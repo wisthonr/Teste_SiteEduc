@@ -79,7 +79,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .cr{width:100%;background:var(--branco);border-radius:24px;padding:28px 24px;box-shadow:0 6px 24px var(--sombra);display:flex;flex-direction:column;gap:6px}
 .conf{position:fixed;top:-10px;pointer-events:none;z-index:999;font-size:1.6rem;animation:cair 1.4s ease forwards}
 @keyframes cair{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
-.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
+.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:20px;box-shadow:0 6px 24px var(--sombra);text-align:center;user-select:none;-webkit-user-select:none}
 .escrita-emoji{font-size:50px;margin-bottom:4px}
 .escrita-frase{font-size:1.25rem;font-weight:900;color:var(--azul);line-height:1.35;margin-bottom:6px;white-space:pre-line}
 .escrita-dica{font-size:.95rem;font-weight:700;color:#777;margin-bottom:10px;line-height:1.35}
@@ -89,8 +89,8 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .modelo-maiuscula{font-size:1.55rem;font-weight:900;letter-spacing:2px;color:var(--texto)}
 .modelo-minuscula{font-size:1.45rem;font-weight:800;letter-spacing:1px;color:var(--texto)}
 .modelo-cursiva{font-family:'Brush Script MT','Segoe Script','Comic Sans MS',cursive;font-size:2.1rem;font-weight:400;color:var(--texto);line-height:1.05}
-.canvas-wrap{position:relative;width:100%;max-width:620px;margin:0 auto;border:3px dashed #C9C9C9;border-radius:18px;background:#FFFEF6;overflow:hidden;touch-action:none}
-.canvas-wrap canvas{display:block;width:100%;height:330px;touch-action:none}
+.canvas-wrap{position:relative;width:100%;max-width:620px;margin:0 auto;border:3px dashed #C9C9C9;border-radius:18px;background:#FFFEF6;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.canvas-wrap canvas{display:block;width:100%;height:330px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .canvas-placeholder{position:absolute;left:16px;right:16px;top:16px;color:rgba(44,62,80,.18);font-size:1.4rem;font-weight:900;text-align:left;pointer-events:none;line-height:1.5}
 .escrita-progresso{font-size:1rem;font-weight:700;color:#666;margin-top:10px}
 .btn-limpar{margin-top:10px;background:var(--vermelho);color:#fff;border:none;border-radius:14px;padding:12px 20px;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer}
@@ -430,7 +430,7 @@ function avancar(){
 /* ================================================================
    ESCRITA COM CANETA / IPAD
 ================================================================ */
-var canvas,ctx,desenhando=false,modeloAtual='todos',canvasIniciado=false;
+var canvas,ctx,desenhando=false,modeloAtual='todos',canvasIniciado=false,ponteiroAtivo=null;
 
 function abrirEscrita(tipo){
   escEstado.tipo=tipo;
@@ -501,20 +501,34 @@ function initCanvas(){
   ctx.lineJoin='round';
   if(canvasIniciado)return;
   canvasIniciado=true;
+  canvas.addEventListener('contextmenu',function(e){e.preventDefault();});
   canvas.addEventListener('pointerdown',function(e){
     e.preventDefault();
+    if(ponteiroAtivo!==null||e.isPrimary===false)return;
+    ponteiroAtivo=e.pointerId;
     desenhando=true;
+    if(canvas.setPointerCapture)canvas.setPointerCapture(e.pointerId);
     document.getElementById('canvas-placeholder').style.display='none';
     var p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
   });
   canvas.addEventListener('pointermove',function(e){
     e.preventDefault();
-    if(!desenhando)return;
+    if(!desenhando||e.pointerId!==ponteiroAtivo)return;
     var p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();
   });
-  canvas.addEventListener('pointerup',function(e){e.preventDefault();desenhando=false;});
-  canvas.addEventListener('pointerleave',function(){desenhando=false;});
-  canvas.addEventListener('pointercancel',function(){desenhando=false;});
+  canvas.addEventListener('pointerup',encerrarPonteiro);
+  canvas.addEventListener('pointerleave',encerrarPonteiro);
+  canvas.addEventListener('pointercancel',encerrarPonteiro);
+}
+
+function encerrarPonteiro(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  if(e&&ponteiroAtivo!==null&&e.pointerId!==ponteiroAtivo)return;
+  if(e&&canvas&&canvas.releasePointerCapture){
+    try{canvas.releasePointerCapture(e.pointerId);}catch(_err){}
+  }
+  desenhando=false;
+  ponteiroAtivo=null;
 }
 
 function getP(e){
