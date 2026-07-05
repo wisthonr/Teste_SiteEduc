@@ -79,19 +79,28 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .cr{width:100%;background:var(--branco);border-radius:24px;padding:28px 24px;box-shadow:0 6px 24px var(--sombra);display:flex;flex-direction:column;gap:6px}
 .conf{position:fixed;top:-10px;pointer-events:none;z-index:999;font-size:1.6rem;animation:cair 1.4s ease forwards}
 @keyframes cair{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
-.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:22px;box-shadow:0 6px 24px var(--sombra);text-align:center}
-.escrita-emoji{font-size:54px;margin-bottom:6px}
-.escrita-frase{font-size:1.35rem;font-weight:900;color:var(--azul);line-height:1.35;margin-bottom:8px;white-space:pre-line}
-.escrita-dica{font-size:.98rem;font-weight:700;color:#777;margin-bottom:12px;line-height:1.4}
-.escrita-input{width:100%;border:3px solid var(--azul);border-radius:18px;padding:16px 14px;font-family:inherit;font-size:1.15rem;font-weight:800;color:var(--texto);outline:none;background:#FFFEF6;text-align:center}
-.escrita-input:focus{background:#E8F8F5;border-color:var(--verde)}
-.escrita-input.ok{background:#D5F5E3;border-color:var(--verde);color:var(--verde)}
-.escrita-input.erro{background:#FADBD8;border-color:var(--vermelho);color:var(--vermelho)}
+.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
+.escrita-emoji{font-size:50px;margin-bottom:4px}
+.escrita-frase{font-size:1.25rem;font-weight:900;color:var(--azul);line-height:1.35;margin-bottom:6px;white-space:pre-line}
+.escrita-dica{font-size:.95rem;font-weight:700;color:#777;margin-bottom:10px;line-height:1.35}
+.modelo-box{width:100%;background:#F8FBFF;border:3px solid #D6EAF8;border-radius:18px;padding:12px;margin:8px 0 12px;text-align:left}
+.modelo-label{font-size:.82rem;font-weight:900;color:#7F8C8D;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.modelo-linha{border-bottom:2px dashed #D7DBDD;padding:8px 0 10px;margin:4px 0}
+.modelo-maiuscula{font-size:1.55rem;font-weight:900;letter-spacing:2px;color:var(--texto)}
+.modelo-minuscula{font-size:1.45rem;font-weight:800;letter-spacing:1px;color:var(--texto)}
+.modelo-cursiva{font-family:'Brush Script MT','Segoe Script','Comic Sans MS',cursive;font-size:2.1rem;font-weight:400;color:var(--texto);line-height:1.05}
+.canvas-wrap{position:relative;width:100%;max-width:620px;margin:0 auto;border:3px dashed #C9C9C9;border-radius:18px;background:#FFFEF6;overflow:hidden;touch-action:none}
+.canvas-wrap canvas{display:block;width:100%;height:330px;touch-action:none}
+.canvas-placeholder{position:absolute;left:16px;right:16px;top:16px;color:rgba(44,62,80,.18);font-size:1.4rem;font-weight:900;text-align:left;pointer-events:none;line-height:1.5}
 .escrita-progresso{font-size:1rem;font-weight:700;color:#666;margin-top:10px}
+.btn-limpar{margin-top:10px;background:var(--vermelho);color:#fff;border:none;border-radius:14px;padding:12px 20px;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer}
+.mini-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.mini-btn{border:2px solid #DDD;background:#fff;border-radius:14px;padding:10px 12px;font-family:inherit;font-weight:900;color:var(--texto);cursor:pointer}
+.mini-btn.ativo{border-color:var(--azul);background:#EBF5FF;color:var(--azul)}
 @media(max-width:420px){
   .titulo{font-size:1.8rem}.card-e{font-size:36px}.card-n{font-size:.82rem}
   .perg-t{font-size:1.1rem}.btn-o{font-size:.98rem;min-height:58px;padding:12px 8px}
-  .grid-o{gap:10px}.escrita-frase{font-size:1.15rem}.escrita-input{font-size:1rem}
+  .grid-o{gap:10px}.escrita-frase{font-size:1.08rem}.modelo-maiuscula{font-size:1.2rem}.modelo-minuscula{font-size:1.2rem}.modelo-cursiva{font-size:1.55rem}.canvas-wrap canvas{height:300px}
 }
 </style>
 </head>
@@ -208,20 +217,38 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- ========== ESCRITA ========== -->
+<!-- ========== ESCRITA COM CANETA / IPAD ========== -->
 <div id="tela-escrita" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="escrita-area">
     <div id="esc-emoji" class="escrita-emoji">✏️</div>
     <p id="esc-frase" class="escrita-frase">...</p>
-    <p id="esc-dica" class="escrita-dica">Digite a resposta em inglês.</p>
-    <input id="esc-input" class="escrita-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Digite aqui">
+    <p id="esc-dica" class="escrita-dica">Observe o modelo e escreva com a caneta do iPad. A escrita é prática secundária; o foco é memorizar o inglês.</p>
+
+    <div class="mini-row" aria-label="Tipo de modelo de escrita">
+      <button id="btn-modelo-todos" class="mini-btn ativo" onclick="window.setModeloEscrita('todos')">Todos</button>
+      <button id="btn-modelo-maiuscula" class="mini-btn" onclick="window.setModeloEscrita('maiuscula')">MAIÚSCULA</button>
+      <button id="btn-modelo-minuscula" class="mini-btn" onclick="window.setModeloEscrita('minuscula')">minúscula</button>
+      <button id="btn-modelo-cursiva" class="mini-btn" onclick="window.setModeloEscrita('cursiva')">cursiva</button>
+    </div>
+
+    <div class="modelo-box">
+      <div id="modelo-maiuscula-wrap" class="modelo-linha"><div class="modelo-label">Maiúscula</div><div id="modelo-maiuscula" class="modelo-maiuscula">BOARD</div></div>
+      <div id="modelo-minuscula-wrap" class="modelo-linha"><div class="modelo-label">Minúscula</div><div id="modelo-minuscula" class="modelo-minuscula">board</div></div>
+      <div id="modelo-cursiva-wrap" class="modelo-linha"><div class="modelo-label">Cursiva / treino livre</div><div id="modelo-cursiva" class="modelo-cursiva">board</div></div>
+    </div>
+
+    <div class="canvas-wrap">
+      <div id="canvas-placeholder" class="canvas-placeholder">Escreva aqui com a caneta ✏️</div>
+      <canvas id="canvas"></canvas>
+    </div>
+    <button class="btn-limpar" onclick="window.limparCanvas()">🗑️ Apagar escrita</button>
     <div id="esc-fb" class="fb" style="margin-top:14px"></div>
     <p id="esc-prog" class="escrita-progresso">Item 1 de 8</p>
   </div>
   <div class="abtn">
     <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-    <button id="btn-esc-ver" class="ba bp" onclick="window.verificarEscrita()">✅ Verificar</button>
+    <button id="btn-esc-ver" class="ba bp" onclick="window.concluirEscrita()">✅ Concluí</button>
     <button id="btn-esc-px" class="ba bp" style="display:none" onclick="window.proxEscrita()">Próxima ➡️</button>
   </div>
 </div>
@@ -401,8 +428,10 @@ function avancar(){
 }
 
 /* ================================================================
-   ESCRITA
+   ESCRITA COM CANETA / IPAD
 ================================================================ */
+var canvas,ctx,desenhando=false,modeloAtual='todos',canvasIniciado=false;
+
 function abrirEscrita(tipo){
   escEstado.tipo=tipo;
   escEstado.itens=embaralhar(ESCRITA[tipo]).slice(0,tipo==='words'?8:6);
@@ -410,22 +439,24 @@ function abrirEscrita(tipo){
   escEstado.acertos=0;
   escEstado.verificado=false;
   mostrarTela('tela-escrita');
-  mostrarItemEscrita();
+  setTimeout(function(){initCanvas();mostrarItemEscrita();},120);
 }
 
 function mostrarItemEscrita(){
   escEstado.verificado=false;
   var item=escEstado.itens[escEstado.indice];
+  var alvo=item.respostas[0].replace(/\.$/,'');
   document.getElementById('esc-emoji').textContent=item.emoji;
   document.getElementById('esc-frase').textContent=item.texto;
-  document.getElementById('esc-dica').textContent=item.dica;
+  document.getElementById('esc-dica').textContent=item.dica+' Primeiro leia em voz alta, depois copie com a caneta.';
   document.getElementById('esc-prog').textContent='Item '+(escEstado.indice+1)+' de '+escEstado.itens.length;
 
-  var input=document.getElementById('esc-input');
-  input.value='';
-  input.className='escrita-input';
-  input.removeAttribute('readonly');
-  input.focus();
+  document.getElementById('modelo-maiuscula').textContent=alvo.toUpperCase();
+  document.getElementById('modelo-minuscula').textContent=alvo.toLowerCase();
+  document.getElementById('modelo-cursiva').textContent=alvo.toLowerCase();
+
+  setModeloEscrita(modeloAtual);
+  limparCanvas();
 
   var fb=document.getElementById('esc-fb');
   fb.style.display='none';
@@ -435,36 +466,101 @@ function mostrarItemEscrita(){
   document.getElementById('btn-esc-px').style.display='none';
 }
 
-function verificarEscrita(){
+function setModeloEscrita(tipo){
+  modeloAtual=tipo;
+  ['todos','maiuscula','minuscula','cursiva'].forEach(function(t){
+    var b=document.getElementById('btn-modelo-'+t);
+    if(b)b.classList.toggle('ativo',t===tipo);
+  });
+  var showMai=tipo==='todos'||tipo==='maiuscula';
+  var showMin=tipo==='todos'||tipo==='minuscula';
+  var showCur=tipo==='todos'||tipo==='cursiva';
+  var a=document.getElementById('modelo-maiuscula-wrap');
+  var b=document.getElementById('modelo-minuscula-wrap');
+  var c=document.getElementById('modelo-cursiva-wrap');
+  if(a)a.style.display=showMai?'block':'none';
+  if(b)b.style.display=showMin?'block':'none';
+  if(c)c.style.display=showCur?'block':'none';
+}
+
+function initCanvas(){
+  canvas=document.getElementById('canvas');
+  if(!canvas)return;
+  var wrap=canvas.parentElement;
+  var rect=wrap.getBoundingClientRect();
+  var ratio=window.devicePixelRatio||1;
+  var cssW=Math.max(300,rect.width);
+  var cssH=parseInt(getComputedStyle(canvas).height,10)||330;
+  canvas.width=cssW*ratio;
+  canvas.height=cssH*ratio;
+  ctx=canvas.getContext('2d');
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.strokeStyle='#2C3E50';
+  ctx.lineWidth=4;
+  ctx.lineCap='round';
+  ctx.lineJoin='round';
+  if(canvasIniciado)return;
+  canvasIniciado=true;
+  canvas.addEventListener('pointerdown',function(e){
+    e.preventDefault();
+    desenhando=true;
+    document.getElementById('canvas-placeholder').style.display='none';
+    var p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
+  });
+  canvas.addEventListener('pointermove',function(e){
+    e.preventDefault();
+    if(!desenhando)return;
+    var p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+  });
+  canvas.addEventListener('pointerup',function(e){e.preventDefault();desenhando=false;});
+  canvas.addEventListener('pointerleave',function(){desenhando=false;});
+  canvas.addEventListener('pointercancel',function(){desenhando=false;});
+}
+
+function getP(e){
+  var r=canvas.getBoundingClientRect();
+  return{x:e.clientX-r.left,y:e.clientY-r.top};
+}
+
+function desenharLinhas(){
+  if(!ctx||!canvas)return;
+  var r=canvas.getBoundingClientRect();
+  var w=r.width,h=r.height;
+  ctx.save();
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='#D7DBDD';
+  ctx.lineWidth=1.5;
+  for(var y=58;y<h;y+=58){
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+  }
+  ctx.strokeStyle='#F5B7B1';
+  ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(46,0);ctx.lineTo(46,h);ctx.stroke();
+  ctx.restore();
+  ctx.strokeStyle='#2C3E50';
+  ctx.lineWidth=4;
+}
+
+function limparCanvas(){
+  if(!ctx)initCanvas();
+  desenharLinhas();
+  var ph=document.getElementById('canvas-placeholder');
+  if(ph)ph.style.display='block';
+}
+
+function concluirEscrita(){
   if(escEstado.verificado)return;
   escEstado.verificado=true;
-
-  var item=escEstado.itens[escEstado.indice];
-  var input=document.getElementById('esc-input');
-  var resposta=normalizar(input.value);
-  var certas=item.respostas.map(normalizar);
-  var acertou=certas.indexOf(resposta)>=0;
+  escEstado.acertos++;
   var fb=document.getElementById('esc-fb');
-
-  input.setAttribute('readonly','true');
-
-  if(acertou){
-    escEstado.acertos++;
-    input.classList.add('ok');
-    fb.textContent='🎉 Correct!';
-    fb.className='fb c';
-    confete();
-  }else{
-    input.classList.add('erro');
-    fb.textContent='😊 Resposta esperada: '+item.respostas[0];
-    fb.className='fb e';
-  }
-
+  fb.textContent='🌟 Muito bem! Agora leia a palavra/frase em inglês.';
+  fb.className='fb c';
   fb.style.display='block';
   document.getElementById('btn-esc-ver').style.display='none';
   var btnP=document.getElementById('btn-esc-px');
   btnP.style.display='block';
-  btnP.textContent=(escEstado.indice===escEstado.itens.length-1)?'Ver resultado 🏆':'Próxima ➡️';
+  btnP.textContent=(escEstado.indice===escEstado.itens.length-1)?'Finalizar 🏆':'Próxima ➡️';
+  confete();
 }
 
 function proxEscrita(){
@@ -501,10 +597,10 @@ function mostrarFinal(tipo){
 
 function replay(){/* botão recebe onclick dinâmico */}
 
-/* ENTER verifica/próxima na escrita */
+/* Teclado: Enter conclui ou avança na escrita, útil em desktop. No iPad, use a caneta e os botões. */
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter' && document.getElementById('tela-escrita').classList.contains('ativa')){
-    if(document.getElementById('btn-esc-ver').style.display!=='none')verificarEscrita();
+    if(document.getElementById('btn-esc-ver').style.display!=='none')concluirEscrita();
     else proxEscrita();
   }
 });
@@ -515,7 +611,9 @@ window.responder=responder;
 window.avancar=avancar;
 window.mostrarTela=mostrarTela;
 window.abrirEscrita=abrirEscrita;
-window.verificarEscrita=verificarEscrita;
+window.concluirEscrita=concluirEscrita;
+window.setModeloEscrita=setModeloEscrita;
+window.limparCanvas=limparCanvas;
 window.proxEscrita=proxEscrita;
 window.confete=confete;
 window.replay=replay;
