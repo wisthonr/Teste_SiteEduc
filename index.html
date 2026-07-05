@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Matemática Divertida - Julia 🌟</title>
+<title>English Fun - Julia 🌟</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -31,32 +31,26 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .sub{font-size:1.1rem;font-weight:700;color:var(--laranja);text-align:center}
 .secao-label{font-size:1.05rem;font-weight:900;color:var(--roxo);text-align:left;width:100%;padding-left:6px;margin-top:6px}
 .grade{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
-.grade3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%}
 .card{background:var(--branco);border-radius:24px;padding:18px 12px;text-align:center;cursor:pointer;border:3px solid var(--azul);box-shadow:0 6px 20px var(--sombra);transition:transform .15s;font-family:inherit;width:100%;background:linear-gradient(145deg,#EBF5FF,#fff)}
 .card:active{transform:scale(.94)}
 .card-e{font-size:42px;display:block;margin-bottom:8px}
 .card-n{font-size:.92rem;font-weight:800;color:var(--texto);line-height:1.3}
-.card-sm{padding:14px 8px;border-radius:20px}
-.card-sm .card-e{font-size:32px;margin-bottom:4px}
-.card-sm .card-n{font-size:.8rem}
 .card-verde{border-color:var(--verde);background:linear-gradient(145deg,#E9F7EF,#fff)}
 .card-laranja{border-color:var(--laranja);background:linear-gradient(145deg,#FEF9E7,#fff)}
 .card-roxo{border-color:var(--roxo);background:linear-gradient(145deg,#F4ECF7,#fff)}
 .card-rosa{border-color:var(--rosa);background:linear-gradient(145deg,#FDE2F3,#fff)}
-/* LEITURA */
 .leitura-card{width:100%;background:var(--branco);border-radius:24px;padding:24px 22px;box-shadow:0 6px 24px var(--sombra);text-align:left}
 .leitura-titulo{font-size:1.5rem;font-weight:900;color:var(--azul);text-align:center;margin-bottom:4px}
 .leitura-subtitulo{font-size:1.15rem;font-weight:900;color:var(--rosa);margin:16px 0 8px}
 .leitura-txt{font-size:1.05rem;font-weight:600;line-height:1.7;color:var(--texto);margin-bottom:10px}
 .leitura-regra{background:#E8F8F5;border-left:4px solid var(--verde);border-radius:0 12px 12px 0;padding:10px 14px;margin:10px 0;font-size:.95rem;font-weight:700;color:#1E8449}
 .leitura-gloss{background:#FEF9E7;border-left:4px solid var(--laranja);border-radius:0 12px 12px 0;padding:10px 14px;margin:10px 0;font-size:.95rem;font-weight:700;color:#856404}
-/* QUIZ */
 .hdr{width:100%;background:var(--branco);border-radius:20px;padding:12px 18px;box-shadow:0 4px 16px var(--sombra);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .hdr-t{font-size:1rem;font-weight:900}.hdr-p{font-size:.88rem;font-weight:700;color:#666}.hdr-e{font-size:1.2rem;letter-spacing:2px}
 .bar-w{width:100%;background:#E0E0E0;border-radius:10px;height:12px;overflow:hidden}
 .bar{height:100%;background:linear-gradient(90deg,var(--verde),var(--amarelo));border-radius:10px;transition:width .4s;width:0%}
 .cperg{width:100%;background:var(--branco);border-radius:24px;padding:24px 20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
-.perg-e{font-size:44px;display:block;margin-bottom:10px}
+.perg-e{font-size:48px;display:block;margin-bottom:10px}
 .perg-t{font-size:1.3rem;font-weight:800;color:var(--texto);line-height:1.4;white-space:pre-line}
 .grid-o{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
 .grid-o.col1{grid-template-columns:1fr}
@@ -77,7 +71,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .bn{background:linear-gradient(135deg,var(--roxo),var(--rosa));color:#fff}
 .bv{align-self:flex-start;background:none;border:none;font-family:inherit;font-size:1rem;font-weight:800;color:var(--azul);cursor:pointer;padding:4px 0}
 .bv:active{opacity:.6}
-/* FINAL */
 .trofeu{font-size:90px;display:block;text-align:center;animation:bounce 1.2s infinite}
 .tf{font-size:2rem;font-weight:900;text-align:center;background:linear-gradient(135deg,var(--laranja),var(--rosa));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ef{font-size:2.6rem;letter-spacing:4px;text-align:center;margin:6px 0}
@@ -86,38 +79,19 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .cr{width:100%;background:var(--branco);border-radius:24px;padding:28px 24px;box-shadow:0 6px 24px var(--sombra);display:flex;flex-direction:column;gap:6px}
 .conf{position:fixed;top:-10px;pointer-events:none;z-index:999;font-size:1.6rem;animation:cair 1.4s ease forwards}
 @keyframes cair{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
-/* ESCRITA */
-.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
-.escrita-palavra{font-size:2rem;font-weight:900;color:var(--azul);margin-bottom:6px;letter-spacing:2px}
-.escrita-dica{font-size:.95rem;font-weight:700;color:#888;margin-bottom:12px}
-.canvas-wrap{position:relative;width:100%;max-width:500px;margin:0 auto;border:3px dashed #CCC;border-radius:16px;background:#FFFEF6;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:350px}
-.btn-limpar{margin-top:10px;background:var(--vermelho);color:#fff;border:none;border-radius:14px;padding:12px 24px;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer}
-.escrita-progresso{font-size:1rem;font-weight:700;color:#666;margin-top:8px}
-/* ========== CDU GRID ========== */
-.cdu-card{width:100%;background:var(--branco);border-radius:24px;padding:24px 20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
-.cdu-problema{font-size:1.15rem;font-weight:800;color:var(--texto);margin-bottom:16px;line-height:1.5}
-.cdu-wrap{display:inline-block;border:3px solid var(--azul);border-radius:16px;overflow:hidden;margin:0 auto}
-.cdu-header{display:flex;background:linear-gradient(135deg,var(--vermelho),#C0392B)}
-.cdu-header span{flex:1;min-width:56px;padding:8px 0;color:#fff;font-weight:900;font-size:1.1rem;text-align:center;border-right:2px solid rgba(255,255,255,.3)}
-.cdu-header span:last-child{border-right:none}
-.cdu-row{display:flex;border-top:2px solid #E0E0E0}
-.cdu-row:first-child{border-top:none}
-.cdu-sign{width:30px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:var(--azul)}
-.cdu-cell{flex:1;min-width:56px;padding:10px 0;font-size:1.5rem;font-weight:900;text-align:center;border-right:2px solid #E0E0E0;color:var(--texto)}
-.cdu-cell:last-child{border-right:none}
-.cdu-line{height:3px;background:var(--texto);margin:0}
-.cdu-input{flex:1;min-width:56px;padding:8px 0;font-size:1.5rem;font-weight:900;text-align:center;border:none;border-right:2px solid #E0E0E0;background:#FFFDE7;color:var(--azul);font-family:inherit;outline:none;-webkit-appearance:none;appearance:none}
-.cdu-input:last-child{border-right:none}
-.cdu-input:focus{background:#E8F8F5}
-.cdu-input.ok{background:#D5F5E3;color:var(--verde)}
-.cdu-input.erro{background:#FADBD8;color:var(--vermelho)}
-.cdu-progresso{font-size:1rem;font-weight:700;color:#666;margin-top:10px}
+.escrita-area{width:100%;background:var(--branco);border-radius:24px;padding:22px;box-shadow:0 6px 24px var(--sombra);text-align:center}
+.escrita-emoji{font-size:54px;margin-bottom:6px}
+.escrita-frase{font-size:1.35rem;font-weight:900;color:var(--azul);line-height:1.35;margin-bottom:8px;white-space:pre-line}
+.escrita-dica{font-size:.98rem;font-weight:700;color:#777;margin-bottom:12px;line-height:1.4}
+.escrita-input{width:100%;border:3px solid var(--azul);border-radius:18px;padding:16px 14px;font-family:inherit;font-size:1.15rem;font-weight:800;color:var(--texto);outline:none;background:#FFFEF6;text-align:center}
+.escrita-input:focus{background:#E8F8F5;border-color:var(--verde)}
+.escrita-input.ok{background:#D5F5E3;border-color:var(--verde);color:var(--verde)}
+.escrita-input.erro{background:#FADBD8;border-color:var(--vermelho);color:var(--vermelho)}
+.escrita-progresso{font-size:1rem;font-weight:700;color:#666;margin-top:10px}
 @media(max-width:420px){
   .titulo{font-size:1.8rem}.card-e{font-size:36px}.card-n{font-size:.82rem}
   .perg-t{font-size:1.1rem}.btn-o{font-size:.98rem;min-height:58px;padding:12px 8px}
-  .cdu-cell,.cdu-input{min-width:44px;font-size:1.2rem}
-  .cdu-header span{min-width:44px;font-size:.95rem}
+  .grid-o{gap:10px}.escrita-frase{font-size:1.15rem}.escrita-input{font-size:1rem}
 }
 </style>
 </head>
@@ -131,115 +105,99 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 <!-- ========== MENU PRINCIPAL ========== -->
 <div id="tela-menu" class="tela ativa">
   <div style="text-align:center;margin-top:8px">
-    <span class="logo">🧮</span>
-    <h1 class="titulo">Matemática<br>Divertida!</h1>
+    <span class="logo">🏫</span>
+    <h1 class="titulo">English<br>Fun!</h1>
     <p class="julia">✨ para Julia ✨</p>
   </div>
-  <p class="sub">Unidade 4 — Números de 0 a 499</p>
+  <p class="sub">Unit 3 — Let's go to school</p>
 
   <p class="secao-label">📚 Aprender</p>
   <div class="grade">
-    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-dezenas')">
-      <span class="card-e">🔢</span><span class="card-n">Dezenas e<br>Unidades</span>
+    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-school')">
+      <span class="card-e">🏫</span><span class="card-n">School<br>Words</span>
     </button>
-    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-centenas')">
-      <span class="card-e">🏗️</span><span class="card-n">Centenas</span>
+    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-like')">
+      <span class="card-e">💬</span><span class="card-n">I like /<br>I don't like</span>
     </button>
   </div>
 
   <p class="secao-label">🎯 Atividades</p>
   <div class="grade">
-    <button class="card" onclick="window.iniciarTema('dezenas')">
-      <span class="card-e">🔢</span><span class="card-n">Dezenas e<br>Unidades</span>
+    <button class="card" onclick="window.iniciarTema('school')">
+      <span class="card-e">🏫</span><span class="card-n">Escolha a<br>Palavra</span>
     </button>
-    <button class="card" onclick="window.iniciarTema('extenso')">
-      <span class="card-e">📝</span><span class="card-n">Por<br>Extenso</span>
+    <button class="card card-laranja" onclick="window.iniciarTema('complete')">
+      <span class="card-e">🔤</span><span class="card-n">Complete<br>a Palavra</span>
     </button>
-    <button class="card" onclick="window.iniciarTema('adicao')">
-      <span class="card-e">➕</span><span class="card-n">Adição</span>
+    <button class="card card-roxo" onclick="window.iniciarTema('match')">
+      <span class="card-e">🧩</span><span class="card-n">Associe<br>Ideias</span>
     </button>
-    <button class="card" onclick="window.iniciarTema('subtracao')">
-      <span class="card-e">➖</span><span class="card-n">Subtração</span>
-    </button>
-    <button class="card" onclick="window.iniciarTema('centenas')">
-      <span class="card-e">🏗️</span><span class="card-n">Centenas</span>
-    </button>
-    <button class="card" onclick="window.iniciarTema('sequencias')">
-      <span class="card-e">🔄</span><span class="card-n">Sequências</span>
-    </button>
-    <button class="card" onclick="window.iniciarTema('enigmas')">
-      <span class="card-e">🧩</span><span class="card-n">Enigmas</span>
-    </button>
-    <button class="card" onclick="window.iniciarTema('antecessor')">
-      <span class="card-e">⏮️</span><span class="card-n">Antecessor<br>e Sucessor</span>
+    <button class="card card-rosa" onclick="window.iniciarTema('review')">
+      <span class="card-e">⭐</span><span class="card-n">Revisão<br>Geral</span>
     </button>
   </div>
 
-  <p class="secao-label">✍️ Praticar</p>
+  <p class="secao-label">✍️ Praticar Escrita</p>
   <div class="grade">
-    <button class="card card-laranja" onclick="window.abrirCDU()">
-      <span class="card-e">📊</span><span class="card-n">Conta<br>Armada</span>
+    <button class="card card-laranja" onclick="window.abrirEscrita('words')">
+      <span class="card-e">✏️</span><span class="card-n">Escrever<br>Palavras</span>
     </button>
-    <button class="card card-roxo" onclick="window.abrirEscrita()">
-      <span class="card-e">✏️</span><span class="card-n">Escrever<br>Números</span>
+    <button class="card card-roxo" onclick="window.abrirEscrita('sentences')">
+      <span class="card-e">📝</span><span class="card-n">Escrever<br>Frases</span>
     </button>
   </div>
 </div>
 
-<!-- ========== LEITURA: DEZENAS ========== -->
-<div id="tela-ler-dezenas" class="tela">
+<!-- ========== LEITURA: SCHOOL WORDS ========== -->
+<div id="tela-ler-school" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
-    <p class="leitura-titulo">🔢 Dezenas e Unidades</p>
-    <p class="leitura-subtitulo">O que é uma unidade?</p>
-    <p class="leitura-txt">Uma <strong>unidade</strong> é cada objeto sozinho. 1 lápis = 1 unidade. 7 lápis = 7 unidades.</p>
-    <p class="leitura-subtitulo">O que é uma dezena?</p>
-    <p class="leitura-txt">Quando juntamos <strong>10 unidades</strong>, formamos <strong>1 dezena</strong>!</p>
-    <div class="leitura-regra">💡 10 unidades = 1 dezena</div>
-    <p class="leitura-subtitulo">Exemplo: o número 35</p>
-    <p class="leitura-txt"><strong>3 dezenas</strong> e <strong>5 unidades</strong> = 30 + 5 = 35</p>
-    <p class="leitura-txt">Por extenso: <strong>trinta e cinco</strong></p>
-    <p class="leitura-subtitulo">Forma decomposta</p>
-    <p class="leitura-txt">67 = 60 + 7 → <strong>sessenta e sete</strong></p>
-    <p class="leitura-txt">84 = 80 + 4 → <strong>oitenta e quatro</strong></p>
+    <p class="leitura-titulo">🏫 School Words</p>
+    <p class="leitura-subtitulo">Places and objects</p>
+    <p class="leitura-txt">Vamos treinar palavras da escola em inglês.</p>
+    <div class="leitura-regra">board = quadro</div>
+    <div class="leitura-regra">classroom = sala de aula</div>
+    <div class="leitura-regra">desk = carteira / mesa</div>
+    <div class="leitura-regra">gym = ginásio</div>
+    <div class="leitura-regra">library = biblioteca</div>
+    <div class="leitura-regra">playground = parquinho</div>
+    <div class="leitura-regra">swimming pool = piscina</div>
+    <div class="leitura-regra">toilet = banheiro</div>
+    <p class="leitura-subtitulo">Pergunta importante</p>
+    <p class="leitura-txt"><strong>What's in your school?</strong> = O que tem na sua escola?</p>
   </div>
-  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('dezenas')">🎯 Atividade</button>
+  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('school')">🎯 Atividade</button>
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
-<!-- ========== LEITURA: CENTENAS ========== -->
-<div id="tela-ler-centenas" class="tela">
+<!-- ========== LEITURA: I LIKE ========== -->
+<div id="tela-ler-like" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
-    <p class="leitura-titulo">🏗️ Centenas</p>
-    <p class="leitura-subtitulo">O que é uma centena?</p>
-    <p class="leitura-txt"><strong>10 dezenas</strong> = <strong>1 centena</strong> = <strong>100 unidades</strong></p>
-    <div class="leitura-regra">💡 1 centena = 10 dezenas = 100 unidades</div>
-    <p class="leitura-subtitulo">Exemplo: 428</p>
-    <p class="leitura-txt">4 centenas + 2 dezenas + 8 unidades</p>
-    <p class="leitura-txt">400 + 20 + 8 = 428</p>
-    <p class="leitura-subtitulo">Valor posicional</p>
-    <p class="leitura-txt">Em <strong>245</strong>: o 4 vale <strong>40</strong> (dezenas)</p>
-    <p class="leitura-txt">Em <strong>412</strong>: o 4 vale <strong>400</strong> (centenas)</p>
-    <div class="leitura-gloss">📘 O valor depende da posição!</div>
-    <p class="leitura-subtitulo">Antecessor e Sucessor</p>
-    <p class="leitura-txt"><strong>Antecessor</strong> = número anterior (−1)</p>
-    <p class="leitura-txt"><strong>Sucessor</strong> = número seguinte (+1)</p>
+    <p class="leitura-titulo">💬 I like / I don't like</p>
+    <p class="leitura-subtitulo">Para falar do que você gosta</p>
+    <p class="leitura-txt"><strong>I like reading.</strong> = Eu gosto de ler.</p>
+    <p class="leitura-txt"><strong>I like playing football.</strong> = Eu gosto de jogar futebol.</p>
+    <p class="leitura-txt"><strong>I like playing basketball.</strong> = Eu gosto de jogar basquete.</p>
+    <div class="leitura-regra">I like + atividade.</div>
+    <p class="leitura-subtitulo">Para falar do que você não gosta</p>
+    <p class="leitura-txt"><strong>I don't like playing hide and seek.</strong> = Eu não gosto de brincar de esconde-esconde.</p>
+    <div class="leitura-gloss">I don't like + atividade.</div>
   </div>
-  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('centenas')">🎯 Atividade</button>
+  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('review')">⭐ Revisão</button>
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
 <!-- ========== QUIZ ========== -->
 <div id="tela-quiz" class="tela">
   <div class="hdr">
-    <span id="hdr-t" class="hdr-t">🧮</span>
+    <span id="hdr-t" class="hdr-t">🏫</span>
     <span id="hdr-p" class="hdr-p">1 / 6</span>
     <span id="hdr-e" class="hdr-e">☆☆☆☆☆</span>
   </div>
   <div class="bar-w"><div id="bar" class="bar"></div></div>
   <div class="cperg">
-    <span id="perg-e" class="perg-e">🧮</span>
+    <span id="perg-e" class="perg-e">🏫</span>
     <p id="perg-t" class="perg-t">...</p>
   </div>
   <div id="grid-o" class="grid-o"></div>
@@ -250,38 +208,21 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- ========== CONTA ARMADA (CDU) ========== -->
-<div id="tela-cdu" class="tela">
-  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
-  <div class="cdu-card">
-    <p style="font-size:1.2rem;font-weight:900;color:var(--azul);margin-bottom:6px">📊 Conta Armada</p>
-    <p id="cdu-problema" class="cdu-problema">...</p>
-    <div id="cdu-grid" style="display:flex;justify-content:center"></div>
-    <div id="cdu-fb" class="fb" style="margin-top:14px"></div>
-    <p id="cdu-prog" class="cdu-progresso">Conta 1 de 8</p>
-  </div>
-  <div class="abtn">
-    <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-    <button id="btn-cdu-ver" class="ba bp" onclick="window.verificarCDU()">✅ Verificar</button>
-    <button id="btn-cdu-px" class="ba bp" style="display:none" onclick="window.proxCDU()">Próxima ➡️</button>
-  </div>
-</div>
-
 <!-- ========== ESCRITA ========== -->
 <div id="tela-escrita" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="escrita-area">
-    <p style="font-size:1.1rem;font-weight:900;color:var(--azul);margin-bottom:4px">✏️ Escrever Números</p>
-    <p class="escrita-dica">Escreva a palavra com a caneta!</p>
-    <p id="esc-palavra" class="escrita-palavra">Trinta</p>
-    <p id="esc-dica2" class="escrita-dica">💡 30 — três dezenas!</p>
-    <div class="canvas-wrap"><canvas id="canvas"></canvas></div>
-    <button class="btn-limpar" onclick="window.limparCanvas()">🗑️ Apagar</button>
-    <p id="esc-prog" class="escrita-progresso">Palavra 1 de 10</p>
+    <div id="esc-emoji" class="escrita-emoji">✏️</div>
+    <p id="esc-frase" class="escrita-frase">...</p>
+    <p id="esc-dica" class="escrita-dica">Digite a resposta em inglês.</p>
+    <input id="esc-input" class="escrita-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Digite aqui">
+    <div id="esc-fb" class="fb" style="margin-top:14px"></div>
+    <p id="esc-prog" class="escrita-progresso">Item 1 de 8</p>
   </div>
   <div class="abtn">
     <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-    <button id="btn-esc-px" class="ba bp" onclick="window.proxPalavra()">Próxima ✏️</button>
+    <button id="btn-esc-ver" class="ba bp" onclick="window.verificarEscrita()">✅ Verificar</button>
+    <button id="btn-esc-px" class="ba bp" style="display:none" onclick="window.proxEscrita()">Próxima ➡️</button>
   </div>
 </div>
 
@@ -304,129 +245,77 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 
 <script>
 /* ================================================================
-   BANCO DE PERGUNTAS
+   BANCO DE PERGUNTAS - INGLÊS
+   Base: Unit 3 — Let's go to school
 ================================================================ */
 var BANCO={
-dezenas:{nome:'🔢 Dezenas e Unidades',emoji:'🔢',perguntas:[
-  {texto:'Quantas dezenas tem\no número 35?',opcoes:['5','3','35','2'],certa:1},
-  {texto:'Quantas unidades tem\no número 67?',opcoes:['6','60','7','67'],certa:2},
-  {texto:'O número 84 tem\nquantas dezenas?',opcoes:['4','84','8','48'],certa:2},
-  {texto:'5 dezenas e 4 unidades\nformam qual número?',opcoes:['45','504','54','9'],certa:2},
-  {texto:'Qual é a forma decomposta\nde 35?',opcoes:['3 + 5','35 + 0','30 + 5','20 + 15'],certa:2},
-  {texto:'10 unidades formam:',opcoes:['1 centena','10 dezenas','1 dezena','100 unidades'],certa:2},
-  {texto:'Qual número tem\n7 dezenas e 0 unidades?',opcoes:['7','17','70','700'],certa:2},
-  {texto:'O número 12 é formado por:',opcoes:['1 dezena e 2 unidades','2 dezenas e 1 unidade','12 dezenas','12 centenas'],certa:0},
-  {texto:'Se juntarmos 4 dezenas\ne 14 unidades, temos:',opcoes:['44','414','54','18'],certa:2},
-  {texto:'3 dezenas e 5 unidades\né o mesmo que:',opcoes:['53','305','35','8'],certa:2}
+school:{nome:'🏫 School Words',emoji:'🏫',perguntas:[
+  {texto:'What is this?\n🧑‍🏫 The teacher writes here.',opcoes:['board','desk','library','toilet'],certa:0},
+  {texto:'Where are the books?\n📚',opcoes:['gym','library','playground','desk'],certa:1},
+  {texto:'Where do students sit and study?\n🪑✏️',opcoes:['desk','swimming pool','toilet','playground'],certa:0},
+  {texto:'Where can children play outside?\n🛝',opcoes:['board','classroom','playground','library'],certa:2},
+  {texto:'Where can you swim?\n🏊',opcoes:['toilet','gym','swimming pool','desk'],certa:2},
+  {texto:'Where can you play sports?\n🏃',opcoes:['gym','board','library','toilet'],certa:0},
+  {texto:'Where is the class?\n👩‍🏫👧👦',opcoes:['classroom','playground','swimming pool','toilet'],certa:0},
+  {texto:'Where do you wash your hands?\n🚻',opcoes:['library','desk','toilet','board'],certa:2}
 ]},
-extenso:{nome:'📝 Por Extenso',emoji:'📝',perguntas:[
-  {texto:'Como se escreve 35\npor extenso?',opcoes:['Treze e cinco','Trinta e cinco','Trinta e três','Três e cinco'],certa:1},
-  {texto:'"Sessenta e sete"\nvale quanto?',opcoes:['76','607','67','617'],certa:2},
-  {texto:'Como se escreve 84\npor extenso?',opcoes:['Oito e quatro','Oitenta e quatro','Quarenta e oito','Oitocentos e quatro'],certa:1},
-  {texto:'"Setenta" é o mesmo que:',opcoes:['7','17','700','70'],certa:3},
-  {texto:'Como se escreve 12\npor extenso?',opcoes:['Um e dois','Cento e dois','Doze','Vinte e um'],certa:2},
-  {texto:'"Trezentos e oitenta\ne seis" vale:',opcoes:['3086','368','386','308'],certa:2},
-  {texto:'Como se escreve 204\npor extenso?',opcoes:['Vinte e quatro','Dois mil e quatro','Duzentos e quatro','Duzentos e quarenta'],certa:2},
-  {texto:'"Quatrocentos e trinta\ne cinco" vale:',opcoes:['4035','345','4305','435'],certa:3}
+complete:{nome:'🔤 Complete the Word',emoji:'🔤',perguntas:[
+  {texto:'Complete:\nb _ a r d',opcoes:['board','boord','braod','bored'],certa:0},
+  {texto:'Complete:\nc l a s s r _ _ m',opcoes:['classroom','classrom','clasroom','classroam'],certa:0},
+  {texto:'Complete:\nd _ s k',opcoes:['dask','desk','disk','deski'],certa:1},
+  {texto:'Complete:\ng _ m',opcoes:['gum','gam','gym','gim'],certa:2},
+  {texto:'Complete:\nl i b r _ r y',opcoes:['library','librare','librery','libry'],certa:0},
+  {texto:'Complete:\np l a y g r _ _ n d',opcoes:['playgrond','playground','playgruond','playgroud'],certa:1},
+  {texto:'Complete:\ns w i m m i n g  p _ _ l',opcoes:['swimming pull','swimming pool','swiming pool','swimming pol'],certa:1},
+  {texto:'Complete:\nt o i l _ t',opcoes:['toilet','toilat','toilette','toillet'],certa:0}
 ]},
-adicao:{nome:'➕ Adição',emoji:'➕',perguntas:[
-  {texto:'37 + 28 = ?',opcoes:['55','65','56','75'],certa:1},
-  {texto:'55 + 25 = ?',opcoes:['70','90','80','85'],certa:2},
-  {texto:'34 + 18 = ?',opcoes:['42','52','48','62'],certa:1},
-  {texto:'46 + 28 = ?',opcoes:['64','74','68','84'],certa:1},
-  {texto:'39 + 25 = ?',opcoes:['54','64','74','59'],certa:1},
-  {texto:'197 + 102 = ?',opcoes:['209','289','299','399'],certa:2},
-  {texto:'281 + 103 = ?',opcoes:['384','374','394','284'],certa:0},
-  {texto:'236 + 162 = ?',opcoes:['396','398','388','408'],certa:1},
-  {texto:'74 + 17 = ?',opcoes:['81','91','87','97'],certa:1},
-  {texto:'35 + 17 = ?',opcoes:['42','52','45','62'],certa:1}
+match:{nome:'🧩 Match',emoji:'🧩',perguntas:[
+  {texto:'Match the meaning:\nboard',opcoes:['quadro','biblioteca','ginásio','piscina'],certa:0},
+  {texto:'Match the meaning:\nclassroom',opcoes:['banheiro','sala de aula','parquinho','mesa'],certa:1},
+  {texto:'Match the meaning:\ndesk',opcoes:['mesa/carteira','piscina','quadro','ginásio'],certa:0},
+  {texto:'Match the meaning:\ngym',opcoes:['biblioteca','banheiro','ginásio','sala de aula'],certa:2},
+  {texto:'Match the meaning:\nplayground',opcoes:['quadro','parquinho','biblioteca','carteira'],certa:1},
+  {texto:'Match the meaning:\ntoilet',opcoes:['banheiro','piscina','ginásio','sala de aula'],certa:0},
+  {texto:'Match:\nreading',opcoes:['lendo','jogando futebol','brincando de esconde-esconde','nadando'],certa:0},
+  {texto:'Match:\nplaying hide and seek',opcoes:['jogando basquete','lendo','brincando de esconde-esconde','jogando futebol'],certa:2}
 ]},
-subtracao:{nome:'➖ Subtração',emoji:'➖',perguntas:[
-  {texto:'345 - 120 = ?',opcoes:['215','225','235','125'],certa:1},
-  {texto:'486 - 321 = ?',opcoes:['175','155','165','265'],certa:2},
-  {texto:'337 - 114 = ?',opcoes:['213','233','223','113'],certa:2},
-  {texto:'467 - 142 = ?',opcoes:['335','315','325','425'],certa:2},
-  {texto:'276 - 124 = ?',opcoes:['142','152','162','252'],certa:1},
-  {texto:'80 - 25 = ?',opcoes:['45','55','65','50'],certa:1},
-  {texto:'52 - 18 = ?',opcoes:['44','24','34','38'],certa:2},
-  {texto:'74 - 28 = ?',opcoes:['56','46','36','52'],certa:1}
-]},
-centenas:{nome:'🏗️ Centenas',emoji:'🏗️',perguntas:[
-  {texto:'1 centena é igual a\nquantas unidades?',opcoes:['10','1000','100','50'],certa:2},
-  {texto:'O número 428 tem\nquantas centenas?',opcoes:['42','2','8','4'],certa:3},
-  {texto:'2 centenas + 0 dezenas\n+ 4 unidades = ?',opcoes:['240','24','204','2004'],certa:2},
-  {texto:'O número 500 equivale\na quantas centenas?',opcoes:['50','5','500','55'],certa:1},
-  {texto:'A forma decomposta\nde 367 é:',opcoes:['36 + 7','300 + 60 + 7','3 + 6 + 7','360 + 70'],certa:1},
-  {texto:'3 centenas e 6 unidades = ?',opcoes:['36','360','306','3006'],certa:2},
-  {texto:'O valor do algarismo 4\nem 245 é:',opcoes:['4','400','40','2'],certa:2},
-  {texto:'O número 500 equivale\na quantas dezenas?',opcoes:['5','500','50','55'],certa:2},
-  {texto:'O número 175 é formado por:',opcoes:['17 dez. e 5 unid.','1 cent., 7 dez. e 5 unid.','175 unidades','Todas as alternativas'],certa:3},
-  {texto:'O valor do algarismo 4\nem 412 é:',opcoes:['4','40','400','4000'],certa:2}
-]},
-sequencias:{nome:'🔄 Sequências',emoji:'🔄',perguntas:[
-  {texto:'112, 114, 116, 118, ___',opcoes:['119','122','120','130'],certa:2},
-  {texto:'315, 320, 325, 330, ___',opcoes:['340','335','331','345'],certa:1},
-  {texto:'218, 215, 212, 209, ___',opcoes:['207','208','206','205'],certa:2},
-  {texto:'410, 409, 408, 407, ___',opcoes:['405','406','400','410'],certa:1},
-  {texto:'134, 144, 154, 164, ___',opcoes:['165','170','174','184'],certa:2},
-  {texto:'248, 250, 252, ___, 256',opcoes:['253','254','255','251'],certa:1},
-  {texto:'380, 390, 400, ___, 420',opcoes:['405','410','415','401'],certa:1},
-  {texto:'100, 104, 108, ___, 116',opcoes:['110','114','112','109'],certa:2}
-]},
-enigmas:{nome:'🧩 Enigmas',emoji:'🧩',perguntas:[
-  {texto:'4 centenas, 3 dezenas\ne 5 unidades = ?',opcoes:['345','453','435','534'],certa:2},
-  {texto:'3 centenas e 6 unidades = ?',opcoes:['36','360','306','603'],certa:2},
-  {texto:'Este número tem 2 dezenas\na menos que 167:',opcoes:['165','157','147','187'],certa:2},
-  {texto:'2 centenas, 5 dezenas\ne 18 unidades = ?',opcoes:['258','2518','268','278'],certa:2},
-  {texto:'1 centena a mais que 234:',opcoes:['235','244','334','134'],certa:2},
-  {texto:'10 dezenas e 9 unidades = ?',opcoes:['19','190','109','1009'],certa:2},
-  {texto:'9 centenas, 4 dezenas\ne 3 unidades = ?',opcoes:['493','934','349','943'],certa:3},
-  {texto:'Este número tem\n1 centena e 53 unidades:',opcoes:['1053','53','153','163'],certa:2}
-]},
-antecessor:{nome:'⏮️ Antecessor e Sucessor',emoji:'⏮️',perguntas:[
-  {texto:'Qual é o ANTECESSOR\nde 295?',opcoes:['296','294','290','293'],certa:1},
-  {texto:'Qual é o SUCESSOR\nde 206?',opcoes:['205','210','207','216'],certa:2},
-  {texto:'Qual é o ANTECESSOR\nde 260?',opcoes:['261','250','259','270'],certa:2},
-  {texto:'Qual é o SUCESSOR\nde 221?',opcoes:['220','222','231','211'],certa:1},
-  {texto:'Qual é o ANTECESSOR\nde 300?',opcoes:['301','290','200','299'],certa:3},
-  {texto:'Qual é o SUCESSOR\nde 499?',opcoes:['498','500','400','509'],certa:1},
-  {texto:'Qual é o ANTECESSOR\nde 200?',opcoes:['201','190','100','199'],certa:3},
-  {texto:'Qual é o SUCESSOR\nde 399?',opcoes:['398','400','409','300'],certa:1}
+review:{nome:'⭐ Review',emoji:'⭐',perguntas:[
+  {texto:'Choose the correct sentence:\nEu gosto de ler.',opcoes:['I like reading.','I like board.','I don’t like toilet.','I like classroom.'],certa:0},
+  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',opcoes:['I like playing football.','I don’t like playing football.','I don’t like reading.','I like playground.'],certa:1},
+  {texto:'What activity is this?\n🏀',opcoes:['playing football','reading','playing basketball','playing hide and seek'],certa:2},
+  {texto:'What activity is this?\n⚽',opcoes:['playing football','playing basketball','reading','swimming pool'],certa:0},
+  {texto:'What activity is this?\n📖',opcoes:['playing hide and seek','reading','gym','desk'],certa:1},
+  {texto:'What activity is this?\n🙈🌳',opcoes:['playing football','playing basketball','reading','playing hide and seek'],certa:3},
+  {texto:'Complete the sentence:\nI like ______.',opcoes:['reading','library','board','toilet'],certa:0},
+  {texto:'Complete the sentence:\nI don’t like ______.',opcoes:['playing basketball','classroom','desk','board'],certa:0}
 ]}
 };
 
-/* CONTAS ARMADAS (CDU) */
-var CONTAS=[
-  {tipo:'+',a:37,b:28,r:65},{tipo:'+',a:55,b:25,r:80},
-  {tipo:'+',a:34,b:18,r:52},{tipo:'+',a:46,b:28,r:74},
-  {tipo:'+',a:39,b:25,r:64},{tipo:'+',a:74,b:17,r:91},
-  {tipo:'+',a:281,b:103,r:384},{tipo:'+',a:236,b:162,r:398},
-  {tipo:'+',a:197,b:102,r:299},{tipo:'+',a:320,b:159,r:479},
-  {tipo:'-',a:80,b:25,r:55},{tipo:'-',a:74,b:28,r:46},
-  {tipo:'-',a:345,b:120,r:225},{tipo:'-',a:337,b:114,r:223},
-  {tipo:'-',a:486,b:321,r:165},{tipo:'-',a:467,b:142,r:325}
-];
-
-/* PALAVRAS ESCRITA */
-var PALAVRAS=[
-  {palavra:'Trinta',dica:'30 — três dezenas!'},
-  {palavra:'Doze',dica:'12 — uma dezena e duas unidades!'},
-  {palavra:'Setenta',dica:'70 — sete dezenas!'},
-  {palavra:'Oitenta',dica:'80 — oito dezenas!'},
-  {palavra:'Centena',dica:'1 centena = 100 unidades!'},
-  {palavra:'Dezena',dica:'1 dezena = 10 unidades!'},
-  {palavra:'Cinco',dica:'5 unidades!'},
-  {palavra:'Quatro',dica:'4 unidades!'},
-  {palavra:'Duzentos',dica:'200 — duas centenas!'},
-  {palavra:'Sete',dica:'7 unidades!'},
-  {palavra:'Nove',dica:'9 unidades!'},
-  {palavra:'Quarenta',dica:'40 — quatro dezenas!'}
-];
+/* ESCRITA */
+var ESCRITA={
+words:[
+  {emoji:'🧑‍🏫',texto:'Escreva em inglês:\nquadro',respostas:['board'],dica:'Dica: começa com b.'},
+  {emoji:'🏫',texto:'Escreva em inglês:\nsala de aula',respostas:['classroom'],dica:'Dica: class + room.'},
+  {emoji:'🪑',texto:'Escreva em inglês:\ncarteira / mesa',respostas:['desk'],dica:'Dica: 4 letras.'},
+  {emoji:'🏃',texto:'Escreva em inglês:\nginásio',respostas:['gym'],dica:'Dica: 3 letras.'},
+  {emoji:'📚',texto:'Escreva em inglês:\nbiblioteca',respostas:['library'],dica:'Dica: lugar dos livros.'},
+  {emoji:'🛝',texto:'Escreva em inglês:\nparquinho',respostas:['playground'],dica:'Dica: play + ground.'},
+  {emoji:'🏊',texto:'Escreva em inglês:\npiscina',respostas:['swimming pool'],dica:'Dica: duas palavras.'},
+  {emoji:'🚻',texto:'Escreva em inglês:\nbanheiro',respostas:['toilet'],dica:'Dica: começa com t.'}
+],
+sentences:[
+  {emoji:'📖',texto:'Escreva a frase:\nEu gosto de ler.',respostas:['i like reading','i like reading.'],dica:'Use: I like reading.'},
+  {emoji:'⚽',texto:'Escreva a frase:\nEu gosto de jogar futebol.',respostas:['i like playing football','i like playing football.'],dica:'Use: I like + activity.'},
+  {emoji:'🏀',texto:'Escreva a frase:\nEu gosto de jogar basquete.',respostas:['i like playing basketball','i like playing basketball.'],dica:'Use: I like playing basketball.'},
+  {emoji:'🙈',texto:'Escreva a frase:\nEu não gosto de brincar de esconde-esconde.',respostas:["i don't like playing hide and seek","i dont like playing hide and seek","i don't like playing hide and seek.","i dont like playing hide and seek."],dica:"Use: I don't like + activity."},
+  {emoji:'⚽',texto:'Escreva a frase:\nEu não gosto de jogar futebol.',respostas:["i don't like playing football","i dont like playing football","i don't like playing football.","i dont like playing football."],dica:"Use: I don't like playing football."},
+  {emoji:'🏀',texto:'Escreva a frase:\nEu não gosto de jogar basquete.',respostas:["i don't like playing basketball","i dont like playing basketball","i don't like playing basketball.","i dont like playing basketball."],dica:"Use: I don't like playing basketball."}
+]
+};
 
 /* ESTADO */
 var estado={tema:'',perguntas:[],indice:0,acertos:0,respondeu:false};
-var escIdx=0,escPalavras=[];
-var cduIdx=0,cduContas=[],cduAcertos=0,cduVerificado=false;
+var escEstado={tipo:'words',itens:[],indice:0,acertos:0,verificado:false};
 
 /* ================================================================
    FUNÇÕES UTILITÁRIAS
@@ -435,11 +324,19 @@ function embaralhar(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.
 function mostrarTela(id){var t=document.querySelectorAll('.tela');for(var i=0;i<t.length;i++)t[i].classList.remove('ativa');document.getElementById(id).classList.add('ativa');window.scrollTo(0,0);}
 function calcE(a,t){var p=a/t,n=p>=.9?5:p>=.7?4:p>=.5?3:p>=.3?2:1,s='';for(var i=0;i<5;i++)s+=i<n?'⭐':'☆';return s;}
 function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(var i=0;i<12;i++){(function(d){setTimeout(function(){var el=document.createElement('span');el.className='conf';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=Math.random()*95+'vw';el.style.animationDuration=(.8+Math.random()*.9)+'s';document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1800);},d);})(i*80);}}
+function normalizar(txt){return String(txt||'').toLowerCase().trim().replace(/[.!?]+$/,'').replace(/\s+/g,' ');}
 
 /* ================================================================
    QUIZ
 ================================================================ */
-function iniciarTema(tema){estado.tema=tema;estado.perguntas=embaralhar(BANCO[tema].perguntas).slice(0,6);estado.indice=0;estado.acertos=0;mostrarTela('tela-quiz');carregarPergunta();}
+function iniciarTema(tema){
+  estado.tema=tema;
+  estado.perguntas=embaralhar(BANCO[tema].perguntas).slice(0,6);
+  estado.indice=0;
+  estado.acertos=0;
+  mostrarTela('tela-quiz');
+  carregarPergunta();
+}
 
 function carregarPergunta(){
   estado.respondeu=false;
@@ -450,192 +347,178 @@ function carregarPergunta(){
   document.getElementById('hdr-e').textContent=calcE(estado.acertos,total);
   document.getElementById('bar').style.width=((estado.indice/total)*100)+'%';
   document.getElementById('perg-t').textContent=p.texto;
+
   var grid=document.getElementById('grid-o');grid.innerHTML='';
   var usarCol1=false;for(var c=0;c<p.opcoes.length;c++){if(p.opcoes[c].length>28)usarCol1=true;}
   grid.className=usarCol1?'grid-o col1':'grid-o';
+
   for(var idx=0;idx<p.opcoes.length;idx++){
-    var btn=document.createElement('button');btn.className='btn-o';btn.textContent=p.opcoes[idx];
-    btn.setAttribute('data-idx',String(idx));btn.setAttribute('onclick','window.responder('+idx+')');
+    var btn=document.createElement('button');
+    btn.className='btn-o';
+    btn.textContent=p.opcoes[idx];
+    btn.setAttribute('data-idx',String(idx));
+    btn.setAttribute('onclick','window.responder('+idx+')');
     grid.appendChild(btn);
   }
+
   var fb=document.getElementById('fb');fb.style.display='none';fb.className='fb';
   document.getElementById('btn-px').style.display='none';
 }
 
 function responder(escolhido){
-  if(estado.respondeu)return;estado.respondeu=true;
+  if(estado.respondeu)return;
+  estado.respondeu=true;
   var p=estado.perguntas[estado.indice],certa=p.certa,acertou=(escolhido===certa);
   var btns=document.querySelectorAll('.btn-o');
-  for(var i=0;i<btns.length;i++){btns[i].setAttribute('onclick','');var bi=parseInt(btns[i].getAttribute('data-idx'));if(bi===certa)btns[i].classList.add('certa');else if(bi===escolhido&&!acertou)btns[i].classList.add('errada');}
+  for(var i=0;i<btns.length;i++){
+    btns[i].setAttribute('onclick','');
+    var bi=parseInt(btns[i].getAttribute('data-idx'));
+    if(bi===certa)btns[i].classList.add('certa');
+    else if(bi===escolhido&&!acertou)btns[i].classList.add('errada');
+  }
   var fb=document.getElementById('fb');
-  if(acertou){estado.acertos++;var m=['🎉 Muito bem!','⭐ Incrível!','🌟 Parabéns!','🏅 Certíssimo!','✨ Arrasou!'];fb.textContent=m[Math.floor(Math.random()*m.length)];fb.className='fb c';confete();}
-  else{fb.textContent='😊 Quase! A certa está em verde!';fb.className='fb e';}
+  if(acertou){
+    estado.acertos++;
+    var m=['🎉 Very good!','⭐ Great job!','🌟 Excellent!','🏅 Correct!','✨ Amazing!'];
+    fb.textContent=m[Math.floor(Math.random()*m.length)];
+    fb.className='fb c';
+    confete();
+  }else{
+    fb.textContent='😊 Quase! A resposta certa está em verde.';
+    fb.className='fb e';
+  }
   fb.style.display='block';
   document.getElementById('hdr-e').textContent=calcE(estado.acertos,estado.perguntas.length);
-  var btnP=document.getElementById('btn-px');btnP.style.display='block';
+  var btnP=document.getElementById('btn-px');
+  btnP.style.display='block';
   btnP.textContent=(estado.indice===estado.perguntas.length-1)?'Ver resultado 🏆':'Próxima ➡️';
 }
 
-function avancar(){estado.indice++;if(estado.indice>=estado.perguntas.length)mostrarFinal('quiz');else carregarPergunta();}
+function avancar(){
+  estado.indice++;
+  if(estado.indice>=estado.perguntas.length)mostrarFinal('quiz');
+  else carregarPergunta();
+}
 
+/* ================================================================
+   ESCRITA
+================================================================ */
+function abrirEscrita(tipo){
+  escEstado.tipo=tipo;
+  escEstado.itens=embaralhar(ESCRITA[tipo]).slice(0,tipo==='words'?8:6);
+  escEstado.indice=0;
+  escEstado.acertos=0;
+  escEstado.verificado=false;
+  mostrarTela('tela-escrita');
+  mostrarItemEscrita();
+}
+
+function mostrarItemEscrita(){
+  escEstado.verificado=false;
+  var item=escEstado.itens[escEstado.indice];
+  document.getElementById('esc-emoji').textContent=item.emoji;
+  document.getElementById('esc-frase').textContent=item.texto;
+  document.getElementById('esc-dica').textContent=item.dica;
+  document.getElementById('esc-prog').textContent='Item '+(escEstado.indice+1)+' de '+escEstado.itens.length;
+
+  var input=document.getElementById('esc-input');
+  input.value='';
+  input.className='escrita-input';
+  input.removeAttribute('readonly');
+  input.focus();
+
+  var fb=document.getElementById('esc-fb');
+  fb.style.display='none';
+  fb.className='fb';
+
+  document.getElementById('btn-esc-ver').style.display='block';
+  document.getElementById('btn-esc-px').style.display='none';
+}
+
+function verificarEscrita(){
+  if(escEstado.verificado)return;
+  escEstado.verificado=true;
+
+  var item=escEstado.itens[escEstado.indice];
+  var input=document.getElementById('esc-input');
+  var resposta=normalizar(input.value);
+  var certas=item.respostas.map(normalizar);
+  var acertou=certas.indexOf(resposta)>=0;
+  var fb=document.getElementById('esc-fb');
+
+  input.setAttribute('readonly','true');
+
+  if(acertou){
+    escEstado.acertos++;
+    input.classList.add('ok');
+    fb.textContent='🎉 Correct!';
+    fb.className='fb c';
+    confete();
+  }else{
+    input.classList.add('erro');
+    fb.textContent='😊 Resposta esperada: '+item.respostas[0];
+    fb.className='fb e';
+  }
+
+  fb.style.display='block';
+  document.getElementById('btn-esc-ver').style.display='none';
+  var btnP=document.getElementById('btn-esc-px');
+  btnP.style.display='block';
+  btnP.textContent=(escEstado.indice===escEstado.itens.length-1)?'Ver resultado 🏆':'Próxima ➡️';
+}
+
+function proxEscrita(){
+  escEstado.indice++;
+  if(escEstado.indice>=escEstado.itens.length)mostrarFinal('escrita');
+  else mostrarItemEscrita();
+}
+
+/* ================================================================
+   FINAL
+================================================================ */
 function mostrarFinal(tipo){
-  var ac=tipo==='cdu'?cduAcertos:estado.acertos;
-  var total=tipo==='cdu'?cduContas.length:estado.perguntas.length;
+  var ac,total,replayFn;
+
+  if(tipo==='escrita'){
+    ac=escEstado.acertos;
+    total=escEstado.itens.length;
+    replayFn='window.abrirEscrita("'+escEstado.tipo+'")';
+  }else{
+    ac=estado.acertos;
+    total=estado.perguntas.length;
+    replayFn='window.iniciarTema("'+estado.tema+'")';
+  }
+
   var pct=ac/total;
   document.getElementById('ef').textContent=calcE(ac,total);
   document.getElementById('af').textContent=ac+' / '+total+' acertos!';
-  var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excelente! 🎉','PERFEITO! 🧠✨'];
+  var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excellent! 🎉','PERFECT! 🧠✨'];
   document.getElementById('mf').textContent=ms[Math.min(Math.floor(pct*5),4)];
-  document.getElementById('bar').style.width='100%';
-  var btnR=document.getElementById('btn-replay');
-  if(tipo==='cdu'){btnR.setAttribute('onclick','window.abrirCDU()');}
-  else{btnR.setAttribute('onclick','window.iniciarTema("'+estado.tema+'")');}
-  confete();mostrarTela('tela-final');
+  document.getElementById('btn-replay').setAttribute('onclick',replayFn);
+  confete();
+  mostrarTela('tela-final');
 }
 
-function replay(){/* handled by dynamic onclick */}
+function replay(){/* botão recebe onclick dinâmico */}
 
-/* ================================================================
-   CONTA ARMADA (CDU)
-================================================================ */
-function abrirCDU(){
-  cduContas=embaralhar(CONTAS).slice(0,8);cduIdx=0;cduAcertos=0;
-  mostrarTela('tela-cdu');montarCDU();
-}
-
-function montarCDU(){
-  cduVerificado=false;
-  var c=cduContas[cduIdx];
-  var cols=String(Math.max(c.a,c.b,c.r)).length;
-  /* Texto do problema */
-  var probTxt=c.a+' '+c.tipo+' '+c.b+' = ?';
-  document.getElementById('cdu-problema').textContent=probTxt;
-  document.getElementById('cdu-prog').textContent='Conta '+(cduIdx+1)+' de '+cduContas.length;
-  /* Construir grid */
-  var wrap=document.getElementById('cdu-grid');
-  wrap.innerHTML='';
-  var tbl=document.createElement('div');tbl.className='cdu-wrap';
-  /* Header */
-  var hdr=document.createElement('div');hdr.className='cdu-header';
-  var labels=cols===3?['C','D','U']:['D','U'];
-  for(var i=0;i<labels.length;i++){var sp=document.createElement('span');sp.textContent=labels[i];hdr.appendChild(sp);}
-  tbl.appendChild(hdr);
-  /* Linha A */
-  var rowA=document.createElement('div');rowA.className='cdu-row';
-  var digA=padNum(c.a,cols);
-  for(var i=0;i<cols;i++){var ce=document.createElement('span');ce.className='cdu-cell';ce.textContent=digA[i];rowA.appendChild(ce);}
-  tbl.appendChild(rowA);
-  /* Linha B (com sinal) */
-  var rowB=document.createElement('div');rowB.className='cdu-row';
-  var sign=document.createElement('span');sign.className='cdu-sign';sign.textContent=c.tipo;rowB.appendChild(sign);
-  var digB=padNum(c.b,cols);
-  for(var i=0;i<cols;i++){var ce=document.createElement('span');ce.className='cdu-cell';ce.textContent=digB[i];rowB.appendChild(ce);}
-  tbl.appendChild(rowB);
-  /* Linha divisória */
-  var line=document.createElement('div');line.className='cdu-line';tbl.appendChild(line);
-  /* Linha resultado (inputs) */
-  var rowR=document.createElement('div');rowR.className='cdu-row';
-  var spacer=document.createElement('span');spacer.className='cdu-sign';spacer.textContent='=';rowR.appendChild(spacer);
-  for(var i=0;i<cols;i++){
-    var inp=document.createElement('input');inp.className='cdu-input';inp.type='text';
-    inp.setAttribute('inputmode','numeric');inp.setAttribute('maxlength','1');
-    inp.setAttribute('data-pos',String(i));
-    inp.setAttribute('onclick','this.select()');
-    /* Auto-advance */
-    (function(pos){
-      inp.addEventListener('input',function(){
-        if(this.value.length===1){
-          var next=rowR.querySelector('[data-pos="'+(pos+1)+'"]');
-          if(next)next.focus();
-        }
-      });
-    })(i);
-    rowR.appendChild(inp);
+/* ENTER verifica/próxima na escrita */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter' && document.getElementById('tela-escrita').classList.contains('ativa')){
+    if(document.getElementById('btn-esc-ver').style.display!=='none')verificarEscrita();
+    else proxEscrita();
   }
-  tbl.appendChild(rowR);
-  wrap.appendChild(tbl);
-  /* Reset feedback */
-  var fb=document.getElementById('cdu-fb');fb.style.display='none';fb.className='fb';
-  document.getElementById('btn-cdu-ver').style.display='block';
-  document.getElementById('btn-cdu-px').style.display='none';
-  /* Focus first input */
-  setTimeout(function(){var first=tbl.querySelector('.cdu-input');if(first)first.focus();},300);
-}
-
-function padNum(n,cols){
-  var s=String(n);
-  while(s.length<cols)s='0'+s;
-  return s.split('');
-}
-
-function verificarCDU(){
-  if(cduVerificado)return;cduVerificado=true;
-  var c=cduContas[cduIdx];
-  var cols=String(Math.max(c.a,c.b,c.r)).length;
-  var digR=padNum(c.r,cols);
-  var inputs=document.querySelectorAll('.cdu-input');
-  var acertou=true;
-  for(var i=0;i<inputs.length;i++){
-    var v=inputs[i].value.trim();
-    if(v===digR[i]){inputs[i].classList.add('ok');}
-    else{inputs[i].classList.add('erro');inputs[i].value=digR[i];acertou=false;}
-    inputs[i].setAttribute('readonly','true');
-  }
-  var fb=document.getElementById('cdu-fb');
-  if(acertou){cduAcertos++;fb.textContent='🎉 Certíssimo!';fb.className='fb c';confete();}
-  else{fb.textContent='😊 A resposta certa é '+c.r;fb.className='fb e';}
-  fb.style.display='block';
-  document.getElementById('btn-cdu-ver').style.display='none';
-  var btnP=document.getElementById('btn-cdu-px');btnP.style.display='block';
-  btnP.textContent=(cduIdx===cduContas.length-1)?'Ver resultado 🏆':'Próxima ➡️';
-}
-
-function proxCDU(){cduIdx++;if(cduIdx>=cduContas.length)mostrarFinal('cdu');else montarCDU();}
-
-/* ================================================================
-   ESCRITA (Canvas)
-================================================================ */
-var canvas,ctx,desenhando=false;
-function initCanvas(){
-  canvas=document.getElementById('canvas');var wrap=canvas.parentElement;
-  var rect=wrap.getBoundingClientRect();canvas.width=rect.width-6;canvas.height=350;
-  ctx=canvas.getContext('2d');ctx.strokeStyle='#2C3E50';ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';
-  canvas.addEventListener('pointerdown',function(e){e.preventDefault();desenhando=true;var p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
-  canvas.addEventListener('pointermove',function(e){e.preventDefault();if(!desenhando)return;var p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();});
-  canvas.addEventListener('pointerup',function(e){e.preventDefault();desenhando=false;});
-  canvas.addEventListener('pointerleave',function(){desenhando=false;});
-  canvas.addEventListener('pointercancel',function(){desenhando=false;});
-  canvas.addEventListener('touchstart',function(e){if(e.touches.length===1){e.preventDefault();desenhando=true;var p=getT(e);ctx.beginPath();ctx.moveTo(p.x,p.y);}},{passive:false});
-  canvas.addEventListener('touchmove',function(e){if(!desenhando)return;e.preventDefault();var p=getT(e);ctx.lineTo(p.x,p.y);ctx.stroke();},{passive:false});
-  canvas.addEventListener('touchend',function(){desenhando=false;});
-}
-function getP(e){var r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
-function getT(e){var r=canvas.getBoundingClientRect();var t=e.touches[0];return{x:t.clientX-r.left,y:t.clientY-r.top};}
-function desenharLinhas(){
-  var h=canvas.height,w=canvas.width;ctx.save();
-  ctx.strokeStyle='#D4C9B8';ctx.lineWidth=1;
-  [80,140,200,260,310].forEach(function(y){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();});
-  ctx.strokeStyle='#F5C6C6';ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(45,0);ctx.lineTo(45,h);ctx.stroke();
-  ctx.restore();ctx.strokeStyle='#2C3E50';ctx.lineWidth=3;
-}
-function limparCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);desenharLinhas();}
-function abrirEscrita(){escPalavras=embaralhar(PALAVRAS).slice(0,10);escIdx=0;mostrarTela('tela-escrita');setTimeout(function(){initCanvas();mostrarPalavraEsc();},400);}
-function mostrarPalavraEsc(){
-  var p=escPalavras[escIdx];
-  document.getElementById('esc-palavra').textContent=p.palavra;
-  document.getElementById('esc-dica2').textContent='💡 '+p.dica;
-  document.getElementById('esc-prog').textContent='Palavra '+(escIdx+1)+' de '+escPalavras.length;
-  ctx.clearRect(0,0,canvas.width,canvas.height);desenharLinhas();
-  document.getElementById('btn-esc-px').textContent=(escIdx===escPalavras.length-1)?'Finalizar ✅':'Próxima ✏️';
-}
-function proxPalavra(){escIdx++;if(escIdx>=escPalavras.length){confete();escIdx=0;mostrarTela('tela-menu');}else mostrarPalavraEsc();}
+});
 
 /* EXPOR TUDO NO WINDOW */
-window.iniciarTema=iniciarTema;window.responder=responder;window.avancar=avancar;
-window.mostrarTela=mostrarTela;window.abrirCDU=abrirCDU;window.verificarCDU=verificarCDU;
-window.proxCDU=proxCDU;window.abrirEscrita=abrirEscrita;window.limparCanvas=limparCanvas;
-window.proxPalavra=proxPalavra;window.confete=confete;window.replay=replay;
+window.iniciarTema=iniciarTema;
+window.responder=responder;
+window.avancar=avancar;
+window.mostrarTela=mostrarTela;
+window.abrirEscrita=abrirEscrita;
+window.verificarEscrita=verificarEscrita;
+window.proxEscrita=proxEscrita;
+window.confete=confete;
+window.replay=replay;
 </script>
 </body>
 </html>
