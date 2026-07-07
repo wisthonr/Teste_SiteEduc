@@ -45,16 +45,36 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .leitura-txt{font-size:1.05rem;font-weight:600;line-height:1.7;color:var(--texto);margin-bottom:10px}
 .leitura-regra{background:#E8F8F5;border-left:4px solid var(--verde);border-radius:0 12px 12px 0;padding:10px 14px;margin:10px 0;font-size:.95rem;font-weight:700;color:#1E8449}
 .leitura-gloss{background:#FEF9E7;border-left:4px solid var(--laranja);border-radius:0 12px 12px 0;padding:10px 14px;margin:10px 0;font-size:.95rem;font-weight:700;color:#856404}
+.leitura-img-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:12px 0}
+.leitura-img{background:#F8FBFF;border:2px solid #D6EAF8;border-radius:18px;padding:12px 8px;text-align:center;font-weight:900;color:var(--texto);box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.leitura-img span{display:block;font-size:2.2rem;margin-bottom:5px}
+.frase-visual{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;background:#F8FBFF;border:2px solid #D6EAF8;border-radius:18px;padding:12px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.frase-visual .fv-img{font-size:2.4rem;text-align:center}
+.frase-visual .fv-txt{font-size:1.02rem;font-weight:700;line-height:1.45}
 .hdr{width:100%;background:var(--branco);border-radius:20px;padding:12px 18px;box-shadow:0 4px 16px var(--sombra);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .hdr-t{font-size:1rem;font-weight:900}.hdr-p{font-size:.88rem;font-weight:700;color:#666}.hdr-e{font-size:1.2rem;letter-spacing:2px}
 .bar-w{width:100%;background:#E0E0E0;border-radius:10px;height:12px;overflow:hidden}
 .bar{height:100%;background:linear-gradient(90deg,var(--verde),var(--amarelo));border-radius:10px;transition:width .4s;width:0%}
 .cperg{width:100%;background:var(--branco);border-radius:24px;padding:24px 20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
 .perg-e{font-size:48px;display:block;margin-bottom:10px}
+.perg-visual{display:none;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:10px;margin:0 auto 14px;max-width:520px}
+.perg-visual.ativa{display:grid}
+.visual-card{background:#F8FBFF;border:2px solid #D6EAF8;border-radius:18px;padding:10px 8px;min-height:74px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.scene-card{grid-column:1/-1;position:relative;overflow:hidden;min-height:190px;border:3px solid #D6EAF8;border-radius:24px;background:linear-gradient(180deg,#DDF4FF 0%,#F9FDFF 55%,#DFF7D9 56%,#BFE8A8 100%);box-shadow:0 8px 22px rgba(0,0,0,.12);padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
+.scene-card::before{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:22px;top:18px;background:rgba(255,224,102,.9);box-shadow:0 0 28px rgba(255,224,102,.55)}
+.scene-sky{position:absolute;left:18px;right:18px;top:18px;display:flex;justify-content:space-between;align-items:flex-start;font-size:2.1rem;z-index:1}
+.scene-people{position:relative;z-index:2;display:flex;align-items:end;justify-content:center;gap:12px;font-size:3.5rem;margin-bottom:10px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.12))}
+.scene-people span{display:inline-block;animation:wiggle 2.4s ease-in-out infinite}
+.scene-people span:nth-child(2){animation-delay:.2s}.scene-people span:nth-child(3){animation-delay:.4s}.scene-people span:nth-child(4){animation-delay:.6s}
+.scene-label{position:relative;z-index:3;background:rgba(255,255,255,.9);border:2px solid rgba(255,255,255,.95);border-radius:18px;padding:10px 12px;font-size:1.05rem;font-weight:900;color:var(--texto);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.scene-hint{display:block;font-size:.82rem;color:#5D6D7E;margin-top:2px}
+@keyframes wiggle{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
 .perg-t{font-size:1.3rem;font-weight:800;color:var(--texto);line-height:1.4;white-space:pre-line}
 .grid-o{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
 .grid-o.col1{grid-template-columns:1fr}
 .btn-o{background:var(--branco);border:3px solid #CCC;border-radius:20px;padding:16px 10px;font-family:inherit;font-size:1.1rem;font-weight:800;color:var(--texto);cursor:pointer;box-shadow:0 4px 14px var(--sombra);transition:transform .12s,border-color .15s,background .15s;min-height:66px;width:100%;line-height:1.25;text-align:center}
+.btn-o .op-img{display:block;font-size:2rem;line-height:1;margin-bottom:7px}
+.btn-o .op-txt{display:block}
 .btn-o:active{transform:scale(.93)}
 .btn-o.certa{background:#E8F8F5;border-color:var(--verde);color:var(--verde);animation:pc .4s ease}
 .btn-o.errada{background:#FDEDEC;border-color:var(--vermelho);color:var(--vermelho);animation:sk .4s ease}
@@ -164,14 +184,16 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
     <p class="leitura-titulo">🏫 School Words</p>
     <p class="leitura-subtitulo">Places and objects</p>
     <p class="leitura-txt">Vamos treinar palavras da escola em inglês.</p>
-    <div class="leitura-regra">board = quadro</div>
-    <div class="leitura-regra">classroom = sala de aula</div>
-    <div class="leitura-regra">desk = carteira / mesa</div>
-    <div class="leitura-regra">gym = ginásio</div>
-    <div class="leitura-regra">library = biblioteca</div>
-    <div class="leitura-regra">playground = parquinho</div>
-    <div class="leitura-regra">swimming pool = piscina</div>
-    <div class="leitura-regra">toilet = banheiro</div>
+    <div class="leitura-img-grid" aria-label="Imagens das palavras da escola">
+      <div class="leitura-img"><span>🧑‍🏫</span>board<br><small>quadro</small></div>
+      <div class="leitura-img"><span>🏫</span>classroom<br><small>sala de aula</small></div>
+      <div class="leitura-img"><span>🪑</span>desk<br><small>carteira / mesa</small></div>
+      <div class="leitura-img"><span>🏃</span>gym<br><small>ginásio</small></div>
+      <div class="leitura-img"><span>📚</span>library<br><small>biblioteca</small></div>
+      <div class="leitura-img"><span>🛝</span>playground<br><small>parquinho</small></div>
+      <div class="leitura-img"><span>🏊</span>swimming pool<br><small>piscina</small></div>
+      <div class="leitura-img"><span>🚻</span>toilet<br><small>banheiro</small></div>
+    </div>
     <p class="leitura-subtitulo">Pergunta importante</p>
     <p class="leitura-txt"><strong>What's in your school?</strong> = O que tem na sua escola?</p>
   </div>
@@ -185,12 +207,19 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <div class="leitura-card">
     <p class="leitura-titulo">💬 I like / I don't like</p>
     <p class="leitura-subtitulo">Para falar do que você gosta</p>
-    <p class="leitura-txt"><strong>I like reading.</strong> = Eu gosto de ler.</p>
-    <p class="leitura-txt"><strong>I like playing football.</strong> = Eu gosto de jogar futebol.</p>
-    <p class="leitura-txt"><strong>I like playing basketball.</strong> = Eu gosto de jogar basquete.</p>
+    <div class="frase-visual"><span class="fv-img">😊📖</span><p class="fv-txt"><strong>I like reading.</strong><br>Eu gosto de ler.</p></div>
+    <div class="frase-visual"><span class="fv-img">😊⚽</span><p class="fv-txt"><strong>I like playing football.</strong><br>Eu gosto de jogar futebol.</p></div>
+    <div class="frase-visual"><span class="fv-img">😊🏀</span><p class="fv-txt"><strong>I like playing basketball.</strong><br>Eu gosto de jogar basquete.</p></div>
+    <div class="leitura-img-grid" aria-label="Imagens de atividades em inglês">
+      <div class="leitura-img"><span>📖</span>reading<br><small>lendo</small></div>
+      <div class="leitura-img"><span>⚽</span>playing football<br><small>jogando futebol</small></div>
+      <div class="leitura-img"><span>🏀</span>playing basketball<br><small>jogando basquete</small></div>
+      <div class="leitura-img"><span>🙈🌳</span>playing hide and seek<br><small>esconde-esconde</small></div>
+    </div>
     <div class="leitura-regra">I like + atividade.</div>
     <p class="leitura-subtitulo">Para falar do que você não gosta</p>
-    <p class="leitura-txt"><strong>I don't like playing hide and seek.</strong> = Eu não gosto de brincar de esconde-esconde.</p>
+    <div class="frase-visual"><span class="fv-img">🙅‍♀️🙈🌳</span><p class="fv-txt"><strong>I don't like playing hide and seek.</strong><br>Eu não gosto de brincar de esconde-esconde.</p></div>
+    <div class="frase-visual"><span class="fv-img">🙅‍♀️⚽</span><p class="fv-txt"><strong>I don't like playing football.</strong><br>Eu não gosto de jogar futebol.</p></div>
     <div class="leitura-gloss">I don't like + atividade.</div>
   </div>
   <button class="ba bp" style="width:100%" onclick="window.iniciarTema('review')">⭐ Revisão</button>
@@ -207,6 +236,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <div class="bar-w"><div id="bar" class="bar"></div></div>
   <div class="cperg">
     <span id="perg-e" class="perg-e">🏫</span>
+    <div id="perg-v" class="perg-visual" aria-hidden="true"></div>
     <p id="perg-t" class="perg-t">...</p>
   </div>
   <div id="grid-o" class="grid-o"></div>
@@ -277,44 +307,44 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 ================================================================ */
 var BANCO={
 school:{nome:'🏫 School Words',emoji:'🏫',perguntas:[
-  {texto:'What is this?\n🧑‍🏫 The teacher writes here.',opcoes:['board','desk','library','toilet'],certa:0},
-  {texto:'Where are the books?\n📚',opcoes:['gym','library','playground','desk'],certa:1},
-  {texto:'Where do students sit and study?\n🪑✏️',opcoes:['desk','swimming pool','toilet','playground'],certa:0},
-  {texto:'Where can children play outside?\n🛝',opcoes:['board','classroom','playground','library'],certa:2},
-  {texto:'Where can you swim?\n🏊',opcoes:['toilet','gym','swimming pool','desk'],certa:2},
-  {texto:'Where can you play sports?\n🏃',opcoes:['gym','board','library','toilet'],certa:0},
-  {texto:'Where is the class?\n👩‍🏫👧👦',opcoes:['classroom','playground','swimming pool','toilet'],certa:0},
-  {texto:'Where do you wash your hands?\n🚻',opcoes:['library','desk','toilet','board'],certa:2}
+  {texto:'What is this?\nThe teacher writes here.',cena:'board',opcoes:['board','desk','library','toilet'],certa:0},
+  {texto:'Where are the books?',cena:'library',opcoes:['gym','library','playground','desk'],certa:1},
+  {texto:'Where do students sit and study?',cena:'desk',opcoes:['desk','swimming pool','toilet','playground'],certa:0},
+  {texto:'Where can children play outside?',cena:'playground',opcoes:['board','classroom','playground','library'],certa:2},
+  {texto:'Where can you swim?',cena:'pool',opcoes:['toilet','gym','swimming pool','desk'],certa:2},
+  {texto:'Where can you play sports?',cena:'gym',opcoes:['gym','board','library','toilet'],certa:0},
+  {texto:'Where is the class?',cena:'classroom',opcoes:['classroom','playground','swimming pool','toilet'],certa:0},
+  {texto:'Where do you wash your hands?',cena:'toilet',opcoes:['library','desk','toilet','board'],certa:2}
 ]},
 complete:{nome:'🔤 Complete the Word',emoji:'🔤',perguntas:[
-  {texto:'Complete:\nb _ a r d',opcoes:['board','boord','braod','bored'],certa:0},
-  {texto:'Complete:\nc l a s s r _ _ m',opcoes:['classroom','classrom','clasroom','classroam'],certa:0},
-  {texto:'Complete:\nd _ s k',opcoes:['dask','desk','disk','deski'],certa:1},
-  {texto:'Complete:\ng _ m',opcoes:['gum','gam','gym','gim'],certa:2},
-  {texto:'Complete:\nl i b r _ r y',opcoes:['library','librare','librery','libry'],certa:0},
-  {texto:'Complete:\np l a y g r _ _ n d',opcoes:['playgrond','playground','playgruond','playgroud'],certa:1},
-  {texto:'Complete:\ns w i m m i n g  p _ _ l',opcoes:['swimming pull','swimming pool','swiming pool','swimming pol'],certa:1},
-  {texto:'Complete:\nt o i l _ t',opcoes:['toilet','toilat','toilette','toillet'],certa:0}
+  {texto:'Complete:\nb _ a r d',cena:'board',opcoes:['board','boord','braod','bored'],certa:0},
+  {texto:'Complete:\nc l a s s r _ _ m',cena:'classroom',opcoes:['classroom','classrom','clasroom','classroam'],certa:0},
+  {texto:'Complete:\nd _ s k',cena:'desk',opcoes:['dask','desk','disk','deski'],certa:1},
+  {texto:'Complete:\ng _ m',cena:'gym',opcoes:['gum','gam','gym','gim'],certa:2},
+  {texto:'Complete:\nl i b r _ r y',cena:'library',opcoes:['library','librare','librery','libry'],certa:0},
+  {texto:'Complete:\np l a y g r _ _ n d',cena:'playground',opcoes:['playgrond','playground','playgruond','playgroud'],certa:1},
+  {texto:'Complete:\ns w i m m i n g  p _ _ l',cena:'pool',opcoes:['swimming pull','swimming pool','swiming pool','swimming pol'],certa:1},
+  {texto:'Complete:\nt o i l _ t',cena:'toilet',opcoes:['toilet','toilat','toilette','toillet'],certa:0}
 ]},
 match:{nome:'🧩 Match',emoji:'🧩',perguntas:[
-  {texto:'Match the meaning:\nboard',opcoes:['quadro','biblioteca','ginásio','piscina'],certa:0},
-  {texto:'Match the meaning:\nclassroom',opcoes:['banheiro','sala de aula','parquinho','mesa'],certa:1},
-  {texto:'Match the meaning:\ndesk',opcoes:['mesa/carteira','piscina','quadro','ginásio'],certa:0},
-  {texto:'Match the meaning:\ngym',opcoes:['biblioteca','banheiro','ginásio','sala de aula'],certa:2},
-  {texto:'Match the meaning:\nplayground',opcoes:['quadro','parquinho','biblioteca','carteira'],certa:1},
-  {texto:'Match the meaning:\ntoilet',opcoes:['banheiro','piscina','ginásio','sala de aula'],certa:0},
-  {texto:'Match:\nreading',opcoes:['lendo','jogando futebol','brincando de esconde-esconde','nadando'],certa:0},
-  {texto:'Match:\nplaying hide and seek',opcoes:['jogando basquete','lendo','brincando de esconde-esconde','jogando futebol'],certa:2}
+  {texto:'Match the meaning:\nboard',cena:'board',opcoes:['quadro','biblioteca','ginásio','piscina'],certa:0},
+  {texto:'Match the meaning:\nclassroom',cena:'classroom',opcoes:['banheiro','sala de aula','parquinho','mesa'],certa:1},
+  {texto:'Match the meaning:\ndesk',cena:'desk',opcoes:['mesa/carteira','piscina','quadro','ginásio'],certa:0},
+  {texto:'Match the meaning:\ngym',cena:'gym',opcoes:['biblioteca','banheiro','ginásio','sala de aula'],certa:2},
+  {texto:'Match the meaning:\nplayground',cena:'playground',opcoes:['quadro','parquinho','biblioteca','carteira'],certa:1},
+  {texto:'Match the meaning:\ntoilet',cena:'toilet',opcoes:['banheiro','piscina','ginásio','sala de aula'],certa:0},
+  {texto:'Match:\nreading',cena:'reading',opcoes:['lendo','jogando futebol','brincando de esconde-esconde','nadando'],certa:0},
+  {texto:'Match:\nplaying hide and seek',cena:'hideSeek',opcoes:['jogando basquete','lendo','brincando de esconde-esconde','jogando futebol'],certa:2}
 ]},
 review:{nome:'⭐ Review',emoji:'⭐',perguntas:[
-  {texto:'Choose the correct sentence:\nEu gosto de ler.',opcoes:['I like reading.','I like board.','I don’t like toilet.','I like classroom.'],certa:0},
-  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',opcoes:['I like playing football.','I don’t like playing football.','I don’t like reading.','I like playground.'],certa:1},
-  {texto:'What activity is this?\n🏀',opcoes:['playing football','reading','playing basketball','playing hide and seek'],certa:2},
-  {texto:'What activity is this?\n⚽',opcoes:['playing football','playing basketball','reading','swimming pool'],certa:0},
-  {texto:'What activity is this?\n📖',opcoes:['playing hide and seek','reading','gym','desk'],certa:1},
-  {texto:'What activity is this?\n🙈🌳',opcoes:['playing football','playing basketball','reading','playing hide and seek'],certa:3},
-  {texto:'Complete the sentence:\nI like ______.',opcoes:['reading','library','board','toilet'],certa:0},
-  {texto:'Complete the sentence:\nI don’t like ______.',opcoes:['playing basketball','classroom','desk','board'],certa:0}
+  {texto:'Choose the correct sentence:\nEu gosto de ler.',cena:'likeReading',opcoes:['I like reading.','I like board.','I don’t like toilet.','I like classroom.'],certa:0},
+  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',cena:'dislikeFootball',opcoes:['I like playing football.','I don’t like playing football.','I don’t like reading.','I like playground.'],certa:1},
+  {texto:'What activity is this?',cena:'basketball',opcoes:['playing football','reading','playing basketball','playing hide and seek'],certa:2},
+  {texto:'What activity is this?',cena:'football',opcoes:['playing football','playing basketball','reading','swimming pool'],certa:0},
+  {texto:'What activity is this?',cena:'reading',opcoes:['playing hide and seek','reading','gym','desk'],certa:1},
+  {texto:'What activity is this?',cena:'hideSeek',opcoes:['playing football','playing basketball','reading','playing hide and seek'],certa:3},
+  {texto:'Complete the sentence:\nI like ______.',cena:'reading',opcoes:['reading','library','board','toilet'],certa:0},
+  {texto:'Complete the sentence:\nI don’t like ______.',cena:'basketball',opcoes:['playing basketball','classroom','desk','board'],certa:0}
 ]}
 };
 
@@ -352,6 +382,50 @@ function mostrarTela(id){var t=document.querySelectorAll('.tela');for(var i=0;i<
 function calcE(a,t){var p=a/t,n=p>=.9?5:p>=.7?4:p>=.5?3:p>=.3?2:1,s='';for(var i=0;i<5;i++)s+=i<n?'⭐':'☆';return s;}
 function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(var i=0;i<12;i++){(function(d){setTimeout(function(){var el=document.createElement('span');el.className='conf';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=Math.random()*95+'vw';el.style.animationDuration=(.8+Math.random()*.9)+'s';document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1800);},d);})(i*80);}}
 function normalizar(txt){return String(txt||'').toLowerCase().trim().replace(/[.!?]+$/,'').replace(/\s+/g,' ');}
+function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+
+var CENAS={
+  board:{ceu:['☁️','☀️'],pessoas:['👩‍🏫','⬛','✏️'],titulo:'board',dica:'The teacher writes here.'},
+  classroom:{ceu:['📚','🪟'],pessoas:['👩‍🏫','👧','👦','🪑'],titulo:'classroom',dica:'The class learns here.'},
+  desk:{ceu:['✏️','📘'],pessoas:['👧','🪑','📓'],titulo:'desk',dica:'Students sit and study.'},
+  gym:{ceu:['🏅','🎽'],pessoas:['🏃‍♀️','🏃','⚽'],titulo:'gym',dica:'A place to play sports.'},
+  library:{ceu:['📚','🔖'],pessoas:['👧','📖','📚'],titulo:'library',dica:'Books live here.'},
+  playground:{ceu:['☀️','🌈'],pessoas:['👧','🛝','👦'],titulo:'playground',dica:'Children play outside.'},
+  pool:{ceu:['☀️','💦'],pessoas:['🏊‍♀️','🏊','💧'],titulo:'swimming pool',dica:'You can swim here.'},
+  toilet:{ceu:['🧼','💧'],pessoas:['🚻','🧴','🧻'],titulo:'toilet',dica:'Wash your hands here.'},
+  reading:{ceu:['📚','✨'],pessoas:['👧','📖','🛋️'],titulo:'reading',dica:'I like reading.'},
+  football:{ceu:['🥅','🌤️'],pessoas:['👧','⚽','🏃'],titulo:'playing football',dica:'Kick the ball with your feet.'},
+  basketball:{ceu:['🏀','⭐'],pessoas:['👧','🏀','⛹️'],titulo:'playing basketball',dica:'Throw the ball into the hoop.'},
+  hideSeek:{ceu:['🌳','☀️','🌳'],pessoas:['🙈','🌳','👧','👦'],titulo:'playing hide and seek',dica:'One child counts. Friends hide.'},
+  likeReading:{ceu:['💬','✨'],pessoas:['😊','📖','👧'],titulo:'I like reading.',dica:'Eu gosto de ler.'},
+  dislikeFootball:{ceu:['💬','⚽'],pessoas:['🙅‍♀️','⚽','👧'],titulo:"I don't like playing football.",dica:'Eu não gosto de jogar futebol.'}
+};
+function renderCena(chave){
+  var c=CENAS[chave];
+  if(!c)return null;
+  var card=document.createElement('div');
+  card.className='scene-card';
+  var ceu=document.createElement('div');ceu.className='scene-sky';
+  for(var i=0;i<c.ceu.length;i++){var sp=document.createElement('span');sp.textContent=c.ceu[i];ceu.appendChild(sp);}
+  var pessoas=document.createElement('div');pessoas.className='scene-people';
+  for(var j=0;j<c.pessoas.length;j++){var pp=document.createElement('span');pp.textContent=c.pessoas[j];pessoas.appendChild(pp);}
+  var label=document.createElement('div');label.className='scene-label';label.textContent=c.titulo;
+  var hint=document.createElement('span');hint.className='scene-hint';hint.textContent=c.dica;label.appendChild(hint);
+  card.appendChild(ceu);card.appendChild(pessoas);card.appendChild(label);
+  return card;
+}
+
+function visualPara(txt){
+  var k=normalizar(txt).replace(/^i like /,'').replace(/^i don.t like /,'');
+  var mapa={
+    'board':'🧑‍🏫','quadro':'🧑‍🏫','classroom':'🏫','sala de aula':'🏫','desk':'🪑','mesa/carteira':'🪑','carteira':'🪑','mesa':'🪑',
+    'gym':'🏃','ginásio':'🏃','library':'📚','biblioteca':'📚','playground':'🛝','parquinho':'🛝','swimming pool':'🏊','piscina':'🏊','toilet':'🚻','banheiro':'🚻',
+    'reading':'📖','lendo':'📖','playing football':'⚽','jogando futebol':'⚽','playing basketball':'🏀','jogando basquete':'🏀','playing hide and seek':'🙈🌳','brincando de esconde-esconde':'🙈🌳','nadando':'🏊',
+    'i like reading':'😊📖','i like reading.':'😊📖','i like playing football':'😊⚽','i like playing football.':'😊⚽','i like playing basketball':'😊🏀','i like playing basketball.':'😊🏀','i don’t like playing football':'🙅‍♀️⚽','i don’t like playing football.':'🙅‍♀️⚽','i don’t like reading':'🙅‍♀️📖','i don’t like reading.':'🙅‍♀️📖','i don’t like playing hide and seek':'🙅‍♀️🙈🌳',"i don't like playing hide and seek":"🙅‍♀️🙈🌳"
+  };
+  return mapa[k]||mapa[normalizar(txt)]||'';
+}
+function htmlOpcao(txt){var v=visualPara(txt);return (v?'<span class="op-img">'+escHTML(v)+'</span>':'')+'<span class="op-txt">'+escHTML(txt)+'</span>';}
 
 /* ================================================================
    QUIZ
@@ -374,6 +448,11 @@ function carregarPergunta(){
   document.getElementById('hdr-e').textContent=calcE(estado.acertos,total);
   document.getElementById('bar').style.width=((estado.indice/total)*100)+'%';
   document.getElementById('perg-t').textContent=p.texto;
+  var pv=document.getElementById('perg-v');pv.innerHTML='';
+  if(p.cena){var cena=renderCena(p.cena);if(cena)pv.appendChild(cena);}
+  var vis=p.visuais||[p.visual||''];
+  for(var vi=0;vi<vis.length;vi++){if(vis[vi]){var card=document.createElement('span');card.className='visual-card';card.textContent=vis[vi];pv.appendChild(card);}}
+  pv.classList.toggle('ativa',pv.children.length>0);
 
   var grid=document.getElementById('grid-o');grid.innerHTML='';
   var usarCol1=false;for(var c=0;c<p.opcoes.length;c++){if(p.opcoes[c].length>28)usarCol1=true;}
@@ -382,7 +461,7 @@ function carregarPergunta(){
   for(var idx=0;idx<p.opcoes.length;idx++){
     var btn=document.createElement('button');
     btn.className='btn-o';
-    btn.textContent=p.opcoes[idx];
+    btn.innerHTML=htmlOpcao(p.opcoes[idx]);
     btn.setAttribute('data-idx',String(idx));
     btn.setAttribute('onclick','window.responder('+idx+')');
     grid.appendChild(btn);
