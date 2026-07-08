@@ -57,18 +57,8 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .bar{height:100%;background:linear-gradient(90deg,var(--verde),var(--amarelo));border-radius:10px;transition:width .4s;width:0%}
 .cperg{width:100%;background:var(--branco);border-radius:24px;padding:24px 20px;box-shadow:0 6px 24px var(--sombra);text-align:center}
 .perg-e{font-size:48px;display:block;margin-bottom:10px}
-.perg-visual{display:none;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:10px;margin:0 auto 14px;max-width:520px}
-.perg-visual.ativa{display:grid}
-.visual-card{background:#F8FBFF;border:2px solid #D6EAF8;border-radius:18px;padding:10px 8px;min-height:74px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;box-shadow:0 3px 10px rgba(0,0,0,.08)}
-.scene-card{grid-column:1/-1;position:relative;overflow:hidden;min-height:190px;border:3px solid #D6EAF8;border-radius:24px;background:linear-gradient(180deg,#DDF4FF 0%,#F9FDFF 55%,#DFF7D9 56%,#BFE8A8 100%);box-shadow:0 8px 22px rgba(0,0,0,.12);padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
-.scene-card::before{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:22px;top:18px;background:rgba(255,224,102,.9);box-shadow:0 0 28px rgba(255,224,102,.55)}
-.scene-sky{position:absolute;left:18px;right:18px;top:18px;display:flex;justify-content:space-between;align-items:flex-start;font-size:2.1rem;z-index:1}
-.scene-people{position:relative;z-index:2;display:flex;align-items:end;justify-content:center;gap:12px;font-size:3.5rem;margin-bottom:10px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.12))}
-.scene-people span{display:inline-block;animation:wiggle 2.4s ease-in-out infinite}
-.scene-people span:nth-child(2){animation-delay:.2s}.scene-people span:nth-child(3){animation-delay:.4s}.scene-people span:nth-child(4){animation-delay:.6s}
-.scene-label{position:relative;z-index:3;background:rgba(255,255,255,.9);border:2px solid rgba(255,255,255,.95);border-radius:18px;padding:10px 12px;font-size:1.05rem;font-weight:900;color:var(--texto);box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.scene-hint{display:block;font-size:.82rem;color:#5D6D7E;margin-top:2px}
-@keyframes wiggle{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+
+
 .perg-t{font-size:1.3rem;font-weight:800;color:var(--texto);line-height:1.4;white-space:pre-line}
 .grid-o{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
 .grid-o.col1{grid-template-columns:1fr}
@@ -131,7 +121,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 </div>
 <div id="app">
 
-<!-- ========== MENU PRINCIPAL ========== -->
+<!-- MENU -->
 <div id="tela-menu" class="tela ativa">
   <div style="text-align:center;margin-top:8px">
     <span class="logo">🏫</span>
@@ -139,7 +129,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
     <p class="julia">✨ para Julia ✨</p>
   </div>
   <p class="sub">Unit 3 — Let's go to school</p>
-
   <p class="secao-label">📚 Aprender</p>
   <div class="grade">
     <button class="card card-verde" onclick="window.mostrarTela('tela-ler-school')">
@@ -149,7 +138,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
       <span class="card-e">💬</span><span class="card-n">I like /<br>I don't like</span>
     </button>
   </div>
-
   <p class="secao-label">🎯 Atividades</p>
   <div class="grade">
     <button class="card" onclick="window.iniciarTema('school')">
@@ -165,7 +153,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
       <span class="card-e">⭐</span><span class="card-n">Revisão<br>Geral</span>
     </button>
   </div>
-
   <p class="secao-label">✍️ Praticar Escrita</p>
   <div class="grade">
     <button class="card card-laranja" onclick="window.abrirEscrita('words')">
@@ -177,14 +164,14 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- ========== LEITURA: SCHOOL WORDS ========== -->
+<!-- LEITURA: SCHOOL -->
 <div id="tela-ler-school" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
     <p class="leitura-titulo">🏫 School Words</p>
     <p class="leitura-subtitulo">Places and objects</p>
     <p class="leitura-txt">Vamos treinar palavras da escola em inglês.</p>
-    <div class="leitura-img-grid" aria-label="Imagens das palavras da escola">
+    <div class="leitura-img-grid">
       <div class="leitura-img"><span>🧑‍🏫</span>board<br><small>quadro</small></div>
       <div class="leitura-img"><span>🏫</span>classroom<br><small>sala de aula</small></div>
       <div class="leitura-img"><span>🪑</span>desk<br><small>carteira / mesa</small></div>
@@ -201,7 +188,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
-<!-- ========== LEITURA: I LIKE ========== -->
+<!-- LEITURA: I LIKE -->
 <div id="tela-ler-like" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
@@ -210,7 +197,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
     <div class="frase-visual"><span class="fv-img">😊📖</span><p class="fv-txt"><strong>I like reading.</strong><br>Eu gosto de ler.</p></div>
     <div class="frase-visual"><span class="fv-img">😊⚽</span><p class="fv-txt"><strong>I like playing football.</strong><br>Eu gosto de jogar futebol.</p></div>
     <div class="frase-visual"><span class="fv-img">😊🏀</span><p class="fv-txt"><strong>I like playing basketball.</strong><br>Eu gosto de jogar basquete.</p></div>
-    <div class="leitura-img-grid" aria-label="Imagens de atividades em inglês">
+    <div class="leitura-img-grid">
       <div class="leitura-img"><span>📖</span>reading<br><small>lendo</small></div>
       <div class="leitura-img"><span>⚽</span>playing football<br><small>jogando futebol</small></div>
       <div class="leitura-img"><span>🏀</span>playing basketball<br><small>jogando basquete</small></div>
@@ -226,7 +213,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
-<!-- ========== QUIZ ========== -->
+<!-- QUIZ -->
 <div id="tela-quiz" class="tela">
   <div class="hdr">
     <span id="hdr-t" class="hdr-t">🏫</span>
@@ -236,7 +223,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <div class="bar-w"><div id="bar" class="bar"></div></div>
   <div class="cperg">
     <span id="perg-e" class="perg-e">🏫</span>
-    <div id="perg-v" class="perg-visual" aria-hidden="true"></div>
     <p id="perg-t" class="perg-t">...</p>
   </div>
   <div id="grid-o" class="grid-o"></div>
@@ -247,27 +233,24 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- ========== ESCRITA COM CANETA / IPAD ========== -->
+<!-- ESCRITA -->
 <div id="tela-escrita" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="escrita-area">
     <div id="esc-emoji" class="escrita-emoji">✏️</div>
     <p id="esc-frase" class="escrita-frase">...</p>
-    <p id="esc-dica" class="escrita-dica">Observe o modelo e escreva com a caneta do iPad. A escrita é prática secundária; o foco é memorizar o inglês.</p>
-
-    <div class="mini-row" aria-label="Tipo de modelo de escrita">
+    <p id="esc-dica" class="escrita-dica">Observe o modelo e escreva com a caneta do iPad.</p>
+    <div class="mini-row">
       <button id="btn-modelo-todos" class="mini-btn ativo" onclick="window.setModeloEscrita('todos')">Todos</button>
       <button id="btn-modelo-maiuscula" class="mini-btn" onclick="window.setModeloEscrita('maiuscula')">MAIÚSCULA</button>
       <button id="btn-modelo-minuscula" class="mini-btn" onclick="window.setModeloEscrita('minuscula')">minúscula</button>
       <button id="btn-modelo-cursiva" class="mini-btn" onclick="window.setModeloEscrita('cursiva')">cursiva</button>
     </div>
-
     <div class="modelo-box">
       <div id="modelo-maiuscula-wrap" class="modelo-linha"><div class="modelo-label">Maiúscula</div><div id="modelo-maiuscula" class="modelo-maiuscula">BOARD</div></div>
       <div id="modelo-minuscula-wrap" class="modelo-linha"><div class="modelo-label">Minúscula</div><div id="modelo-minuscula" class="modelo-minuscula">board</div></div>
       <div id="modelo-cursiva-wrap" class="modelo-linha"><div class="modelo-label">Cursiva / treino livre</div><div id="modelo-cursiva" class="modelo-cursiva">board</div></div>
     </div>
-
     <div class="canvas-wrap">
       <div id="canvas-placeholder" class="canvas-placeholder">Escreva aqui com a caneta ✏️</div>
       <canvas id="canvas"></canvas>
@@ -283,7 +266,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- ========== FINAL ========== -->
+<!-- FINAL -->
 <div id="tela-final" class="tela">
   <div class="cr">
     <span class="trofeu">🏆</span>
@@ -299,12 +282,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 </div>
 
 </div>
-
 <script>
-/* ================================================================
-   BANCO DE PERGUNTAS - INGLÊS
-   Base: Unit 3 — Let's go to school
-================================================================ */
 var BANCO={
 school:{nome:'🏫 School Words',emoji:'🏫',perguntas:[
   {texto:'What is this?\nThe teacher writes here.',cena:'board',opcoes:['board','desk','library','toilet'],certa:0},
@@ -337,18 +315,17 @@ match:{nome:'🧩 Match',emoji:'🧩',perguntas:[
   {texto:'Match:\nplaying hide and seek',cena:'hideSeek',opcoes:['jogando basquete','lendo','brincando de esconde-esconde','jogando futebol'],certa:2}
 ]},
 review:{nome:'⭐ Review',emoji:'⭐',perguntas:[
-  {texto:'Choose the correct sentence:\nEu gosto de ler.',cena:'likeReading',opcoes:['I like reading.','I like board.','I don’t like toilet.','I like classroom.'],certa:0},
-  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',cena:'dislikeFootball',opcoes:['I like playing football.','I don’t like playing football.','I don’t like reading.','I like playground.'],certa:1},
+  {texto:'Choose the correct sentence:\nEu gosto de ler.',cena:'likeReading',opcoes:['I like reading.','I like board.','I don\'t like toilet.','I like classroom.'],certa:0},
+  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',cena:'dislikeFootball',opcoes:['I like playing football.','I don\'t like playing football.','I don\'t like reading.','I like playground.'],certa:1},
   {texto:'What activity is this?',cena:'basketball',opcoes:['playing football','reading','playing basketball','playing hide and seek'],certa:2},
   {texto:'What activity is this?',cena:'football',opcoes:['playing football','playing basketball','reading','swimming pool'],certa:0},
   {texto:'What activity is this?',cena:'reading',opcoes:['playing hide and seek','reading','gym','desk'],certa:1},
   {texto:'What activity is this?',cena:'hideSeek',opcoes:['playing football','playing basketball','reading','playing hide and seek'],certa:3},
   {texto:'Complete the sentence:\nI like ______.',cena:'reading',opcoes:['reading','library','board','toilet'],certa:0},
-  {texto:'Complete the sentence:\nI don’t like ______.',cena:'basketball',opcoes:['playing basketball','classroom','desk','board'],certa:0}
+  {texto:'Complete the sentence:\nI don\'t like ______.',cena:'basketball',opcoes:['playing basketball','classroom','desk','board'],certa:0}
 ]}
 };
 
-/* ESCRITA */
 var ESCRITA={
 words:[
   {emoji:'🧑‍🏫',texto:'Escreva em inglês:\nquadro',respostas:['board'],dica:'Dica: começa com b.'},
@@ -361,82 +338,52 @@ words:[
   {emoji:'🚻',texto:'Escreva em inglês:\nbanheiro',respostas:['toilet'],dica:'Dica: começa com t.'}
 ],
 sentences:[
-  {emoji:'📖',texto:'Escreva a frase:\nEu gosto de ler.',respostas:['i like reading','i like reading.'],dica:'Use: I like reading.'},
-  {emoji:'⚽',texto:'Escreva a frase:\nEu gosto de jogar futebol.',respostas:['i like playing football','i like playing football.'],dica:'Use: I like + activity.'},
-  {emoji:'🏀',texto:'Escreva a frase:\nEu gosto de jogar basquete.',respostas:['i like playing basketball','i like playing basketball.'],dica:'Use: I like playing basketball.'},
-  {emoji:'🙈',texto:'Escreva a frase:\nEu não gosto de brincar de esconde-esconde.',respostas:["i don't like playing hide and seek","i dont like playing hide and seek","i don't like playing hide and seek.","i dont like playing hide and seek."],dica:"Use: I don't like + activity."},
-  {emoji:'⚽',texto:'Escreva a frase:\nEu não gosto de jogar futebol.',respostas:["i don't like playing football","i dont like playing football","i don't like playing football.","i dont like playing football."],dica:"Use: I don't like playing football."},
-  {emoji:'🏀',texto:'Escreva a frase:\nEu não gosto de jogar basquete.',respostas:["i don't like playing basketball","i dont like playing basketball","i don't like playing basketball.","i dont like playing basketball."],dica:"Use: I don't like playing basketball."}
+  {emoji:'📖',texto:'Escreva:\nI like reading.',respostas:['i like reading','i like reading.'],dica:'Eu gosto de ler.'},
+  {emoji:'⚽',texto:'Escreva:\nI like football.',respostas:['i like football','i like football.'],dica:'Eu gosto de futebol.'},
+  {emoji:'🏀',texto:'Escreva:\nI like basketball.',respostas:['i like basketball','i like basketball.'],dica:'Eu gosto de basquete.'},
+  {emoji:'😊',texto:'Escreva:\nI like school.',respostas:['i like school','i like school.'],dica:'Eu gosto da escola.'},
+  {emoji:'📖',texto:"Escreva:\nI don't like reading.",respostas:["i don't like reading","i dont like reading","i don't like reading.","i dont like reading."],dica:'Eu não gosto de ler.'},
+  {emoji:'⚽',texto:"Escreva:\nI don't like football.",respostas:["i don't like football","i dont like football","i don't like football.","i dont like football."],dica:'Eu não gosto de futebol.'}
 ]
 };
 
-/* ESTADO */
 var estado={tema:'',perguntas:[],indice:0,acertos:0,respondeu:false};
 var escEstado={tipo:'words',itens:[],indice:0,acertos:0,verificado:false};
 
-/* ================================================================
-   FUNÇÕES UTILITÁRIAS
-================================================================ */
 function embaralhar(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t;}return r;}
 function mostrarTela(id){var t=document.querySelectorAll('.tela');for(var i=0;i<t.length;i++)t[i].classList.remove('ativa');document.getElementById(id).classList.add('ativa');window.scrollTo(0,0);}
 function calcE(a,t){var p=a/t,n=p>=.9?5:p>=.7?4:p>=.5?3:p>=.3?2:1,s='';for(var i=0;i<5;i++)s+=i<n?'⭐':'☆';return s;}
 function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(var i=0;i<12;i++){(function(d){setTimeout(function(){var el=document.createElement('span');el.className='conf';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=Math.random()*95+'vw';el.style.animationDuration=(.8+Math.random()*.9)+'s';document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1800);},d);})(i*80);}}
-function normalizar(txt){return String(txt||'').toLowerCase().trim().replace(/[.!?]+$/,'').replace(/\s+/g,' ');}
-function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
 
-var CENAS={
-  board:{ceu:['☁️','☀️'],pessoas:['👩‍🏫','⬛','✏️'],titulo:'board',dica:'The teacher writes here.'},
-  classroom:{ceu:['📚','🪟'],pessoas:['👩‍🏫','👧','👦','🪑'],titulo:'classroom',dica:'The class learns here.'},
-  desk:{ceu:['✏️','📘'],pessoas:['👧','🪑','📓'],titulo:'desk',dica:'Students sit and study.'},
-  gym:{ceu:['🏅','🎽'],pessoas:['🏃‍♀️','🏃','⚽'],titulo:'gym',dica:'A place to play sports.'},
-  library:{ceu:['📚','🔖'],pessoas:['👧','📖','📚'],titulo:'library',dica:'Books live here.'},
-  playground:{ceu:['☀️','🌈'],pessoas:['👧','🛝','👦'],titulo:'playground',dica:'Children play outside.'},
-  pool:{ceu:['☀️','💦'],pessoas:['🏊‍♀️','🏊','💧'],titulo:'swimming pool',dica:'You can swim here.'},
-  toilet:{ceu:['🧼','💧'],pessoas:['🚻','🧴','🧻'],titulo:'toilet',dica:'Wash your hands here.'},
-  reading:{ceu:['📚','✨'],pessoas:['👧','📖','🛋️'],titulo:'reading',dica:'I like reading.'},
-  football:{ceu:['🥅','🌤️'],pessoas:['👧','⚽','🏃'],titulo:'playing football',dica:'Kick the ball with your feet.'},
-  basketball:{ceu:['🏀','⭐'],pessoas:['👧','🏀','⛹️'],titulo:'playing basketball',dica:'Throw the ball into the hoop.'},
-  hideSeek:{ceu:['🌳','☀️','🌳'],pessoas:['🙈','🌳','👧','👦'],titulo:'playing hide and seek',dica:'One child counts. Friends hide.'},
-  likeReading:{ceu:['💬','✨'],pessoas:['😊','📖','👧'],titulo:'I like reading.',dica:'Eu gosto de ler.'},
-  dislikeFootball:{ceu:['💬','⚽'],pessoas:['🙅‍♀️','⚽','👧'],titulo:"I don't like playing football.",dica:'Eu não gosto de jogar futebol.'}
-};
-function renderCena(chave){
-  var c=CENAS[chave];
-  if(!c)return null;
-  var card=document.createElement('div');
-  card.className='scene-card';
-  var ceu=document.createElement('div');ceu.className='scene-sky';
-  for(var i=0;i<c.ceu.length;i++){var sp=document.createElement('span');sp.textContent=c.ceu[i];ceu.appendChild(sp);}
-  var pessoas=document.createElement('div');pessoas.className='scene-people';
-  for(var j=0;j<c.pessoas.length;j++){var pp=document.createElement('span');pp.textContent=c.pessoas[j];pessoas.appendChild(pp);}
-  var label=document.createElement('div');label.className='scene-label';label.textContent=c.titulo;
-  var hint=document.createElement('span');hint.className='scene-hint';hint.textContent=c.dica;label.appendChild(hint);
-  card.appendChild(ceu);card.appendChild(pessoas);card.appendChild(label);
-  return card;
-}
 
 function visualPara(txt){
-  var k=normalizar(txt).replace(/^i like /,'').replace(/^i don.t like /,'');
+  var k=txt.toLowerCase().trim().replace(/[.!?]+$/,'');
   var mapa={
-    'board':'🧑‍🏫','quadro':'🧑‍🏫','classroom':'🏫','sala de aula':'🏫','desk':'🪑','mesa/carteira':'🪑','carteira':'🪑','mesa':'🪑',
-    'gym':'🏃','ginásio':'🏃','library':'📚','biblioteca':'📚','playground':'🛝','parquinho':'🛝','swimming pool':'🏊','piscina':'🏊','toilet':'🚻','banheiro':'🚻',
-    'reading':'📖','lendo':'📖','playing football':'⚽','jogando futebol':'⚽','playing basketball':'🏀','jogando basquete':'🏀','playing hide and seek':'🙈🌳','brincando de esconde-esconde':'🙈🌳','nadando':'🏊',
-    'i like reading':'😊📖','i like reading.':'😊📖','i like playing football':'😊⚽','i like playing football.':'😊⚽','i like playing basketball':'😊🏀','i like playing basketball.':'😊🏀','i don’t like playing football':'🙅‍♀️⚽','i don’t like playing football.':'🙅‍♀️⚽','i don’t like reading':'🙅‍♀️📖','i don’t like reading.':'🙅‍♀️📖','i don’t like playing hide and seek':'🙅‍♀️🙈🌳',"i don't like playing hide and seek":"🙅‍♀️🙈🌳"
+    'board':'🧑‍🏫','quadro':'🧑‍🏫','classroom':'🏫','sala de aula':'🏫',
+    'desk':'🪑','mesa/carteira':'🪑','gym':'🏃','ginásio':'🏃',
+    'library':'📚','biblioteca':'📚','playground':'🛝','parquinho':'🛝',
+    'swimming pool':'🏊','piscina':'🏊','toilet':'🚻','banheiro':'🚻',
+    'reading':'📖','lendo':'📖','playing football':'⚽','jogando futebol':'⚽',
+    'playing basketball':'🏀','jogando basquete':'🏀',
+    'playing hide and seek':'🙈🌳','brincando de esconde-esconde':'🙈🌳',
+    'i like reading':'😊📖','i like playing football':'😊⚽',
+    'i like playing basketball':'😊🏀',"i don't like playing football":'🙅‍♀️⚽',
+    "i don't like reading":'🙅‍♀️📖',"i don't like playing hide and seek":'🙅‍♀️🙈🌳'
   };
-  return mapa[k]||mapa[normalizar(txt)]||'';
+  return mapa[k]||'';
 }
-function htmlOpcao(txt){var v=visualPara(txt);return (v?'<span class="op-img">'+escHTML(v)+'</span>':'')+'<span class="op-txt">'+escHTML(txt)+'</span>';}
+function htmlOpcao(txt){
+  var v=visualPara(txt);
+  return (v?'<span class="op-img">'+escHTML(v)+'</span>':'')+'<span class="op-txt">'+escHTML(txt)+'</span>';
+}
 
-/* ================================================================
-   QUIZ
-================================================================ */
+/* QUIZ */
 function iniciarTema(tema){
   estado.tema=tema;
   estado.perguntas=embaralhar(BANCO[tema].perguntas).slice(0,6);
-  estado.indice=0;
-  estado.acertos=0;
-  mostrarTela('tela-quiz');
-  carregarPergunta();
+  estado.indice=0;estado.acertos=0;
+  mostrarTela('tela-quiz');carregarPergunta();
 }
 
 function carregarPergunta(){
@@ -448,16 +395,13 @@ function carregarPergunta(){
   document.getElementById('hdr-e').textContent=calcE(estado.acertos,total);
   document.getElementById('bar').style.width=((estado.indice/total)*100)+'%';
   document.getElementById('perg-t').textContent=p.texto;
-  var pv=document.getElementById('perg-v');pv.innerHTML='';
-  if(p.cena){var cena=renderCena(p.cena);if(cena)pv.appendChild(cena);}
-  var vis=p.visuais||[p.visual||''];
-  for(var vi=0;vi<vis.length;vi++){if(vis[vi]){var card=document.createElement('span');card.className='visual-card';card.textContent=vis[vi];pv.appendChild(card);}}
-  pv.classList.toggle('ativa',pv.children.length>0);
+
+  /* Cenas removidas do quiz — os emojis entregavam a resposta */
 
   var grid=document.getElementById('grid-o');grid.innerHTML='';
-  var usarCol1=false;for(var c=0;c<p.opcoes.length;c++){if(p.opcoes[c].length>28)usarCol1=true;}
+  var usarCol1=false;
+  for(var c=0;c<p.opcoes.length;c++){if(p.opcoes[c].length>28)usarCol1=true;}
   grid.className=usarCol1?'grid-o col1':'grid-o';
-
   for(var idx=0;idx<p.opcoes.length;idx++){
     var btn=document.createElement('button');
     btn.className='btn-o';
@@ -466,7 +410,6 @@ function carregarPergunta(){
     btn.setAttribute('onclick','window.responder('+idx+')');
     grid.appendChild(btn);
   }
-
   var fb=document.getElementById('fb');fb.style.display='none';fb.className='fb';
   document.getElementById('btn-px').style.display='none';
 }
@@ -487,8 +430,7 @@ function responder(escolhido){
     estado.acertos++;
     var m=['🎉 Very good!','⭐ Great job!','🌟 Excellent!','🏅 Correct!','✨ Amazing!'];
     fb.textContent=m[Math.floor(Math.random()*m.length)];
-    fb.className='fb c';
-    confete();
+    fb.className='fb c';confete();
   }else{
     fb.textContent='😊 Quase! A resposta certa está em verde.';
     fb.className='fb e';
@@ -506,17 +448,13 @@ function avancar(){
   else carregarPergunta();
 }
 
-/* ================================================================
-   ESCRITA COM CANETA / IPAD
-================================================================ */
+/* ESCRITA */
 var canvas,ctx,desenhando=false,modeloAtual='todos',canvasIniciado=false,ponteiroAtivo=null;
 
 function abrirEscrita(tipo){
   escEstado.tipo=tipo;
   escEstado.itens=embaralhar(ESCRITA[tipo]).slice(0,tipo==='words'?8:6);
-  escEstado.indice=0;
-  escEstado.acertos=0;
-  escEstado.verificado=false;
+  escEstado.indice=0;escEstado.acertos=0;escEstado.verificado=false;
   mostrarTela('tela-escrita');
   setTimeout(function(){initCanvas();mostrarItemEscrita();},120);
 }
@@ -529,18 +467,11 @@ function mostrarItemEscrita(){
   document.getElementById('esc-frase').textContent=item.texto;
   document.getElementById('esc-dica').textContent=item.dica+' Primeiro leia em voz alta, depois copie com a caneta.';
   document.getElementById('esc-prog').textContent='Item '+(escEstado.indice+1)+' de '+escEstado.itens.length;
-
   document.getElementById('modelo-maiuscula').textContent=alvo.toUpperCase();
   document.getElementById('modelo-minuscula').textContent=alvo.toLowerCase();
   document.getElementById('modelo-cursiva').textContent=alvo.toLowerCase();
-
-  setModeloEscrita(modeloAtual);
-  limparCanvas();
-
-  var fb=document.getElementById('esc-fb');
-  fb.style.display='none';
-  fb.className='fb';
-
+  setModeloEscrita(modeloAtual);limparCanvas();
+  var fb=document.getElementById('esc-fb');fb.style.display='none';fb.className='fb';
   document.getElementById('btn-esc-ver').style.display='block';
   document.getElementById('btn-esc-px').style.display='none';
 }
@@ -548,44 +479,36 @@ function mostrarItemEscrita(){
 function setModeloEscrita(tipo){
   modeloAtual=tipo;
   ['todos','maiuscula','minuscula','cursiva'].forEach(function(t){
-    var b=document.getElementById('btn-modelo-'+t);
-    if(b)b.classList.toggle('ativo',t===tipo);
+    var b=document.getElementById('btn-modelo-'+t);if(b)b.classList.toggle('ativo',t===tipo);
   });
-  var showMai=tipo==='todos'||tipo==='maiuscula';
-  var showMin=tipo==='todos'||tipo==='minuscula';
-  var showCur=tipo==='todos'||tipo==='cursiva';
+  var sm=tipo==='todos'||tipo==='maiuscula';
+  var sn=tipo==='todos'||tipo==='minuscula';
+  var sc=tipo==='todos'||tipo==='cursiva';
   var a=document.getElementById('modelo-maiuscula-wrap');
   var b=document.getElementById('modelo-minuscula-wrap');
   var c=document.getElementById('modelo-cursiva-wrap');
-  if(a)a.style.display=showMai?'block':'none';
-  if(b)b.style.display=showMin?'block':'none';
-  if(c)c.style.display=showCur?'block':'none';
+  if(a)a.style.display=sm?'block':'none';
+  if(b)b.style.display=sn?'block':'none';
+  if(c)c.style.display=sc?'block':'none';
 }
 
 function initCanvas(){
-  canvas=document.getElementById('canvas');
-  if(!canvas)return;
+  canvas=document.getElementById('canvas');if(!canvas)return;
   var wrap=canvas.parentElement;
   var rect=wrap.getBoundingClientRect();
   var ratio=window.devicePixelRatio||1;
   var cssW=Math.max(300,rect.width);
   var cssH=parseInt(getComputedStyle(canvas).height,10)||330;
-  canvas.width=cssW*ratio;
-  canvas.height=cssH*ratio;
+  canvas.width=cssW*ratio;canvas.height=cssH*ratio;
   ctx=canvas.getContext('2d');
   ctx.setTransform(ratio,0,0,ratio,0,0);
-  ctx.strokeStyle='#2C3E50';
-  ctx.lineWidth=4;
-  ctx.lineCap='round';
-  ctx.lineJoin='round';
-  if(canvasIniciado)return;
-  canvasIniciado=true;
+  ctx.strokeStyle='#2C3E50';ctx.lineWidth=4;ctx.lineCap='round';ctx.lineJoin='round';
+  if(canvasIniciado)return;canvasIniciado=true;
   canvas.addEventListener('contextmenu',function(e){e.preventDefault();});
   canvas.addEventListener('pointerdown',function(e){
     e.preventDefault();
     if(ponteiroAtivo!==null||e.isPrimary===false)return;
-    ponteiroAtivo=e.pointerId;
-    desenhando=true;
+    ponteiroAtivo=e.pointerId;desenhando=true;
     if(canvas.setPointerCapture)canvas.setPointerCapture(e.pointerId);
     document.getElementById('canvas-placeholder').style.display='none';
     var p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
@@ -603,52 +526,34 @@ function initCanvas(){
 function encerrarPonteiro(e){
   if(e&&e.preventDefault)e.preventDefault();
   if(e&&ponteiroAtivo!==null&&e.pointerId!==ponteiroAtivo)return;
-  if(e&&canvas&&canvas.releasePointerCapture){
-    try{canvas.releasePointerCapture(e.pointerId);}catch(_err){}
-  }
-  desenhando=false;
-  ponteiroAtivo=null;
+  if(e&&canvas&&canvas.releasePointerCapture){try{canvas.releasePointerCapture(e.pointerId);}catch(_){}};
+  desenhando=false;ponteiroAtivo=null;
 }
 
-function getP(e){
-  var r=canvas.getBoundingClientRect();
-  return{x:e.clientX-r.left,y:e.clientY-r.top};
-}
+function getP(e){var r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
 
 function desenharLinhas(){
   if(!ctx||!canvas)return;
-  var r=canvas.getBoundingClientRect();
-  var w=r.width,h=r.height;
-  ctx.save();
-  ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle='#D7DBDD';
-  ctx.lineWidth=1.5;
-  for(var y=58;y<h;y+=58){
-    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
-  }
-  ctx.strokeStyle='#F5B7B1';
-  ctx.lineWidth=1;
+  var r=canvas.getBoundingClientRect();var w=r.width,h=r.height;
+  ctx.save();ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='#D7DBDD';ctx.lineWidth=1.5;
+  for(var y=58;y<h;y+=58){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+  ctx.strokeStyle='#F5B7B1';ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(46,0);ctx.lineTo(46,h);ctx.stroke();
-  ctx.restore();
-  ctx.strokeStyle='#2C3E50';
-  ctx.lineWidth=4;
+  ctx.restore();ctx.strokeStyle='#2C3E50';ctx.lineWidth=4;
 }
 
 function limparCanvas(){
-  if(!ctx)initCanvas();
-  desenharLinhas();
-  var ph=document.getElementById('canvas-placeholder');
-  if(ph)ph.style.display='block';
+  if(!ctx)initCanvas();desenharLinhas();
+  var ph=document.getElementById('canvas-placeholder');if(ph)ph.style.display='block';
 }
 
 function concluirEscrita(){
   if(escEstado.verificado)return;
-  escEstado.verificado=true;
-  escEstado.acertos++;
+  escEstado.verificado=true;escEstado.acertos++;
   var fb=document.getElementById('esc-fb');
   fb.textContent='🌟 Muito bem! Agora leia a palavra/frase em inglês.';
-  fb.className='fb c';
-  fb.style.display='block';
+  fb.className='fb c';fb.style.display='block';
   document.getElementById('btn-esc-ver').style.display='none';
   var btnP=document.getElementById('btn-esc-px');
   btnP.style.display='block';
@@ -662,54 +567,33 @@ function proxEscrita(){
   else mostrarItemEscrita();
 }
 
-/* ================================================================
-   FINAL
-================================================================ */
 function mostrarFinal(tipo){
   var ac,total,replayFn;
-
-  if(tipo==='escrita'){
-    ac=escEstado.acertos;
-    total=escEstado.itens.length;
-    replayFn='window.abrirEscrita("'+escEstado.tipo+'")';
-  }else{
-    ac=estado.acertos;
-    total=estado.perguntas.length;
-    replayFn='window.iniciarTema("'+estado.tema+'")';
-  }
-
+  if(tipo==='escrita'){ac=escEstado.acertos;total=escEstado.itens.length;replayFn='window.abrirEscrita("'+escEstado.tipo+'")';}
+  else{ac=estado.acertos;total=estado.perguntas.length;replayFn='window.iniciarTema("'+estado.tema+'")';}
   var pct=ac/total;
   document.getElementById('ef').textContent=calcE(ac,total);
   document.getElementById('af').textContent=ac+' / '+total+' acertos!';
   var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excellent! 🎉','PERFECT! 🧠✨'];
   document.getElementById('mf').textContent=ms[Math.min(Math.floor(pct*5),4)];
   document.getElementById('btn-replay').setAttribute('onclick',replayFn);
-  confete();
-  mostrarTela('tela-final');
+  confete();mostrarTela('tela-final');
 }
 
-function replay(){/* botão recebe onclick dinâmico */}
+function replay(){}
 
-/* Teclado: Enter conclui ou avança na escrita, útil em desktop. No iPad, use a caneta e os botões. */
 document.addEventListener('keydown',function(e){
-  if(e.key==='Enter' && document.getElementById('tela-escrita').classList.contains('ativa')){
+  if(e.key==='Enter'&&document.getElementById('tela-escrita').classList.contains('ativa')){
     if(document.getElementById('btn-esc-ver').style.display!=='none')concluirEscrita();
     else proxEscrita();
   }
 });
 
-/* EXPOR TUDO NO WINDOW */
-window.iniciarTema=iniciarTema;
-window.responder=responder;
-window.avancar=avancar;
-window.mostrarTela=mostrarTela;
-window.abrirEscrita=abrirEscrita;
-window.concluirEscrita=concluirEscrita;
-window.setModeloEscrita=setModeloEscrita;
-window.limparCanvas=limparCanvas;
-window.proxEscrita=proxEscrita;
-window.confete=confete;
-window.replay=replay;
+window.iniciarTema=iniciarTema;window.responder=responder;window.avancar=avancar;
+window.mostrarTela=mostrarTela;window.abrirEscrita=abrirEscrita;
+window.concluirEscrita=concluirEscrita;window.setModeloEscrita=setModeloEscrita;
+window.limparCanvas=limparCanvas;window.proxEscrita=proxEscrita;
+window.confete=confete;window.replay=replay;
 </script>
 </body>
 </html>
