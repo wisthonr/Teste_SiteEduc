@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>English Fun - Julia 🌟</title>
+<title>Português em Ação - Julia 🌟</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -124,30 +124,30 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 <!-- MENU -->
 <div id="tela-menu" class="tela ativa">
   <div style="text-align:center;margin-top:8px">
-    <span class="logo">🏫</span>
-    <h1 class="titulo">English<br>Fun!</h1>
+    <span class="logo">📚</span>
+    <h1 class="titulo">Português<br>em Ação!</h1>
     <p class="julia">✨ para Julia ✨</p>
   </div>
-  <p class="sub">Unit 3 — Let's go to school</p>
+  <p class="sub">Revisão para a avaliação de 26/08</p>
   <p class="secao-label">📚 Aprender</p>
   <div class="grade">
     <button class="card card-verde" onclick="window.mostrarTela('tela-ler-school')">
-      <span class="card-e">🏫</span><span class="card-n">School<br>Words</span>
+      <span class="card-e">📖</span><span class="card-n">Ler e<br>Interpretar</span>
     </button>
     <button class="card card-verde" onclick="window.mostrarTela('tela-ler-like')">
-      <span class="card-e">💬</span><span class="card-n">I like /<br>I don't like</span>
+      <span class="card-e">🔤</span><span class="card-n">Palavras e<br>Frases</span>
     </button>
   </div>
   <p class="secao-label">🎯 Atividades</p>
   <div class="grade">
-    <button class="card" onclick="window.iniciarTema('school')">
-      <span class="card-e">🏫</span><span class="card-n">Escolha a<br>Palavra</span>
+    <button class="card" onclick="window.iniciarTema('interpretacao')">
+      <span class="card-e">📖</span><span class="card-n">Interpretação<br>de Texto</span>
     </button>
-    <button class="card card-laranja" onclick="window.iniciarTema('complete')">
-      <span class="card-e">🔤</span><span class="card-n">Complete<br>a Palavra</span>
+    <button class="card card-laranja" onclick="window.iniciarTema('ortografia')">
+      <span class="card-e">🔤</span><span class="card-n">Som de /K/<br>e Letra L</span>
     </button>
-    <button class="card card-roxo" onclick="window.iniciarTema('match')">
-      <span class="card-e">🧩</span><span class="card-n">Associe<br>Ideias</span>
+    <button class="card card-roxo" onclick="window.iniciarTema('silabas')">
+      <span class="card-e">👏</span><span class="card-n">Separe as<br>Sílabas</span>
     </button>
     <button class="card card-rosa" onclick="window.iniciarTema('review')">
       <span class="card-e">⭐</span><span class="card-n">Revisão<br>Geral</span>
@@ -164,50 +164,50 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   </div>
 </div>
 
-<!-- LEITURA: SCHOOL -->
+<!-- LEITURA E INTERPRETAÇÃO -->
 <div id="tela-ler-school" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
-    <p class="leitura-titulo">🏫 School Words</p>
-    <p class="leitura-subtitulo">Places and objects</p>
-    <p class="leitura-txt">Vamos treinar palavras da escola em inglês.</p>
+    <p class="leitura-titulo">📖 Ler e interpretar</p>
+    <p class="leitura-subtitulo">Texto verbal e texto não verbal</p>
+    <p class="leitura-txt"><strong>Texto verbal</strong> usa palavras e frases. <strong>Texto não verbal</strong> comunica principalmente por imagens, símbolos, cores e sinais. Um cartaz pode misturar os dois.</p>
+    <div class="leitura-regra">Leia devagar e procure no texto as palavras que comprovam sua resposta.</div>
+    <p class="leitura-subtitulo">O que observar</p>
     <div class="leitura-img-grid">
-      <div class="leitura-img"><span>🧑‍🏫</span>board<br><small>quadro</small></div>
-      <div class="leitura-img"><span>🏫</span>classroom<br><small>sala de aula</small></div>
-      <div class="leitura-img"><span>🪑</span>desk<br><small>carteira / mesa</small></div>
-      <div class="leitura-img"><span>🏃</span>gym<br><small>ginásio</small></div>
-      <div class="leitura-img"><span>📚</span>library<br><small>biblioteca</small></div>
-      <div class="leitura-img"><span>🛝</span>playground<br><small>parquinho</small></div>
-      <div class="leitura-img"><span>🏊</span>swimming pool<br><small>piscina</small></div>
-      <div class="leitura-img"><span>🚻</span>toilet<br><small>banheiro</small></div>
+      <div class="leitura-img"><span>👧👦</span>Personagens<br><small>quem participa</small></div>
+      <div class="leitura-img"><span>🗣️</span>Narrador<br><small>quem conta</small></div>
+      <div class="leitura-img"><span>🔎</span>Informação explícita<br><small>está escrita no texto</small></div>
+      <div class="leitura-img"><span>💭</span>Opinião<br><small>o que alguém pensa</small></div>
     </div>
-    <p class="leitura-subtitulo">Pergunta importante</p>
-    <p class="leitura-txt"><strong>What's in your school?</strong> = O que tem na sua escola?</p>
+    <p class="leitura-subtitulo">Texto para treinar</p>
+    <div class="leitura-gloss">No sábado, Lia e o avô separaram livros e brinquedos para uma campanha de doação. Lia colocou os livros na caixa azul. O avô guardou os brinquedos na caixa verde. Depois, os dois levaram as caixas à biblioteca do bairro.</div>
+    <p class="leitura-txt"><strong>Personagens:</strong> Lia e o avô.<br><strong>Informação explícita:</strong> os livros foram colocados na caixa azul.<br><strong>Opinião possível:</strong> “A campanha foi uma ideia maravilhosa.”</p>
+    <p class="leitura-subtitulo">Exemplo de cartaz</p>
+    <div class="frase-visual"><span class="fv-img">📚🧸</span><p class="fv-txt"><strong>CAMPANHA DO BEM</strong><br>Doe livros e brinquedos.<br>Entrega: sexta-feira.<br>Local: caixa azul da biblioteca.</p></div>
   </div>
-  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('school')">🎯 Atividade</button>
+  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('interpretacao')">🎯 Atividade</button>
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
-<!-- LEITURA: I LIKE -->
+<!-- PALAVRAS E FRASES -->
 <div id="tela-ler-like" class="tela">
   <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
   <div class="leitura-card">
-    <p class="leitura-titulo">💬 I like / I don't like</p>
-    <p class="leitura-subtitulo">Para falar do que você gosta</p>
-    <div class="frase-visual"><span class="fv-img">😊📖</span><p class="fv-txt"><strong>I like reading.</strong><br>Eu gosto de ler.</p></div>
-    <div class="frase-visual"><span class="fv-img">😊⚽</span><p class="fv-txt"><strong>I like playing football.</strong><br>Eu gosto de jogar futebol.</p></div>
-    <div class="frase-visual"><span class="fv-img">😊🏀</span><p class="fv-txt"><strong>I like playing basketball.</strong><br>Eu gosto de jogar basquete.</p></div>
+    <p class="leitura-titulo">🔤 Palavras e frases</p>
+    <p class="leitura-subtitulo">Som de /K/</p>
+    <p class="leitura-txt">A letra <strong>C</strong> tem som de /K/ antes de <strong>A, O e U</strong>: <strong>casa, comida, cubo</strong>. A letra <strong>Q</strong> costuma aparecer com U: <strong>queijo, quilo</strong>. Algumas palavras usam <strong>K</strong>: <strong>kiwi, karatê</strong>.</p>
+    <div class="leitura-regra">CA - CO - CU &nbsp; | &nbsp; QUE - QUI &nbsp; | &nbsp; K</div>
+    <p class="leitura-subtitulo">A letra L em diferentes posições</p>
     <div class="leitura-img-grid">
-      <div class="leitura-img"><span>📖</span>reading<br><small>lendo</small></div>
-      <div class="leitura-img"><span>⚽</span>playing football<br><small>jogando futebol</small></div>
-      <div class="leitura-img"><span>🏀</span>playing basketball<br><small>jogando basquete</small></div>
-      <div class="leitura-img"><span>🙈🌳</span>playing hide and seek<br><small>esconde-esconde</small></div>
+      <div class="leitura-img"><span>✏️</span><strong>l</strong>ápis<br><small>início</small></div>
+      <div class="leitura-img"><span>🏫</span>esco<strong>l</strong>a<br><small>meio</small></div>
+      <div class="leitura-img"><span>📄</span>pape<strong>l</strong><br><small>final</small></div>
     </div>
-    <div class="leitura-regra">I like + atividade.</div>
-    <p class="leitura-subtitulo">Para falar do que você não gosta</p>
-    <div class="frase-visual"><span class="fv-img">🙅‍♀️🙈🌳</span><p class="fv-txt"><strong>I don't like playing hide and seek.</strong><br>Eu não gosto de brincar de esconde-esconde.</p></div>
-    <div class="frase-visual"><span class="fv-img">🙅‍♀️⚽</span><p class="fv-txt"><strong>I don't like playing football.</strong><br>Eu não gosto de jogar futebol.</p></div>
-    <div class="leitura-gloss">I don't like + atividade.</div>
+    <p class="leitura-subtitulo">Sílabas</p>
+    <p class="leitura-txt">Fale a palavra devagar e bata palmas para cada parte: <strong>mo-to-ca</strong>, <strong>bam-bo-lê</strong>, <strong>pa-ti-ne-te</strong>, <strong>fan-ta-si-a</strong>.</p>
+    <p class="leitura-subtitulo">Frase bem escrita</p>
+    <div class="frase-visual"><span class="fv-img">📝</span><p class="fv-txt"><strong>Lia guardou o livro.</strong><br>Começa com letra maiúscula, tem espaço entre as palavras e termina com ponto-final.</p></div>
+    <div class="leitura-gloss">Nomes de pessoas também começam com letra maiúscula: Lia, Rafa, Bia.</div>
   </div>
   <button class="ba bp" style="width:100%" onclick="window.iniciarTema('review')">⭐ Revisão</button>
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
@@ -247,9 +247,9 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
       <button id="btn-modelo-cursiva" class="mini-btn" onclick="window.setModeloEscrita('cursiva')">cursiva</button>
     </div>
     <div class="modelo-box">
-      <div id="modelo-maiuscula-wrap" class="modelo-linha"><div class="modelo-label">Maiúscula</div><div id="modelo-maiuscula" class="modelo-maiuscula">BOARD</div></div>
-      <div id="modelo-minuscula-wrap" class="modelo-linha"><div class="modelo-label">Minúscula</div><div id="modelo-minuscula" class="modelo-minuscula">board</div></div>
-      <div id="modelo-cursiva-wrap" class="modelo-linha"><div class="modelo-label">Cursiva / treino livre</div><div id="modelo-cursiva" class="modelo-cursiva">board</div></div>
+      <div id="modelo-maiuscula-wrap" class="modelo-linha"><div class="modelo-label">Maiúscula</div><div id="modelo-maiuscula" class="modelo-maiuscula">CADERNO</div></div>
+      <div id="modelo-minuscula-wrap" class="modelo-linha"><div class="modelo-label">Minúscula</div><div id="modelo-minuscula" class="modelo-minuscula">caderno</div></div>
+      <div id="modelo-cursiva-wrap" class="modelo-linha"><div class="modelo-label">Cursiva / treino livre</div><div id="modelo-cursiva" class="modelo-cursiva">caderno</div></div>
     </div>
     <div class="canvas-wrap">
       <div id="canvas-placeholder" class="canvas-placeholder">Escreva aqui com a caneta ✏️</div>
@@ -283,67 +283,91 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 
 </div>
 <script>
+var TEXTO_DOACAO='Leia o texto:\n\nNo sábado, Lia e o avô separaram livros e brinquedos para uma campanha de doação. Lia colocou os livros na caixa azul. O avô guardou os brinquedos na caixa verde. Depois, os dois levaram as caixas à biblioteca do bairro.\n\n';
+var TEXTO_IMAGINACAO='Leia o texto:\n\nRafa olhou as nuvens pela janela e imaginou um barco voador. Em seu caderno, desenhou a viagem e escreveu uma história. Quando terminou, mostrou o texto à irmã Bia.\n\n';
+var TEXTO_CARTAZ='Observe o cartaz:\n\n📚🧸 CAMPANHA DO BEM\nDoe livros e brinquedos.\nEntrega: sexta-feira.\nLocal: caixa azul da biblioteca.\n\n';
+
 var BANCO={
-school:{nome:'🏫 School Words',emoji:'🏫',perguntas:[
-  {texto:'What is this?\nThe teacher writes here.',cena:'board',opcoes:['board','desk','library','toilet'],certa:0},
-  {texto:'Where are the books?',cena:'library',opcoes:['gym','library','playground','desk'],certa:1},
-  {texto:'Where do students sit and study?',cena:'desk',opcoes:['desk','swimming pool','toilet','playground'],certa:0},
-  {texto:'Where can children play outside?',cena:'playground',opcoes:['board','classroom','playground','library'],certa:2},
-  {texto:'Where can you swim?',cena:'pool',opcoes:['toilet','gym','swimming pool','desk'],certa:2},
-  {texto:'Where can you play sports?',cena:'gym',opcoes:['gym','board','library','toilet'],certa:0},
-  {texto:'Where is the class?',cena:'classroom',opcoes:['classroom','playground','swimming pool','toilet'],certa:0},
-  {texto:'Where do you wash your hands?',cena:'toilet',opcoes:['library','desk','toilet','board'],certa:2}
+interpretacao:{nome:'📖 Interpretação',emoji:'📖',perguntas:[
+  {texto:TEXTO_DOACAO+'Quem são os personagens?',opcoes:['Lia e o avô','Lia e Bia','O avô e Rafa','A bibliotecária e Lia'],certa:0,explicacao:'Lia e o avô participam das ações narradas.'},
+  {texto:TEXTO_DOACAO+'O que Lia colocou na caixa azul?',opcoes:['Os brinquedos','Os livros','Os cadernos','As roupas'],certa:1,explicacao:'O texto diz claramente que Lia colocou os livros na caixa azul.'},
+  {texto:TEXTO_DOACAO+'Onde os dois levaram as caixas?',opcoes:['À escola','Ao mercado','À biblioteca do bairro','À casa de Bia'],certa:2,explicacao:'Essa informação aparece na última frase do texto.'},
+  {texto:TEXTO_DOACAO+'Quando eles separaram as doações?',opcoes:['No sábado','Na sexta-feira','À noite','No domingo'],certa:0,explicacao:'O texto começa com a expressão “No sábado”.'},
+  {texto:TEXTO_DOACAO+'Qual frase apresenta uma OPINIÃO?',opcoes:['Lia colocou livros na caixa azul.','O avô guardou os brinquedos.','A campanha foi uma ideia maravilhosa.','Os dois foram à biblioteca.'],certa:2,explicacao:'“Maravilhosa” mostra uma avaliação pessoal, portanto é uma opinião.'},
+  {texto:TEXTO_IMAGINACAO+'O que Rafa imaginou?',opcoes:['Um castelo encantado','Um barco voador','Uma casa na árvore','Um foguete amarelo'],certa:1,explicacao:'O barco voador é uma informação explícita do texto.'},
+  {texto:TEXTO_IMAGINACAO+'Para quem Rafa mostrou o texto?',opcoes:['Para o avô','Para Lia','Para a professora','Para a irmã Bia'],certa:3,explicacao:'A última frase informa que ele mostrou o texto à irmã Bia.'},
+  {texto:TEXTO_IMAGINACAO+'Quem conta essa história?',opcoes:['Rafa, usando a palavra “eu”','Bia, usando a palavra “eu”','Um narrador que não participa da história','O barco voador'],certa:2,explicacao:'O narrador fala de Rafa em terceira pessoa e não participa dos fatos.'},
+  {texto:TEXTO_CARTAZ+'Que materiais podem ser doados?',opcoes:['Alimentos e roupas','Livros e brinquedos','Cadernos e lápis','Sapatos e cobertores'],certa:1,explicacao:'O cartaz pede a doação de livros e brinquedos.'},
+  {texto:TEXTO_CARTAZ+'Em que dia deve ser feita a entrega?',opcoes:['Segunda-feira','Quarta-feira','Sexta-feira','Sábado'],certa:2,explicacao:'A data de entrega indicada no cartaz é sexta-feira.'},
+  {texto:TEXTO_CARTAZ+'Onde as doações devem ser colocadas?',opcoes:['Na caixa verde da escola','Na caixa azul da biblioteca','Na mesa da professora','Na porta do mercado'],certa:1,explicacao:'O local está escrito na última linha do cartaz.'},
+  {texto:TEXTO_CARTAZ+'O cartaz combina quais elementos?',opcoes:['Somente números','Palavras e imagens','Somente fotografias','Música e movimento'],certa:1,explicacao:'Ele combina texto verbal, com palavras, e elementos não verbais, como os símbolos.'}
 ]},
-complete:{nome:'🔤 Complete the Word',emoji:'🔤',perguntas:[
-  {texto:'Complete:\nb _ a r d',cena:'board',opcoes:['board','boord','braod','bored'],certa:0},
-  {texto:'Complete:\nc l a s s r _ _ m',cena:'classroom',opcoes:['classroom','classrom','clasroom','classroam'],certa:0},
-  {texto:'Complete:\nd _ s k',cena:'desk',opcoes:['dask','desk','disk','deski'],certa:1},
-  {texto:'Complete:\ng _ m',cena:'gym',opcoes:['gum','gam','gym','gim'],certa:2},
-  {texto:'Complete:\nl i b r _ r y',cena:'library',opcoes:['library','librare','librery','libry'],certa:0},
-  {texto:'Complete:\np l a y g r _ _ n d',cena:'playground',opcoes:['playgrond','playground','playgruond','playgroud'],certa:1},
-  {texto:'Complete:\ns w i m m i n g  p _ _ l',cena:'pool',opcoes:['swimming pull','swimming pool','swiming pool','swimming pol'],certa:1},
-  {texto:'Complete:\nt o i l _ t',cena:'toilet',opcoes:['toilet','toilat','toilette','toillet'],certa:0}
+ortografia:{nome:'🔤 Som de /K/ e L',emoji:'🔤',perguntas:[
+  {texto:'Complete corretamente:\n_aderno',opcoes:['Caderno','Kaderno','Quaderno','Saderno'],certa:0,explicacao:'Caderno é escrito com C.'},
+  {texto:'Qual palavra está escrita corretamente?',opcoes:['Komida','Comida','Quomida','Commidá'],certa:1,explicacao:'Em comida, o C antes de O tem som de /K/.'},
+  {texto:'Qual palavra começa com K?',opcoes:['Cubo','Queijo','Kiwi','Casa'],certa:2,explicacao:'Kiwi é uma palavra de origem estrangeira escrita com K.'},
+  {texto:'Complete corretamente:\n_eijo',opcoes:['Ceijo','Keijo','Queijo','Qeijo'],certa:2,explicacao:'Queijo começa com QU; a letra Q aparece acompanhada de U.'},
+  {texto:'Em qual grupo o C tem som de /K/ em todas as palavras?',opcoes:['casa, comida, cubo','cidade, cedo, cinema','cena, circo, cidade','cebola, cinema, cereja'],certa:0,explicacao:'Antes de A, O e U, o C representa o som de /K/.'},
+  {texto:'Qual palavra está escrita corretamente?',opcoes:['Karatê','Caratêh','Qaratê','Karratê'],certa:0,explicacao:'Karatê é escrito com K e termina com Ê.'},
+  {texto:'Em qual palavra a letra L está no INÍCIO?',opcoes:['escola','papel','lápis','palito'],certa:2,explicacao:'Lápis começa com a letra L.'},
+  {texto:'Em qual palavra a letra L está no MEIO?',opcoes:['livro','escola','papel','limão'],certa:1,explicacao:'Em escola, a letra L aparece no meio da palavra.'},
+  {texto:'Em qual palavra a letra L está no FINAL?',opcoes:['lupa','palito','escola','caracol'],certa:3,explicacao:'Caracol termina com a letra L.'},
+  {texto:'Qual palavra completa a frase?\nEu desenhei no _____.',opcoes:['papeu','papel','papéu','pappel'],certa:1,explicacao:'Papel termina com L.'},
+  {texto:'Qual palavra está escrita corretamente?',opcoes:['automóveu','autómovel','automóvel','automóvell'],certa:2,explicacao:'Automóvel termina com L e recebe acento em “mó”.'},
+  {texto:'Qual sequência está em ordem alfabética?',opcoes:['kiwi, queijo, casa','casa, kiwi, queijo','queijo, casa, kiwi','kiwi, casa, queijo'],certa:1,explicacao:'Na ordem alfabética, C vem antes de K, e K vem antes de Q.'}
 ]},
-match:{nome:'🧩 Match',emoji:'🧩',perguntas:[
-  {texto:'Match the meaning:\nboard',cena:'board',opcoes:['quadro','biblioteca','ginásio','piscina'],certa:0},
-  {texto:'Match the meaning:\nclassroom',cena:'classroom',opcoes:['banheiro','sala de aula','parquinho','mesa'],certa:1},
-  {texto:'Match the meaning:\ndesk',cena:'desk',opcoes:['mesa/carteira','piscina','quadro','ginásio'],certa:0},
-  {texto:'Match the meaning:\ngym',cena:'gym',opcoes:['biblioteca','banheiro','ginásio','sala de aula'],certa:2},
-  {texto:'Match the meaning:\nplayground',cena:'playground',opcoes:['quadro','parquinho','biblioteca','carteira'],certa:1},
-  {texto:'Match the meaning:\ntoilet',cena:'toilet',opcoes:['banheiro','piscina','ginásio','sala de aula'],certa:0},
-  {texto:'Match:\nreading',cena:'reading',opcoes:['lendo','jogando futebol','brincando de esconde-esconde','nadando'],certa:0},
-  {texto:'Match:\nplaying hide and seek',cena:'hideSeek',opcoes:['jogando basquete','lendo','brincando de esconde-esconde','jogando futebol'],certa:2}
+silabas:{nome:'👏 Sílabas',emoji:'👏',perguntas:[
+  {texto:'Qual é a separação correta de MOTOCA?',opcoes:['mo-to-ca','mot-o-ca','mo-toc-a','moto-ca'],certa:0,explicacao:'Motoca tem três sílabas: mo-to-ca.'},
+  {texto:'Qual é a separação correta de BAMBOLÊ?',opcoes:['bam-bolê','ba-mbo-lê','bam-bo-lê','bambo-lê'],certa:2,explicacao:'Bambolê tem três sílabas: bam-bo-lê.'},
+  {texto:'Quantas sílabas tem PATINETE?\npa-ti-ne-te',opcoes:['2 sílabas','3 sílabas','4 sílabas','5 sílabas'],certa:2,explicacao:'Pa-ti-ne-te tem quatro sílabas.'},
+  {texto:'Qual é a separação correta de FANTASIA?',opcoes:['fan-ta-si-a','fant-a-si-a','fan-tas-ia','fanta-sia'],certa:0,explicacao:'Fantasia se separa em fan-ta-si-a.'},
+  {texto:'Quantas sílabas tem PIÃO?\npi-ão',opcoes:['1 sílaba','2 sílabas','3 sílabas','4 sílabas'],certa:1,explicacao:'Pi-ão tem duas sílabas.'},
+  {texto:'Qual é a separação correta de FOGUETINHO?',opcoes:['fo-gue-ti-nho','fo-guet-inho','fogue-ti-nho','fo-gu-e-ti-nho'],certa:0,explicacao:'Foguetinho tem quatro sílabas: fo-gue-ti-nho.'},
+  {texto:'Qual palavra tem DUAS sílabas?',opcoes:['motoca','pião','fantasia','patinete'],certa:1,explicacao:'Pi-ão é a única opção com duas sílabas.'},
+  {texto:'Qual palavra tem QUATRO sílabas?',opcoes:['papel','escola','livro','solidária'],certa:3,explicacao:'Solidária se separa em so-li-dá-ria.'},
+  {texto:'Qual é a primeira sílaba de BRINQUEDO?',opcoes:['brin','que','do','bri'],certa:0,explicacao:'Brinquedo se separa em brin-que-do.'},
+  {texto:'Qual é a última sílaba de BONECA?',opcoes:['bo','ne','ca','bone'],certa:2,explicacao:'Boneca se separa em bo-ne-ca; a última sílaba é ca.'},
+  {texto:'Qual palavra está separada de forma incorreta?',opcoes:['ca-der-no','es-co-la','li-vro','pa-p-e-l'],certa:3,explicacao:'Papel se separa em pa-pel, com duas sílabas.'},
+  {texto:'Quantas palmas batemos ao falar CA-RA-COL?',opcoes:['1 palma','2 palmas','3 palmas','4 palmas'],certa:2,explicacao:'Cada sílaba corresponde a uma palma: ca-ra-col.'}
 ]},
-review:{nome:'⭐ Review',emoji:'⭐',perguntas:[
-  {texto:'Choose the correct sentence:\nEu gosto de ler.',cena:'likeReading',opcoes:['I like reading.','I like board.','I don\'t like toilet.','I like classroom.'],certa:0},
-  {texto:'Choose the correct sentence:\nEu não gosto de jogar futebol.',cena:'dislikeFootball',opcoes:['I like playing football.','I don\'t like playing football.','I don\'t like reading.','I like playground.'],certa:1},
-  {texto:'What activity is this?',cena:'basketball',opcoes:['playing football','reading','playing basketball','playing hide and seek'],certa:2},
-  {texto:'What activity is this?',cena:'football',opcoes:['playing football','playing basketball','reading','swimming pool'],certa:0},
-  {texto:'What activity is this?',cena:'reading',opcoes:['playing hide and seek','reading','gym','desk'],certa:1},
-  {texto:'What activity is this?',cena:'hideSeek',opcoes:['playing football','playing basketball','reading','playing hide and seek'],certa:3},
-  {texto:'Complete the sentence:\nI like ______.',cena:'reading',opcoes:['reading','library','board','toilet'],certa:0},
-  {texto:'Complete the sentence:\nI don\'t like ______.',cena:'basketball',opcoes:['playing basketball','classroom','desk','board'],certa:0}
+review:{nome:'⭐ Revisão Geral',emoji:'⭐',perguntas:[
+  {texto:'Qual frase está escrita corretamente?',opcoes:['lia guardou o livro','Lia guardou o livro.','LiaGuardouOLivro.','Lia guardou o livro'],certa:1,explicacao:'A frase começa com maiúscula, tem espaços e termina com ponto-final.'},
+  {texto:'Qual frase usa corretamente a letra maiúscula?',opcoes:['rafa mostrou o desenho.','Rafa mostrou o desenho.','rafa Mostrou o desenho.','Rafa mostrou O desenho.'],certa:1,explicacao:'O nome próprio Rafa e o início da frase pedem letra maiúscula.'},
+  {texto:'Qual sinal deve terminar esta frase afirmativa?\nO avô levou os brinquedos',opcoes:['Ponto-final (.)','Vírgula (,)','Dois-pontos (:)','Nenhum sinal'],certa:0,explicacao:'Uma frase afirmativa completa deve terminar com ponto-final.'},
+  {texto:'Qual opção apresenta as palavras bem separadas?',opcoes:['Aliaguardouolivro.','A Lia guardou o livro.','A Liaguardou o livro.','ALia guardouolivro.'],certa:1,explicacao:'Deve haver um espaço entre cada palavra.'},
+  {texto:'Qual é a separação correta de ESCOLA?',opcoes:['es-co-la','e-sco-la','escol-a','es-col-a'],certa:0,explicacao:'Escola tem três sílabas: es-co-la.'},
+  {texto:'Qual palavra tem L no final?',opcoes:['livro','lápis','palito','pastel'],certa:3,explicacao:'Pastel termina com a letra L.'},
+  {texto:'Qual palavra está escrita corretamente?',opcoes:['Qubo','Kubo','Cubo','Subo'],certa:2,explicacao:'Cubo é escrito com C; o C antes de U tem som de /K/.'},
+  {texto:'Qual sequência está em ordem alfabética?',opcoes:['salada, bolo, milho','bolo, milho, salada','milho, salada, bolo','salada, milho, bolo'],certa:1,explicacao:'B vem antes de M, e M vem antes de S.'},
+  {texto:TEXTO_DOACAO+'Qual informação está escrita no texto?',opcoes:['A biblioteca estava fechada.','Lia separou roupas.','O avô guardou brinquedos na caixa verde.','Bia participou da campanha.'],certa:2,explicacao:'Essa é uma informação explícita do texto.'},
+  {texto:TEXTO_CARTAZ+'Qual é a finalidade do cartaz?',opcoes:['Ensinar uma receita','Convidar para uma campanha de doação','Contar uma história de aventura','Vender brinquedos'],certa:1,explicacao:'O cartaz convida o leitor a doar livros e brinquedos.'},
+  {texto:'Qual frase é uma OPINIÃO?',opcoes:['A caixa é azul.','A entrega será na sexta-feira.','A biblioteca fica no bairro.','A história é muito divertida.'],certa:3,explicacao:'“Muito divertida” expressa o que alguém pensa sobre a história.'},
+  {texto:'Em uma história, quem são os personagens?',opcoes:['As pessoas ou seres que participam dos fatos','Somente quem escreveu o livro','As letras do título','Os leitores do texto'],certa:0,explicacao:'Personagens são aqueles que participam dos acontecimentos narrados.'}
 ]}
 };
 
 var ESCRITA={
 words:[
-  {emoji:'🧑‍🏫',texto:'Escreva em inglês:\nquadro',respostas:['board'],dica:'Dica: começa com b.'},
-  {emoji:'🏫',texto:'Escreva em inglês:\nsala de aula',respostas:['classroom'],dica:'Dica: class + room.'},
-  {emoji:'🪑',texto:'Escreva em inglês:\ncarteira / mesa',respostas:['desk'],dica:'Dica: 4 letras.'},
-  {emoji:'🏃',texto:'Escreva em inglês:\nginásio',respostas:['gym'],dica:'Dica: 3 letras.'},
-  {emoji:'📚',texto:'Escreva em inglês:\nbiblioteca',respostas:['library'],dica:'Dica: lugar dos livros.'},
-  {emoji:'🛝',texto:'Escreva em inglês:\nparquinho',respostas:['playground'],dica:'Dica: play + ground.'},
-  {emoji:'🏊',texto:'Escreva em inglês:\npiscina',respostas:['swimming pool'],dica:'Dica: duas palavras.'},
-  {emoji:'🚻',texto:'Escreva em inglês:\nbanheiro',respostas:['toilet'],dica:'Dica: começa com t.'}
+  {emoji:'📒',texto:'Copie a palavra em letra cursiva:',respostas:['caderno'],dica:'Caderno começa com C.'},
+  {emoji:'🧀',texto:'Copie a palavra em letra cursiva:',respostas:['queijo'],dica:'Queijo começa com QU.'},
+  {emoji:'🥝',texto:'Copie a palavra em letra cursiva:',respostas:['kiwi'],dica:'Kiwi começa com K.'},
+  {emoji:'✏️',texto:'Copie a palavra em letra cursiva:',respostas:['lápis'],dica:'Lápis tem L no início.'},
+  {emoji:'🏫',texto:'Copie a palavra em letra cursiva:',respostas:['escola'],dica:'Escola tem L no meio.'},
+  {emoji:'📄',texto:'Copie a palavra em letra cursiva:',respostas:['papel'],dica:'Papel tem L no final.'},
+  {emoji:'🐌',texto:'Copie a palavra em letra cursiva:',respostas:['caracol'],dica:'Caracol termina com L.'},
+  {emoji:'🧸',texto:'Copie a palavra em letra cursiva:',respostas:['brinquedo'],dica:'Brinquedo se separa em brin-que-do.'},
+  {emoji:'🛴',texto:'Copie a palavra em letra cursiva:',respostas:['motoca'],dica:'Motoca se separa em mo-to-ca.'},
+  {emoji:'🥋',texto:'Copie a palavra em letra cursiva:',respostas:['karatê'],dica:'Karatê começa com K.'}
 ],
 sentences:[
-  {emoji:'📖',texto:'Escreva:\nI like reading.',respostas:['i like reading','i like reading.'],dica:'Eu gosto de ler.'},
-  {emoji:'⚽',texto:'Escreva:\nI like football.',respostas:['i like football','i like football.'],dica:'Eu gosto de futebol.'},
-  {emoji:'🏀',texto:'Escreva:\nI like basketball.',respostas:['i like basketball','i like basketball.'],dica:'Eu gosto de basquete.'},
-  {emoji:'😊',texto:'Escreva:\nI like school.',respostas:['i like school','i like school.'],dica:'Eu gosto da escola.'},
-  {emoji:'📖',texto:"Escreva:\nI don't like reading.",respostas:["i don't like reading","i dont like reading","i don't like reading.","i dont like reading."],dica:'Eu não gosto de ler.'},
-  {emoji:'⚽',texto:"Escreva:\nI don't like football.",respostas:["i don't like football","i dont like football","i don't like football.","i dont like football."],dica:'Eu não gosto de futebol.'}
+  {emoji:'📚',texto:'Copie a frase em letra cursiva:',respostas:['Lia guardou o livro.'],dica:'Observe a maiúscula, os espaços e o ponto-final.'},
+  {emoji:'🧸',texto:'Copie a frase em letra cursiva:',respostas:['O avô levou os brinquedos.'],dica:'Comece com letra maiúscula e termine com ponto.'},
+  {emoji:'📝',texto:'Copie a frase em letra cursiva:',respostas:['Rafa escreveu uma história.'],dica:'Rafa é nome de pessoa e começa com maiúscula.'},
+  {emoji:'📦',texto:'Copie a frase em letra cursiva:',respostas:['A caixa azul tem livros.'],dica:'Não junte as palavras.'},
+  {emoji:'📖',texto:'Copie a frase em letra cursiva:',respostas:['Bia leu o texto.'],dica:'Bia é nome de pessoa e começa com maiúscula.'},
+  {emoji:'🥝',texto:'Copie a frase em letra cursiva:',respostas:['O kiwi está maduro.'],dica:'Kiwi é escrito com K.'},
+  {emoji:'🏫',texto:'Copie a frase em letra cursiva:',respostas:['A escola fica perto.'],dica:'Escola tem L no meio.'},
+  {emoji:'🐌',texto:'Copie a frase em letra cursiva:',respostas:['O caracol subiu devagar.'],dica:'Caracol termina com L.'}
 ]
 };
 
@@ -357,22 +381,7 @@ function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(va
 function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
 
 
-function visualPara(txt){
-  var k=txt.toLowerCase().trim().replace(/[.!?]+$/,'');
-  var mapa={
-    'board':'🧑‍🏫','quadro':'🧑‍🏫','classroom':'🏫','sala de aula':'🏫',
-    'desk':'🪑','mesa/carteira':'🪑','gym':'🏃','ginásio':'🏃',
-    'library':'📚','biblioteca':'📚','playground':'🛝','parquinho':'🛝',
-    'swimming pool':'🏊','piscina':'🏊','toilet':'🚻','banheiro':'🚻',
-    'reading':'📖','lendo':'📖','playing football':'⚽','jogando futebol':'⚽',
-    'playing basketball':'🏀','jogando basquete':'🏀',
-    'playing hide and seek':'🙈🌳','brincando de esconde-esconde':'🙈🌳',
-    'i like reading':'😊📖','i like playing football':'😊⚽',
-    'i like playing basketball':'😊🏀',"i don't like playing football":'🙅‍♀️⚽',
-    "i don't like reading":'🙅‍♀️📖',"i don't like playing hide and seek":'🙅‍♀️🙈🌳'
-  };
-  return mapa[k]||'';
-}
+function visualPara(){return '';}
 function htmlOpcao(txt){
   var v=visualPara(txt);
   return (v?'<span class="op-img">'+escHTML(v)+'</span>':'')+'<span class="op-txt">'+escHTML(txt)+'</span>';
@@ -428,11 +437,11 @@ function responder(escolhido){
   var fb=document.getElementById('fb');
   if(acertou){
     estado.acertos++;
-    var m=['🎉 Very good!','⭐ Great job!','🌟 Excellent!','🏅 Correct!','✨ Amazing!'];
-    fb.textContent=m[Math.floor(Math.random()*m.length)];
+    var m=['🎉 Muito bem!','⭐ Ótimo trabalho!','🌟 Excelente!','🏅 Resposta certa!','✨ Você conseguiu!'];
+    fb.textContent=m[Math.floor(Math.random()*m.length)]+' '+p.explicacao;
     fb.className='fb c';confete();
   }else{
-    fb.textContent='😊 Quase! A resposta certa está em verde.';
+    fb.textContent='😊 Quase! A resposta certa está em verde. '+p.explicacao;
     fb.className='fb e';
   }
   fb.style.display='block';
@@ -449,7 +458,7 @@ function avancar(){
 }
 
 /* ESCRITA */
-var canvas,ctx,desenhando=false,modeloAtual='todos',canvasIniciado=false,ponteiroAtivo=null;
+var canvas,ctx,desenhando=false,modeloAtual='cursiva',canvasIniciado=false,ponteiroAtivo=null;
 
 function abrirEscrita(tipo){
   escEstado.tipo=tipo;
@@ -462,14 +471,14 @@ function abrirEscrita(tipo){
 function mostrarItemEscrita(){
   escEstado.verificado=false;
   var item=escEstado.itens[escEstado.indice];
-  var alvo=item.respostas[0].replace(/\.$/,'');
+  var alvo=item.respostas[0];
   document.getElementById('esc-emoji').textContent=item.emoji;
   document.getElementById('esc-frase').textContent=item.texto;
-  document.getElementById('esc-dica').textContent=item.dica+' Primeiro leia em voz alta, depois copie com a caneta.';
+  document.getElementById('esc-dica').textContent=item.dica+' Primeiro leia em voz alta e depois copie com a Apple Pencil.';
   document.getElementById('esc-prog').textContent='Item '+(escEstado.indice+1)+' de '+escEstado.itens.length;
   document.getElementById('modelo-maiuscula').textContent=alvo.toUpperCase();
   document.getElementById('modelo-minuscula').textContent=alvo.toLowerCase();
-  document.getElementById('modelo-cursiva').textContent=alvo.toLowerCase();
+  document.getElementById('modelo-cursiva').textContent=alvo;
   setModeloEscrita(modeloAtual);limparCanvas();
   var fb=document.getElementById('esc-fb');fb.style.display='none';fb.className='fb';
   document.getElementById('btn-esc-ver').style.display='block';
@@ -552,7 +561,7 @@ function concluirEscrita(){
   if(escEstado.verificado)return;
   escEstado.verificado=true;escEstado.acertos++;
   var fb=document.getElementById('esc-fb');
-  fb.textContent='🌟 Muito bem! Agora leia a palavra/frase em inglês.';
+  fb.textContent='🌟 Muito bem! Confira a maiúscula, os espaços e o ponto-final.';
   fb.className='fb c';fb.style.display='block';
   document.getElementById('btn-esc-ver').style.display='none';
   var btnP=document.getElementById('btn-esc-px');
@@ -573,8 +582,8 @@ function mostrarFinal(tipo){
   else{ac=estado.acertos;total=estado.perguntas.length;replayFn='window.iniciarTema("'+estado.tema+'")';}
   var pct=ac/total;
   document.getElementById('ef').textContent=calcE(ac,total);
-  document.getElementById('af').textContent=ac+' / '+total+' acertos!';
-  var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excellent! 🎉','PERFECT! 🧠✨'];
+  document.getElementById('af').textContent=tipo==='escrita'?(ac+' / '+total+' itens concluídos!'):(ac+' / '+total+' acertos!');
+  var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excelente! 🎉','Arrasou! 🧠✨'];
   document.getElementById('mf').textContent=ms[Math.min(Math.floor(pct*5),4)];
   document.getElementById('btn-replay').setAttribute('onclick',replayFn);
   confete();mostrarTela('tela-final');
