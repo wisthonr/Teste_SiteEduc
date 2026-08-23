@@ -51,6 +51,15 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 .frase-visual{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;background:#F8FBFF;border:2px solid #D6EAF8;border-radius:18px;padding:12px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,.08)}
 .frase-visual .fv-img{font-size:2.4rem;text-align:center}
 .frase-visual .fv-txt{font-size:1.02rem;font-weight:700;line-height:1.45}
+.texto-livro{width:100%;background:var(--branco);border-radius:24px;padding:26px 24px;box-shadow:0 6px 24px var(--sombra);text-align:left}
+.texto-genero{text-align:center;color:var(--rosa);font-size:.88rem;font-weight:900;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.texto-titulo{text-align:center;color:var(--azul);font-size:1.65rem;font-weight:900;line-height:1.25;margin-bottom:20px}
+.texto-corpo{font-size:1.08rem;font-weight:600;line-height:1.75;color:var(--texto)}
+.texto-corpo p{margin-bottom:15px}
+.texto-corpo.poema{white-space:pre-line;text-align:center;line-height:1.9}
+.texto-autor{text-align:right;color:#777;font-size:.9rem;font-weight:800;margin-top:18px}
+.texto-aviso{background:#EBF5FF;border:2px solid #AED6F1;border-radius:16px;padding:11px 14px;text-align:center;font-size:.92rem;font-weight:800;color:#2874A6;margin-bottom:16px}
+#quiz-texto-apoio{display:none;max-height:58vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .hdr{width:100%;background:var(--branco);border-radius:20px;padding:12px 18px;box-shadow:0 4px 16px var(--sombra);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .hdr-t{font-size:1rem;font-weight:900}.hdr-p{font-size:.88rem;font-weight:700;color:#666}.hdr-e{font-size:1.2rem;letter-spacing:2px}
 .bar-w{width:100%;background:#E0E0E0;border-radius:10px;height:12px;overflow:hidden}
@@ -138,6 +147,21 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
       <span class="card-e">🔤</span><span class="card-n">Palavras e<br>Frases</span>
     </button>
   </div>
+  <p class="secao-label">📚 Textos do Livro</p>
+  <div class="grade">
+    <button class="card card-verde" onclick="window.abrirTexto('hortalicas')">
+      <span class="card-e">🥗</span><span class="card-n">Misturando as<br>Hortaliças</span>
+    </button>
+    <button class="card" onclick="window.abrirTexto('paginas')">
+      <span class="card-e">🌎</span><span class="card-n">As Páginas<br>do Mundo</span>
+    </button>
+    <button class="card card-laranja" onclick="window.abrirTexto('solidariedade')">
+      <span class="card-e">🎁</span><span class="card-n">Texto sobre<br>Solidariedade</span>
+    </button>
+    <button class="card card-roxo" onclick="window.abrirTexto('presente')">
+      <span class="card-e">🐢</span><span class="card-n">O Presente de<br>Quatro Patas</span>
+    </button>
+  </div>
   <p class="secao-label">🎯 Atividades</p>
   <div class="grade">
     <button class="card" onclick="window.iniciarTema('interpretacao')">
@@ -213,6 +237,14 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
 </div>
 
+<!-- TEXTOS DO LIVRO -->
+<div id="tela-texto" class="tela">
+  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
+  <div id="texto-container" class="texto-livro"></div>
+  <button id="btn-questoes-texto" class="ba bp" style="width:100%">🎯 Responder sobre o texto</button>
+  <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
+</div>
+
 <!-- QUIZ -->
 <div id="tela-quiz" class="tela">
   <div class="hdr">
@@ -221,6 +253,8 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
     <span id="hdr-e" class="hdr-e">☆☆☆☆☆</span>
   </div>
   <div class="bar-w"><div id="bar" class="bar"></div></div>
+  <button id="btn-ver-texto" class="ba bn" style="display:none;width:100%" onclick="window.toggleTextoApoio()">📖 Ver o texto completo</button>
+  <div id="quiz-texto-apoio" class="texto-livro"></div>
   <div class="cperg">
     <span id="perg-e" class="perg-e">🏫</span>
     <p id="perg-t" class="perg-t">...</p>
@@ -283,6 +317,76 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
 
 </div>
 <script>
+var TEXTOS={
+hortalicas:{
+  titulo:'Misturando as hortaliças',genero:'Poema',emoji:'🥗',tema:'texto_hortalicas',poema:true,
+  paragrafos:['Era uma vez\nEm um vilarejo\nUma beterraba que crescia em um canteiro.\nA beterraba queria virar salada\nEntão, para a couve perguntou:\nMe ajuda, minha camarada?\nA couve também queria\nIr para o prato e virar comida\nEntão, para a mandioca perguntou:\nMe ajuda, minha aliada?\nA rúcula já estava com aflição\nQueria fazer parte dessa nutrição\nA mandioca, muito esperta\nFez logo um pedido de união.\nMandioca, couve, rúcula e beterraba\nQuem vai querer essa combinação?']
+},
+paginas:{
+  titulo:'As páginas do mundo',genero:'Narrativa - Viajando pelo mundo sem sair do lugar',emoji:'🌎',tema:'texto_paginas',autor:'Ana Rapha Nunes',
+  paragrafos:[
+    'Catiana gostava de espiar as nuvens no céu, de acompanhar o voo das pipas, de contar estrelas antes de dormir. A menina sonhava horizontes...',
+    'Numa noite sem luar, antes de encontrar o sono, ela pediu ao pai:',
+    '— Eu quero conhecer o mundo.',
+    '— Quando você crescer, vou te levar para viajar pelos sete mares — prometeu o homem que adorava a canção das águas.',
+    'Catiana não gostou da ideia. O futuro parecia um lugar longe demais. Ela era menina curiosa, tinha fome de saberes, queria conhecer mais sobre o mundo logo.',
+    'Então, resolveu pedir para a irmã mais velha, que já era adolescente e de tudo fazia tempestade. Ela foi esbravejando:',
+    '— Não tenho tempo para isso agora — e sumiu para dentro do quarto.',
+    'Catiana murchou antes mesmo de florir. Mas não desistiu. Buscou abrigo no colo da avó.',
+    '— O mundo é muito grande, minha neta. Não tem como conhecê-lo por inteiro.',
+    'Inconformada, a menina decidiu ir até a professora.',
+    'Maristela era serena e tinha borboletas no olhar. A professora a pegou pela mão e caminharam por alguns corredores. De repente, ela abriu uma porta e disse:',
+    '— O mundo também está aqui dentro — e apontou para os livros na biblioteca.',
+    'Catiana deixou um sorriso nascer no rosto. E começou a sua maior aventura.',
+    'Todos os dias ela encontrava outras pessoas, novos lugares, diferentes culturas, muitas histórias. Subiu no pé de laranja lima, ouviu as mentiras de um boneco de madeira, conheceu um patinho que se achava feio, fez amizade com um menino maluquinho...',
+    'Às vezes, a menina tropeçava numa letra ou numa ideia. Mas não se apegava ao medo. Seguia as linhas do desconhecido, visitando a imaginação e descobrindo as páginas do mundo.'
+  ]
+},
+solidariedade:{
+  titulo:'Solidariedade é um presente',genero:'Texto informativo',emoji:'🎁',tema:'texto_solidariedade',
+  paragrafos:[
+    'Você se lembra da última vez em que ganhou um presente?',
+    'É uma sensação muito especial, não é? Agora, imagine poder proporcionar essa mesma alegria a outra criança!',
+    'Doar um brinquedo que você não usa mais é um gesto de carinho que faz toda a diferença. Participar de ações solidárias é uma maneira de incluir ainda mais crianças na brincadeira, espalhando felicidade e esperança.',
+    'Ser solidário é ajudar de boa vontade quem precisa. E uma forma de vivenciar a solidariedade é participar de campanhas de arrecadações, como a de brinquedos.',
+    'A solidariedade é um presente que alegra tanto quem recebe quanto quem doa!'
+  ]
+},
+presente:{
+  titulo:'O presente de quatro patas',genero:'Narrativa - Rir é o melhor remédio',emoji:'🐢',tema:'texto_presente',autor:'Ana Rapha Nunes',
+  paragrafos:[
+    'João Maria Bernardino Emerildo Sebastião dos Santos era um menino tagarela. Tinha a língua solta e a cabeça cheia de histórias para lá de esquisitas.',
+    'Na escola, ele era o rei dos causos. Falava, por exemplo, sobre a coleção de sapatos um tanto diferentes da mãe.',
+    '— Ela tem sapato de golfinho, de espiga de milho e até de lua minguante, que brilha no escuro! Um dia, ela quase foi confundida com uma alienígena no supermercado!',
+    'Contava sobre as palavras que o pai inventava nos finais de semana.',
+    '— Este sábado papai inventou quatro palavras: monstropípedo, superpassarildo, risadaço, pipocalvo. A última é a pipoca que fica careca no fundo da panela.',
+    'Todo mundo queria ouvir as histórias inventivas do menino, fazendo um monte de perguntas:',
+    '— Sua mãe tem sapato de jacaré que morde?',
+    '— Qual a palavra mais engraçada que seu pai já inventou?',
+    'E João Maria ficava todo prosa, só respondendo aos seus amigos. Parecia um pavão com microfone. Ele dizia sempre que, quando crescesse, queria ser pescador, não pelos peixes, mas pelos causos que iria contar.',
+    'Um dia, ele ficou com uma ideia teimando na cabeça. Queria um cachorro. Valente, peludo e com superpoderes. Um verdadeiro herói, capaz de salvar o planeta com seus latidos. Juntos eles viveriam muitas histórias engraçadas.',
+    'Mas a mãe torcia o nariz cada vez que ele vinha com essa conversa. E logo emendava:',
+    '— Um dia, meu filho, um dia.',
+    'O tempo ia passando apressado nos ponteiros do relógio e nada do seu amigo canino chegar.',
+    '— Um dia não chega nunca! — reclamava João Maria.',
+    'Vendo o sonho do garoto escapulir dos olhos, a tia resolveu ajudar. No aniversário do sobrinho, trouxe para ele um presente de quatro patas.',
+    '— Tcharam! Aqui está seu companheiro de aventuras!',
+    'O pai, claro, não perdeu a chance de inventar mais uma palavra:',
+    '— Que brincamara!',
+    'João Maria observou o presente, coçou as ideias na cabeça e... ficou em silêncio.',
+    'Não era peludo. Nem latia. Nem abanava o rabo. Mas tinha nome importante: Rei Charles.',
+    'Desde o primeiro dia, o novo companheiro se mostrou... peculiar. Vivia tropeçando nos sapatos excêntricos da mãe. Quando via um passarinho na janela, não latia. Sumia. E João Maria se questionava:',
+    '— Que aventuras vamos viver se ele não consegue nem correr no parque?',
+    'Rei Charles não era exatamente veloz, nem destemido. Mas enchia a casa de diversão e levava João Maria para o mundo da imaginação...',
+    'Quem visse os dois no quintal, brincando de heróis, jurava que aquela dupla tinha acabado de salvar o mundo — mesmo que um deles parasse várias vezes no meio do caminho.',
+    'Afinal, ser um réptil com escudo nas costas também era um superpoder.',
+    'Foi então que João Maria começou a espalhar para os amigos:',
+    '— O superpoder do meu herói de quatro patas não é latir, e sim andar em câmera lenta!',
+    'Rei Charles era uma tartaruga. E junto de João Maria, eles viveram muitas histórias. Com aventuras, ação, drama, emoção. Todas com finais... divertidos!'
+  ]
+}
+};
+
 var TEXTO_DOACAO='Leia o texto:\n\nNo sábado, Lia e o avô separaram livros e brinquedos para uma campanha de doação. Lia colocou os livros na caixa azul. O avô guardou os brinquedos na caixa verde. Depois, os dois levaram as caixas à biblioteca do bairro.\n\n';
 var TEXTO_IMAGINACAO='Leia o texto:\n\nRafa olhou as nuvens pela janela e imaginou um barco voador. Em seu caderno, desenhou a viagem e escreveu uma história. Quando terminou, mostrou o texto à irmã Bia.\n\n';
 var TEXTO_CARTAZ='Observe o cartaz:\n\n📚🧸 CAMPANHA DO BEM\nDoe livros e brinquedos.\nEntrega: sexta-feira.\nLocal: caixa azul da biblioteca.\n\n';
@@ -301,6 +405,58 @@ interpretacao:{nome:'📖 Interpretação',emoji:'📖',perguntas:[
   {texto:TEXTO_CARTAZ+'Em que dia deve ser feita a entrega?',opcoes:['Segunda-feira','Quarta-feira','Sexta-feira','Sábado'],certa:2,explicacao:'A data de entrega indicada no cartaz é sexta-feira.'},
   {texto:TEXTO_CARTAZ+'Onde as doações devem ser colocadas?',opcoes:['Na caixa verde da escola','Na caixa azul da biblioteca','Na mesa da professora','Na porta do mercado'],certa:1,explicacao:'O local está escrito na última linha do cartaz.'},
   {texto:TEXTO_CARTAZ+'O cartaz combina quais elementos?',opcoes:['Somente números','Palavras e imagens','Somente fotografias','Música e movimento'],certa:1,explicacao:'Ele combina texto verbal, com palavras, e elementos não verbais, como os símbolos.'}
+]},
+texto_hortalicas:{nome:'🥗 Hortaliças',emoji:'🥗',textoId:'hortalicas',perguntas:[
+  {texto:'Onde a beterraba crescia?',opcoes:['Em um canteiro','Em uma panela','Em uma floresta','Em uma feira'],certa:0,explicacao:'O poema diz que a beterraba crescia em um canteiro.'},
+  {texto:'O que a beterraba queria virar?',opcoes:['Uma sopa','Uma salada','Um suco','Um bolo'],certa:1,explicacao:'A beterraba queria virar salada.'},
+  {texto:'A quem a beterraba pediu ajuda primeiro?',opcoes:['À mandioca','À rúcula','À couve','À cenoura'],certa:2,explicacao:'Primeiro, a beterraba perguntou à couve.'},
+  {texto:'Por que a rúcula estava com aflição?',opcoes:['Porque não queria ser comida','Porque queria fazer parte da nutrição','Porque perdeu a mandioca','Porque não gostava da salada'],certa:1,explicacao:'A rúcula queria participar daquela combinação de hortaliças.'},
+  {texto:'Quem fez um pedido de união?',opcoes:['A couve','A beterraba','A rúcula','A mandioca'],certa:3,explicacao:'O texto afirma que a mandioca fez logo um pedido de união.'},
+  {texto:'Quais hortaliças formaram a combinação?',opcoes:['Mandioca, couve, rúcula e beterraba','Cenoura, alface, tomate e pepino','Batata, cebola, milho e abóbora','Beterraba, tomate, pepino e cenoura'],certa:0,explicacao:'Essas quatro hortaliças aparecem juntas no final do poema.'},
+  {texto:'No texto, “camarada” e “aliada” indicam alguém que...',opcoes:['atrapalha','ajuda e participa','vai embora','faz uma pergunta'],certa:1,explicacao:'As palavras indicam companheiras que podem ajudar na combinação.'},
+  {texto:'A pergunta final “Quem vai querer essa combinação?” é dirigida a quem?',opcoes:['Somente à mandioca','À professora','Ao leitor','Somente à couve'],certa:2,explicacao:'A pergunta convida o leitor a imaginar se gostaria da salada.'},
+  {texto:'Esse texto está organizado principalmente em...',opcoes:['versos','uma lista de compras','uma notícia','uma receita com medidas'],certa:0,explicacao:'O texto é um poema organizado em versos.'},
+  {texto:'Qual é a ideia principal do poema?',opcoes:['As hortaliças se unem para formar uma combinação','A beterraba foge do canteiro','A mandioca não quer ajudar','A rúcula prepara uma sobremesa'],certa:0,explicacao:'As hortaliças se juntam para formar uma salada.'}
+]},
+texto_paginas:{nome:'🌎 Páginas do Mundo',emoji:'🌎',textoId:'paginas',perguntas:[
+  {texto:'O que Catiana gostava de fazer antes de dormir?',opcoes:['Contar estrelas','Jogar bola','Cozinhar','Ouvir rádio'],certa:0,explicacao:'O texto conta que Catiana gostava de contar estrelas antes de dormir.'},
+  {texto:'Qual era o grande desejo de Catiana?',opcoes:['Ganhar uma pipa','Conhecer o mundo','Mudar de escola','Ser professora'],certa:1,explicacao:'Catiana disse ao pai: “Eu quero conhecer o mundo”.'},
+  {texto:'O que o pai prometeu?',opcoes:['Comprar muitos livros','Levá-la para viajar quando crescesse','Ir imediatamente à biblioteca','Pedir ajuda à professora'],certa:1,explicacao:'O pai prometeu levá-la para viajar pelos sete mares quando ela crescesse.'},
+  {texto:'Por que Catiana não gostou da resposta do pai?',opcoes:['Ela tinha medo do mar','Ela queria conhecer o mundo logo','Ela não gostava de viajar','Ela queria ficar em casa'],certa:1,explicacao:'Para Catiana, o futuro parecia longe demais; ela queria aprender logo.'},
+  {texto:'Como a irmã mais velha reagiu ao pedido de Catiana?',opcoes:['Levou-a à biblioteca','Prometeu viajar com ela','Disse que não tinha tempo','Contou uma história'],certa:2,explicacao:'A irmã respondeu que não tinha tempo e entrou no quarto.'},
+  {texto:'Depois de não conseguir ajuda da irmã, onde Catiana buscou abrigo?',opcoes:['No colo da avó','No quarto da irmã','Na casa do pai','No pátio da escola'],certa:0,explicacao:'Catiana buscou abrigo no colo da avó.'},
+  {texto:'Quem mostrou a biblioteca para Catiana?',opcoes:['O pai','A irmã','A avó','A professora Maristela'],certa:3,explicacao:'A professora Maristela levou Catiana até a biblioteca.'},
+  {texto:'O que a professora quis dizer com “O mundo também está aqui dentro”?',opcoes:['A biblioteca era enorme','Os livros permitem conhecer lugares, pessoas e culturas','Havia um mapa escondido','Catiana deveria morar na escola'],certa:1,explicacao:'Por meio da leitura, Catiana poderia conhecer muitos mundos sem viajar fisicamente.'},
+  {texto:'Qual foi a “maior aventura” iniciada por Catiana?',opcoes:['Navegar pelos sete mares','Subir em árvores','Descobrir o mundo por meio dos livros','Viajar com a irmã'],certa:2,explicacao:'A aventura foi ler e descobrir as páginas do mundo.'},
+  {texto:'O trecho sobre o pé de laranja lima, o boneco de madeira e o patinho mostra que Catiana...',opcoes:['encontrou animais de verdade','conheceu diferentes histórias pela leitura','saiu viajando sozinha','inventou brinquedos'],certa:1,explicacao:'Essas referências representam histórias e personagens encontrados nos livros.'},
+  {texto:'Quando tropeçava numa letra ou numa ideia, o que Catiana fazia?',opcoes:['Desistia da leitura','Pedia para sair da biblioteca','Continuava sem se apegar ao medo','Fechava o livro'],certa:2,explicacao:'Ela não se apegava ao medo e seguia descobrindo o desconhecido.'},
+  {texto:'Quem conta a história de Catiana?',opcoes:['Catiana em primeira pessoa','A professora Maristela','Um narrador que não participa dos fatos','A irmã mais velha'],certa:2,explicacao:'O narrador fala de Catiana em terceira pessoa e não participa da história.'}
+]},
+texto_solidariedade:{nome:'🎁 Solidariedade',emoji:'🎁',textoId:'solidariedade',perguntas:[
+  {texto:'Que tipo de doação é usado como exemplo no texto?',opcoes:['Doação de brinquedos','Doação de alimentos','Doação de dinheiro','Doação de plantas'],certa:0,explicacao:'O texto usa a doação de brinquedos como exemplo de ação solidária.'},
+  {texto:'Segundo o texto, o que é ser solidário?',opcoes:['Guardar tudo para si','Ajudar de boa vontade quem precisa','Comprar presentes caros','Brincar sempre sozinho'],certa:1,explicacao:'O texto define solidariedade como ajudar de boa vontade quem precisa.'},
+  {texto:'O que uma ação solidária pode espalhar?',opcoes:['Dúvidas e medo','Felicidade e esperança','Brinquedos quebrados','Competição e pressa'],certa:1,explicacao:'Participar de ações solidárias espalha felicidade e esperança.'},
+  {texto:'Doar um brinquedo que não é mais usado é considerado...',opcoes:['um desperdício','um gesto de carinho','uma brincadeira','uma obrigação escolar'],certa:1,explicacao:'O texto chama essa doação de gesto de carinho.'},
+  {texto:'Uma forma de vivenciar a solidariedade é...',opcoes:['participar de campanhas de arrecadação','esconder brinquedos','comprar somente para si','evitar outras crianças'],certa:0,explicacao:'Participar de campanhas de arrecadação é o exemplo apresentado.'},
+  {texto:'Quem pode ficar alegre com a solidariedade?',opcoes:['Somente quem doa','Somente quem recebe','Quem recebe e quem doa','Apenas os adultos'],certa:2,explicacao:'O texto afirma que a solidariedade alegra tanto quem recebe quanto quem doa.'},
+  {texto:'Por que a solidariedade é comparada a um presente?',opcoes:['Porque sempre vem embrulhada','Porque leva alegria a quem recebe e a quem doa','Porque precisa ser comprada','Porque só acontece em aniversários'],certa:1,explicacao:'Ela é chamada de presente porque produz alegria para os dois lados.'},
+  {texto:'Qual é a principal finalidade do texto?',opcoes:['Ensinar a fabricar brinquedos','Incentivar atitudes solidárias','Contar uma aventura fantástica','Anunciar uma loja'],certa:1,explicacao:'O texto explica e incentiva a prática da solidariedade.'},
+  {texto:'Qual atitude combina com a mensagem do texto?',opcoes:['Doar um brinquedo conservado que não usa mais','Jogar brinquedos bons no lixo','Esconder materiais dos colegas','Recusar ajuda a quem precisa'],certa:0,explicacao:'Doar algo em bom estado é uma atitude solidária coerente com o texto.'},
+  {texto:'A pergunta no início do texto faz o leitor lembrar...',opcoes:['da última vez que ganhou um presente','de uma viagem','de uma prova','de uma receita'],certa:0,explicacao:'O texto começa perguntando sobre a última vez em que o leitor ganhou um presente.'}
+]},
+texto_presente:{nome:'🐢 Quatro Patas',emoji:'🐢',textoId:'presente',perguntas:[
+  {texto:'Como João Maria é apresentado no início da história?',opcoes:['Tímido e silencioso','Tagarela e cheio de histórias','Bravo e impaciente','Medroso e distraído'],certa:1,explicacao:'Ele era tagarela, tinha a língua solta e a cabeça cheia de histórias.'},
+  {texto:'Por que João Maria era chamado de “rei dos causos”?',opcoes:['Porque inventava e contava muitas histórias','Porque era filho de um rei','Porque colecionava livros','Porque pescava muitos peixes'],certa:0,explicacao:'Na escola, todos gostavam de ouvir as histórias inventivas do menino.'},
+  {texto:'Quem inventava palavras nos finais de semana?',opcoes:['A mãe','A tia','O pai','João Maria'],certa:2,explicacao:'O texto diz que o pai inventava palavras nos finais de semana.'},
+  {texto:'O que significa “pipocalvo” na história?',opcoes:['Uma pipoca muito salgada','A pipoca que fica careca no fundo da panela','Um cachorro com manchas','Um sapato diferente'],certa:1,explicacao:'O próprio texto explica que pipocalvo é a pipoca careca no fundo da panela.'},
+  {texto:'Por que João Maria queria ser pescador quando crescesse?',opcoes:['Pelos peixes que pescaria','Pelos causos que iria contar','Para viajar de barco','Para morar perto do mar'],certa:1,explicacao:'Ele queria ser pescador pelos causos, não pelos peixes.'},
+  {texto:'Que animal João Maria desejava ganhar?',opcoes:['Uma tartaruga','Um papagaio','Um cachorro','Um peixe'],certa:2,explicacao:'Ele sonhava com um cachorro valente, peludo e com superpoderes.'},
+  {texto:'Quem trouxe o presente de quatro patas?',opcoes:['A mãe','A tia','O pai','A professora'],certa:1,explicacao:'A tia resolveu ajudar e levou o presente no aniversário do sobrinho.'},
+  {texto:'Qual era o verdadeiro animal chamado Rei Charles?',opcoes:['Um cachorro','Um gato','Uma tartaruga','Um coelho'],certa:2,explicacao:'No final, o texto revela que Rei Charles era uma tartaruga.'},
+  {texto:'Por que João Maria estranhou o presente no começo?',opcoes:['Ele não tinha nome','Não era peludo, não latia e não abanava o rabo','Era muito barulhento','Não tinha quatro patas'],certa:1,explicacao:'O animal era diferente do cachorro que João Maria havia imaginado.'},
+  {texto:'Qual “superpoder” João Maria atribuiu a Rei Charles?',opcoes:['Voar bem alto','Ficar invisível','Andar em câmera lenta','Latir muito forte'],certa:2,explicacao:'João Maria transformou a lentidão da tartaruga em um superpoder.'},
+  {texto:'O que mudou na relação de João Maria com Rei Charles?',opcoes:['Ele devolveu o presente','Ele passou a imaginar aventuras com o novo amigo','Ele deixou de contar histórias','Ele tentou ensinar a tartaruga a latir'],certa:1,explicacao:'João Maria aceitou o companheiro e viveu muitas histórias com ele.'},
+  {texto:'Qual mensagem combina melhor com a história?',opcoes:['Um amigo precisa ser exatamente como imaginamos','A imaginação ajuda a valorizar o que é diferente','Somente cachorros vivem aventuras','Animais lentos não podem brincar'],certa:1,explicacao:'João Maria descobriu diversão e amizade em um companheiro diferente do esperado.'}
 ]},
 ortografia:{nome:'🔤 Som de /K/ e L',emoji:'🔤',perguntas:[
   {texto:'Complete corretamente:\n_aderno',opcoes:['Caderno','Kaderno','Quaderno','Saderno'],certa:0,explicacao:'Caderno é escrito com C.'},
@@ -371,7 +527,7 @@ sentences:[
 ]
 };
 
-var estado={tema:'',perguntas:[],indice:0,acertos:0,respondeu:false};
+var estado={tema:'',textoId:'',perguntas:[],indice:0,acertos:0,respondeu:false};
 var escEstado={tipo:'words',itens:[],indice:0,acertos:0,verificado:false};
 
 function embaralhar(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t;}return r;}
@@ -379,6 +535,36 @@ function mostrarTela(id){var t=document.querySelectorAll('.tela');for(var i=0;i<
 function calcE(a,t){var p=a/t,n=p>=.9?5:p>=.7?4:p>=.5?3:p>=.3?2:1,s='';for(var i=0;i<5;i++)s+=i<n?'⭐':'☆';return s;}
 function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(var i=0;i<12;i++){(function(d){setTimeout(function(){var el=document.createElement('span');el.className='conf';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=Math.random()*95+'vw';el.style.animationDuration=(.8+Math.random()*.9)+'s';document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1800);},d);})(i*80);}}
 function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+
+function montarTextoHTML(id,apoio){
+  var t=TEXTOS[id],html='';if(!t)return html;
+  html+='<p class="texto-genero">'+escHTML(t.genero)+'</p>';
+  html+='<h2 class="texto-titulo">'+escHTML(t.emoji+' '+t.titulo)+'</h2>';
+  if(!apoio)html+='<div class="texto-aviso">Leia o texto inteiro com calma. Depois, responda às perguntas de interpretação.</div>';
+  if(t.poema){
+    html+='<div class="texto-corpo poema">'+escHTML(t.paragrafos[0])+'</div>';
+  }else{
+    html+='<div class="texto-corpo">';
+    for(var i=0;i<t.paragrafos.length;i++)html+='<p>'+escHTML(t.paragrafos[i])+'</p>';
+    html+='</div>';
+  }
+  if(t.autor)html+='<p class="texto-autor">'+escHTML(t.autor)+'</p>';
+  return html;
+}
+
+function abrirTexto(id){
+  var t=TEXTOS[id];if(!t)return;
+  document.getElementById('texto-container').innerHTML=montarTextoHTML(id,false);
+  document.getElementById('btn-questoes-texto').setAttribute('onclick','window.iniciarTema("'+t.tema+'")');
+  mostrarTela('tela-texto');
+}
+
+function toggleTextoApoio(){
+  var box=document.getElementById('quiz-texto-apoio'),btn=document.getElementById('btn-ver-texto');
+  var abrir=box.style.display!=='block';
+  box.style.display=abrir?'block':'none';
+  btn.textContent=abrir?'📕 Fechar o texto':'📖 Ver o texto completo';
+}
 
 
 function visualPara(){return '';}
@@ -390,6 +576,7 @@ function htmlOpcao(txt){
 /* QUIZ */
 function iniciarTema(tema){
   estado.tema=tema;
+  estado.textoId=BANCO[tema].textoId||'';
   estado.perguntas=embaralhar(BANCO[tema].perguntas).slice(0,6);
   estado.indice=0;estado.acertos=0;
   mostrarTela('tela-quiz');carregarPergunta();
@@ -404,6 +591,15 @@ function carregarPergunta(){
   document.getElementById('hdr-e').textContent=calcE(estado.acertos,total);
   document.getElementById('bar').style.width=((estado.indice/total)*100)+'%';
   document.getElementById('perg-t').textContent=p.texto;
+
+  var btnTexto=document.getElementById('btn-ver-texto');
+  var apoio=document.getElementById('quiz-texto-apoio');
+  if(d.textoId){
+    btnTexto.style.display='block';btnTexto.textContent='📖 Ver o texto completo';
+    apoio.innerHTML=montarTextoHTML(d.textoId,true);apoio.style.display='none';
+  }else{
+    btnTexto.style.display='none';apoio.style.display='none';apoio.innerHTML='';
+  }
 
   /* Cenas removidas do quiz — os emojis entregavam a resposta */
 
@@ -600,6 +796,7 @@ document.addEventListener('keydown',function(e){
 
 window.iniciarTema=iniciarTema;window.responder=responder;window.avancar=avancar;
 window.mostrarTela=mostrarTela;window.abrirEscrita=abrirEscrita;
+window.abrirTexto=abrirTexto;window.toggleTextoApoio=toggleTextoApoio;
 window.concluirEscrita=concluirEscrita;window.setModeloEscrita=setModeloEscrita;
 window.limparCanvas=limparCanvas;window.proxEscrita=proxEscrita;
 window.confete=confete;window.replay=replay;
