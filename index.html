@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Português em Ação - Julia 🌟</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matemática em Ação - Julia 🌟</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -121,685 +121,1936 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:va
   .perg-t{font-size:1.1rem}.btn-o{font-size:.98rem;min-height:58px;padding:12px 8px}
   .grid-o{gap:10px}.escrita-frase{font-size:1.08rem}.modelo-maiuscula{font-size:1.2rem}.modelo-minuscula{font-size:1.2rem}.modelo-cursiva{font-size:1.55rem}.canvas-wrap canvas{height:300px}
 }
-</style>
-</head>
-<body>
-<div class="bg" aria-hidden="true">
-<div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div>
-<div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div>
-</div>
-<div id="app">
 
-<!-- MENU -->
-<div id="tela-menu" class="tela ativa">
-  <div style="text-align:center;margin-top:8px">
-    <span class="logo">📚</span>
-    <h1 class="titulo">Português<br>em Ação!</h1>
-    <p class="julia">✨ para Julia ✨</p>
-  </div>
-  <p class="sub">Revisão para a avaliação de 26/08</p>
-  <p class="secao-label">📚 Aprender</p>
-  <div class="grade">
-    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-school')">
-      <span class="card-e">📖</span><span class="card-n">Ler e<br>Interpretar</span>
-    </button>
-    <button class="card card-verde" onclick="window.mostrarTela('tela-ler-like')">
-      <span class="card-e">🔤</span><span class="card-n">Palavras e<br>Frases</span>
-    </button>
-  </div>
-  <p class="secao-label">📚 Textos do Livro</p>
-  <div class="grade">
-    <button class="card card-verde" onclick="window.abrirTexto('hortalicas')">
-      <span class="card-e">🥗</span><span class="card-n">Misturando as<br>Hortaliças</span>
-    </button>
-    <button class="card" onclick="window.abrirTexto('paginas')">
-      <span class="card-e">🌎</span><span class="card-n">As Páginas<br>do Mundo</span>
-    </button>
-    <button class="card card-laranja" onclick="window.abrirTexto('solidariedade')">
-      <span class="card-e">🎁</span><span class="card-n">Texto sobre<br>Solidariedade</span>
-    </button>
-    <button class="card card-roxo" onclick="window.abrirTexto('presente')">
-      <span class="card-e">🐢</span><span class="card-n">O Presente de<br>Quatro Patas</span>
-    </button>
-  </div>
-  <p class="secao-label">🎯 Atividades</p>
-  <div class="grade">
-    <button class="card" onclick="window.iniciarTema('interpretacao')">
-      <span class="card-e">📖</span><span class="card-n">Interpretação<br>de Texto</span>
-    </button>
-    <button class="card card-laranja" onclick="window.iniciarTema('ortografia')">
-      <span class="card-e">🔤</span><span class="card-n">Som de /K/<br>e Letra L</span>
-    </button>
-    <button class="card card-roxo" onclick="window.iniciarTema('silabas')">
-      <span class="card-e">👏</span><span class="card-n">Separe as<br>Sílabas</span>
-    </button>
-    <button class="card card-rosa" onclick="window.iniciarTema('review')">
-      <span class="card-e">⭐</span><span class="card-n">Revisão<br>Geral</span>
-    </button>
-  </div>
-  <p class="secao-label">✍️ Praticar Escrita</p>
-  <div class="grade">
-    <button class="card card-laranja" onclick="window.abrirEscrita('words')">
-      <span class="card-e">✏️</span><span class="card-n">Escrever<br>Palavras</span>
-    </button>
-    <button class="card card-roxo" onclick="window.abrirEscrita('sentences')">
-      <span class="card-e">📝</span><span class="card-n">Escrever<br>Frases</span>
-    </button>
-  </div>
-</div>
-
-<!-- LEITURA E INTERPRETAÇÃO -->
-<div id="tela-ler-school" class="tela">
-  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
-  <div class="leitura-card">
-    <p class="leitura-titulo">📖 Ler e interpretar</p>
-    <p class="leitura-subtitulo">Texto verbal e texto não verbal</p>
-    <p class="leitura-txt"><strong>Texto verbal</strong> usa palavras e frases. <strong>Texto não verbal</strong> comunica principalmente por imagens, símbolos, cores e sinais. Um cartaz pode misturar os dois.</p>
-    <div class="leitura-regra">Leia devagar e procure no texto as palavras que comprovam sua resposta.</div>
-    <p class="leitura-subtitulo">O que observar</p>
-    <div class="leitura-img-grid">
-      <div class="leitura-img"><span>👧👦</span>Personagens<br><small>quem participa</small></div>
-      <div class="leitura-img"><span>🗣️</span>Narrador<br><small>quem conta</small></div>
-      <div class="leitura-img"><span>🔎</span>Informação explícita<br><small>está escrita no texto</small></div>
-      <div class="leitura-img"><span>💭</span>Opinião<br><small>o que alguém pensa</small></div>
-    </div>
-    <p class="leitura-subtitulo">Texto para treinar</p>
-    <div class="leitura-gloss">No sábado, Lia e o avô separaram livros e brinquedos para uma campanha de doação. Lia colocou os livros na caixa azul. O avô guardou os brinquedos na caixa verde. Depois, os dois levaram as caixas à biblioteca do bairro.</div>
-    <p class="leitura-txt"><strong>Personagens:</strong> Lia e o avô.<br><strong>Informação explícita:</strong> os livros foram colocados na caixa azul.<br><strong>Opinião possível:</strong> “A campanha foi uma ideia maravilhosa.”</p>
-    <p class="leitura-subtitulo">Exemplo de cartaz</p>
-    <div class="frase-visual"><span class="fv-img">📚🧸</span><p class="fv-txt"><strong>CAMPANHA DO BEM</strong><br>Doe livros e brinquedos.<br>Entrega: sexta-feira.<br>Local: caixa azul da biblioteca.</p></div>
-  </div>
-  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('interpretacao')">🎯 Atividade</button>
-  <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-</div>
-
-<!-- PALAVRAS E FRASES -->
-<div id="tela-ler-like" class="tela">
-  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
-  <div class="leitura-card">
-    <p class="leitura-titulo">🔤 Palavras e frases</p>
-    <p class="leitura-subtitulo">Som de /K/</p>
-    <p class="leitura-txt">A letra <strong>C</strong> tem som de /K/ antes de <strong>A, O e U</strong>: <strong>casa, comida, cubo</strong>. A letra <strong>Q</strong> costuma aparecer com U: <strong>queijo, quilo</strong>. Algumas palavras usam <strong>K</strong>: <strong>kiwi, karatê</strong>.</p>
-    <div class="leitura-regra">CA - CO - CU &nbsp; | &nbsp; QUE - QUI &nbsp; | &nbsp; K</div>
-    <p class="leitura-subtitulo">A letra L em diferentes posições</p>
-    <div class="leitura-img-grid">
-      <div class="leitura-img"><span>✏️</span><strong>l</strong>ápis<br><small>início</small></div>
-      <div class="leitura-img"><span>🏫</span>esco<strong>l</strong>a<br><small>meio</small></div>
-      <div class="leitura-img"><span>📄</span>pape<strong>l</strong><br><small>final</small></div>
-    </div>
-    <p class="leitura-subtitulo">Sílabas</p>
-    <p class="leitura-txt">Fale a palavra devagar e bata palmas para cada parte: <strong>mo-to-ca</strong>, <strong>bam-bo-lê</strong>, <strong>pa-ti-ne-te</strong>, <strong>fan-ta-si-a</strong>.</p>
-    <p class="leitura-subtitulo">Frase bem escrita</p>
-    <div class="frase-visual"><span class="fv-img">📝</span><p class="fv-txt"><strong>Lia guardou o livro.</strong><br>Começa com letra maiúscula, tem espaço entre as palavras e termina com ponto-final.</p></div>
-    <div class="leitura-gloss">Nomes de pessoas também começam com letra maiúscula: Lia, Rafa, Bia.</div>
-  </div>
-  <button class="ba bp" style="width:100%" onclick="window.iniciarTema('review')">⭐ Revisão</button>
-  <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-</div>
-
-<!-- TEXTOS DO LIVRO -->
-<div id="tela-texto" class="tela">
-  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
-  <div id="texto-container" class="texto-livro"></div>
-  <button id="btn-questoes-texto" class="ba bp" style="width:100%">🎯 Responder sobre o texto</button>
-  <button class="ba bm" style="width:100%" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-</div>
-
-<!-- QUIZ -->
-<div id="tela-quiz" class="tela">
-  <div class="hdr">
-    <span id="hdr-t" class="hdr-t">🏫</span>
-    <span id="hdr-p" class="hdr-p">1 / 6</span>
-    <span id="hdr-e" class="hdr-e">☆☆☆☆☆</span>
-  </div>
-  <div class="bar-w"><div id="bar" class="bar"></div></div>
-  <button id="btn-ver-texto" class="ba bn" style="display:none;width:100%" onclick="window.toggleTextoApoio()">📖 Ver o texto completo</button>
-  <div id="quiz-texto-apoio" class="texto-livro"></div>
-  <div class="cperg">
-    <span id="perg-e" class="perg-e">🏫</span>
-    <p id="perg-t" class="perg-t">...</p>
-  </div>
-  <div id="grid-o" class="grid-o"></div>
-  <div id="fb" class="fb"></div>
-  <div class="abtn">
-    <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-    <button id="btn-px" class="ba bp" style="display:none" onclick="window.avancar()">Próxima ➡️</button>
-  </div>
-</div>
-
-<!-- ESCRITA -->
-<div id="tela-escrita" class="tela">
-  <button class="bv" onclick="window.mostrarTela('tela-menu')">⬅️ Voltar</button>
-  <div class="escrita-area">
-    <div id="esc-emoji" class="escrita-emoji">✏️</div>
-    <p id="esc-frase" class="escrita-frase">...</p>
-    <p id="esc-dica" class="escrita-dica">Observe o modelo e escreva com a caneta do iPad.</p>
-    <div class="mini-row">
-      <button id="btn-modelo-todos" class="mini-btn ativo" onclick="window.setModeloEscrita('todos')">Todos</button>
-      <button id="btn-modelo-maiuscula" class="mini-btn" onclick="window.setModeloEscrita('maiuscula')">MAIÚSCULA</button>
-      <button id="btn-modelo-minuscula" class="mini-btn" onclick="window.setModeloEscrita('minuscula')">minúscula</button>
-      <button id="btn-modelo-cursiva" class="mini-btn" onclick="window.setModeloEscrita('cursiva')">cursiva</button>
-    </div>
-    <div class="modelo-box">
-      <div id="modelo-maiuscula-wrap" class="modelo-linha"><div class="modelo-label">Maiúscula</div><div id="modelo-maiuscula" class="modelo-maiuscula">CADERNO</div></div>
-      <div id="modelo-minuscula-wrap" class="modelo-linha"><div class="modelo-label">Minúscula</div><div id="modelo-minuscula" class="modelo-minuscula">caderno</div></div>
-      <div id="modelo-cursiva-wrap" class="modelo-linha"><div class="modelo-label">Cursiva / treino livre</div><div id="modelo-cursiva" class="modelo-cursiva">caderno</div></div>
-    </div>
-    <div class="canvas-wrap">
-      <div id="canvas-placeholder" class="canvas-placeholder">Escreva aqui com a caneta ✏️</div>
-      <canvas id="canvas"></canvas>
-    </div>
-    <button class="btn-limpar" onclick="window.limparCanvas()">🗑️ Apagar escrita</button>
-    <div id="esc-fb" class="fb" style="margin-top:14px"></div>
-    <p id="esc-prog" class="escrita-progresso">Item 1 de 8</p>
-  </div>
-  <div class="abtn">
-    <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-    <button id="btn-esc-ver" class="ba bp" onclick="window.concluirEscrita()">✅ Concluí</button>
-    <button id="btn-esc-px" class="ba bp" style="display:none" onclick="window.proxEscrita()">Próxima ➡️</button>
-  </div>
-</div>
-
-<!-- FINAL -->
-<div id="tela-final" class="tela">
-  <div class="cr">
-    <span class="trofeu">🏆</span>
-    <h2 id="tf" class="tf">Parabéns! 🎊</h2>
-    <div id="ef" class="ef">⭐⭐⭐⭐⭐</div>
-    <p id="af" class="af">6 / 6 acertos!</p>
-    <p id="mf" class="mf">Você é incrível! 🎉</p>
-  </div>
-  <div class="abtn" style="max-width:700px;width:100%">
-    <button id="btn-replay" class="ba bn" onclick="window.replay()">🔄 Jogar de Novo</button>
-    <button class="ba bm" onclick="window.mostrarTela('tela-menu')">🏠 Menu</button>
-  </div>
-</div>
-
-</div>
-<script>
-var TEXTOS={
-hortalicas:{
-  titulo:'Misturando as hortaliças',genero:'Poema',emoji:'🥗',tema:'texto_hortalicas',poema:true,
-  paragrafos:['Era uma vez\nEm um vilarejo\nUma beterraba que crescia em um canteiro.\nA beterraba queria virar salada\nEntão, para a couve perguntou:\nMe ajuda, minha camarada?\nA couve também queria\nIr para o prato e virar comida\nEntão, para a mandioca perguntou:\nMe ajuda, minha aliada?\nA rúcula já estava com aflição\nQueria fazer parte dessa nutrição\nA mandioca, muito esperta\nFez logo um pedido de união.\nMandioca, couve, rúcula e beterraba\nQuem vai querer essa combinação?']
-},
-paginas:{
-  titulo:'As páginas do mundo',genero:'Narrativa - Viajando pelo mundo sem sair do lugar',emoji:'🌎',tema:'texto_paginas',autor:'Ana Rapha Nunes',
-  paragrafos:[
-    'Catiana gostava de espiar as nuvens no céu, de acompanhar o voo das pipas, de contar estrelas antes de dormir. A menina sonhava horizontes...',
-    'Numa noite sem luar, antes de encontrar o sono, ela pediu ao pai:',
-    '— Eu quero conhecer o mundo.',
-    '— Quando você crescer, vou te levar para viajar pelos sete mares — prometeu o homem que adorava a canção das águas.',
-    'Catiana não gostou da ideia. O futuro parecia um lugar longe demais. Ela era menina curiosa, tinha fome de saberes, queria conhecer mais sobre o mundo logo.',
-    'Então, resolveu pedir para a irmã mais velha, que já era adolescente e de tudo fazia tempestade. Ela foi esbravejando:',
-    '— Não tenho tempo para isso agora — e sumiu para dentro do quarto.',
-    'Catiana murchou antes mesmo de florir. Mas não desistiu. Buscou abrigo no colo da avó.',
-    '— O mundo é muito grande, minha neta. Não tem como conhecê-lo por inteiro.',
-    'Inconformada, a menina decidiu ir até a professora.',
-    'Maristela era serena e tinha borboletas no olhar. A professora a pegou pela mão e caminharam por alguns corredores. De repente, ela abriu uma porta e disse:',
-    '— O mundo também está aqui dentro — e apontou para os livros na biblioteca.',
-    'Catiana deixou um sorriso nascer no rosto. E começou a sua maior aventura.',
-    'Todos os dias ela encontrava outras pessoas, novos lugares, diferentes culturas, muitas histórias. Subiu no pé de laranja lima, ouviu as mentiras de um boneco de madeira, conheceu um patinho que se achava feio, fez amizade com um menino maluquinho...',
-    'Às vezes, a menina tropeçava numa letra ou numa ideia. Mas não se apegava ao medo. Seguia as linhas do desconhecido, visitando a imaginação e descobrindo as páginas do mundo.'
-  ]
-},
-solidariedade:{
-  titulo:'Solidariedade é um presente',genero:'Texto informativo',emoji:'🎁',tema:'texto_solidariedade',
-  paragrafos:[
-    'Você se lembra da última vez em que ganhou um presente?',
-    'É uma sensação muito especial, não é? Agora, imagine poder proporcionar essa mesma alegria a outra criança!',
-    'Doar um brinquedo que você não usa mais é um gesto de carinho que faz toda a diferença. Participar de ações solidárias é uma maneira de incluir ainda mais crianças na brincadeira, espalhando felicidade e esperança.',
-    'Ser solidário é ajudar de boa vontade quem precisa. E uma forma de vivenciar a solidariedade é participar de campanhas de arrecadações, como a de brinquedos.',
-    'A solidariedade é um presente que alegra tanto quem recebe quanto quem doa!'
-  ]
-},
-presente:{
-  titulo:'O presente de quatro patas',genero:'Narrativa - Rir é o melhor remédio',emoji:'🐢',tema:'texto_presente',autor:'Ana Rapha Nunes',
-  paragrafos:[
-    'João Maria Bernardino Emerildo Sebastião dos Santos era um menino tagarela. Tinha a língua solta e a cabeça cheia de histórias para lá de esquisitas.',
-    'Na escola, ele era o rei dos causos. Falava, por exemplo, sobre a coleção de sapatos um tanto diferentes da mãe.',
-    '— Ela tem sapato de golfinho, de espiga de milho e até de lua minguante, que brilha no escuro! Um dia, ela quase foi confundida com uma alienígena no supermercado!',
-    'Contava sobre as palavras que o pai inventava nos finais de semana.',
-    '— Este sábado papai inventou quatro palavras: monstropípedo, superpassarildo, risadaço, pipocalvo. A última é a pipoca que fica careca no fundo da panela.',
-    'Todo mundo queria ouvir as histórias inventivas do menino, fazendo um monte de perguntas:',
-    '— Sua mãe tem sapato de jacaré que morde?',
-    '— Qual a palavra mais engraçada que seu pai já inventou?',
-    'E João Maria ficava todo prosa, só respondendo aos seus amigos. Parecia um pavão com microfone. Ele dizia sempre que, quando crescesse, queria ser pescador, não pelos peixes, mas pelos causos que iria contar.',
-    'Um dia, ele ficou com uma ideia teimando na cabeça. Queria um cachorro. Valente, peludo e com superpoderes. Um verdadeiro herói, capaz de salvar o planeta com seus latidos. Juntos eles viveriam muitas histórias engraçadas.',
-    'Mas a mãe torcia o nariz cada vez que ele vinha com essa conversa. E logo emendava:',
-    '— Um dia, meu filho, um dia.',
-    'O tempo ia passando apressado nos ponteiros do relógio e nada do seu amigo canino chegar.',
-    '— Um dia não chega nunca! — reclamava João Maria.',
-    'Vendo o sonho do garoto escapulir dos olhos, a tia resolveu ajudar. No aniversário do sobrinho, trouxe para ele um presente de quatro patas.',
-    '— Tcharam! Aqui está seu companheiro de aventuras!',
-    'O pai, claro, não perdeu a chance de inventar mais uma palavra:',
-    '— Que brincamara!',
-    'João Maria observou o presente, coçou as ideias na cabeça e... ficou em silêncio.',
-    'Não era peludo. Nem latia. Nem abanava o rabo. Mas tinha nome importante: Rei Charles.',
-    'Desde o primeiro dia, o novo companheiro se mostrou... peculiar. Vivia tropeçando nos sapatos excêntricos da mãe. Quando via um passarinho na janela, não latia. Sumia. E João Maria se questionava:',
-    '— Que aventuras vamos viver se ele não consegue nem correr no parque?',
-    'Rei Charles não era exatamente veloz, nem destemido. Mas enchia a casa de diversão e levava João Maria para o mundo da imaginação...',
-    'Quem visse os dois no quintal, brincando de heróis, jurava que aquela dupla tinha acabado de salvar o mundo — mesmo que um deles parasse várias vezes no meio do caminho.',
-    'Afinal, ser um réptil com escudo nas costas também era um superpoder.',
-    'Foi então que João Maria começou a espalhar para os amigos:',
-    '— O superpoder do meu herói de quatro patas não é latir, e sim andar em câmera lenta!',
-    'Rei Charles era uma tartaruga. E junto de João Maria, eles viveram muitas histórias. Com aventuras, ação, drama, emoção. Todas com finais... divertidos!'
-  ]
-}
+.tela{padding-bottom:24px}.card small{display:block;font-size:.8rem;font-weight:700;margin-top:6px;color:#576574}
+button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #243B87;outline-offset:4px}
+button:disabled{cursor:default}.btn-o:disabled{opacity:1}.nota{font-size:.88rem;color:#596775;line-height:1.5;text-align:center}.pagina{font-size:.85rem;color:#657586;margin-top:12px}
+select{font:inherit;padding:10px;border:2px solid #D6EAF8;border-radius:12px;background:white;max-width:100%}
+.guia{width:100%;background:#fff;border-radius:20px;padding:20px;line-height:1.65;box-shadow:0 4px 16px var(--sombra)}
+.guia summary{font-weight:900;color:var(--roxo);cursor:pointer;padding:8px}.guia p{margin:12px 0}.guia h3{color:var(--azul);margin:12px 0 4px}
+#visual{margin:14px 0 0}.pecas{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}.pecas-grupo{flex:1;min-width:85px}.pecas-grupo strong{display:block;margin-bottom:10px;font-size:.9rem}.pecas-conjunto{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:flex-start}
+.placa,.barra,.cubo{background-color:#FAD35D;background-image:linear-gradient(to right,#B58523 1px,transparent 1px),linear-gradient(to bottom,#B58523 1px,transparent 1px);background-size:7px 7px;border-right:1px solid #B58523;border-bottom:1px solid #B58523;display:inline-block}.placa{width:70px;height:70px}.barra{width:7px;height:70px}.cubo{width:7px;height:7px}
+.dinheiro-visual{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px}.cedula{background:#E6EEF8;border:3px double #476687;border-radius:8px;padding:10px 15px;font-size:1.4rem;font-weight:900;min-width:105px}.cedula small{display:block;font-size:.65rem;letter-spacing:1px}.moeda{display:flex;align-items:center;justify-content:center;background:#FBE4A0;border:5px double #8B7029;border-radius:50%;width:80px;height:80px;font-weight:900;font-size:1rem;color:#4F4019}
+#esc-resposta{white-space:pre-line;text-align:left;font-size:1rem;line-height:1.6;background:#EBF5FF;border:2px solid #AED6F1;color:#214968;padding:16px;border-radius:16px;margin-top:14px}
+.canvas-wrap{max-width:none}.canvas-wrap canvas{height:360px}.escrita-area{padding:16px}.ferramentas{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:10px 0}.ferramentas label{font-size:.85rem}.ferramentas input{width:20px;height:20px;vertical-align:middle}.aviso-escrita{padding:10px;background:#FFF3D6;border-radius:12px;font-size:.86rem;line-height:1.5;margin-top:12px}
+#guia-quiz{margin:0;box-shadow:none;border:2px solid #D6EAF8}#esc-feedback{margin-top:10px;color:#546878;font-weight:800}.mode{width:100%;text-align:center;background:white;border-radius:18px;padding:12px}.mode label{font-weight:800;display:block;margin-bottom:7px}
+@media(max-width:420px){.titulo{font-size:1.8rem}.hdr{padding:10px}.cperg{padding:18px 12px}.canvas-wrap canvas{height:320px}.escrita-area{padding:10px}.pecas{gap:6px}.placa{width:50px;height:50px;background-size:5px 5px}.barra{width:5px;height:50px;background-size:5px 5px}.cubo{width:5px;height:5px;background-size:5px 5px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="bg" aria-hidden="true"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
+<main id="app">
+<section id="tela-menu" class="tela ativa">
+<header><span class="logo" aria-hidden="true">🧮</span><h1 class="titulo">Matemática<br>em Ação!</h1><p class="julia">Vamos praticar, Julia! 🌟</p><p class="sub">Um desafio de cada vez.</p></header>
+<details class="guia"><summary>📚 O que vamos estudar?</summary><p>Números até 499; centenas, dezenas e unidades; comparação e ordenação; sequências; adição e subtração; cédulas e moedas; compras, troco e valores por extenso.</p><p>Revisão baseada nas páginas <strong>82–89, 95, 97–107 e 140–157</strong>. As atividades foram adaptadas para praticar no tablet. Tenha o livro e o caderno por perto.</p><p>Leia a pergunta, descubra o que ela pede e faça a conta. Nos exercícios de desenho e escrita, compare sua resolução com um adulto.</p></details>
+<div class="mode"><label for="modo">Como você quer praticar?</label><select id="modo"><option value="curta">Rodada curta: 6 perguntas sorteadas</option><option value="todas">Todas as perguntas do tema, em ordem</option></select></div>
+<h2 class="secao-label">🎯 Escolha um desafio</h2><div id="temas" class="grade"></div>
+<h2 class="secao-label">✏️ Escrever e desenhar</h2><div id="escritas" class="grade"></div>
+<p class="nota">Use Apple Pencil, dedo ou mouse. Os desenhos ficam apenas nesta página e não são enviados. Ao trocar de atividade ou recarregar, a escrita é apagada.</p>
+</section>
+<section id="tela-quiz" class="tela">
+<div class="hdr"><span id="hdr-t" class="hdr-t"></span><span id="hdr-p" class="hdr-p"></span><span id="hdr-e" class="hdr-e" aria-label="Estrelas"></span></div>
+<div class="bar-w"><div id="bar" class="bar"></div></div>
+<details id="guia-quiz" class="guia"><summary>💡 Relembrar como fazer</summary><div id="guia-conteudo"></div></details>
+<div class="cperg"><span id="perg-e" class="perg-e" aria-hidden="true"></span><h2 id="perg-t" class="perg-t"></h2><div id="visual"></div><p id="fonte" class="pagina"></p></div>
+<button class="mini-btn" onclick="abrirRascunho()">✏️ Fazer a conta no rascunho</button>
+<div id="grid-o" class="grid-o"></div><div id="fb" class="fb" role="status" aria-live="polite"></div>
+<div class="abtn"><button class="ba bm" onclick="mostrarTela('tela-menu')">🏠 Menu</button><button id="btn-px" class="ba bp" onclick="avancar()" hidden>Próxima ➡️</button></div>
+</section>
+<section id="tela-escrita" class="tela">
+<button id="esc-voltar" class="bv" onclick="voltarEscrita()">⬅️ Voltar ao menu</button>
+<div class="escrita-area"><div id="esc-emoji" class="escrita-emoji" aria-hidden="true">✏️</div><h2 id="esc-frase" class="escrita-frase"></h2><p id="esc-dica" class="escrita-dica"></p>
+<div class="ferramentas"><label for="pauta">Fundo:</label><select id="pauta" onchange="redesenhar()"><option value="quadriculado">Quadriculado</option><option value="cdu">Colunas C · D · U</option><option value="linhas">Linhas</option><option value="livre">Livre</option></select><label><input type="checkbox" id="so-caneta"> Só caneta (ignorar o dedo)</label></div>
+<div class="canvas-wrap"><div id="canvas-placeholder" class="canvas-placeholder">Faça sua conta ou desenho aqui ✏️</div><canvas id="canvas" aria-label="Área para escrever ou desenhar"></canvas></div>
+<div class="ferramentas"><button class="mini-btn" onclick="desfazer()">↩️ Desfazer traço</button><button class="mini-btn" onclick="limparCanvas()">🗑️ Apagar escrita</button></div>
+<p id="esc-feedback" role="status" aria-live="polite"></p><div id="esc-resposta" hidden></div><p id="esc-prog" class="escrita-progresso"></p>
+<p class="aviso-escrita">A escrita não é lida nem corrigida automaticamente. “Concluí” mostra uma resolução para comparar; não significa que a resposta está certa.</p></div>
+<div class="abtn"><button id="btn-esc-ver" class="ba bp" onclick="concluirEscrita()">✅ Concluí: comparar</button><button id="btn-esc-px" class="ba bp" onclick="proxEscrita()" hidden>Próxima ➡️</button><button id="btn-rascunho" class="ba bp" onclick="voltarEscrita()" hidden>Voltar à pergunta ➡️</button></div>
+</section>
+<section id="tela-final" class="tela"><div class="cr"><span class="trofeu" aria-hidden="true">🏆</span><h2 id="tf" class="tf"></h2><div id="ef" class="ef"></div><p id="af" class="af"></p><p id="mf" class="mf"></p></div><div class="abtn"><button id="btn-replay" class="ba bn">🔄 Praticar de novo</button><button class="ba bm" onclick="mostrarTela('tela-menu')">🏠 Menu</button></div></section>
+</main><script>
+const BANCO = {
+  "numeros": {
+    "nome": "Números até 499",
+    "emoji": "🔢",
+    "paginas": "95, 97–99, 102–103",
+    "perguntas": [
+      {
+        "texto": "Uma centena equivale a quantas dezenas?",
+        "opcoes": [
+          "10",
+          "1",
+          "100",
+          "20"
+        ],
+        "certa": 0,
+        "explicacao": "10 dezenas formam 100 unidades: uma centena.",
+        "pagina": 95
+      },
+      {
+        "texto": "Que número estas peças representam?",
+        "opcoes": [
+          "428",
+          "248",
+          "482",
+          "408"
+        ],
+        "certa": 0,
+        "explicacao": "4 centenas, 2 dezenas e 8 unidades: 400 + 20 + 8 = 428.",
+        "pagina": 95,
+        "visual": {
+          "tipo": "blocos",
+          "c": 4,
+          "d": 2,
+          "u": 8
+        }
+      },
+      {
+        "texto": "Qual é o número formado por 4 centenas, 3 dezenas e 5 unidades?",
+        "opcoes": [
+          "435",
+          "453",
+          "345",
+          "405"
+        ],
+        "certa": 0,
+        "explicacao": "400 + 30 + 5 = 435.",
+        "pagina": 97
+      },
+      {
+        "texto": "Qual é o número formado por 3 centenas e 6 unidades?",
+        "opcoes": [
+          "306",
+          "360",
+          "36",
+          "316"
+        ],
+        "certa": 0,
+        "explicacao": "300 + 6 = 306. O zero indica que não há dezenas soltas.",
+        "pagina": 97
+      },
+      {
+        "texto": "Qual é o número formado por 2 centenas, 5 dezenas e 18 unidades?",
+        "opcoes": [
+          "268",
+          "258",
+          "218",
+          "285"
+        ],
+        "certa": 0,
+        "explicacao": "200 + 50 + 18 = 268. Reagrupamos 10 das 18 unidades em uma dezena.",
+        "pagina": 97
+      },
+      {
+        "texto": "Qual é o número formado por 10 dezenas e 9 unidades?",
+        "opcoes": [
+          "109",
+          "19",
+          "190",
+          "119"
+        ],
+        "certa": 0,
+        "explicacao": "10 dezenas são 100 unidades. 100 + 9 = 109.",
+        "pagina": 97
+      },
+      {
+        "texto": "Que número tem duas dezenas a menos que 167?",
+        "opcoes": [
+          "147",
+          "157",
+          "137",
+          "149"
+        ],
+        "certa": 0,
+        "explicacao": "167 − 20 = 147.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 97,
+        "calculo": [
+          167,
+          "−",
+          20,
+          147
+        ]
+      },
+      {
+        "texto": "Que número tem uma centena a mais que 234?",
+        "opcoes": [
+          "334",
+          "344",
+          "324",
+          "336"
+        ],
+        "certa": 0,
+        "explicacao": "234 + 100 = 334. Juntamos as quantidades.",
+        "pagina": 97,
+        "calculo": [
+          234,
+          "+",
+          100,
+          334
+        ]
+      },
+      {
+        "texto": "Qual é o antecessor de 295?",
+        "opcoes": [
+          "294",
+          "296",
+          "285",
+          "293"
+        ],
+        "certa": 0,
+        "explicacao": "Antecessor é o número imediatamente anterior: 295 − 1 = 294.",
+        "pagina": 99
+      },
+      {
+        "texto": "Qual é o sucessor de 206?",
+        "opcoes": [
+          "207",
+          "205",
+          "216",
+          "208"
+        ],
+        "certa": 0,
+        "explicacao": "Sucessor é o número que vem logo depois: 206 + 1 = 207.",
+        "pagina": 99
+      },
+      {
+        "texto": "Quantas dezenas completas formam 200?",
+        "opcoes": [
+          "20",
+          "2",
+          "10",
+          "200"
+        ],
+        "certa": 0,
+        "explicacao": "Cada centena tem 10 dezenas; 2 centenas têm 20 dezenas.",
+        "pagina": 99
+      },
+      {
+        "texto": "Qual lista está em ordem decrescente?",
+        "opcoes": [
+          "412, 386, 320, 297, 159",
+          "159, 297, 320, 386, 412",
+          "412, 320, 386, 297, 159",
+          "386, 412, 320, 159, 297"
+        ],
+        "certa": 0,
+        "explicacao": "Na ordem decrescente, vamos do maior para o menor.",
+        "pagina": 102
+      },
+      {
+        "texto": "Como escrevemos 386 por extenso?",
+        "opcoes": [
+          "Trezentos e oitenta e seis",
+          "Trezentos e sessenta e oito",
+          "Trinta e oito e seis",
+          "Trezentos e oitenta"
+        ],
+        "certa": 0,
+        "explicacao": "386 = 300 + 80 + 6: trezentos e oitenta e seis.",
+        "pagina": 102
+      },
+      {
+        "texto": "Quanto vale o algarismo 4 em 245 e em 412, nessa ordem?",
+        "opcoes": [
+          "40 e 400",
+          "4 e 4",
+          "400 e 40",
+          "40 e 40"
+        ],
+        "certa": 0,
+        "explicacao": "Em 245, o 4 está nas dezenas; em 412, está nas centenas.",
+        "pagina": 103
+      },
+      {
+        "texto": "Qual adição decompõe 367?",
+        "opcoes": [
+          "300 + 60 + 7",
+          "30 + 60 + 7",
+          "300 + 6 + 7",
+          "300 + 70 + 6"
+        ],
+        "certa": 0,
+        "explicacao": "Cada algarismo tem seu valor: 3 centenas, 6 dezenas e 7 unidades.",
+        "pagina": 103
+      },
+      {
+        "texto": "100 + 100 + 50 + 19 formam qual número?",
+        "opcoes": [
+          "269",
+          "259",
+          "219",
+          "169"
+        ],
+        "certa": 0,
+        "explicacao": "100 + 100 = 200; 50 + 19 = 69; 200 + 69 = 269.",
+        "pagina": 103
+      }
+    ]
+  },
+  "sequencias": {
+    "nome": "Sequências e regularidades",
+    "emoji": "👣",
+    "paginas": "98–101",
+    "perguntas": [
+      {
+        "texto": "Na linha 270, 271, 272, 273... os números aumentam de quanto?",
+        "opcoes": [
+          "1",
+          "2",
+          "10",
+          "100"
+        ],
+        "certa": 0,
+        "explicacao": "Na mesma linha do quadro, cada número tem uma unidade a mais.",
+        "pagina": 98
+      },
+      {
+        "texto": "Na coluna 208, 218, 228, 238... os números aumentam de quanto?",
+        "opcoes": [
+          "10",
+          "1",
+          "2",
+          "100"
+        ],
+        "certa": 0,
+        "explicacao": "Ao descer uma linha na mesma coluna, acrescentamos uma dezena.",
+        "pagina": 98
+      },
+      {
+        "texto": "Contando de 2 em 2, de 230 até 244, passamos por 241?",
+        "opcoes": [
+          "Não",
+          "Sim",
+          "Só se começarmos em 230",
+          "Só se terminarmos em 244"
+        ],
+        "certa": 0,
+        "explicacao": "230, 232, 234, 236, 238, 240, 242, 244. O 241 não aparece.",
+        "pagina": 98
+      },
+      {
+        "texto": "Complete: 112, 114, 116, __, 120, 122.",
+        "opcoes": [
+          "118",
+          "117",
+          "119",
+          "126"
+        ],
+        "certa": 0,
+        "explicacao": "Aumenta de 2 em 2: 116 + 2 = 118.",
+        "pagina": 100
+      },
+      {
+        "texto": "Qual é a regra de 315, 320, 325, 330?",
+        "opcoes": [
+          "Somar 5",
+          "Somar 2",
+          "Subtrair 5",
+          "Somar 10"
+        ],
+        "certa": 0,
+        "explicacao": "320 − 315 = 5. O aumento se repete a cada passo.",
+        "pagina": 100
+      },
+      {
+        "texto": "Complete: 218, 215, 212, __, 206, 203.",
+        "opcoes": [
+          "209",
+          "210",
+          "211",
+          "208"
+        ],
+        "certa": 0,
+        "explicacao": "Diminui de 3 em 3: 212 − 3 = 209.",
+        "pagina": 100
+      },
+      {
+        "texto": "Complete: 410, 409, 408, __, 406, 405.",
+        "opcoes": [
+          "407",
+          "411",
+          "409",
+          "404"
+        ],
+        "certa": 0,
+        "explicacao": "A cada passo, subtraímos 1.",
+        "pagina": 100
+      },
+      {
+        "texto": "Em 134, 144, 154, 164... o que acontece?",
+        "opcoes": [
+          "Soma 10 e a unidade continua 4",
+          "Soma 1 e a unidade muda",
+          "Subtrai 10",
+          "Soma 4"
+        ],
+        "certa": 0,
+        "explicacao": "Aumenta uma dezena a cada passo; o algarismo das unidades continua sendo 4.",
+        "pagina": 100
+      },
+      {
+        "texto": "Cada termo é a soma dos dois anteriores. Complete: 5, 5, 10, 15, __, 40.",
+        "opcoes": [
+          "25",
+          "20",
+          "30",
+          "35"
+        ],
+        "certa": 0,
+        "explicacao": "10 + 15 = 25. Depois, 15 + 25 = 40.",
+        "pagina": 100
+      },
+      {
+        "texto": "Usando a mesma regra, complete: 25, 40, 65, __, 170.",
+        "opcoes": [
+          "105",
+          "100",
+          "110",
+          "95"
+        ],
+        "certa": 0,
+        "explicacao": "40 + 65 = 105. Depois, 65 + 105 = 170.",
+        "pagina": 100
+      },
+      {
+        "texto": "Na reta, complete: 370, 376, 382, __, 394.",
+        "opcoes": [
+          "388",
+          "386",
+          "390",
+          "384"
+        ],
+        "certa": 0,
+        "explicacao": "Os intervalos são de 6 unidades: 382 + 6 = 388.",
+        "pagina": 101
+      },
+      {
+        "texto": "Na reta, complete: 234, 238, 242, __, 250.",
+        "opcoes": [
+          "246",
+          "244",
+          "248",
+          "245"
+        ],
+        "certa": 0,
+        "explicacao": "A regra é somar 4: 242 + 4 = 246.",
+        "pagina": 101
+      }
+    ]
+  },
+  "adicao": {
+    "nome": "Somar e reagrupar",
+    "emoji": "➕",
+    "paginas": "82–85",
+    "perguntas": [
+      {
+        "texto": "Foram distribuídos 37 ingressos amarelos e 28 azuis. Quantos ao todo?",
+        "opcoes": [
+          "65",
+          "75",
+          "55",
+          "67"
+        ],
+        "certa": 0,
+        "explicacao": "37 + 28 = 65. Juntamos as quantidades.",
+        "pagina": 82,
+        "calculo": [
+          37,
+          "+",
+          28,
+          65
+        ]
+      },
+      {
+        "texto": "Já levaram 55 cadeiras e vão levar mais 25. Quantas serão?",
+        "opcoes": [
+          "80",
+          "90",
+          "70",
+          "82"
+        ],
+        "certa": 0,
+        "explicacao": "55 + 25 = 80. Juntamos as quantidades.",
+        "pagina": 83,
+        "calculo": [
+          55,
+          "+",
+          25,
+          80
+        ]
+      },
+      {
+        "texto": "Foram entregues 34 copos e sobraram 18 na mesa. Quantos copos foram cheios?",
+        "opcoes": [
+          "52",
+          "62",
+          "42",
+          "54"
+        ],
+        "certa": 0,
+        "explicacao": "34 + 18 = 52. Juntamos as quantidades.",
+        "pagina": 83,
+        "calculo": [
+          34,
+          "+",
+          18,
+          52
+        ]
+      },
+      {
+        "texto": "Uma coleção tinha 46 conchas e ganhou mais 28. Quantas tem agora?",
+        "opcoes": [
+          "74",
+          "84",
+          "64",
+          "76"
+        ],
+        "certa": 0,
+        "explicacao": "46 + 28 = 74. Juntamos as quantidades.",
+        "pagina": 84,
+        "calculo": [
+          46,
+          "+",
+          28,
+          74
+        ]
+      },
+      {
+        "texto": "Um turista encontrou 35 conchas de manhã e 17 à tarde. Quantas encontrou?",
+        "opcoes": [
+          "52",
+          "62",
+          "42",
+          "54"
+        ],
+        "certa": 0,
+        "explicacao": "35 + 17 = 52. Juntamos as quantidades.",
+        "pagina": 84,
+        "calculo": [
+          35,
+          "+",
+          17,
+          52
+        ]
+      },
+      {
+        "texto": "Havia 39 crianças e chegaram mais 25. Quantas ficaram?",
+        "opcoes": [
+          "64",
+          "74",
+          "54",
+          "66"
+        ],
+        "certa": 0,
+        "explicacao": "39 + 25 = 64. Juntamos as quantidades.",
+        "pagina": 85,
+        "calculo": [
+          39,
+          "+",
+          25,
+          64
+        ]
+      },
+      {
+        "texto": "Quanto é 74 + 17?",
+        "opcoes": [
+          "91",
+          "101",
+          "81",
+          "93"
+        ],
+        "certa": 0,
+        "explicacao": "74 + 17 = 91. Juntamos as quantidades.",
+        "pagina": 85,
+        "calculo": [
+          74,
+          "+",
+          17,
+          91
+        ]
+      },
+      {
+        "texto": "Quanto é 28 + 23?",
+        "opcoes": [
+          "51",
+          "61",
+          "41",
+          "53"
+        ],
+        "certa": 0,
+        "explicacao": "28 + 23 = 51. Juntamos as quantidades.",
+        "pagina": 85,
+        "calculo": [
+          28,
+          "+",
+          23,
+          51
+        ]
+      },
+      {
+        "texto": "Quanto é 39 + 28?",
+        "opcoes": [
+          "67",
+          "77",
+          "57",
+          "69"
+        ],
+        "certa": 0,
+        "explicacao": "39 + 28 = 67. Juntamos as quantidades.",
+        "pagina": 85,
+        "calculo": [
+          39,
+          "+",
+          28,
+          67
+        ]
+      },
+      {
+        "texto": "Quanto é 47 + 36?",
+        "opcoes": [
+          "83",
+          "93",
+          "73",
+          "85"
+        ],
+        "certa": 0,
+        "explicacao": "47 + 36 = 83. Juntamos as quantidades.",
+        "pagina": 85,
+        "calculo": [
+          47,
+          "+",
+          36,
+          83
+        ]
+      },
+      {
+        "texto": "Ao somar 37 + 28, juntamos 7 + 8 = 15 unidades. Como reagrupá-las?",
+        "opcoes": [
+          "1 dezena e 5 unidades",
+          "5 dezenas e 1 unidade",
+          "1 centena e 5 unidades",
+          "Só 5 unidades"
+        ],
+        "certa": 0,
+        "explicacao": "15 unidades = 10 + 5. Levamos uma dezena para a coluna das dezenas.",
+        "pagina": 82
+      }
+    ]
+  },
+  "subtracao": {
+    "nome": "Subtrair e comparar",
+    "emoji": "➖",
+    "paginas": "86–89",
+    "perguntas": [
+      {
+        "texto": "Havia 65 gibis. Foram dados 27 ao primo. Quantos restaram?",
+        "opcoes": [
+          "38",
+          "48",
+          "28",
+          "40"
+        ],
+        "certa": 0,
+        "explicacao": "65 − 27 = 38.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 86,
+        "calculo": [
+          65,
+          "−",
+          27,
+          38
+        ]
+      },
+      {
+        "texto": "Dos 72 gibis, 23 são repetidos. Quantos não são repetidos?",
+        "opcoes": [
+          "49",
+          "59",
+          "39",
+          "51"
+        ],
+        "certa": 0,
+        "explicacao": "72 − 23 = 49.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 86,
+        "calculo": [
+          72,
+          "−",
+          23,
+          49
+        ]
+      },
+      {
+        "texto": "Um clube tinha 96 gibis e emprestou 18. Quantos ficaram?",
+        "opcoes": [
+          "78",
+          "88",
+          "68",
+          "80"
+        ],
+        "certa": 0,
+        "explicacao": "96 − 18 = 78.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 87,
+        "calculo": [
+          96,
+          "−",
+          18,
+          78
+        ]
+      },
+      {
+        "texto": "Um leitor doou 31 gibis e um colecionador, 26. Quantos o leitor doou a mais?",
+        "opcoes": [
+          "5",
+          "15",
+          "6",
+          "7"
+        ],
+        "certa": 0,
+        "explicacao": "31 − 26 = 5.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 87,
+        "calculo": [
+          31,
+          "−",
+          26,
+          5
+        ]
+      },
+      {
+        "texto": "Dois irmãos têm 53 brinquedos juntos. Um tem 29. Quantos tem o outro?",
+        "opcoes": [
+          "24",
+          "34",
+          "14",
+          "26"
+        ],
+        "certa": 0,
+        "explicacao": "53 − 29 = 24.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 88,
+        "calculo": [
+          53,
+          "−",
+          29,
+          24
+        ]
+      },
+      {
+        "texto": "Há 44 bolas; 26 estão cheias. Quantas não estão cheias?",
+        "opcoes": [
+          "18",
+          "28",
+          "8",
+          "20"
+        ],
+        "certa": 0,
+        "explicacao": "44 − 26 = 18.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 88,
+        "calculo": [
+          44,
+          "−",
+          26,
+          18
+        ]
+      },
+      {
+        "texto": "Das 85 crianças, 49 veem as aves. As demais visitam a caverna. Quantas são?",
+        "opcoes": [
+          "36",
+          "46",
+          "26",
+          "38"
+        ],
+        "certa": 0,
+        "explicacao": "85 − 49 = 36.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 89,
+        "calculo": [
+          85,
+          "−",
+          49,
+          36
+        ]
+      },
+      {
+        "texto": "Quanto é 71 − 45?",
+        "opcoes": [
+          "26",
+          "36",
+          "16",
+          "28"
+        ],
+        "certa": 0,
+        "explicacao": "71 − 45 = 26.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 89,
+        "calculo": [
+          71,
+          "−",
+          45,
+          26
+        ]
+      },
+      {
+        "texto": "Quanto é 52 − 44?",
+        "opcoes": [
+          "8",
+          "18",
+          "9",
+          "10"
+        ],
+        "certa": 0,
+        "explicacao": "52 − 44 = 8.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 89,
+        "calculo": [
+          52,
+          "−",
+          44,
+          8
+        ]
+      },
+      {
+        "texto": "Quanto é 32 − 13?",
+        "opcoes": [
+          "19",
+          "29",
+          "9",
+          "21"
+        ],
+        "certa": 0,
+        "explicacao": "32 − 13 = 19.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 89,
+        "calculo": [
+          32,
+          "−",
+          13,
+          19
+        ]
+      },
+      {
+        "texto": "Quanto é 86 − 37?",
+        "opcoes": [
+          "49",
+          "59",
+          "39",
+          "51"
+        ],
+        "certa": 0,
+        "explicacao": "86 − 37 = 49.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 89,
+        "calculo": [
+          86,
+          "−",
+          37,
+          49
+        ]
+      },
+      {
+        "texto": "Para calcular 65 − 27, podemos trocar 1 dezena. Como fica o 65?",
+        "opcoes": [
+          "5 dezenas e 15 unidades",
+          "6 dezenas e 15 unidades",
+          "5 dezenas e 5 unidades",
+          "4 dezenas e 15 unidades"
+        ],
+        "certa": 0,
+        "explicacao": "65 = 60 + 5 = 50 + 15. O total continua igual após a troca.",
+        "pagina": 86
+      }
+    ]
+  },
+  "problemas": {
+    "nome": "Problemas com centenas",
+    "emoji": "🧩",
+    "paginas": "102, 104–107",
+    "perguntas": [
+      {
+        "texto": "Um atleta percorre 320 metros e depois mais 159. Quantos metros percorre?",
+        "opcoes": [
+          "479",
+          "489",
+          "469",
+          "481"
+        ],
+        "certa": 0,
+        "explicacao": "320 + 159 = 479. Juntamos as quantidades.",
+        "pagina": 102,
+        "calculo": [
+          320,
+          "+",
+          159,
+          479
+        ]
+      },
+      {
+        "texto": "Um trem levava 276 passageiros. Desceram 124. Quantos permaneceram?",
+        "opcoes": [
+          "152",
+          "162",
+          "142",
+          "154"
+        ],
+        "certa": 0,
+        "explicacao": "276 − 124 = 152.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 104,
+        "calculo": [
+          276,
+          "−",
+          124,
+          152
+        ]
+      },
+      {
+        "texto": "Venderam 215 garrafinhas de água e 203 de suco. Quantas ao todo?",
+        "opcoes": [
+          "418",
+          "428",
+          "408",
+          "420"
+        ],
+        "certa": 0,
+        "explicacao": "215 + 203 = 418. Juntamos as quantidades.",
+        "pagina": 104,
+        "calculo": [
+          215,
+          "+",
+          203,
+          418
+        ]
+      },
+      {
+        "texto": "Um trem saiu com 324 turistas. Subiram mais 131. Depois todos desceram. Quantos desceram?",
+        "opcoes": [
+          "455",
+          "465",
+          "445",
+          "457"
+        ],
+        "certa": 0,
+        "explicacao": "324 + 131 = 455. Juntamos as quantidades.",
+        "pagina": 104,
+        "calculo": [
+          324,
+          "+",
+          131,
+          455
+        ]
+      },
+      {
+        "texto": "Foram colhidas 197 maçãs vermelhas e 102 verdes. Quantas maçãs?",
+        "opcoes": [
+          "299",
+          "309",
+          "289",
+          "301"
+        ],
+        "certa": 0,
+        "explicacao": "197 + 102 = 299. Juntamos as quantidades.",
+        "pagina": 105,
+        "calculo": [
+          197,
+          "+",
+          102,
+          299
+        ]
+      },
+      {
+        "texto": "Das 345 goiabas, 120 estavam estragadas. Quantas estavam boas?",
+        "opcoes": [
+          "225",
+          "235",
+          "215",
+          "227"
+        ],
+        "certa": 0,
+        "explicacao": "345 − 120 = 225.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 105,
+        "calculo": [
+          345,
+          "−",
+          120,
+          225
+        ]
+      },
+      {
+        "texto": "Havia 486 espigas e foram recolhidas 321. Quantas permaneceram?",
+        "opcoes": [
+          "165",
+          "175",
+          "155",
+          "167"
+        ],
+        "certa": 0,
+        "explicacao": "486 − 321 = 165.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 105,
+        "calculo": [
+          486,
+          "−",
+          321,
+          165
+        ]
+      },
+      {
+        "texto": "Uma caixa tinha 281 canetas e recebeu mais 103. Quantas ficaram?",
+        "opcoes": [
+          "384",
+          "394",
+          "374",
+          "386"
+        ],
+        "certa": 0,
+        "explicacao": "281 + 103 = 384. Juntamos as quantidades.",
+        "pagina": 106,
+        "calculo": [
+          281,
+          "+",
+          103,
+          384
+        ]
+      },
+      {
+        "texto": "Havia 337 tesouras no estoque. Levaram 114 para o balcão. Quantas sobraram no estoque?",
+        "opcoes": [
+          "223",
+          "233",
+          "213",
+          "225"
+        ],
+        "certa": 0,
+        "explicacao": "337 − 114 = 223.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 106,
+        "calculo": [
+          337,
+          "−",
+          114,
+          223
+        ]
+      },
+      {
+        "texto": "Um pacote tinha 236 clipes e recebeu outros 162. Quantos clipes ficaram?",
+        "opcoes": [
+          "398",
+          "408",
+          "388",
+          "400"
+        ],
+        "certa": 0,
+        "explicacao": "236 + 162 = 398. Juntamos as quantidades.",
+        "pagina": 106,
+        "calculo": [
+          236,
+          "+",
+          162,
+          398
+        ]
+      },
+      {
+        "texto": "A praia fica a 452 metros. Uma família já andou 241. Quantos metros faltam?",
+        "opcoes": [
+          "211",
+          "221",
+          "201",
+          "213"
+        ],
+        "certa": 0,
+        "explicacao": "452 − 241 = 211.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 107,
+        "calculo": [
+          452,
+          "−",
+          241,
+          211
+        ]
+      },
+      {
+        "texto": "Um barco tem 245 lugares e 213 passageiros. Quantos lugares estão vazios?",
+        "opcoes": [
+          "32",
+          "42",
+          "22",
+          "34"
+        ],
+        "certa": 0,
+        "explicacao": "245 − 213 = 32.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 107,
+        "calculo": [
+          245,
+          "−",
+          213,
+          32
+        ]
+      },
+      {
+        "texto": "Venderam 203 águas de coco de manhã e 134 à tarde. Quantas ao todo?",
+        "opcoes": [
+          "337",
+          "347",
+          "327",
+          "339"
+        ],
+        "certa": 0,
+        "explicacao": "203 + 134 = 337. Juntamos as quantidades.",
+        "pagina": 107,
+        "calculo": [
+          203,
+          "+",
+          134,
+          337
+        ]
+      },
+      {
+        "texto": "Uma sorveteria tem 324 casquinhas de baunilha e 175 de chocolate. Quantas ao todo?",
+        "opcoes": [
+          "499",
+          "489",
+          "498",
+          "490"
+        ],
+        "certa": 0,
+        "explicacao": "324 + 175 = 499. Juntamos as quantidades.",
+        "pagina": 107,
+        "calculo": [
+          324,
+          "+",
+          175,
+          499
+        ]
+      }
+    ]
+  },
+  "dinheiro": {
+    "nome": "Cédulas, moedas e valores",
+    "emoji": "🪙",
+    "paginas": "140–144, 147–148, 152, 156",
+    "perguntas": [
+      {
+        "texto": "Qual é o símbolo do real?",
+        "opcoes": [
+          "R$",
+          "$R",
+          "€",
+          "US$"
+        ],
+        "certa": 0,
+        "explicacao": "No livro, o real é representado por R$.",
+        "pagina": 140
+      },
+      {
+        "texto": "Qual lista de cédulas vai do maior para o menor valor?",
+        "opcoes": [
+          "200, 100, 50, 20, 10, 5, 2",
+          "2, 5, 10, 20, 50, 100, 200",
+          "200, 50, 100, 20, 10, 5, 2",
+          "100, 200, 50, 20, 10, 5, 2"
+        ],
+        "certa": 0,
+        "explicacao": "Comparamos os valores em reais, do maior para o menor.",
+        "pagina": 140
+      },
+      {
+        "texto": "Como se escreve o valor desta moeda?",
+        "opcoes": [
+          "Dez centavos",
+          "Dez reais",
+          "Um real",
+          "Cem reais"
+        ],
+        "certa": 0,
+        "explicacao": "A moeda indica 10 centavos, uma parte de um real.",
+        "pagina": 141,
+        "visual": {
+          "tipo": "dinheiro",
+          "valores": [
+            10
+          ]
+        }
+      },
+      {
+        "texto": "Como se escreve R$ 200?",
+        "opcoes": [
+          "Duzentos reais",
+          "Vinte reais",
+          "Dois reais",
+          "Duzentos centavos"
+        ],
+        "certa": 0,
+        "explicacao": "200 reais se escreve duzentos reais.",
+        "pagina": 141
+      },
+      {
+        "texto": "Quanto dinheiro há neste conjunto?",
+        "opcoes": [
+          "126",
+          "125",
+          "156",
+          "123"
+        ],
+        "certa": 0,
+        "explicacao": "100 + 5 + 10 + 10 + 1 = 126 reais.",
+        "pagina": 141,
+        "visual": {
+          "tipo": "dinheiro",
+          "valores": [
+            10000,
+            500,
+            1000,
+            1000,
+            100
+          ]
+        }
+      },
+      {
+        "texto": "Qual composição paga exatamente uma boia de R$ 223?",
+        "opcoes": [
+          "200 + 20 + 2 + 1",
+          "200 + 20 + 5",
+          "100 + 20 + 2 + 1",
+          "200 + 10 + 2 + 1"
+        ],
+        "certa": 0,
+        "explicacao": "200 + 20 + 2 + 1 = 223 reais.",
+        "pagina": 142
+      },
+      {
+        "texto": "Qual composição paga exatamente uma boia de R$ 147?",
+        "opcoes": [
+          "100 + 20 + 20 + 5 + 2",
+          "100 + 20 + 20 + 5 + 1",
+          "100 + 50 + 2",
+          "100 + 20 + 10 + 5 + 2"
+        ],
+        "certa": 0,
+        "explicacao": "100 + 40 + 5 + 2 = 147 reais.",
+        "pagina": 142
+      },
+      {
+        "texto": "Por qual cédula podemos trocar estas moedas?",
+        "opcoes": [
+          "R$ 2",
+          "R$ 5",
+          "R$ 10",
+          "R$ 20"
+        ],
+        "certa": 0,
+        "explicacao": "50 centavos + 50 centavos = 1 real. Com mais 1 real, são 2 reais.",
+        "pagina": 143,
+        "visual": {
+          "tipo": "dinheiro",
+          "valores": [
+            100,
+            50,
+            50
+          ]
+        }
+      },
+      {
+        "texto": "Cinco moedas de R$ 1 equivalem a qual cédula?",
+        "opcoes": [
+          "R$ 5",
+          "R$ 2",
+          "R$ 10",
+          "R$ 20"
+        ],
+        "certa": 0,
+        "explicacao": "1 + 1 + 1 + 1 + 1 = 5 reais.",
+        "pagina": 143
+      },
+      {
+        "texto": "Quantas cédulas de R$ 5 formam R$ 20?",
+        "opcoes": [
+          "4",
+          "2",
+          "5",
+          "10"
+        ],
+        "certa": 0,
+        "explicacao": "5 + 5 + 5 + 5 = 20 reais.",
+        "pagina": 143
+      },
+      {
+        "texto": "Qual grupo de cédulas forma R$ 50?",
+        "opcoes": [
+          "20 + 20 + 10",
+          "20 + 10 + 10",
+          "20 + 20 + 5",
+          "10 + 10 + 10"
+        ],
+        "certa": 0,
+        "explicacao": "20 + 20 + 10 = 50 reais. Há outras maneiras de formar esse valor.",
+        "pagina": 144
+      },
+      {
+        "texto": "Qual grupo paga exatamente a mochila de R$ 215?",
+        "opcoes": [
+          "200 + 10 + 5",
+          "200 + 20 + 5",
+          "100 + 10 + 5",
+          "200 + 10 + 2"
+        ],
+        "certa": 0,
+        "explicacao": "200 + 10 + 5 = 215 reais.",
+        "pagina": 147
+      },
+      {
+        "texto": "Qual grupo paga exatamente os livros de R$ 139?",
+        "opcoes": [
+          "100 + 20 + 10 + 5 + 2 + 2",
+          "100 + 20 + 10 + 5 + 1",
+          "100 + 20 + 5 + 2 + 2",
+          "100 + 20 + 20 + 5 + 2"
+        ],
+        "certa": 0,
+        "explicacao": "100 + 20 + 10 + 5 + 2 + 2 = 139 reais.",
+        "pagina": 148
+      },
+      {
+        "texto": "Este conjunto equivale à inscrição de R$ 226?",
+        "opcoes": [
+          "Sim",
+          "Não, vale R$ 225",
+          "Não, vale R$ 216",
+          "Não, vale R$ 236"
+        ],
+        "certa": 0,
+        "explicacao": "200 + 20 + 5 + 1 = 226 reais.",
+        "pagina": 152,
+        "visual": {
+          "tipo": "dinheiro",
+          "valores": [
+            20000,
+            2000,
+            500,
+            100
+          ]
+        }
+      },
+      {
+        "texto": "O show de mágica custa R$ 65. Como escrever por extenso?",
+        "opcoes": [
+          "Sessenta e cinco reais",
+          "Cinquenta e seis reais",
+          "Seiscentos e cinco reais",
+          "Sessenta reais"
+        ],
+        "certa": 0,
+        "explicacao": "65 = 60 + 5: sessenta e cinco reais.",
+        "pagina": 156
+      }
+    ]
+  },
+  "compras": {
+    "nome": "Compras e comparação",
+    "emoji": "🛍️",
+    "paginas": "144–154, 157",
+    "perguntas": [
+      {
+        "texto": "Um cofrinho custa R$ 62 e outro R$ 39. Qual é a diferença?",
+        "opcoes": [
+          "23 reais",
+          "33 reais",
+          "13 reais",
+          "25 reais"
+        ],
+        "certa": 0,
+        "explicacao": "62 − 39 = 23.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 145,
+        "calculo": [
+          62,
+          "−",
+          39,
+          23
+        ]
+      },
+      {
+        "texto": "Há R$ 58 em moedas e R$ 24 em cédulas. Qual é o total?",
+        "opcoes": [
+          "82 reais",
+          "92 reais",
+          "72 reais",
+          "84 reais"
+        ],
+        "certa": 0,
+        "explicacao": "58 + 24 = 82. Juntamos as quantidades.",
+        "pagina": 145,
+        "calculo": [
+          58,
+          "+",
+          24,
+          82
+        ]
+      },
+      {
+        "texto": "Há R$ 45 no cofrinho e chegam mais R$ 38. Qual é o total?",
+        "opcoes": [
+          "83 reais",
+          "93 reais",
+          "73 reais",
+          "85 reais"
+        ],
+        "certa": 0,
+        "explicacao": "45 + 38 = 83. Juntamos as quantidades.",
+        "pagina": 146,
+        "calculo": [
+          45,
+          "+",
+          38,
+          83
+        ]
+      },
+      {
+        "texto": "Uma bola custa R$ 14, um chaveiro R$ 8 e um boné R$ 22. A bola e o chaveiro juntos custam quanto?",
+        "opcoes": [
+          "22 reais",
+          "32 reais",
+          "12 reais",
+          "24 reais"
+        ],
+        "certa": 0,
+        "explicacao": "14 + 8 = 22. Juntamos as quantidades.",
+        "pagina": 149,
+        "calculo": [
+          14,
+          "+",
+          8,
+          22
+        ]
+      },
+      {
+        "texto": "Atletismo custa R$ 163 e ciclismo R$ 226. Quanto custam as duas inscrições?",
+        "opcoes": [
+          "389 reais",
+          "399 reais",
+          "379 reais",
+          "391 reais"
+        ],
+        "certa": 0,
+        "explicacao": "163 + 226 = 389. Juntamos as quantidades.",
+        "pagina": 151,
+        "calculo": [
+          163,
+          "+",
+          226,
+          389
+        ]
+      },
+      {
+        "texto": "Taekwondo custa R$ 357 e ciclismo R$ 226. Quanto o taekwondo custa a mais?",
+        "opcoes": [
+          "131 reais",
+          "141 reais",
+          "121 reais",
+          "133 reais"
+        ],
+        "certa": 0,
+        "explicacao": "357 − 226 = 131.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 151,
+        "calculo": [
+          357,
+          "−",
+          226,
+          131
+        ]
+      },
+      {
+        "texto": "Futebol: R$ 448. Tênis: R$ 42. Qual é a diferença entre esses preços?",
+        "opcoes": [
+          "406 reais",
+          "416 reais",
+          "396 reais",
+          "408 reais"
+        ],
+        "certa": 0,
+        "explicacao": "448 − 42 = 406.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 153,
+        "calculo": [
+          448,
+          "−",
+          42,
+          406
+        ]
+      },
+      {
+        "texto": "Basquete: R$ 299. Vôlei: R$ 137. Quanto o vôlei custa a menos?",
+        "opcoes": [
+          "162 reais",
+          "172 reais",
+          "152 reais",
+          "164 reais"
+        ],
+        "certa": 0,
+        "explicacao": "299 − 137 = 162.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 154,
+        "calculo": [
+          299,
+          "−",
+          137,
+          162
+        ]
+      },
+      {
+        "texto": "Uma caixa de maçãs custa R$ 35 e outra R$ 28. Qual é a diferença?",
+        "opcoes": [
+          "7 reais",
+          "17 reais",
+          "8 reais",
+          "9 reais"
+        ],
+        "certa": 0,
+        "explicacao": "35 − 28 = 7.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 157,
+        "calculo": [
+          35,
+          "−",
+          28,
+          7
+        ]
+      },
+      {
+        "texto": "Foram gastos R$ 44 em legumes e R$ 36 em frutas. Qual é o total?",
+        "opcoes": [
+          "80 reais",
+          "90 reais",
+          "70 reais",
+          "82 reais"
+        ],
+        "certa": 0,
+        "explicacao": "44 + 36 = 80. Juntamos as quantidades.",
+        "pagina": 157,
+        "calculo": [
+          44,
+          "+",
+          36,
+          80
+        ]
+      },
+      {
+        "texto": "Um combo custa R$ 19 e o outro R$ 42. Quanto custam os dois?",
+        "opcoes": [
+          "61 reais",
+          "71 reais",
+          "51 reais",
+          "63 reais"
+        ],
+        "certa": 0,
+        "explicacao": "19 + 42 = 61. Juntamos as quantidades.",
+        "pagina": 157,
+        "calculo": [
+          19,
+          "+",
+          42,
+          61
+        ]
+      },
+      {
+        "texto": "Mochila: R$ 215. Caderno: R$ 29. Livros: R$ 139. Qual é o mais barato?",
+        "opcoes": [
+          "Caderno",
+          "Mochila",
+          "Livros",
+          "Todos custam igual"
+        ],
+        "certa": 0,
+        "explicacao": "29 é menor que 139 e que 215.",
+        "pagina": 148
+      },
+      {
+        "texto": "Uma taxa deve ter 3 algarismos e ser de, no máximo, R$ 300. Qual valor atende às duas regras?",
+        "opcoes": [
+          "R$ 250",
+          "R$ 99",
+          "R$ 390",
+          "R$ 350"
+        ],
+        "certa": 0,
+        "explicacao": "250 tem três algarismos e não ultrapassa 300.",
+        "pagina": 150
+      },
+      {
+        "texto": "Plástico: 5 + 5 + 2 + 2 + 10 reais. Polo aquático: 50 reais. Pingue-pongue: 2 + 2 + 10 + 5 reais. Qual bola é mais cara?",
+        "opcoes": [
+          "Polo aquático",
+          "Plástico",
+          "Pingue-pongue",
+          "Todas custam igual"
+        ],
+        "certa": 0,
+        "explicacao": "Os preços são 24, 50 e 19 reais. O maior é 50 reais.",
+        "pagina": 154
+      }
+    ]
+  },
+  "troco": {
+    "nome": "Troco e quanto falta",
+    "emoji": "💰",
+    "paginas": "145–146, 149, 155",
+    "perguntas": [
+      {
+        "texto": "Um cofrinho custa R$ 62. Você tem R$ 48. Quanto falta?",
+        "opcoes": [
+          "14 reais",
+          "24 reais",
+          "4 reais",
+          "16 reais"
+        ],
+        "certa": 0,
+        "explicacao": "62 − 48 = 14.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 145,
+        "calculo": [
+          62,
+          "−",
+          48,
+          14
+        ]
+      },
+      {
+        "texto": "Um cofrinho custa R$ 39. Pagando com R$ 50, qual é o troco?",
+        "opcoes": [
+          "11 reais",
+          "21 reais",
+          "1 reais",
+          "13 reais"
+        ],
+        "certa": 0,
+        "explicacao": "50 − 39 = 11.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 145,
+        "calculo": [
+          50,
+          "−",
+          39,
+          11
+        ]
+      },
+      {
+        "texto": "Há R$ 348 guardados. Um capacete custa R$ 206. Quanto sobra?",
+        "opcoes": [
+          "142 reais",
+          "152 reais",
+          "132 reais",
+          "144 reais"
+        ],
+        "certa": 0,
+        "explicacao": "348 − 206 = 142.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 146,
+        "calculo": [
+          348,
+          "−",
+          206,
+          142
+        ]
+      },
+      {
+        "texto": "Um livro custa R$ 64. O leitor tem R$ 27. Quanto falta?",
+        "opcoes": [
+          "37 reais",
+          "47 reais",
+          "27 reais",
+          "39 reais"
+        ],
+        "certa": 0,
+        "explicacao": "64 − 27 = 37.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 146,
+        "calculo": [
+          64,
+          "−",
+          27,
+          37
+        ]
+      },
+      {
+        "texto": "Uma bola, um chaveiro e um boné custam juntos R$ 44. Você paga R$ 65. Qual é o troco?",
+        "opcoes": [
+          "21 reais",
+          "31 reais",
+          "11 reais",
+          "23 reais"
+        ],
+        "certa": 0,
+        "explicacao": "65 − 44 = 21.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 149,
+        "calculo": [
+          65,
+          "−",
+          44,
+          21
+        ]
+      },
+      {
+        "texto": "Uma compra de R$ 43 foi paga com R$ 20 + R$ 20 + R$ 5. Qual é o troco?",
+        "opcoes": [
+          "2 reais",
+          "12 reais",
+          "3 reais",
+          "4 reais"
+        ],
+        "certa": 0,
+        "explicacao": "45 − 43 = 2.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 155,
+        "calculo": [
+          45,
+          "−",
+          43,
+          2
+        ]
+      },
+      {
+        "texto": "Um violão de R$ 247 foi pago com R$ 100 + R$ 100 + R$ 50. Qual é o troco?",
+        "opcoes": [
+          "3 reais",
+          "13 reais",
+          "4 reais",
+          "5 reais"
+        ],
+        "certa": 0,
+        "explicacao": "250 − 247 = 3.Subtraímos para descobrir o que resta ou a diferença.",
+        "pagina": 155,
+        "calculo": [
+          250,
+          "−",
+          247,
+          3
+        ]
+      },
+      {
+        "texto": "A compra custou R$ 18 e o troco foi R$ 2. Quanto foi entregue ao caixa?",
+        "opcoes": [
+          "20 reais",
+          "30 reais",
+          "10 reais",
+          "22 reais"
+        ],
+        "certa": 0,
+        "explicacao": "18 + 2 = 20. Juntamos as quantidades.",
+        "pagina": 155,
+        "calculo": [
+          18,
+          "+",
+          2,
+          20
+        ]
+      },
+      {
+        "texto": "Uma criança juntou R$ 45 + R$ 38. Já pode comprar um álbum de R$ 85?",
+        "opcoes": [
+          "Não. Faltam R$ 2.",
+          "Sim. Sobram R$ 2.",
+          "Sim. É o valor exato.",
+          "Não. Faltam R$ 12."
+        ],
+        "certa": 0,
+        "explicacao": "45 + 38 = 83. Como 85 − 83 = 2, faltam 2 reais.",
+        "pagina": 146
+      }
+    ]
+  }
 };
-
-var TEXTO_DOACAO='Leia o texto:\n\nNo sábado, Lia e o avô separaram livros e brinquedos para uma campanha de doação. Lia colocou os livros na caixa azul. O avô guardou os brinquedos na caixa verde. Depois, os dois levaram as caixas à biblioteca do bairro.\n\n';
-var TEXTO_IMAGINACAO='Leia o texto:\n\nRafa olhou as nuvens pela janela e imaginou um barco voador. Em seu caderno, desenhou a viagem e escreveu uma história. Quando terminou, mostrou o texto à irmã Bia.\n\n';
-var TEXTO_CARTAZ='Observe o cartaz:\n\n📚🧸 CAMPANHA DO BEM\nDoe livros e brinquedos.\nEntrega: sexta-feira.\nLocal: caixa azul da biblioteca.\n\n';
-
-var BANCO={
-interpretacao:{nome:'📖 Interpretação',emoji:'📖',perguntas:[
-  {texto:TEXTO_DOACAO+'Quem são os personagens?',opcoes:['Lia e o avô','Lia e Bia','O avô e Rafa','A bibliotecária e Lia'],certa:0,explicacao:'Lia e o avô participam das ações narradas.'},
-  {texto:TEXTO_DOACAO+'O que Lia colocou na caixa azul?',opcoes:['Os brinquedos','Os livros','Os cadernos','As roupas'],certa:1,explicacao:'O texto diz claramente que Lia colocou os livros na caixa azul.'},
-  {texto:TEXTO_DOACAO+'Onde os dois levaram as caixas?',opcoes:['À escola','Ao mercado','À biblioteca do bairro','À casa de Bia'],certa:2,explicacao:'Essa informação aparece na última frase do texto.'},
-  {texto:TEXTO_DOACAO+'Quando eles separaram as doações?',opcoes:['No sábado','Na sexta-feira','À noite','No domingo'],certa:0,explicacao:'O texto começa com a expressão “No sábado”.'},
-  {texto:TEXTO_DOACAO+'Qual frase apresenta uma OPINIÃO?',opcoes:['Lia colocou livros na caixa azul.','O avô guardou os brinquedos.','A campanha foi uma ideia maravilhosa.','Os dois foram à biblioteca.'],certa:2,explicacao:'“Maravilhosa” mostra uma avaliação pessoal, portanto é uma opinião.'},
-  {texto:TEXTO_IMAGINACAO+'O que Rafa imaginou?',opcoes:['Um castelo encantado','Um barco voador','Uma casa na árvore','Um foguete amarelo'],certa:1,explicacao:'O barco voador é uma informação explícita do texto.'},
-  {texto:TEXTO_IMAGINACAO+'Para quem Rafa mostrou o texto?',opcoes:['Para o avô','Para Lia','Para a professora','Para a irmã Bia'],certa:3,explicacao:'A última frase informa que ele mostrou o texto à irmã Bia.'},
-  {texto:TEXTO_IMAGINACAO+'Quem conta essa história?',opcoes:['Rafa, usando a palavra “eu”','Bia, usando a palavra “eu”','Um narrador que não participa da história','O barco voador'],certa:2,explicacao:'O narrador fala de Rafa em terceira pessoa e não participa dos fatos.'},
-  {texto:TEXTO_CARTAZ+'Que materiais podem ser doados?',opcoes:['Alimentos e roupas','Livros e brinquedos','Cadernos e lápis','Sapatos e cobertores'],certa:1,explicacao:'O cartaz pede a doação de livros e brinquedos.'},
-  {texto:TEXTO_CARTAZ+'Em que dia deve ser feita a entrega?',opcoes:['Segunda-feira','Quarta-feira','Sexta-feira','Sábado'],certa:2,explicacao:'A data de entrega indicada no cartaz é sexta-feira.'},
-  {texto:TEXTO_CARTAZ+'Onde as doações devem ser colocadas?',opcoes:['Na caixa verde da escola','Na caixa azul da biblioteca','Na mesa da professora','Na porta do mercado'],certa:1,explicacao:'O local está escrito na última linha do cartaz.'},
-  {texto:TEXTO_CARTAZ+'O cartaz combina quais elementos?',opcoes:['Somente números','Palavras e imagens','Somente fotografias','Música e movimento'],certa:1,explicacao:'Ele combina texto verbal, com palavras, e elementos não verbais, como os símbolos.'}
-]},
-texto_hortalicas:{nome:'🥗 Hortaliças',emoji:'🥗',textoId:'hortalicas',perguntas:[
-  {texto:'Onde a beterraba crescia?',opcoes:['Em um canteiro','Em uma panela','Em uma floresta','Em uma feira'],certa:0,explicacao:'O poema diz que a beterraba crescia em um canteiro.'},
-  {texto:'O que a beterraba queria virar?',opcoes:['Uma sopa','Uma salada','Um suco','Um bolo'],certa:1,explicacao:'A beterraba queria virar salada.'},
-  {texto:'A quem a beterraba pediu ajuda primeiro?',opcoes:['À mandioca','À rúcula','À couve','À cenoura'],certa:2,explicacao:'Primeiro, a beterraba perguntou à couve.'},
-  {texto:'Por que a rúcula estava com aflição?',opcoes:['Porque não queria ser comida','Porque queria fazer parte da nutrição','Porque perdeu a mandioca','Porque não gostava da salada'],certa:1,explicacao:'A rúcula queria participar daquela combinação de hortaliças.'},
-  {texto:'Quem fez um pedido de união?',opcoes:['A couve','A beterraba','A rúcula','A mandioca'],certa:3,explicacao:'O texto afirma que a mandioca fez logo um pedido de união.'},
-  {texto:'Quais hortaliças formaram a combinação?',opcoes:['Mandioca, couve, rúcula e beterraba','Cenoura, alface, tomate e pepino','Batata, cebola, milho e abóbora','Beterraba, tomate, pepino e cenoura'],certa:0,explicacao:'Essas quatro hortaliças aparecem juntas no final do poema.'},
-  {texto:'No texto, “camarada” e “aliada” indicam alguém que...',opcoes:['atrapalha','ajuda e participa','vai embora','faz uma pergunta'],certa:1,explicacao:'As palavras indicam companheiras que podem ajudar na combinação.'},
-  {texto:'A pergunta final “Quem vai querer essa combinação?” é dirigida a quem?',opcoes:['Somente à mandioca','À professora','Ao leitor','Somente à couve'],certa:2,explicacao:'A pergunta convida o leitor a imaginar se gostaria da salada.'},
-  {texto:'Esse texto está organizado principalmente em...',opcoes:['versos','uma lista de compras','uma notícia','uma receita com medidas'],certa:0,explicacao:'O texto é um poema organizado em versos.'},
-  {texto:'Qual é a ideia principal do poema?',opcoes:['As hortaliças se unem para formar uma combinação','A beterraba foge do canteiro','A mandioca não quer ajudar','A rúcula prepara uma sobremesa'],certa:0,explicacao:'As hortaliças se juntam para formar uma salada.'}
-]},
-texto_paginas:{nome:'🌎 Páginas do Mundo',emoji:'🌎',textoId:'paginas',perguntas:[
-  {texto:'O que Catiana gostava de fazer antes de dormir?',opcoes:['Contar estrelas','Jogar bola','Cozinhar','Ouvir rádio'],certa:0,explicacao:'O texto conta que Catiana gostava de contar estrelas antes de dormir.'},
-  {texto:'Qual era o grande desejo de Catiana?',opcoes:['Ganhar uma pipa','Conhecer o mundo','Mudar de escola','Ser professora'],certa:1,explicacao:'Catiana disse ao pai: “Eu quero conhecer o mundo”.'},
-  {texto:'O que o pai prometeu?',opcoes:['Comprar muitos livros','Levá-la para viajar quando crescesse','Ir imediatamente à biblioteca','Pedir ajuda à professora'],certa:1,explicacao:'O pai prometeu levá-la para viajar pelos sete mares quando ela crescesse.'},
-  {texto:'Por que Catiana não gostou da resposta do pai?',opcoes:['Ela tinha medo do mar','Ela queria conhecer o mundo logo','Ela não gostava de viajar','Ela queria ficar em casa'],certa:1,explicacao:'Para Catiana, o futuro parecia longe demais; ela queria aprender logo.'},
-  {texto:'Como a irmã mais velha reagiu ao pedido de Catiana?',opcoes:['Levou-a à biblioteca','Prometeu viajar com ela','Disse que não tinha tempo','Contou uma história'],certa:2,explicacao:'A irmã respondeu que não tinha tempo e entrou no quarto.'},
-  {texto:'Depois de não conseguir ajuda da irmã, onde Catiana buscou abrigo?',opcoes:['No colo da avó','No quarto da irmã','Na casa do pai','No pátio da escola'],certa:0,explicacao:'Catiana buscou abrigo no colo da avó.'},
-  {texto:'Quem mostrou a biblioteca para Catiana?',opcoes:['O pai','A irmã','A avó','A professora Maristela'],certa:3,explicacao:'A professora Maristela levou Catiana até a biblioteca.'},
-  {texto:'O que a professora quis dizer com “O mundo também está aqui dentro”?',opcoes:['A biblioteca era enorme','Os livros permitem conhecer lugares, pessoas e culturas','Havia um mapa escondido','Catiana deveria morar na escola'],certa:1,explicacao:'Por meio da leitura, Catiana poderia conhecer muitos mundos sem viajar fisicamente.'},
-  {texto:'Qual foi a “maior aventura” iniciada por Catiana?',opcoes:['Navegar pelos sete mares','Subir em árvores','Descobrir o mundo por meio dos livros','Viajar com a irmã'],certa:2,explicacao:'A aventura foi ler e descobrir as páginas do mundo.'},
-  {texto:'O trecho sobre o pé de laranja lima, o boneco de madeira e o patinho mostra que Catiana...',opcoes:['encontrou animais de verdade','conheceu diferentes histórias pela leitura','saiu viajando sozinha','inventou brinquedos'],certa:1,explicacao:'Essas referências representam histórias e personagens encontrados nos livros.'},
-  {texto:'Quando tropeçava numa letra ou numa ideia, o que Catiana fazia?',opcoes:['Desistia da leitura','Pedia para sair da biblioteca','Continuava sem se apegar ao medo','Fechava o livro'],certa:2,explicacao:'Ela não se apegava ao medo e seguia descobrindo o desconhecido.'},
-  {texto:'Quem conta a história de Catiana?',opcoes:['Catiana em primeira pessoa','A professora Maristela','Um narrador que não participa dos fatos','A irmã mais velha'],certa:2,explicacao:'O narrador fala de Catiana em terceira pessoa e não participa da história.'}
-]},
-texto_solidariedade:{nome:'🎁 Solidariedade',emoji:'🎁',textoId:'solidariedade',perguntas:[
-  {texto:'Que tipo de doação é usado como exemplo no texto?',opcoes:['Doação de brinquedos','Doação de alimentos','Doação de dinheiro','Doação de plantas'],certa:0,explicacao:'O texto usa a doação de brinquedos como exemplo de ação solidária.'},
-  {texto:'Segundo o texto, o que é ser solidário?',opcoes:['Guardar tudo para si','Ajudar de boa vontade quem precisa','Comprar presentes caros','Brincar sempre sozinho'],certa:1,explicacao:'O texto define solidariedade como ajudar de boa vontade quem precisa.'},
-  {texto:'O que uma ação solidária pode espalhar?',opcoes:['Dúvidas e medo','Felicidade e esperança','Brinquedos quebrados','Competição e pressa'],certa:1,explicacao:'Participar de ações solidárias espalha felicidade e esperança.'},
-  {texto:'Doar um brinquedo que não é mais usado é considerado...',opcoes:['um desperdício','um gesto de carinho','uma brincadeira','uma obrigação escolar'],certa:1,explicacao:'O texto chama essa doação de gesto de carinho.'},
-  {texto:'Uma forma de vivenciar a solidariedade é...',opcoes:['participar de campanhas de arrecadação','esconder brinquedos','comprar somente para si','evitar outras crianças'],certa:0,explicacao:'Participar de campanhas de arrecadação é o exemplo apresentado.'},
-  {texto:'Quem pode ficar alegre com a solidariedade?',opcoes:['Somente quem doa','Somente quem recebe','Quem recebe e quem doa','Apenas os adultos'],certa:2,explicacao:'O texto afirma que a solidariedade alegra tanto quem recebe quanto quem doa.'},
-  {texto:'Por que a solidariedade é comparada a um presente?',opcoes:['Porque sempre vem embrulhada','Porque leva alegria a quem recebe e a quem doa','Porque precisa ser comprada','Porque só acontece em aniversários'],certa:1,explicacao:'Ela é chamada de presente porque produz alegria para os dois lados.'},
-  {texto:'Qual é a principal finalidade do texto?',opcoes:['Ensinar a fabricar brinquedos','Incentivar atitudes solidárias','Contar uma aventura fantástica','Anunciar uma loja'],certa:1,explicacao:'O texto explica e incentiva a prática da solidariedade.'},
-  {texto:'Qual atitude combina com a mensagem do texto?',opcoes:['Doar um brinquedo conservado que não usa mais','Jogar brinquedos bons no lixo','Esconder materiais dos colegas','Recusar ajuda a quem precisa'],certa:0,explicacao:'Doar algo em bom estado é uma atitude solidária coerente com o texto.'},
-  {texto:'A pergunta no início do texto faz o leitor lembrar...',opcoes:['da última vez que ganhou um presente','de uma viagem','de uma prova','de uma receita'],certa:0,explicacao:'O texto começa perguntando sobre a última vez em que o leitor ganhou um presente.'}
-]},
-texto_presente:{nome:'🐢 Quatro Patas',emoji:'🐢',textoId:'presente',perguntas:[
-  {texto:'Como João Maria é apresentado no início da história?',opcoes:['Tímido e silencioso','Tagarela e cheio de histórias','Bravo e impaciente','Medroso e distraído'],certa:1,explicacao:'Ele era tagarela, tinha a língua solta e a cabeça cheia de histórias.'},
-  {texto:'Por que João Maria era chamado de “rei dos causos”?',opcoes:['Porque inventava e contava muitas histórias','Porque era filho de um rei','Porque colecionava livros','Porque pescava muitos peixes'],certa:0,explicacao:'Na escola, todos gostavam de ouvir as histórias inventivas do menino.'},
-  {texto:'Quem inventava palavras nos finais de semana?',opcoes:['A mãe','A tia','O pai','João Maria'],certa:2,explicacao:'O texto diz que o pai inventava palavras nos finais de semana.'},
-  {texto:'O que significa “pipocalvo” na história?',opcoes:['Uma pipoca muito salgada','A pipoca que fica careca no fundo da panela','Um cachorro com manchas','Um sapato diferente'],certa:1,explicacao:'O próprio texto explica que pipocalvo é a pipoca careca no fundo da panela.'},
-  {texto:'Por que João Maria queria ser pescador quando crescesse?',opcoes:['Pelos peixes que pescaria','Pelos causos que iria contar','Para viajar de barco','Para morar perto do mar'],certa:1,explicacao:'Ele queria ser pescador pelos causos, não pelos peixes.'},
-  {texto:'Que animal João Maria desejava ganhar?',opcoes:['Uma tartaruga','Um papagaio','Um cachorro','Um peixe'],certa:2,explicacao:'Ele sonhava com um cachorro valente, peludo e com superpoderes.'},
-  {texto:'Quem trouxe o presente de quatro patas?',opcoes:['A mãe','A tia','O pai','A professora'],certa:1,explicacao:'A tia resolveu ajudar e levou o presente no aniversário do sobrinho.'},
-  {texto:'Qual era o verdadeiro animal chamado Rei Charles?',opcoes:['Um cachorro','Um gato','Uma tartaruga','Um coelho'],certa:2,explicacao:'No final, o texto revela que Rei Charles era uma tartaruga.'},
-  {texto:'Por que João Maria estranhou o presente no começo?',opcoes:['Ele não tinha nome','Não era peludo, não latia e não abanava o rabo','Era muito barulhento','Não tinha quatro patas'],certa:1,explicacao:'O animal era diferente do cachorro que João Maria havia imaginado.'},
-  {texto:'Qual “superpoder” João Maria atribuiu a Rei Charles?',opcoes:['Voar bem alto','Ficar invisível','Andar em câmera lenta','Latir muito forte'],certa:2,explicacao:'João Maria transformou a lentidão da tartaruga em um superpoder.'},
-  {texto:'O que mudou na relação de João Maria com Rei Charles?',opcoes:['Ele devolveu o presente','Ele passou a imaginar aventuras com o novo amigo','Ele deixou de contar histórias','Ele tentou ensinar a tartaruga a latir'],certa:1,explicacao:'João Maria aceitou o companheiro e viveu muitas histórias com ele.'},
-  {texto:'Qual mensagem combina melhor com a história?',opcoes:['Um amigo precisa ser exatamente como imaginamos','A imaginação ajuda a valorizar o que é diferente','Somente cachorros vivem aventuras','Animais lentos não podem brincar'],certa:1,explicacao:'João Maria descobriu diversão e amizade em um companheiro diferente do esperado.'}
-]},
-ortografia:{nome:'🔤 Som de /K/ e L',emoji:'🔤',perguntas:[
-  {texto:'Complete corretamente:\n_aderno',opcoes:['Caderno','Kaderno','Quaderno','Saderno'],certa:0,explicacao:'Caderno é escrito com C.'},
-  {texto:'Qual palavra está escrita corretamente?',opcoes:['Komida','Comida','Quomida','Commidá'],certa:1,explicacao:'Em comida, o C antes de O tem som de /K/.'},
-  {texto:'Qual palavra começa com K?',opcoes:['Cubo','Queijo','Kiwi','Casa'],certa:2,explicacao:'Kiwi é uma palavra de origem estrangeira escrita com K.'},
-  {texto:'Complete corretamente:\n_eijo',opcoes:['Ceijo','Keijo','Queijo','Qeijo'],certa:2,explicacao:'Queijo começa com QU; a letra Q aparece acompanhada de U.'},
-  {texto:'Em qual grupo o C tem som de /K/ em todas as palavras?',opcoes:['casa, comida, cubo','cidade, cedo, cinema','cena, circo, cidade','cebola, cinema, cereja'],certa:0,explicacao:'Antes de A, O e U, o C representa o som de /K/.'},
-  {texto:'Qual palavra está escrita corretamente?',opcoes:['Karatê','Caratêh','Qaratê','Karratê'],certa:0,explicacao:'Karatê é escrito com K e termina com Ê.'},
-  {texto:'Em qual palavra a letra L está no INÍCIO?',opcoes:['escola','papel','lápis','palito'],certa:2,explicacao:'Lápis começa com a letra L.'},
-  {texto:'Em qual palavra a letra L está no MEIO?',opcoes:['livro','escola','papel','limão'],certa:1,explicacao:'Em escola, a letra L aparece no meio da palavra.'},
-  {texto:'Em qual palavra a letra L está no FINAL?',opcoes:['lupa','palito','escola','caracol'],certa:3,explicacao:'Caracol termina com a letra L.'},
-  {texto:'Qual palavra completa a frase?\nEu desenhei no _____.',opcoes:['papeu','papel','papéu','pappel'],certa:1,explicacao:'Papel termina com L.'},
-  {texto:'Qual palavra está escrita corretamente?',opcoes:['automóveu','autómovel','automóvel','automóvell'],certa:2,explicacao:'Automóvel termina com L e recebe acento em “mó”.'},
-  {texto:'Qual sequência está em ordem alfabética?',opcoes:['kiwi, queijo, casa','casa, kiwi, queijo','queijo, casa, kiwi','kiwi, casa, queijo'],certa:1,explicacao:'Na ordem alfabética, C vem antes de K, e K vem antes de Q.'}
-]},
-silabas:{nome:'👏 Sílabas',emoji:'👏',perguntas:[
-  {texto:'Qual é a separação correta de MOTOCA?',opcoes:['mo-to-ca','mot-o-ca','mo-toc-a','moto-ca'],certa:0,explicacao:'Motoca tem três sílabas: mo-to-ca.'},
-  {texto:'Qual é a separação correta de BAMBOLÊ?',opcoes:['bam-bolê','ba-mbo-lê','bam-bo-lê','bambo-lê'],certa:2,explicacao:'Bambolê tem três sílabas: bam-bo-lê.'},
-  {texto:'Quantas sílabas tem PATINETE?\npa-ti-ne-te',opcoes:['2 sílabas','3 sílabas','4 sílabas','5 sílabas'],certa:2,explicacao:'Pa-ti-ne-te tem quatro sílabas.'},
-  {texto:'Qual é a separação correta de FANTASIA?',opcoes:['fan-ta-si-a','fant-a-si-a','fan-tas-ia','fanta-sia'],certa:0,explicacao:'Fantasia se separa em fan-ta-si-a.'},
-  {texto:'Quantas sílabas tem PIÃO?\npi-ão',opcoes:['1 sílaba','2 sílabas','3 sílabas','4 sílabas'],certa:1,explicacao:'Pi-ão tem duas sílabas.'},
-  {texto:'Qual é a separação correta de FOGUETINHO?',opcoes:['fo-gue-ti-nho','fo-guet-inho','fogue-ti-nho','fo-gu-e-ti-nho'],certa:0,explicacao:'Foguetinho tem quatro sílabas: fo-gue-ti-nho.'},
-  {texto:'Qual palavra tem DUAS sílabas?',opcoes:['motoca','pião','fantasia','patinete'],certa:1,explicacao:'Pi-ão é a única opção com duas sílabas.'},
-  {texto:'Qual palavra tem QUATRO sílabas?',opcoes:['papel','escola','livro','solidária'],certa:3,explicacao:'Solidária se separa em so-li-dá-ria.'},
-  {texto:'Qual é a primeira sílaba de BRINQUEDO?',opcoes:['brin','que','do','bri'],certa:0,explicacao:'Brinquedo se separa em brin-que-do.'},
-  {texto:'Qual é a última sílaba de BONECA?',opcoes:['bo','ne','ca','bone'],certa:2,explicacao:'Boneca se separa em bo-ne-ca; a última sílaba é ca.'},
-  {texto:'Qual palavra está separada de forma incorreta?',opcoes:['ca-der-no','es-co-la','li-vro','pa-p-e-l'],certa:3,explicacao:'Papel se separa em pa-pel, com duas sílabas.'},
-  {texto:'Quantas palmas batemos ao falar CA-RA-COL?',opcoes:['1 palma','2 palmas','3 palmas','4 palmas'],certa:2,explicacao:'Cada sílaba corresponde a uma palma: ca-ra-col.'}
-]},
-review:{nome:'⭐ Revisão Geral',emoji:'⭐',perguntas:[
-  {texto:'Qual frase está escrita corretamente?',opcoes:['lia guardou o livro','Lia guardou o livro.','LiaGuardouOLivro.','Lia guardou o livro'],certa:1,explicacao:'A frase começa com maiúscula, tem espaços e termina com ponto-final.'},
-  {texto:'Qual frase usa corretamente a letra maiúscula?',opcoes:['rafa mostrou o desenho.','Rafa mostrou o desenho.','rafa Mostrou o desenho.','Rafa mostrou O desenho.'],certa:1,explicacao:'O nome próprio Rafa e o início da frase pedem letra maiúscula.'},
-  {texto:'Qual sinal deve terminar esta frase afirmativa?\nO avô levou os brinquedos',opcoes:['Ponto-final (.)','Vírgula (,)','Dois-pontos (:)','Nenhum sinal'],certa:0,explicacao:'Uma frase afirmativa completa deve terminar com ponto-final.'},
-  {texto:'Qual opção apresenta as palavras bem separadas?',opcoes:['Aliaguardouolivro.','A Lia guardou o livro.','A Liaguardou o livro.','ALia guardouolivro.'],certa:1,explicacao:'Deve haver um espaço entre cada palavra.'},
-  {texto:'Qual é a separação correta de ESCOLA?',opcoes:['es-co-la','e-sco-la','escol-a','es-col-a'],certa:0,explicacao:'Escola tem três sílabas: es-co-la.'},
-  {texto:'Qual palavra tem L no final?',opcoes:['livro','lápis','palito','pastel'],certa:3,explicacao:'Pastel termina com a letra L.'},
-  {texto:'Qual palavra está escrita corretamente?',opcoes:['Qubo','Kubo','Cubo','Subo'],certa:2,explicacao:'Cubo é escrito com C; o C antes de U tem som de /K/.'},
-  {texto:'Qual sequência está em ordem alfabética?',opcoes:['salada, bolo, milho','bolo, milho, salada','milho, salada, bolo','salada, milho, bolo'],certa:1,explicacao:'B vem antes de M, e M vem antes de S.'},
-  {texto:TEXTO_DOACAO+'Qual informação está escrita no texto?',opcoes:['A biblioteca estava fechada.','Lia separou roupas.','O avô guardou brinquedos na caixa verde.','Bia participou da campanha.'],certa:2,explicacao:'Essa é uma informação explícita do texto.'},
-  {texto:TEXTO_CARTAZ+'Qual é a finalidade do cartaz?',opcoes:['Ensinar uma receita','Convidar para uma campanha de doação','Contar uma história de aventura','Vender brinquedos'],certa:1,explicacao:'O cartaz convida o leitor a doar livros e brinquedos.'},
-  {texto:'Qual frase é uma OPINIÃO?',opcoes:['A caixa é azul.','A entrega será na sexta-feira.','A biblioteca fica no bairro.','A história é muito divertida.'],certa:3,explicacao:'“Muito divertida” expressa o que alguém pensa sobre a história.'},
-  {texto:'Em uma história, quem são os personagens?',opcoes:['As pessoas ou seres que participam dos fatos','Somente quem escreveu o livro','As letras do título','Os leitores do texto'],certa:0,explicacao:'Personagens são aqueles que participam dos acontecimentos narrados.'}
-]}
+const ESCRITA = {
+  "contas": [
+    {
+      "pagina": 82,
+      "texto": "Monte e resolva: 37 + 28.",
+      "resposta": "37 + 28 = 65. Unidades: 7 + 8 = 15. Trocamos 10 unidades por 1 dezena. Dezenas: 3 + 2 + 1 = 6.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 85,
+      "texto": "Monte e resolva: 74 + 17.",
+      "resposta": "74 + 17 = 91. Unidades: 4 + 7 = 11. Dezenas: 7 + 1 + 1 = 9.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 86,
+      "texto": "Monte e resolva: 65 − 27.",
+      "resposta": "65 = 5 dezenas e 15 unidades. 15 − 7 = 8; 5 − 2 = 3. Resultado: 38.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 89,
+      "texto": "Monte e resolva: 52 − 44.",
+      "resposta": "52 = 4 dezenas e 12 unidades. 12 − 4 = 8; 4 − 4 = 0. Resultado: 8.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 106,
+      "texto": "Há 236 clipes. Foram acrescentados mais 162. Monte a conta.",
+      "resposta": "236 + 162 = 398 clipes. Unidades: 6 + 2 = 8; dezenas: 3 + 6 = 9; centenas: 2 + 1 = 3.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 107,
+      "texto": "A praia fica a 452 metros. Já andaram 241 metros. Quantos faltam?",
+      "resposta": "452 − 241 = 211 metros. Confira: 241 + 211 = 452.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    }
+  ],
+  "numeros": [
+    {
+      "pagina": 95,
+      "texto": "Desenhe 4 centenas, 2 dezenas e 8 unidades. Escreva o número.",
+      "resposta": "4 placas, 2 barras e 8 cubinhos representam 428. 400 + 20 + 8 = 428.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 97,
+      "texto": "Escreva o número: 2 centenas, 5 dezenas e 18 unidades.",
+      "resposta": "200 + 50 + 18 = 268. As 18 unidades podem ser reagrupadas em 1 dezena e 8 unidades.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 102,
+      "texto": "Escreva 386 por extenso.",
+      "resposta": "Trezentos e oitenta e seis.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 103,
+      "texto": "Decomponha 498 de três maneiras diferentes.",
+      "resposta": "Exemplos: 400 + 90 + 8; 400 + 80 + 18; 200 + 200 + 90 + 8. Outras somas com total 498 também valem.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 100,
+      "texto": "Complete: 5, 5, 10, 15, __, 40, 65, __, 170.",
+      "resposta": "Faltam 25 e 105. Cada número, a partir do terceiro, é a soma dos dois anteriores.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 101,
+      "texto": "Crie uma sequência de 6 números, começando em 234 e somando 4 a cada passo.",
+      "resposta": "234, 238, 242, 246, 250, 254.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    }
+  ],
+  "dinheiro": [
+    {
+      "pagina": 141,
+      "texto": "Escreva por extenso: R$ 5, R$ 200 e 10 centavos.",
+      "resposta": "Cinco reais; duzentos reais; dez centavos.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 144,
+      "texto": "Desenhe duas formas de pagar R$ 50. Use pelo menos duas cédulas em cada forma.",
+      "resposta": "Exemplos: 20 + 20 + 10; 20 + 10 + 10 + 5 + 5. Outras composições de 50 reais também valem.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 147,
+      "texto": "Desenhe cédulas para pagar exatamente um caderno de R$ 29.",
+      "resposta": "Exemplo: 20 + 5 + 2 + 2 = 29 reais. Outras combinações com o mesmo total também valem.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 152,
+      "texto": "Forme R$ 163 com exatamente 3 cédulas e 3 moedas.",
+      "resposta": "Cédulas de 100, 50 e 10 reais; três moedas de 1 real. Total: 163 reais.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 152,
+      "texto": "Forme R$ 163 com exatamente 6 cédulas e 1 moeda.",
+      "resposta": "Exemplo: cédulas de 100, 20, 20, 10, 10 e 2 reais; uma moeda de 1 real. Total: 163 reais.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 156,
+      "texto": "Desenhe duas maneiras de pagar R$ 133 pelo teatro.",
+      "resposta": "Exemplos: 100 + 20 + 10 + 2 + 1; 50 + 50 + 20 + 10 + 1 + 1 + 1. Use moedas para os valores de 1 real.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    }
+  ],
+  "criar": [
+    {
+      "pagina": 97,
+      "texto": "Crie um enigma para um número até 499. Escreva as pistas e a resposta.",
+      "resposta": "Resposta pessoal. Confira se centenas, dezenas e unidades das pistas formam o número escolhido. Exemplo: 3 centenas e 6 unidades → 306.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 101,
+      "texto": "Invente uma sequência e escreva a regra. Use números até 499.",
+      "resposta": "Resposta pessoal. Confira se todos os passos obedecem à regra. Exemplo: 100, 104, 108, 112; somar 4.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 106,
+      "texto": "Crie um problema de subtração em uma papelaria. Use números com 3 algarismos, até 499, e resolva.",
+      "resposta": "Resposta pessoal. Escreva uma situação, uma pergunta e a conta. Exemplo: havia 250 lápis e venderam 120. Restaram 130 lápis.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 149,
+      "texto": "Você tem R$ 65. Escolha 3 produtos, some os preços e descubra quanto sobra.\nBola: 14; chaveiro: 8; chinelo: 31; camiseta: 37; boné: 22; corda: 16 reais.",
+      "resposta": "Há várias respostas. Exemplo: bola + chaveiro + boné = 14 + 8 + 22 = 44 reais. Sobram 65 − 44 = 21 reais. Confira se a sua soma não passa de 65.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 150,
+      "texto": "Invente uma taxa de inscrição com 3 algarismos, de no máximo R$ 300. Desenhe o dinheiro para pagá-la.",
+      "resposta": "Resposta pessoal. O valor deve estar entre 100 e 300 reais. Exemplo: 250 reais = 200 + 50.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    },
+    {
+      "pagina": 151,
+      "texto": "Crie e resolva um problema com estes valores: atletismo R$ 163 e ciclismo R$ 226.",
+      "resposta": "Resposta pessoal. Se perguntar o total: 163 + 226 = 389 reais. Se perguntar a diferença: 226 − 163 = 63 reais.",
+      "dica": "Resolva com números, palavras ou desenhos."
+    }
+  ]
 };
-
-var ESCRITA={
-words:[
-  {emoji:'📒',texto:'Copie a palavra em letra cursiva:',respostas:['caderno'],dica:'Caderno começa com C.'},
-  {emoji:'🧀',texto:'Copie a palavra em letra cursiva:',respostas:['queijo'],dica:'Queijo começa com QU.'},
-  {emoji:'🥝',texto:'Copie a palavra em letra cursiva:',respostas:['kiwi'],dica:'Kiwi começa com K.'},
-  {emoji:'✏️',texto:'Copie a palavra em letra cursiva:',respostas:['lápis'],dica:'Lápis tem L no início.'},
-  {emoji:'🏫',texto:'Copie a palavra em letra cursiva:',respostas:['escola'],dica:'Escola tem L no meio.'},
-  {emoji:'📄',texto:'Copie a palavra em letra cursiva:',respostas:['papel'],dica:'Papel tem L no final.'},
-  {emoji:'🐌',texto:'Copie a palavra em letra cursiva:',respostas:['caracol'],dica:'Caracol termina com L.'},
-  {emoji:'🧸',texto:'Copie a palavra em letra cursiva:',respostas:['brinquedo'],dica:'Brinquedo se separa em brin-que-do.'},
-  {emoji:'🛴',texto:'Copie a palavra em letra cursiva:',respostas:['motoca'],dica:'Motoca se separa em mo-to-ca.'},
-  {emoji:'🥋',texto:'Copie a palavra em letra cursiva:',respostas:['karatê'],dica:'Karatê começa com K.'}
-],
-sentences:[
-  {emoji:'📚',texto:'Copie a frase em letra cursiva:',respostas:['Lia guardou o livro.'],dica:'Observe a maiúscula, os espaços e o ponto-final.'},
-  {emoji:'🧸',texto:'Copie a frase em letra cursiva:',respostas:['O avô levou os brinquedos.'],dica:'Comece com letra maiúscula e termine com ponto.'},
-  {emoji:'📝',texto:'Copie a frase em letra cursiva:',respostas:['Rafa escreveu uma história.'],dica:'Rafa é nome de pessoa e começa com maiúscula.'},
-  {emoji:'📦',texto:'Copie a frase em letra cursiva:',respostas:['A caixa azul tem livros.'],dica:'Não junte as palavras.'},
-  {emoji:'📖',texto:'Copie a frase em letra cursiva:',respostas:['Bia leu o texto.'],dica:'Bia é nome de pessoa e começa com maiúscula.'},
-  {emoji:'🥝',texto:'Copie a frase em letra cursiva:',respostas:['O kiwi está maduro.'],dica:'Kiwi é escrito com K.'},
-  {emoji:'🏫',texto:'Copie a frase em letra cursiva:',respostas:['A escola fica perto.'],dica:'Escola tem L no meio.'},
-  {emoji:'🐌',texto:'Copie a frase em letra cursiva:',respostas:['O caracol subiu devagar.'],dica:'Caracol termina com L.'}
-]
+const GUIAS = {
+ numeros: '<h3>Cada algarismo tem seu lugar</h3><p>C = centenas, D = dezenas, U = unidades. Uma dezena tem 10 unidades. Uma centena tem 10 dezenas ou 100 unidades.</p><p>Exemplo: 245 = 200 + 40 + 5. O 4 vale 40. Em 412, ele vale 400. Para comparar números, comece pelas centenas, depois pelas dezenas e unidades.</p><p>Ordem crescente: do menor para o maior. Decrescente: do maior para o menor. Antecessor: menos 1. Sucessor: mais 1.</p>',
+ sequencias: '<h3>Descubra a regra</h3><p>Compare um número com o seguinte. Aumentou ou diminuiu? Quanto? Repita a regra para completar.</p><p>Exemplo: 100, 104, 108, 112… aumenta de 4 em 4. Em algumas sequências, cada termo é a soma dos dois anteriores: 5, 5, 10, 15, 25…</p><p>No quadro de 200 a 299, avançar uma casa na mesma linha soma 1; descer uma linha na mesma coluna soma 10.</p>',
+ adicao: '<h3>Juntar e reagrupar</h3><p>Alinhe unidades com unidades e dezenas com dezenas. Comece pelas unidades.</p><p>Em 37 + 28, fazemos 7 + 8 = 15 unidades. Trocamos 10 unidades por 1 dezena: ficam 5 unidades. Nas dezenas, 3 + 2 + 1 = 6. Resultado: 65.</p><p>Outra forma: 30 + 20 = 50; 7 + 8 = 15; 50 + 15 = 65.</p>',
+ subtracao: '<h3>Tirar ou descobrir a diferença</h3><p>Leia a pergunta: precisamos descobrir o que sobrou, o que falta ou quantos há a mais? Nessas situações, podemos usar a subtração.</p><p>Em 65 − 27, trocamos uma dezena por 10 unidades. O 65 vira 5 dezenas e 15 unidades. Fazemos 15 − 7 = 8 e 5 − 2 = 3. Resultado: 38.</p><p>Confira com a adição: 38 + 27 = 65.</p>',
+ problemas: '<h3>Entenda antes de calcular</h3><p>1. Leia o que aconteceu. 2. Veja o que a pergunta quer saber. 3. Escolha adição ou subtração. 4. Monte a conta em C, D e U. 5. Escreva a resposta com a unidade: clipes, pessoas, metros…</p><p>Se entram mais objetos, a quantidade aumenta. Se alguns saem, ela diminui. Para descobrir uma parte que falta, subtraia a parte conhecida do total.</p><p>Confira se o resultado combina com a história.</p>',
+ dinheiro: '<h3>O valor do dinheiro</h3><p>O símbolo do real é R$. Uma moeda de 1 real vale 100 centavos. Duas moedas de 50 centavos também formam 1 real.</p><p>As cédulas trabalhadas no livro são de 2, 5, 10, 20, 50, 100 e 200 reais. As moedas mostradas são de 1, 5, 10, 25 e 50 centavos e de 1 real.</p><p>Some os valores, não a quantidade de peças. 20 + 20 + 10 = 50 reais. Várias combinações podem formar a mesma quantia.</p><p>Nas atividades, os desenhos do dinheiro são representações didáticas simplificadas.</p>',
+ compras: '<h3>Compare e some os preços</h3><p>Para descobrir qual produto é mais caro, compare os valores. Para descobrir quanto custa a mais, subtraia o menor preço do maior.</p><p>Para comprar vários produtos, some os preços. Depois compare a soma com a quantia disponível. Só dá para comprar se o dinheiro for suficiente.</p><p>Leia todas as condições: às vezes é preciso usar certa quantidade de cédulas ou respeitar um valor máximo.</p>',
+ troco: '<h3>Quanto sobra ou falta?</h3><p>Troco = dinheiro entregue − preço da compra. Primeiro some as cédulas entregues ao caixa.</p><p>Se o dinheiro ainda não é suficiente, calcule: preço − dinheiro que você tem.</p><p>Se a pergunta pede quanto foi entregue ao caixa, some preço + troco. Confira: valor da compra + troco deve ser igual ao pagamento.</p>'
 };
-
-var estado={tema:'',textoId:'',perguntas:[],indice:0,acertos:0,respondeu:false};
-var escEstado={tipo:'words',itens:[],indice:0,acertos:0,verificado:false};
-
-function embaralhar(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t;}return r;}
-function mostrarTela(id){var t=document.querySelectorAll('.tela');for(var i=0;i<t.length;i++)t[i].classList.remove('ativa');document.getElementById(id).classList.add('ativa');window.scrollTo(0,0);}
-function calcE(a,t){var p=a/t,n=p>=.9?5:p>=.7?4:p>=.5?3:p>=.3?2:1,s='';for(var i=0;i<5;i++)s+=i<n?'⭐':'☆';return s;}
-function confete(){var e=['🎉','⭐','🌟','✨','🎊','🏅','🎈'];for(var i=0;i<12;i++){(function(d){setTimeout(function(){var el=document.createElement('span');el.className='conf';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=Math.random()*95+'vw';el.style.animationDuration=(.8+Math.random()*.9)+'s';document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1800);},d);})(i*80);}}
-function escHTML(txt){return String(txt).replace(/[&<>"']/g,function(ch){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
-
-function montarTextoHTML(id,apoio){
-  var t=TEXTOS[id],html='';if(!t)return html;
-  html+='<p class="texto-genero">'+escHTML(t.genero)+'</p>';
-  html+='<h2 class="texto-titulo">'+escHTML(t.emoji+' '+t.titulo)+'</h2>';
-  if(!apoio)html+='<div class="texto-aviso">Leia o texto inteiro com calma. Depois, responda às perguntas de interpretação.</div>';
-  if(t.poema){
-    html+='<div class="texto-corpo poema">'+escHTML(t.paragrafos[0])+'</div>';
-  }else{
-    html+='<div class="texto-corpo">';
-    for(var i=0;i<t.paragrafos.length;i++)html+='<p>'+escHTML(t.paragrafos[i])+'</p>';
-    html+='</div>';
-  }
-  if(t.autor)html+='<p class="texto-autor">'+escHTML(t.autor)+'</p>';
-  return html;
+const $ = id => document.getElementById(id);
+const escHTML = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function embaralhar(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+function mostrarTela(id){document.querySelectorAll('.tela').forEach(t=>t.classList.toggle('ativa',t.id===id));window.scrollTo(0,0);}
+function calcE(a,t){const n=Math.round(5*a/t);return '⭐'.repeat(n)+'☆'.repeat(5-n);}
+function confete(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;['🎉','⭐','🌟','✨','🎊','🏅'].forEach((e,i)=>{const el=document.createElement('span');el.className='conf';el.textContent=e;el.style.left=(12+i*15)+'vw';document.body.appendChild(el);setTimeout(()=>el.remove(),1500);});}
+const CORES=['','card-verde','card-laranja','card-roxo','card-rosa'];
+Object.entries(BANCO).forEach(([key,b],i)=>{const el=document.createElement('button');el.className='card '+CORES[i%5];el.innerHTML='<span class="card-e" aria-hidden="true">'+b.emoji+'</span><span class="card-n">'+b.nome+'</span><small>'+b.perguntas.length+' perguntas · p. '+b.paginas+'</small>';el.onclick=()=>iniciarTema(key);$('temas').appendChild(el);});
+const NOMES_ESCRITA={contas:['🧮','Montar as contas'],numeros:['🔢','Números e sequências'],dinheiro:['🪙','Desenhar dinheiro'],criar:['💭','Criar e explicar']};
+Object.entries(NOMES_ESCRITA).forEach(([key,[emoji,nome]],i)=>{const el=document.createElement('button');el.className='card '+CORES[(i+1)%5];el.innerHTML='<span class="card-e" aria-hidden="true">'+emoji+'</span><span class="card-n">'+nome+'</span><small>6 atividades com escrita</small>';el.onclick=()=>abrirEscrita(key);$('escritas').appendChild(el);});
+let estado={tema:'',perguntas:[],indice:0,acertos:0,respondeu:false};
+function iniciarTema(tema){const b=BANCO[tema];const all=$('modo').value==='todas';estado={tema,perguntas:all?b.perguntas.slice():embaralhar(b.perguntas).slice(0,6),indice:0,acertos:0,respondeu:false};$('guia-conteudo').innerHTML=GUIAS[tema];$('guia-quiz').open=false;mostrarTela('tela-quiz');carregarPergunta();}
+function visualHTML(v){
+ if(!v)return '';
+ if(v.tipo==='blocos')return '<div class="pecas" role="img" aria-label="'+v.c+' centenas, '+v.d+' dezenas e '+v.u+' unidades">'+[['Centenas','placa',v.c],['Dezenas','barra',v.d],['Unidades','cubo',v.u]].map(([n,c,num])=>'<div class="pecas-grupo"><strong>'+n+'</strong><div class="pecas-conjunto">'+Array.from({length:num},()=>'<span class="'+c+'"></span>').join('')+'</div></div>').join('')+'</div>';
+ return '<div class="dinheiro-visual">'+v.valores.map(n=>n<=100?'<span class="moeda">'+(n===100?'1 real':n+' centavos')+'</span>':'<span class="cedula"><small>CÉDULA</small>R$ '+n/100+'</span>').join('')+'</div><p class="nota">Representação didática do dinheiro.</p>';
 }
-
-function abrirTexto(id){
-  var t=TEXTOS[id];if(!t)return;
-  document.getElementById('texto-container').innerHTML=montarTextoHTML(id,false);
-  document.getElementById('btn-questoes-texto').setAttribute('onclick','window.iniciarTema("'+t.tema+'")');
-  mostrarTela('tela-texto');
+let scratch=[];
+function carregarPergunta(){const p=estado.perguntas[estado.indice],b=BANCO[estado.tema],total=estado.perguntas.length;estado.respondeu=false;scratch=[];
+ $('hdr-t').textContent=b.emoji+' '+b.nome;$('hdr-p').textContent='Questão '+(estado.indice+1)+' / '+total;$('hdr-e').textContent=calcE(estado.acertos,total);$('bar').style.width=(100*estado.indice/total)+'%';$('perg-e').textContent=b.emoji;$('perg-t').textContent=p.texto;$('visual').innerHTML=visualHTML(p.visual);$('fonte').textContent='Base: página '+p.pagina+' · atividade adaptada';
+ const grid=$('grid-o');grid.innerHTML='';grid.className=p.opcoes.some(s=>s.length>28)?'grid-o col1':'grid-o';embaralhar(p.opcoes.map((texto,id)=>({texto,id}))).forEach(({texto,id})=>{const btn=document.createElement('button');btn.className='btn-o';btn.textContent=texto;btn.dataset.idx=id;btn.onclick=()=>responder(id);grid.appendChild(btn);});$('fb').style.display='none';$('fb').textContent='';$('btn-px').hidden=true;
 }
-
-function toggleTextoApoio(){
-  var box=document.getElementById('quiz-texto-apoio'),btn=document.getElementById('btn-ver-texto');
-  var abrir=box.style.display!=='block';
-  box.style.display=abrir?'block':'none';
-  btn.textContent=abrir?'📕 Fechar o texto':'📖 Ver o texto completo';
+function responder(escolhido){if(estado.respondeu)return;estado.respondeu=true;const p=estado.perguntas[estado.indice],ok=escolhido===p.certa;
+ document.querySelectorAll('.btn-o').forEach(btn=>{btn.disabled=true;const i=Number(btn.dataset.idx);if(i===p.certa)btn.classList.add('certa');else if(i===escolhido)btn.classList.add('errada');});if(ok){estado.acertos++;confete();}
+ const fb=$('fb');fb.className='fb '+(ok?'c':'e');fb.textContent=(ok?'🌟 Muito bem! ':'😊 Vamos conferir. A resposta é '+p.opcoes[p.certa]+'. ')+p.explicacao;fb.style.display='block';$('hdr-e').textContent=calcE(estado.acertos,estado.perguntas.length);$('bar').style.width=(100*(estado.indice+1)/estado.perguntas.length)+'%';$('btn-px').textContent=estado.indice===estado.perguntas.length-1?'Ver resultado 🏆':'Próxima ➡️';$('btn-px').hidden=false;
 }
-
-
-function visualPara(){return '';}
-function htmlOpcao(txt){
-  var v=visualPara(txt);
-  return (v?'<span class="op-img">'+escHTML(v)+'</span>':'')+'<span class="op-txt">'+escHTML(txt)+'</span>';
-}
-
-/* QUIZ */
-function iniciarTema(tema){
-  estado.tema=tema;
-  estado.textoId=BANCO[tema].textoId||'';
-  estado.perguntas=embaralhar(BANCO[tema].perguntas).slice(0,6);
-  estado.indice=0;estado.acertos=0;
-  mostrarTela('tela-quiz');carregarPergunta();
-}
-
-function carregarPergunta(){
-  estado.respondeu=false;
-  var p=estado.perguntas[estado.indice],total=estado.perguntas.length,d=BANCO[estado.tema];
-  document.getElementById('hdr-t').textContent=d.nome;
-  document.getElementById('perg-e').textContent=d.emoji;
-  document.getElementById('hdr-p').textContent='Questão '+(estado.indice+1)+' / '+total;
-  document.getElementById('hdr-e').textContent=calcE(estado.acertos,total);
-  document.getElementById('bar').style.width=((estado.indice/total)*100)+'%';
-  document.getElementById('perg-t').textContent=p.texto;
-
-  var btnTexto=document.getElementById('btn-ver-texto');
-  var apoio=document.getElementById('quiz-texto-apoio');
-  if(d.textoId){
-    btnTexto.style.display='block';btnTexto.textContent='📖 Ver o texto completo';
-    apoio.innerHTML=montarTextoHTML(d.textoId,true);apoio.style.display='none';
-  }else{
-    btnTexto.style.display='none';apoio.style.display='none';apoio.innerHTML='';
-  }
-
-  /* Cenas removidas do quiz — os emojis entregavam a resposta */
-
-  var grid=document.getElementById('grid-o');grid.innerHTML='';
-  var usarCol1=false;
-  for(var c=0;c<p.opcoes.length;c++){if(p.opcoes[c].length>28)usarCol1=true;}
-  grid.className=usarCol1?'grid-o col1':'grid-o';
-  for(var idx=0;idx<p.opcoes.length;idx++){
-    var btn=document.createElement('button');
-    btn.className='btn-o';
-    btn.innerHTML=htmlOpcao(p.opcoes[idx]);
-    btn.setAttribute('data-idx',String(idx));
-    btn.setAttribute('onclick','window.responder('+idx+')');
-    grid.appendChild(btn);
-  }
-  var fb=document.getElementById('fb');fb.style.display='none';fb.className='fb';
-  document.getElementById('btn-px').style.display='none';
-}
-
-function responder(escolhido){
-  if(estado.respondeu)return;
-  estado.respondeu=true;
-  var p=estado.perguntas[estado.indice],certa=p.certa,acertou=(escolhido===certa);
-  var btns=document.querySelectorAll('.btn-o');
-  for(var i=0;i<btns.length;i++){
-    btns[i].setAttribute('onclick','');
-    var bi=parseInt(btns[i].getAttribute('data-idx'));
-    if(bi===certa)btns[i].classList.add('certa');
-    else if(bi===escolhido&&!acertou)btns[i].classList.add('errada');
-  }
-  var fb=document.getElementById('fb');
-  if(acertou){
-    estado.acertos++;
-    var m=['🎉 Muito bem!','⭐ Ótimo trabalho!','🌟 Excelente!','🏅 Resposta certa!','✨ Você conseguiu!'];
-    fb.textContent=m[Math.floor(Math.random()*m.length)]+' '+p.explicacao;
-    fb.className='fb c';confete();
-  }else{
-    fb.textContent='😊 Quase! A resposta certa está em verde. '+p.explicacao;
-    fb.className='fb e';
-  }
-  fb.style.display='block';
-  document.getElementById('hdr-e').textContent=calcE(estado.acertos,estado.perguntas.length);
-  var btnP=document.getElementById('btn-px');
-  btnP.style.display='block';
-  btnP.textContent=(estado.indice===estado.perguntas.length-1)?'Ver resultado 🏆':'Próxima ➡️';
-}
-
-function avancar(){
-  estado.indice++;
-  if(estado.indice>=estado.perguntas.length)mostrarFinal('quiz');
-  else carregarPergunta();
-}
-
-/* ESCRITA */
-var canvas,ctx,desenhando=false,modeloAtual='cursiva',canvasIniciado=false,ponteiroAtivo=null;
-
-function abrirEscrita(tipo){
-  escEstado.tipo=tipo;
-  escEstado.itens=embaralhar(ESCRITA[tipo]).slice(0,tipo==='words'?8:6);
-  escEstado.indice=0;escEstado.acertos=0;escEstado.verificado=false;
-  mostrarTela('tela-escrita');
-  setTimeout(function(){initCanvas();mostrarItemEscrita();},120);
-}
-
-function mostrarItemEscrita(){
-  escEstado.verificado=false;
-  var item=escEstado.itens[escEstado.indice];
-  var alvo=item.respostas[0];
-  document.getElementById('esc-emoji').textContent=item.emoji;
-  document.getElementById('esc-frase').textContent=item.texto;
-  document.getElementById('esc-dica').textContent=item.dica+' Primeiro leia em voz alta e depois copie com a Apple Pencil.';
-  document.getElementById('esc-prog').textContent='Item '+(escEstado.indice+1)+' de '+escEstado.itens.length;
-  document.getElementById('modelo-maiuscula').textContent=alvo.toUpperCase();
-  document.getElementById('modelo-minuscula').textContent=alvo.toLowerCase();
-  document.getElementById('modelo-cursiva').textContent=alvo;
-  setModeloEscrita(modeloAtual);limparCanvas();
-  var fb=document.getElementById('esc-fb');fb.style.display='none';fb.className='fb';
-  document.getElementById('btn-esc-ver').style.display='block';
-  document.getElementById('btn-esc-px').style.display='none';
-}
-
-function setModeloEscrita(tipo){
-  modeloAtual=tipo;
-  ['todos','maiuscula','minuscula','cursiva'].forEach(function(t){
-    var b=document.getElementById('btn-modelo-'+t);if(b)b.classList.toggle('ativo',t===tipo);
-  });
-  var sm=tipo==='todos'||tipo==='maiuscula';
-  var sn=tipo==='todos'||tipo==='minuscula';
-  var sc=tipo==='todos'||tipo==='cursiva';
-  var a=document.getElementById('modelo-maiuscula-wrap');
-  var b=document.getElementById('modelo-minuscula-wrap');
-  var c=document.getElementById('modelo-cursiva-wrap');
-  if(a)a.style.display=sm?'block':'none';
-  if(b)b.style.display=sn?'block':'none';
-  if(c)c.style.display=sc?'block':'none';
-}
-
-function initCanvas(){
-  canvas=document.getElementById('canvas');if(!canvas)return;
-  var wrap=canvas.parentElement;
-  var rect=wrap.getBoundingClientRect();
-  var ratio=window.devicePixelRatio||1;
-  var cssW=Math.max(300,rect.width);
-  var cssH=parseInt(getComputedStyle(canvas).height,10)||330;
-  canvas.width=cssW*ratio;canvas.height=cssH*ratio;
-  ctx=canvas.getContext('2d');
-  ctx.setTransform(ratio,0,0,ratio,0,0);
-  ctx.strokeStyle='#2C3E50';ctx.lineWidth=4;ctx.lineCap='round';ctx.lineJoin='round';
-  if(canvasIniciado)return;canvasIniciado=true;
-  canvas.addEventListener('contextmenu',function(e){e.preventDefault();});
-  canvas.addEventListener('pointerdown',function(e){
-    e.preventDefault();
-    if(ponteiroAtivo!==null||e.isPrimary===false)return;
-    ponteiroAtivo=e.pointerId;desenhando=true;
-    if(canvas.setPointerCapture)canvas.setPointerCapture(e.pointerId);
-    document.getElementById('canvas-placeholder').style.display='none';
-    var p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
-  });
-  canvas.addEventListener('pointermove',function(e){
-    e.preventDefault();
-    if(!desenhando||e.pointerId!==ponteiroAtivo)return;
-    var p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();
-  });
-  canvas.addEventListener('pointerup',encerrarPonteiro);
-  canvas.addEventListener('pointerleave',encerrarPonteiro);
-  canvas.addEventListener('pointercancel',encerrarPonteiro);
-}
-
-function encerrarPonteiro(e){
-  if(e&&e.preventDefault)e.preventDefault();
-  if(e&&ponteiroAtivo!==null&&e.pointerId!==ponteiroAtivo)return;
-  if(e&&canvas&&canvas.releasePointerCapture){try{canvas.releasePointerCapture(e.pointerId);}catch(_){}};
-  desenhando=false;ponteiroAtivo=null;
-}
-
-function getP(e){var r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
-
-function desenharLinhas(){
-  if(!ctx||!canvas)return;
-  var r=canvas.getBoundingClientRect();var w=r.width,h=r.height;
-  ctx.save();ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle='#D7DBDD';ctx.lineWidth=1.5;
-  for(var y=58;y<h;y+=58){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
-  ctx.strokeStyle='#F5B7B1';ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(46,0);ctx.lineTo(46,h);ctx.stroke();
-  ctx.restore();ctx.strokeStyle='#2C3E50';ctx.lineWidth=4;
-}
-
-function limparCanvas(){
-  if(!ctx)initCanvas();desenharLinhas();
-  var ph=document.getElementById('canvas-placeholder');if(ph)ph.style.display='block';
-}
-
-function concluirEscrita(){
-  if(escEstado.verificado)return;
-  escEstado.verificado=true;escEstado.acertos++;
-  var fb=document.getElementById('esc-fb');
-  fb.textContent='🌟 Muito bem! Confira a maiúscula, os espaços e o ponto-final.';
-  fb.className='fb c';fb.style.display='block';
-  document.getElementById('btn-esc-ver').style.display='none';
-  var btnP=document.getElementById('btn-esc-px');
-  btnP.style.display='block';
-  btnP.textContent=(escEstado.indice===escEstado.itens.length-1)?'Finalizar 🏆':'Próxima ➡️';
-  confete();
-}
-
-function proxEscrita(){
-  escEstado.indice++;
-  if(escEstado.indice>=escEstado.itens.length)mostrarFinal('escrita');
-  else mostrarItemEscrita();
-}
-
-function mostrarFinal(tipo){
-  var ac,total,replayFn;
-  if(tipo==='escrita'){ac=escEstado.acertos;total=escEstado.itens.length;replayFn='window.abrirEscrita("'+escEstado.tipo+'")';}
-  else{ac=estado.acertos;total=estado.perguntas.length;replayFn='window.iniciarTema("'+estado.tema+'")';}
-  var pct=ac/total;
-  document.getElementById('ef').textContent=calcE(ac,total);
-  document.getElementById('af').textContent=tipo==='escrita'?(ac+' / '+total+' itens concluídos!'):(ac+' / '+total+' acertos!');
-  var ms=['Continue praticando! 💪','Bom trabalho! 😊','Muito bem! 🌟','Excelente! 🎉','Arrasou! 🧠✨'];
-  document.getElementById('mf').textContent=ms[Math.min(Math.floor(pct*5),4)];
-  document.getElementById('btn-replay').setAttribute('onclick',replayFn);
-  confete();mostrarTela('tela-final');
-}
-
-function replay(){}
-
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&document.getElementById('tela-escrita').classList.contains('ativa')){
-    if(document.getElementById('btn-esc-ver').style.display!=='none')concluirEscrita();
-    else proxEscrita();
-  }
-});
-
-window.iniciarTema=iniciarTema;window.responder=responder;window.avancar=avancar;
-window.mostrarTela=mostrarTela;window.abrirEscrita=abrirEscrita;
-window.abrirTexto=abrirTexto;window.toggleTextoApoio=toggleTextoApoio;
-window.concluirEscrita=concluirEscrita;window.setModeloEscrita=setModeloEscrita;
-window.limparCanvas=limparCanvas;window.proxEscrita=proxEscrita;
-window.confete=confete;window.replay=replay;
-</script>
-</body>
-</html>
+function avancar(){if(!estado.respondeu)return;if(++estado.indice>=estado.perguntas.length)mostrarFinal(false);else{carregarPergunta();window.scrollTo(0,0);}}
+let escEstado={tipo:'',itens:[],indice:0,concluidos:0,verificado:false,rascunho:false};
+function abrirEscrita(tipo){escEstado={tipo,itens:ESCRITA[tipo],indice:0,concluidos:0,verificado:false,rascunho:false};$('pauta').value=tipo==='contas'?'cdu':tipo==='dinheiro'?'livre':'quadriculado';mostrarTela('tela-escrita');mostrarItemEscrita();}
+function abrirRascunho(){const p=estado.perguntas[estado.indice];escEstado={tipo:'rascunho',itens:[{texto:p.texto,pagina:p.pagina,dica:'Faça seus cálculos e volte para escolher a resposta.'}],indice:0,concluidos:0,verificado:false,rascunho:true};mostrarTela('tela-escrita');mostrarItemEscrita();tracos=scratch.slice();redesenhar();}
+function mostrarItemEscrita(){const item=escEstado.itens[escEstado.indice];escEstado.verificado=false;$('esc-frase').textContent=item.texto;$('esc-dica').textContent=item.dica;$('esc-emoji').textContent=escEstado.rascunho?'✏️':NOMES_ESCRITA[escEstado.tipo][0];$('esc-prog').textContent=(escEstado.rascunho?'Rascunho':'Item '+(escEstado.indice+1)+' de '+escEstado.itens.length)+' · Base: página '+item.pagina;$('esc-resposta').hidden=true;$('esc-resposta').textContent='';$('esc-feedback').textContent='';$('btn-esc-ver').hidden=escEstado.rascunho;$('btn-esc-px').hidden=true;$('btn-rascunho').hidden=!escEstado.rascunho;$('esc-voltar').textContent=escEstado.rascunho?'⬅️ Voltar à pergunta':'⬅️ Voltar ao menu';tracos=[];ajustarCanvas();}
+function voltarEscrita(){if(escEstado.rascunho){scratch=tracos.slice();mostrarTela('tela-quiz');}else mostrarTela('tela-menu');}
+function concluirEscrita(){if(escEstado.verificado||escEstado.rascunho)return;if(!tracos.length){$('esc-feedback').textContent='Primeiro escreva ou desenhe sua tentativa na área acima.';return;}escEstado.verificado=true;escEstado.concluidos++;$('esc-feedback').textContent='Etapa concluída. Agora compare com a resolução abaixo.';$('esc-resposta').textContent='Confira com um adulto:\n'+escEstado.itens[escEstado.indice].resposta;$('esc-resposta').hidden=false;$('btn-esc-ver').hidden=true;$('btn-esc-px').hidden=false;$('btn-esc-px').textContent=escEstado.indice===escEstado.itens.length-1?'Finalizar 🏆':'Próxima ➡️';}
+function proxEscrita(){if(!escEstado.verificado)return;if(++escEstado.indice>=escEstado.itens.length)mostrarFinal(true);else{mostrarItemEscrita();window.scrollTo(0,0);}}
+function mostrarFinal(escrita){$('tf').textContent=escrita?'Treino concluído! ✏️':'Rodada concluída! 🎉';$('ef').textContent=escrita?'✏️ 🧠 💛':calcE(estado.acertos,estado.perguntas.length);$('af').textContent=escrita?escEstado.concluidos+' atividades concluídas':estado.acertos+' / '+estado.perguntas.length+' acertos';$('mf').textContent=escrita?'As respostas escritas não foram corrigidas automaticamente. Confira-as com um adulto.':'Leia as explicações e pratique de novo quando quiser!';$('btn-replay').onclick=escrita?()=>abrirEscrita(escEstado.tipo):()=>iniciarTema(estado.tema);mostrarTela('tela-final');confete();}
+// Os traços ficam só na memória desta página. Não há reconhecimento de manuscrito.
+const canvas=$('canvas'),ctx=canvas.getContext('2d');let tracos=[],ativo=null,largura=0,altura=0;
+function ajustarCanvas(){if(!$('tela-escrita').classList.contains('ativa'))return;const r=canvas.getBoundingClientRect(),ratio=window.devicePixelRatio||1;largura=r.width;altura=r.height;canvas.width=Math.round(largura*ratio);canvas.height=Math.round(altura*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);redesenhar();}
+function redesenhar(){if(!largura)return;ctx.clearRect(0,0,largura,altura);ctx.save();ctx.strokeStyle='#D9E2E7';ctx.lineWidth=1;const pauta=$('pauta').value;
+ if(pauta==='linhas'||pauta==='quadriculado'){for(let y=36;y<altura;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(largura,y);ctx.stroke();}if(pauta==='quadriculado')for(let x=36;x<largura;x+=36){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,altura);ctx.stroke();}}
+ if(pauta==='cdu'){ctx.font='bold 20px Arial';ctx.fillStyle='#59768C';ctx.textAlign='center';['C','D','U'].forEach((t,i)=>ctx.fillText(t,largura*(i+.5)/3,27));for(let i=1;i<3;i++){ctx.beginPath();ctx.moveTo(largura*i/3,0);ctx.lineTo(largura*i/3,altura);ctx.stroke();}ctx.beginPath();ctx.moveTo(0,40);ctx.lineTo(largura,40);ctx.stroke();}
+ ctx.restore();tracos.forEach(desenharTraco);$('canvas-placeholder').style.display=tracos.length?'none':'block';$('canvas-placeholder').style.top=pauta==='cdu'?'50px':'16px';}
+function desenharTraco(pontos){ctx.strokeStyle='#2C3E50';ctx.fillStyle='#2C3E50';ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';if(pontos.length===1){ctx.beginPath();ctx.arc(pontos[0].x*largura,pontos[0].y*altura,1.7,0,Math.PI*2);ctx.fill();return;}ctx.beginPath();ctx.moveTo(pontos[0].x*largura,pontos[0].y*altura);for(let i=1;i<pontos.length;i++)ctx.lineTo(pontos[i].x*largura,pontos[i].y*altura);ctx.stroke();}
+function ponto(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};}
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+canvas.addEventListener('pointerdown',e=>{e.preventDefault();if(ativo!==null||e.isPrimary===false||($('so-caneta').checked&&e.pointerType!=='pen'))return;ativo=e.pointerId;canvas.setPointerCapture(e.pointerId);tracos.push([ponto(e)]);if(!escEstado.verificado)document.getElementById('esc-feedback').textContent='';redesenhar();});
+canvas.addEventListener('pointermove',e=>{if(ativo!==e.pointerId)return;e.preventDefault();const eventos=e.getCoalescedEvents?e.getCoalescedEvents():[e];(eventos.length?eventos:[e]).forEach(ev=>tracos[tracos.length-1].push(ponto(ev)));redesenhar();});
+function encerrar(e){if(ativo!==e.pointerId)return;ativo=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);}
+canvas.addEventListener('pointerup',encerrar);canvas.addEventListener('pointercancel',encerrar);canvas.addEventListener('lostpointercapture',e=>{if(ativo===e.pointerId)ativo=null;});
+function limparCanvas(){ativo=null;tracos=[];redesenhar();}
+function desfazer(){ativo=null;tracos.pop();redesenhar();}
+new ResizeObserver(()=>ajustarCanvas()).observe(canvas.parentElement);
+</script></body></html>

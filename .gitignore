@@ -5,3 +5,7 @@ WhatsApp Image*.jpg
 
 # Arquivos temporarios de leitura e testes
 tmp/
+
+# Fotos e anotacoes privadas de Matematica
+Fotografias em iCloud*/
+private/
