@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matemática em Ação - Julia 🌟</title>
+<title>Hora de Praticar - Julia 🌟</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -134,12 +134,20 @@ select{font:inherit;padding:10px;border:2px solid #D6EAF8;border-radius:12px;bac
 #esc-resposta{white-space:pre-line;text-align:left;font-size:1rem;line-height:1.6;background:#EBF5FF;border:2px solid #AED6F1;color:#214968;padding:16px;border-radius:16px;margin-top:14px}
 .canvas-wrap{max-width:none}.canvas-wrap canvas{height:360px}.escrita-area{padding:16px}.ferramentas{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:10px 0}.ferramentas label{font-size:.85rem}.ferramentas input{width:20px;height:20px;vertical-align:middle}.aviso-escrita{padding:10px;background:#FFF3D6;border-radius:12px;font-size:.86rem;line-height:1.5;margin-top:12px}
 #guia-quiz{margin:0;box-shadow:none;border:2px solid #D6EAF8}#esc-feedback{margin-top:10px;color:#546878;font-weight:800}.mode{width:100%;text-align:center;background:white;border-radius:18px;padding:12px}.mode label{font-weight:800;display:block;margin-bottom:7px}
+.inicio-hero{width:100%;background:linear-gradient(145deg,#fff,#FFF7DF);border-radius:28px;padding:24px 20px;box-shadow:0 8px 28px var(--sombra);text-align:center}.inicio-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}.materia{min-height:205px;border-radius:28px;border:4px solid transparent;padding:24px 14px;font:inherit;font-weight:900;cursor:pointer;box-shadow:0 8px 24px var(--sombra);transition:transform .15s}.materia:active{transform:scale(.96)}.materia span{display:block;font-size:70px;margin-bottom:8px}.materia strong{display:block;font-size:1.45rem}.materia small{display:block;margin-top:8px;font-size:.9rem;color:#52616B}.materia-mat{background:linear-gradient(145deg,#EAF4FF,#fff);border-color:var(--azul)}.materia-ing{background:linear-gradient(145deg,#EAF8E8,#fff);border-color:var(--verde)}
+.top-voltar{align-self:flex-start}.english-hero{width:100%;border-radius:24px;overflow:hidden;box-shadow:0 6px 24px var(--sombra);background:#fff}.english-hero img{display:block;width:100%;height:auto}.english-hero p{padding:12px 16px;text-align:center;font-weight:900;color:#327046}.english-theme{--azul:#2E8B57}.english-badge{display:inline-flex;align-items:center;gap:7px;background:#EAF8E8;color:#21683F;border-radius:999px;padding:7px 12px;font-size:.85rem;font-weight:900;margin-bottom:8px}.image-prompt{width:100%;max-height:360px;object-fit:contain;border-radius:18px;margin-top:14px;background:#FFF8E8}.image-prompt.wide{max-height:none;object-fit:cover}.eng-word-box{width:100%;background:#fff;border-radius:24px;padding:22px;box-shadow:0 6px 24px var(--sombra);text-align:center}.eng-clue{font-size:4.2rem;line-height:1.1;margin:8px}.eng-context{font-size:1.05rem;font-weight:800;line-height:1.45;color:#52616B;margin:8px 0}.eng-input{width:100%;font:900 1.45rem 'Nunito',Arial,sans-serif;letter-spacing:1px;text-align:center;border:3px solid #A9D8B8;border-radius:16px;padding:14px;margin:12px 0;outline:none}.eng-input:focus{border-color:var(--verde);box-shadow:0 0 0 4px #DDF3E4}.eng-feedback{min-height:29px;font-size:1.05rem;font-weight:900;margin:4px 0 10px}.eng-feedback.ok{color:#1E8449}.eng-feedback.no{color:#B03A2E}.eng-model{font-size:1.45rem;font-weight:900;color:#21683F;letter-spacing:2px;margin:8px 0}.eng-write-canvas{position:relative;width:100%;border:3px dashed #A9D8B8;border-radius:18px;background:repeating-linear-gradient(#FFFEF8 0,#FFFEF8 47px,#B8D8E8 48px,#FFFEF8 49px);overflow:hidden;touch-action:none}.eng-write-canvas canvas{display:block;width:100%;height:205px;touch-action:none}.eng-write-hint{position:absolute;inset:16px;color:rgba(33,104,63,.16);font-size:2rem;font-weight:900;letter-spacing:3px;pointer-events:none;text-align:left}.eng-note{font-size:.86rem;line-height:1.45;color:#657586;margin-top:9px}.audio-btn{border:2px solid #A9D8B8;background:#fff;border-radius:14px;padding:9px 12px;font:900 .92rem 'Nunito',Arial,sans-serif;color:#21683F;cursor:pointer}.topic-count{display:block;font-size:.78rem;color:#5F6F65;margin-top:5px}
+@media(max-width:520px){.inicio-cards{grid-template-columns:1fr}.materia{min-height:160px}.materia span{font-size:54px}.english-hero img{min-height:190px;object-fit:cover}.image-prompt.wide{min-height:180px}.eng-write-canvas canvas{height:230px}}
 @media(max-width:420px){.titulo{font-size:1.8rem}.hdr{padding:10px}.cperg{padding:18px 12px}.canvas-wrap canvas{height:320px}.escrita-area{padding:10px}.pecas{gap:6px}.placa{width:50px;height:50px;background-size:5px 5px}.barra{width:5px;height:50px;background-size:5px 5px}.cubo{width:5px;height:5px;background-size:5px 5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="bg" aria-hidden="true"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
 <main id="app">
-<section id="tela-menu" class="tela ativa">
+<section id="tela-inicio" class="tela ativa">
+<div class="inicio-hero"><span class="logo" aria-hidden="true">🌟</span><h1 class="titulo">Hora de praticar!</h1><p class="julia">Qual matéria vamos estudar, Julia?</p></div>
+<div class="inicio-cards"><button class="materia materia-mat" onclick="mostrarTela('tela-menu')"><span aria-hidden="true">🧮</span><strong>Matemática</strong><small>8 temas, perguntas, contas e desenhos</small></button><button class="materia materia-ing" onclick="abrirMenuIngles()"><span aria-hidden="true">🌻</span><strong>Inglês</strong><small>A day at the farm · palavras e frases</small></button></div>
+</section>
+<section id="tela-menu" class="tela">
+<button class="bv top-voltar" onclick="mostrarTela('tela-inicio')">⬅️ Trocar de matéria</button>
 <header><span class="logo" aria-hidden="true">🧮</span><h1 class="titulo">Matemática<br>em Ação!</h1><p class="julia">Vamos praticar, Julia! 🌟</p><p class="sub">Um desafio de cada vez.</p></header>
 <details class="guia"><summary>📚 O que vamos estudar?</summary><p>Números até 499; centenas, dezenas e unidades; comparação e ordenação; sequências; adição e subtração; cédulas e moedas; compras, troco e valores por extenso.</p><p>Revisão baseada nas páginas <strong>82–89, 95, 97–107 e 140–157</strong>. As atividades foram adaptadas para praticar no tablet. Tenha o livro e o caderno por perto.</p><p>Leia a pergunta, descubra o que ela pede e faça a conta. Nos exercícios de desenho e escrita, compare sua resolução com um adulto.</p></details>
 <div class="mode"><label for="modo">Como você quer praticar?</label><select id="modo"><option value="curta">Rodada curta: 6 perguntas sorteadas</option><option value="todas">Todas as perguntas do tema, em ordem</option></select></div>
@@ -147,6 +155,28 @@ select{font:inherit;padding:10px;border:2px solid #D6EAF8;border-radius:12px;bac
 <h2 class="secao-label">✏️ Escrever e desenhar</h2><div id="escritas" class="grade"></div>
 <p class="nota">Use Apple Pencil, dedo ou mouse. Os desenhos ficam apenas nesta página e não são enviados. Ao trocar de atividade ou recarregar, a escrita é apagada.</p>
 </section>
+<section id="tela-ingles" class="tela english-theme">
+<button class="bv top-voltar" onclick="mostrarTela('tela-inicio')">⬅️ Trocar de matéria</button>
+<header><span class="english-badge">UNIT 4 · FARM</span><h1 class="titulo">English on the Farm!</h1><p class="julia">Let’s practise, Julia! 🌟</p></header>
+<div class="english-hero"><img src="assets/english-farm-panorama.png" alt="Fazenda ilustrada com cavalos, cabras, galinhas, patos, ovelhas, porcos, abelhas, fazendeiro e trator"><p>Look, listen, read and write!</p></div>
+<details class="guia"><summary>📚 O que vamos praticar?</summary><p>Animais da fazenda no singular e plural; <strong>beak, feathers, tail</strong> e <strong>wings</strong>; ações na fazenda; e compreensão de frases com <strong>There are…</strong> e <strong>It’s got…</strong>.</p><p>As imagens são ilustrações originais criadas para esta revisão. As fotos do material escolar não fazem parte do site.</p></details>
+<div class="mode"><label for="eng-modo">Como você quer praticar?</label><select id="eng-modo"><option value="curta">Rodada curta: 8 perguntas sorteadas</option><option value="todas">Todas as perguntas do tema</option></select></div>
+<h2 class="secao-label">👀 Ler e entender</h2><div id="eng-temas" class="grade"></div>
+<h2 class="secao-label">✍️ Treinar palavras</h2><div id="eng-escritas" class="grade"></div>
+<p class="nota">A palavra digitada é corrigida automaticamente. A caligrafia com Apple Pencil fica somente no aparelho e serve para treino; o site não reconhece os traços manuscritos.</p>
+</section>
+<section id="tela-eng-quiz" class="tela english-theme">
+<div class="hdr"><span id="eng-hdr-t" class="hdr-t"></span><span id="eng-hdr-p" class="hdr-p"></span><span id="eng-hdr-e" class="hdr-e"></span></div><div class="bar-w"><div id="eng-bar" class="bar"></div></div>
+<div class="cperg"><span id="eng-perg-e" class="perg-e" aria-hidden="true"></span><h2 id="eng-perg-t" class="perg-t"></h2><div id="eng-visual"></div><button id="eng-audio" class="audio-btn" onclick="ouvirIngles()">🔊 Ouvir a frase</button><p id="eng-fonte" class="pagina"></p></div>
+<div id="eng-grid-o" class="grid-o"></div><div id="eng-fb" class="fb" role="status" aria-live="polite"></div><div class="abtn"><button class="ba bm" onclick="abrirMenuIngles()">🏠 Inglês</button><button id="eng-btn-px" class="ba bp" onclick="avancarIngles()" hidden>Próxima ➡️</button></div>
+</section>
+<section id="tela-eng-escrita" class="tela english-theme">
+<button class="bv top-voltar" onclick="abrirMenuIngles()">⬅️ Voltar para Inglês</button>
+<div class="eng-word-box"><span class="english-badge">WRITE THE WORD</span><div id="eng-clue" class="eng-clue" aria-hidden="true"></div><h2 id="eng-write-prompt" class="escrita-frase"></h2><p id="eng-write-context" class="eng-context"></p><button class="audio-btn" onclick="ouvirPalavra()">🔊 Ouvir</button><input id="eng-input" class="eng-input" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Digite a palavra em inglês"><div id="eng-write-feedback" class="eng-feedback" role="status" aria-live="polite"></div><button id="eng-check" class="ba bp" onclick="corrigirPalavra()">Conferir palavra</button>
+<div id="eng-after" hidden><p class="eng-model">Agora escreva com a caneta: <span id="eng-model-word"></span></p><div class="eng-write-canvas"><div id="eng-canvas-hint" class="eng-write-hint"></div><canvas id="eng-canvas" aria-label="Área para treinar a palavra com Apple Pencil"></canvas></div><div class="mini-row"><button class="mini-btn" onclick="desfazerEng()">↩️ Desfazer</button><button class="mini-btn" onclick="limparEngCanvas()">🗑️ Apagar</button></div><p class="eng-note">A correção acima vale para a palavra digitada. Os traços feitos com a caneta não são avaliados automaticamente.</p></div></div>
+<p id="eng-write-prog" class="escrita-progresso"></p><button id="eng-write-next" class="ba bp" onclick="proximaPalavra()" hidden>Próxima palavra ➡️</button>
+</section>
+<section id="tela-eng-final" class="tela english-theme"><div class="cr"><span class="trofeu" aria-hidden="true">🏆</span><h2 id="eng-tf" class="tf">Great job, Julia!</h2><div id="eng-ef" class="ef"></div><p id="eng-af" class="af"></p><p id="eng-mf" class="mf"></p></div><div class="abtn"><button id="eng-replay" class="ba bn">🔄 Praticar de novo</button><button class="ba bm" onclick="abrirMenuIngles()">🏠 Inglês</button></div></section>
 <section id="tela-quiz" class="tela">
 <div class="hdr"><span id="hdr-t" class="hdr-t"></span><span id="hdr-p" class="hdr-p"></span><span id="hdr-e" class="hdr-e" aria-label="Estrelas"></span></div>
 <div class="bar-w"><div id="bar" class="bar"></div></div>
@@ -168,6 +198,94 @@ select{font:inherit;padding:10px;border:2px solid #D6EAF8;border-radius:12px;bac
 </section>
 <section id="tela-final" class="tela"><div class="cr"><span class="trofeu" aria-hidden="true">🏆</span><h2 id="tf" class="tf"></h2><div id="ef" class="ef"></div><p id="af" class="af"></p><p id="mf" class="mf"></p></div><div class="abtn"><button id="btn-replay" class="ba bn">🔄 Praticar de novo</button><button class="ba bm" onclick="mostrarTela('tela-menu')">🏠 Menu</button></div></section>
 </main><script>
+const FARM_IMG='assets/english-farm-panorama.png';
+const PARTS_IMG='assets/english-animal-parts.png';
+const eq=(texto,opcoes,certa,explicacao,emoji='🌻',imagem='',fonte='Unit 4')=>({texto,opcoes,certa,explicacao,emoji,imagem,fonte});
+const BANCO_INGLES={
+ animais:{nome:'Farm animals',emoji:'🐷',fonte:'Lessons 1, 2 e 4',perguntas:[
+  eq('Which animal is a chicken?',['🐔','🐴','🐷','🐝'],0,'Chicken means galinha.','🐔',FARM_IMG),
+  eq('Which animal is a horse?',['🐴','🐐','🐑','🦆'],0,'Horse means cavalo.','🐴'),
+  eq('Which animal is a goat?',['🐐','🐷','🐔','🐝'],0,'Goat means cabra.','🐐'),
+  eq('Which animal is a pig?',['🐷','🐑','🐴','🦆'],0,'Pig means porco.','🐷'),
+  eq('Which animal is a duck?',['🦆','🐝','🐐','🐔'],0,'Duck means pato.','🦆'),
+  eq('Which animal is a bee?',['🐝','🐔','🐴','🐷'],0,'Bee means abelha.','🐝'),
+  eq('Which animal has wool?',['sheep','pig','duck','bee'],0,'A sheep has wool. Sheep significa ovelha.','🐑'),
+  eq('Which animal makes honey?',['bee','horse','pig','chicken'],0,'A bee makes honey.','🐝'),
+  eq('One chicken. Two…',['chickens','chickenes','chick','chickenss'],0,'For more than one, write chickens.','🐔'),
+  eq('One horse. Three…',['horses','horse','horsies','hors'],0,'For more than one, write horses.','🐴'),
+  eq('One goat. Two…',['goats','goates','goat','goatses'],0,'For more than one, write goats.','🐐'),
+  eq('One pig. Five…',['pigs','pig','pigies','pigss'],0,'For more than one, write pigs.','🐷'),
+  eq('One duck. Four…',['ducks','duck','duckes','duckies'],0,'For more than one, write ducks.','🦆'),
+  eq('One bee. Eight…',['bees','bee','beeses','be'],0,'For more than one, write bees.','🐝'),
+  eq('One sheep. Five…',['sheep','sheeps','sheepes','sheepies'],0,'Sheep stays the same in the singular and plural.','🐑'),
+  eq('Which word means “fazendeiro”?',['farmer','farm','horse','feathers'],0,'Farmer is the person who works on a farm.','🧑‍🌾'),
+  eq('Look at the farm. Which animals are in the pond?',['ducks','horses','goats','pigs'],0,'The ducks are in the pond.','🦆',FARM_IMG),
+  eq('Look at the farm. Which animals are in the mud?',['pigs','bees','sheep','chickens'],0,'The pigs are in the mud.','🐷',FARM_IMG),
+  eq('Look at the farm. Which animals are near the hive?',['bees','ducks','horses','goats'],0,'The bees are near the hive.','🐝',FARM_IMG),
+  eq('Complete: I like farm _____.',['animals','wings','eggs','tails'],0,'The complete sentence is: I like farm animals.','🌻')
+ ]},
+ partes:{nome:'Animal parts',emoji:'🪶',fonte:'Lesson 6',perguntas:[
+  eq('A horse has a long…',['tail','beak','wing','feather'],0,'A horse has a tail.','🐴',PARTS_IMG),
+  eq('A duck has two…',['wings','tails','beaks','horses'],0,'A duck has two wings.','🦆',PARTS_IMG),
+  eq('A chicken has…',['feathers','wool','mud','eggs'],0,'A chicken has feathers.','🐔',PARTS_IMG),
+  eq('A duck eats with its…',['beak','tail','wing','feather'],0,'A duck has a beak.','🦆',PARTS_IMG),
+  eq('Which word means “cauda”?',['tail','wings','beak','feathers'],0,'Tail means cauda or rabo.','🐴'),
+  eq('Which word means “asas”?',['wings','tail','beak','eggs'],0,'Wings means asas.','🪽'),
+  eq('Which word means “penas”?',['feathers','wings','tail','beak'],0,'Feathers means penas.','🪶'),
+  eq('Which word means “bico”?',['beak','tail','feathers','wings'],0,'Beak means bico.','🦆'),
+  eq('Complete: It’s got a _____.',['tail','wings','feathers','ducks'],0,'We use a before one tail: It’s got a tail.','🐴'),
+  eq('Complete: It’s got _____.',['wings','a wings','a feathers','an tail'],0,'Wings is plural, so there is no a.','🦆'),
+  eq('Complete: It’s got a _____.',['beak','feathers','wings','bees'],0,'We use a before one beak.','🐤'),
+  eq('Complete: It’s got _____.',['feathers','a feathers','a tail feathers','beak a'],0,'Feathers is plural: It’s got feathers.','🐔')
+ ]},
+ acoes:{nome:'Farm actions',emoji:'🚜',fonte:'Lesson 4',perguntas:[
+  eq('What can you collect on the farm?',['the eggs','the wings','the farmer','the mud'],0,'You can collect the eggs.','🥚',FARM_IMG),
+  eq('Complete: _____ the horses.',['Feed','Ride','Collect','Count'],0,'Feed the horses means alimentar os cavalos.','🐴'),
+  eq('Complete: _____ the goats.',['Feed','Collect','Fly','Write'],0,'Feed the goats means alimentar as cabras.','🐐'),
+  eq('You can ride in a…',['tractor','beak','feather','hive'],0,'You can ride in a tractor.','🚜',FARM_IMG),
+  eq('Which sentence means “alimente os cavalos”?',['Feed the horses.','Collect the eggs.','Ride in a tractor.','Feed the goats.'],0,'Feed the horses is the matching instruction.','🐴'),
+  eq('Which sentence means “recolha os ovos”?',['Collect the eggs.','Feed the goats.','Count the bees.','Ride the horse.'],0,'Collect the eggs is the matching instruction.','🥚'),
+  eq('Which sentence means “ande de trator”?',['Ride in a tractor.','Feed the tractor.','Collect the tractor.','Fly in a tractor.'],0,'Ride in a tractor is the matching action.','🚜'),
+  eq('The horse is hungry. What can you do?',['Feed the horse.','Collect the horse.','Count its feathers.','Ride in a bee.'],0,'If the horse is hungry, you can feed it.','🐴'),
+  eq('The basket is empty. What can you collect?',['eggs','wings','tails','tractors'],0,'You can collect eggs in a basket.','🧺'),
+  eq('Which action uses a basket?',['Collect the eggs.','Feed the horses.','Ride in a tractor.','Feed the goats.'],0,'Eggs can be collected in a basket.','🥚'),
+  eq('Which action uses food for an animal?',['Feed the goats.','Ride in a tractor.','Collect the eggs.','Look at the barn.'],0,'To feed an animal is to give it food.','🐐'),
+  eq('Complete: I can _____ the goats.',['feed','feeds','feeding','feathers'],0,'After can, use the base verb: feed.','🐐')
+ ]},
+ frases:{nome:'Understand sentences',emoji:'💬',fonte:'Lessons 2, 4 e 6',perguntas:[
+  eq('There are 3 chickens. How many chickens?',['3','2','4','5'],0,'The sentence says there are three chickens.','🐔'),
+  eq('There are 2 pigs. How many pigs?',['2','3','1','4'],0,'The sentence says there are two pigs.','🐷'),
+  eq('There are 5 sheep. How many sheep?',['5','4','6','3'],0,'The sentence says there are five sheep.','🐑'),
+  eq('There are 4 ducks. How many ducks?',['4','3','5','2'],0,'The sentence says there are four ducks.','🦆'),
+  eq('Which sentence matches 🐔🐔🐔?',['There are 3 chickens.','There are 2 chickens.','There is 1 chicken.','There are 4 chickens.'],0,'There are three chicken pictures, so: There are 3 chickens.','🐔'),
+  eq('Which sentence matches 🐷🐷?',['There are 2 pigs.','There are 3 pigs.','There is 1 pig.','There are 5 pigs.'],0,'There are two pig pictures.','🐷'),
+  eq('Which sentence matches 🐑🐑🐑🐑🐑?',['There are 5 sheep.','There are 4 sheep.','There are 5 sheeps.','There is 5 sheep.'],0,'Sheep does not change in the plural: There are 5 sheep.','🐑'),
+  eq('Which sentence matches 🦆🦆🦆🦆?',['There are 4 ducks.','There are 3 ducks.','There are 4 duck.','It’s got 4 ducks.'],0,'There are four duck pictures.','🦆'),
+  eq('“It’s got a tail.” What does the animal have?',['a tail','wings','a beak','feathers'],0,'The sentence says the animal has a tail.','🐴'),
+  eq('“It’s got wings.” What does the animal have?',['wings','a tail','a beak','eggs'],0,'The sentence says the animal has wings.','🦆'),
+  eq('“It’s got a beak.” What does the animal have?',['a beak','feathers only','a tractor','wool'],0,'The sentence says the animal has a beak.','🐤'),
+  eq('“I can feed the goats.” What can the child do?',['feed the goats','collect the goats','ride the goats','draw the goats'],0,'The child can give food to the goats.','🐐'),
+  eq('What farm animals do you like?',['I like horses.','It’s got a tail.','There are two.','Feed the goats.'],0,'I like horses answers the question about preference.','💚'),
+  eq('What can you do on the farm?',['I can collect the eggs.','I like chickens.','It’s got wings.','There are three pigs.'],0,'I can collect the eggs answers a question about what you can do.','🥚'),
+  eq('Read: “The duck has wings and a beak.” Which is true?',['The duck has wings.','The duck has a tail only.','The duck is a horse.','The duck has no beak.'],0,'The sentence directly says the duck has wings and a beak.','🦆'),
+  eq('Read: “There are bees near the hive.” Where are the bees?',['Near the hive.','In the tractor.','Under the horse.','In the barn window.'],0,'The sentence says the bees are near the hive.','🐝',FARM_IMG)
+ ]}
+};
+const ENG_ESCRITA={
+ animais:[
+  ['🐔','chicken','uma galinha'],['🐴','horse','um cavalo'],['🐐','goat','uma cabra'],['🐷','pig','um porco'],['🐑','sheep','uma ovelha'],['🦆','duck','um pato'],['🐝','bee','uma abelha'],['🧑‍🌾','farmer','um fazendeiro'],['🐔','chicken','uma galinha'],['🐴','horse','um cavalo'],['🐐','goat','uma cabra'],['🐷','pig','um porco']
+ ],
+ plurais:[
+  ['🐔🐔','chickens','mais de uma galinha'],['🐴🐴','horses','mais de um cavalo'],['🐐🐐','goats','mais de uma cabra'],['🐷🐷','pigs','mais de um porco'],['🐑🐑','sheep','mais de uma ovelha'],['🦆🦆','ducks','mais de um pato'],['🐝🐝','bees','mais de uma abelha'],['🐔🐔','chickens','plural de chicken'],['🐴🐴','horses','plural de horse'],['🐐🐐','goats','plural de goat'],['🐷🐷','pigs','plural de pig'],['🦆🦆','ducks','plural de duck']
+ ],
+ partes:[
+  ['🐴','tail','a parte comprida atrás do cavalo'],['🪽','wings','as partes usadas para voar'],['🪶','feathers','o que cobre o corpo das aves'],['🐤','beak','a parte usada pela ave para comer'],['🐴','tail','complete: It’s got a _____.'],['🦆','wings','complete: It’s got _____.'],['🐔','feathers','complete: It’s got _____.'],['🐤','beak','complete: It’s got a _____.'],['🐴','tail','cauda'],['🪽','wings','asas'],['🪶','feathers','penas'],['🐤','beak','bico']
+ ],
+ misto:[
+  ['🥚','eggs','complete: collect the _____'],['🚜','tractor','complete: ride in a _____'],['🐴','horse','complete: feed the _____'],['🐐','goats','complete: feed the _____'],['🐝','bee','um animal que faz mel'],['🦆','duck','um animal que nada no lago'],['🐑','sheep','um animal com lã'],['🐔','chicken','um animal que bota ovos'],['🪶','feathers','the chicken has _____'],['🐤','beak','the duck has a _____'],['🪽','wings','the duck has two _____'],['🧑‍🌾','farmer','a person who works on a farm']
+ ]
+};
+const ENG_WRITE_NAMES={animais:['🐷','Animais: singular'],plurais:['🐔','Animais: plural'],partes:['🪶','Partes dos animais'],misto:['🌻','Mistura da fazenda']};
 const BANCO = {
   "numeros": {
     "nome": "Números até 499",
@@ -2003,6 +2121,32 @@ const GUIAS = {
 };
 const $ = id => document.getElementById(id);
 const escHTML = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function abrirMenuIngles(){mostrarTela('tela-ingles');}
+const ENG_CORES=['card-verde','card-laranja','card-roxo','card-rosa'];
+Object.entries(BANCO_INGLES).forEach(([key,b],i)=>{const el=document.createElement('button');el.className='card '+ENG_CORES[i%4];el.innerHTML='<span class="card-e" aria-hidden="true">'+b.emoji+'</span><span class="card-n">'+b.nome+'</span><small class="topic-count">'+b.perguntas.length+' perguntas · '+b.fonte+'</small>';el.onclick=()=>iniciarIngles(key);$('eng-temas').appendChild(el);});
+Object.entries(ENG_WRITE_NAMES).forEach(([key,[emoji,nome]],i)=>{const el=document.createElement('button');el.className='card '+ENG_CORES[(i+1)%4];el.innerHTML='<span class="card-e" aria-hidden="true">'+emoji+'</span><span class="card-n">'+nome+'</span><small class="topic-count">12 palavras · digitar e escrever</small>';el.onclick=()=>abrirEscritaIngles(key);$('eng-escritas').appendChild(el);});
+let engEstado={tema:'',perguntas:[],indice:0,acertos:0,respondeu:false};
+function iniciarIngles(tema){const b=BANCO_INGLES[tema],all=$('eng-modo').value==='todas';engEstado={tema,perguntas:all?b.perguntas.slice():embaralhar(b.perguntas).slice(0,8),indice:0,acertos:0,respondeu:false};mostrarTela('tela-eng-quiz');carregarIngles();}
+function carregarIngles(){const p=engEstado.perguntas[engEstado.indice],b=BANCO_INGLES[engEstado.tema],total=engEstado.perguntas.length;engEstado.respondeu=false;$('eng-hdr-t').textContent=b.emoji+' '+b.nome;$('eng-hdr-p').textContent='Question '+(engEstado.indice+1)+' / '+total;$('eng-hdr-e').textContent=calcE(engEstado.acertos,total);$('eng-bar').style.width=(100*engEstado.indice/total)+'%';$('eng-perg-e').textContent=p.emoji;$('eng-perg-t').textContent=p.texto;$('eng-visual').innerHTML=p.imagem?'<img class="image-prompt '+(p.imagem===FARM_IMG?'wide':'')+'" src="'+p.imagem+'" alt="Ilustração original usada como apoio visual para esta pergunta">':'';$('eng-fonte').textContent='Base: '+(p.fonte==='Unit 4'?b.fonte:p.fonte)+' · atividade adaptada';
+ const grid=$('eng-grid-o');grid.innerHTML='';grid.className=p.opcoes.some(s=>s.length>24)?'grid-o col1':'grid-o';embaralhar(p.opcoes.map((texto,id)=>({texto,id}))).forEach(({texto,id})=>{const btn=document.createElement('button');btn.className='btn-o';btn.textContent=texto;btn.dataset.idx=id;btn.onclick=()=>responderIngles(id);grid.appendChild(btn);});$('eng-fb').style.display='none';$('eng-fb').textContent='';$('eng-btn-px').hidden=true;
+}
+function responderIngles(escolhido){if(engEstado.respondeu)return;engEstado.respondeu=true;const p=engEstado.perguntas[engEstado.indice],ok=escolhido===p.certa;document.querySelectorAll('#eng-grid-o .btn-o').forEach(btn=>{btn.disabled=true;const i=Number(btn.dataset.idx);if(i===p.certa)btn.classList.add('certa');else if(i===escolhido)btn.classList.add('errada');});if(ok){engEstado.acertos++;confete();}const fb=$('eng-fb');fb.className='fb '+(ok?'c':'e');fb.textContent=(ok?'🌟 Great job! ':'😊 Let’s check. The answer is “'+p.opcoes[p.certa]+'”. ')+p.explicacao;fb.style.display='block';$('eng-hdr-e').textContent=calcE(engEstado.acertos,engEstado.perguntas.length);$('eng-bar').style.width=(100*(engEstado.indice+1)/engEstado.perguntas.length)+'%';$('eng-btn-px').textContent=engEstado.indice===engEstado.perguntas.length-1?'See results 🏆':'Next ➡️';$('eng-btn-px').hidden=false;}
+function avancarIngles(){if(!engEstado.respondeu)return;if(++engEstado.indice>=engEstado.perguntas.length)finalIngles(false);else{carregarIngles();window.scrollTo(0,0);}}
+function falar(texto){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(texto.replace(/[🐔🐴🐐🐷🐑🦆🐝🥚🚜🌻🪽🪶🐤💚🧺🧑‍🌾]/gu,''));u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u);}
+function ouvirIngles(){falar(engEstado.perguntas[engEstado.indice].texto);}
+let engWrite={tipo:'',itens:[],indice:0,acertosPrimeira:0,tentativas:0};
+function abrirEscritaIngles(tipo){engWrite={tipo,itens:ENG_ESCRITA[tipo].slice(),indice:0,acertosPrimeira:0,tentativas:0};mostrarTela('tela-eng-escrita');mostrarPalavra();}
+function mostrarPalavra(){const [emoji,palavra,pista]=engWrite.itens[engWrite.indice];$('eng-clue').textContent=emoji;$('eng-write-prompt').textContent='Write the word in English.';$('eng-write-context').textContent=pista;$('eng-input').value='';$('eng-input').disabled=false;$('eng-input').focus();$('eng-write-feedback').textContent='';$('eng-write-feedback').className='eng-feedback';$('eng-check').hidden=false;$('eng-after').hidden=true;$('eng-write-next').hidden=true;$('eng-write-prog').textContent='Word '+(engWrite.indice+1)+' of '+engWrite.itens.length;engWrite.tentativas=0;engTracos=[];setTimeout(ajustarEngCanvas,0);}
+function normalizarPalavra(s){return s.toLowerCase().trim().replace(/[^a-z]/g,'');}
+function corrigirPalavra(){const correta=engWrite.itens[engWrite.indice][1],digitada=normalizarPalavra($('eng-input').value),fb=$('eng-write-feedback');if(!digitada){fb.textContent='Digite uma palavra primeiro.';fb.className='eng-feedback no';return;}engWrite.tentativas++;if(digitada!==correta){fb.className='eng-feedback no';fb.textContent=engWrite.tentativas===1?'Quase! Ela começa com “'+correta[0].toUpperCase()+'” e tem '+correta.length+' letras. Tente de novo.':'Veja com atenção: '+correta.toUpperCase()+'. Agora digite a palavra correta para continuar.';$('eng-input').select();return;}if(engWrite.tentativas===1)engWrite.acertosPrimeira++;fb.textContent='✓ Correct! '+correta.toUpperCase();fb.className='eng-feedback ok';$('eng-input').disabled=true;$('eng-check').hidden=true;$('eng-model-word').textContent=correta;$('eng-canvas-hint').textContent=correta;$('eng-after').hidden=false;$('eng-write-next').hidden=false;$('eng-write-next').textContent=engWrite.indice===engWrite.itens.length-1?'Finish 🏆':'Next word ➡️';engTracos=[];setTimeout(ajustarEngCanvas,0);confete();}
+function ouvirPalavra(){falar(engWrite.itens[engWrite.indice][1]);}
+function proximaPalavra(){if(!$('eng-input').disabled)return;if(!engTracos.length){const fb=$('eng-write-feedback');fb.textContent='Agora copie a palavra uma vez na área de escrita.';fb.className='eng-feedback no';return;}if(++engWrite.indice>=engWrite.itens.length)finalIngles(true);else{mostrarPalavra();window.scrollTo(0,0);}}
+function finalIngles(escrita){$('eng-ef').textContent=escrita?'✍️ 🐝 🌟':calcE(engEstado.acertos,engEstado.perguntas.length);$('eng-af').textContent=escrita?engWrite.itens.length+' palavras praticadas':engEstado.acertos+' / '+engEstado.perguntas.length+' correct';$('eng-mf').textContent=escrita?'Você acertou '+engWrite.acertosPrimeira+' de primeira. Todas foram corrigidas no campo digitado e copiadas à mão.':'Leia o feedback e tente outra rodada quando quiser!';$('eng-replay').onclick=escrita?()=>abrirEscritaIngles(engWrite.tipo):()=>iniciarIngles(engEstado.tema);mostrarTela('tela-eng-final');confete();}
+const engCanvas=$('eng-canvas'),engCtx=engCanvas.getContext('2d');let engTracos=[],engAtivo=null,engW=0,engH=0;
+function ajustarEngCanvas(){if($('eng-after').hidden)return;const r=engCanvas.getBoundingClientRect(),ratio=window.devicePixelRatio||1;if(!r.width)return;engW=r.width;engH=r.height;engCanvas.width=Math.round(engW*ratio);engCanvas.height=Math.round(engH*ratio);engCtx.setTransform(ratio,0,0,ratio,0,0);redesenharEng();}
+function redesenharEng(){if(!engW)return;engCtx.clearRect(0,0,engW,engH);engCtx.strokeStyle='#2C3E50';engCtx.lineWidth=3;engCtx.lineCap='round';engCtx.lineJoin='round';engTracos.forEach(pontos=>{if(pontos.length===1){engCtx.beginPath();engCtx.arc(pontos[0].x*engW,pontos[0].y*engH,1.7,0,Math.PI*2);engCtx.fill();return;}engCtx.beginPath();engCtx.moveTo(pontos[0].x*engW,pontos[0].y*engH);for(let i=1;i<pontos.length;i++)engCtx.lineTo(pontos[i].x*engW,pontos[i].y*engH);engCtx.stroke();});$('eng-canvas-hint').style.display=engTracos.length?'none':'block';}
+function pontoEng(e){const r=engCanvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};}
+engCanvas.addEventListener('contextmenu',e=>e.preventDefault());engCanvas.addEventListener('pointerdown',e=>{e.preventDefault();if(engAtivo!==null||e.isPrimary===false)return;engAtivo=e.pointerId;engCanvas.setPointerCapture(e.pointerId);engTracos.push([pontoEng(e)]);redesenharEng();});engCanvas.addEventListener('pointermove',e=>{if(engAtivo!==e.pointerId)return;e.preventDefault();const eventos=e.getCoalescedEvents?e.getCoalescedEvents():[e];(eventos.length?eventos:[e]).forEach(ev=>engTracos[engTracos.length-1].push(pontoEng(ev)));redesenharEng();});function encerrarEng(e){if(engAtivo!==e.pointerId)return;engAtivo=null;if(engCanvas.hasPointerCapture(e.pointerId))engCanvas.releasePointerCapture(e.pointerId);}engCanvas.addEventListener('pointerup',encerrarEng);engCanvas.addEventListener('pointercancel',encerrarEng);engCanvas.addEventListener('lostpointercapture',e=>{if(engAtivo===e.pointerId)engAtivo=null;});function limparEngCanvas(){engAtivo=null;engTracos=[];redesenharEng();}function desfazerEng(){engAtivo=null;engTracos.pop();redesenharEng();}new ResizeObserver(()=>ajustarEngCanvas()).observe(engCanvas.parentElement);$('eng-input').addEventListener('keydown',e=>{if(e.key==='Enter')corrigirPalavra();});
 function embaralhar(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
 function mostrarTela(id){document.querySelectorAll('.tela').forEach(t=>t.classList.toggle('ativa',t.id===id));window.scrollTo(0,0);}
 function calcE(a,t){const n=Math.round(5*a/t);return '⭐'.repeat(n)+'☆'.repeat(5-n);}
