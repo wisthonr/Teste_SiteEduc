@@ -6,6 +6,12 @@ WhatsApp Image*.jpg
 # Arquivos temporarios de leitura e testes
 tmp/
 
+# Fontes privadas e cópias de segurança
+Fotografias em iCloud*/
+*.docx
+Dossiê*.pdf
+Transcrição*.pdf
+
 # Fotos e anotacoes privadas de Matematica
 Fotografias em iCloud*/
 private/
