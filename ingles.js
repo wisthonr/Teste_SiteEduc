@@ -144,8 +144,8 @@ function nextEnglish(){
   $('eng-result-note').textContent=`${engRun.assistedCorrect} acertos com apoio escrito. Ouça e repita as frases para continuar praticando.`;
   $('eng-again').onclick=startEnglishQuiz;screen('eng-result');
 }
-function startEnglishWriting(topic=null){
-  engWrite={topic,items:shuffle(ENG_WRITING.filter(w=>!topic||w.topic===topic)),i:0,first:0,done:false,assisted:false,tries:0};
+function startEnglishWriting(topic=null,completion=false){
+  engWrite={topic,completion,items:(completion?ENG_COMPLETION:shuffle(ENG_WRITING)).filter(w=>!topic||w.topic===topic),i:0,first:0,done:false,assisted:false,tries:0};
   screen('eng-write');loadEnglishWriting();
 }
 function loadEnglishWriting(){
@@ -154,11 +154,16 @@ function loadEnglishWriting(){
   $('eng-write-count').textContent=`Atividade ${engWrite.i+1} de ${engWrite.items.length} · página ${item.page}`;
   $('eng-write-prompt').textContent=item.prompt;
   $('eng-write-source').textContent=item.source;
+  $('eng-write-clue').innerHTML=engWrite.completion?(item.scene?sceneHTML(item.scene):item.image?foodHTML(item.image):''):'';
+  $('eng-write-prefix').textContent=item.prefix||'';$('eng-write-suffix').textContent=item.suffix||'';
+  $('eng-write-line').classList.toggle('completion',!!engWrite.completion);
+  $('eng-write-bank').textContent=engWrite.completion?'Palavras de apoio: '+(item.topic==='likes'?"likes · doesn’t like":item.topic==='got'?"potatoes · onions · mushrooms · pot · have · haven’t":ENG_WORDS.slice(0,8).map(w=>w.word).join(' · ')):'';
+  $('eng-answer').placeholder=engWrite.completion?'…':'Escreva aqui…';
   $('eng-answer').value='';$('eng-answer').disabled=false;$('eng-check').disabled=false;$('eng-check').hidden=false;
   $('eng-answer').lang=item.prompt.includes('português')?'pt-BR':'en-GB';
   $('eng-write-feedback').hidden=true;$('eng-write-next').hidden=true;$('eng-copy').hidden=true;
   $('eng-write-picture').hidden=true;$('eng-write-playing').textContent='O áudio é opcional. Você já pode escrever sua resposta.';
-  $('eng-write-picture').innerHTML=(item.image?foodHTML(item.image):'')+`<p>Modelo: <strong>${escapeHTML(item.target)}</strong></p>`;
+  $('eng-write-picture').innerHTML=(item.image?foodHTML(item.image):'')+`<p>Modelo: <strong>${escapeHTML(item.model||item.target)}</strong></p>`;
   engStrokes=[];engPointer=null;
 }
 function playEnglishWriting(){speakEnglish(engWrite.items[engWrite.i].audio,$('eng-write-playing'));}
@@ -179,14 +184,14 @@ function checkEnglishWriting(){
   $('eng-write-feedback').className='feedback'+(correct?'':' miss');
   if(!correct){
     engWrite.assisted=true;
-    $('eng-write-feedback').textContent=`Compare com o modelo: ${item.target} Tente novamente. Outras traduções podem ser válidas; a conferência usa os modelos deste treino.`;
+    $('eng-write-feedback').textContent=`Compare com o modelo: ${item.model||item.target} Escreva no espaço: ${item.target}. Tente novamente. Outras traduções podem ser válidas; a conferência usa os modelos deste treino.`;
     return;
   }
   if(engWrite.tries===1&&!engWrite.assisted)engWrite.first++;
   engWrite.done=true;
-  $('eng-write-feedback').textContent=`✓ Muito bem! ${item.target}`;
+  $('eng-write-feedback').textContent=`✓ Muito bem! ${item.model||item.target}`;
   $('eng-answer').disabled=true;$('eng-check').hidden=true;
-  $('eng-copy-word').textContent=item.target;$('eng-copy').hidden=false;$('eng-write-next').hidden=false;
+  $('eng-copy-word').textContent=item.model||item.target;$('eng-copy').hidden=false;$('eng-write-next').hidden=false;
   $('eng-write-next').textContent=engWrite.i===engWrite.items.length-1?'Concluir meu treino →':'Próxima atividade →';
   requestAnimationFrame(resizeEnglishCanvas);
 }
@@ -196,7 +201,7 @@ function nextEnglishWriting(){
   $('eng-result-title').textContent='Treino de escrita concluído!';
   $('eng-result-score').textContent=engWrite.items.length+' respostas escritas e conferidas';
   $('eng-result-note').textContent=`${engWrite.first} de primeira, sem modelo. A cópia à mão não foi corrigida automaticamente.`;
-  $('eng-again').onclick=()=>startEnglishWriting(engWrite.topic);screen('eng-result');
+  $('eng-again').onclick=()=>startEnglishWriting(engWrite.topic,engWrite.completion);screen('eng-result');
 }
 const engCanvas=$('eng-canvas'),engCtx=engCanvas.getContext('2d');
 let engStrokes=[],engPointer=null,engCW=0,engCH=0;
@@ -222,7 +227,7 @@ $('eng-undo').onclick=()=>{engStrokes.pop();drawEnglishCanvas();};$('eng-clear')
 $('subject-pt').onclick=()=>screen('home');$('subject-en').onclick=englishHome;
 document.querySelectorAll('[data-subjects]').forEach(b=>b.onclick=()=>screen('subjects'));
 document.querySelectorAll('[data-english]').forEach(b=>b.onclick=englishHome);
-document.querySelectorAll('[data-eng-learn]').forEach(b=>b.onclick=()=>openEnglishTopic(b.dataset.engLearn));
+document.querySelectorAll('[data-eng-learn]').forEach(b=>b.onclick=()=>startEnglishWriting(b.dataset.engLearn,true));
 $('eng-listen-start').onclick=startEnglishQuiz;$('eng-play').onclick=playEnglishQuestion;
 $('eng-transcript-button').onclick=showEnglishTranscript;$('eng-next').onclick=nextEnglish;
 $('eng-dictation').onclick=()=>startEnglishWriting();

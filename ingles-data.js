@@ -87,3 +87,14 @@ ENG_TRANSLATIONS.forEach(([en,pt])=>{
  ENG_WRITING.push({topic:'got',page:60,prompt:'Traduza a frase para inglês:',source:pt,target:en,answers:[en],audio:en});
  ENG_WRITING.push({topic:'got',page:60,prompt:'Traduza a frase para português:',source:en,target:pt,answers:aliases,audio:en});
 });
+
+const ENG_COMPLETION=[];
+ENG_WORDS.forEach(w=>{
+ const topic=w.page===60?'got':'birthday';
+ const before=topic==='got'?(w.id==='pot'?'Have you got a ':'Have you got '):'';
+ const after=topic==='got'?'?':'.';
+ ENG_COMPLETION.push({topic,page:w.page,prompt:'Complete a palavra: escreva as letras que faltam.',source:w.pt,prefix:before+w.word[0],suffix:after,target:w.word.slice(1),answers:[w.word.slice(1)],model:before+w.word+after,audio:w.word,image:w.id});
+ ENG_COMPLETION.push({topic,page:w.page,prompt:'Agora escreva a palavra inteira em inglês.',source:w.pt,prefix:topic==='got'?before:'',suffix:topic==='got'?after:'',target:w.word,answers:[w.word],model:topic==='got'?before+w.word+after:w.word,audio:w.word,image:w.id});
+});
+ENG_SCENES.forEach(s=>{const [prefix,suffix]=s.blank.split('___');ENG_COMPLETION.push({topic:'likes',page:56,prompt:'Complete a frase: escreva likes ou doesn’t like.',source:s.pt,prefix,suffix,target:s.answer,answers:[s.answer],model:s.sentence,audio:s.sentence,scene:s.id});});
+ENG_WORDS.slice(8).forEach((w,i)=>{const yes=i%2===0;ENG_COMPLETION.push({topic:'got',page:60,prompt:'Complete a resposta em inglês.',source:(w.id==='pot'?'Have you got a pot?':'Have you got '+w.word+'?')+' '+(yes?'✓ Sim, tenho.':'✕ Não, não tenho.'),prefix:yes?'Yes, I ':'No, I ',suffix:'.',target:yes?'have':"haven't",answers:yes?['have']:["haven't",'have not'],model:yes?'Yes, I have.':"No, I haven't.",audio:yes?'Yes, I have.':"No, I haven't.",image:w.id});});
