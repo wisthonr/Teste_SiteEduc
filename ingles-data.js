@@ -21,8 +21,8 @@ const ENG_SCENES = [
   {id:'crisps', sentence:'He likes crisps.', pt:'Ele gosta de batatas chips.', alt:'Menino sorrindo e segurando batatas chips', blank:'He ___ crisps.', answer:'likes'}
 ];
 const ENG_TOPICS = {
-  birthday:{title:'Palavras da festa', pages:'54–55', intro:'Toque em uma palavra para ouvir. Olhe a imagem, escute e repita.', words:ENG_WORDS.slice(0,8)},
-  likes:{title:'Likes / doesn’t like', pages:'56', intro:'Likes significa “gosta”. Doesn’t like significa “não gosta”. She se refere a ela; he, a ele. Ouça e observe as expressões.'},
+  birthday:{title:'Palavras da festa', pages:'54–55', intro:'Leia as palavras e suas traduções. Depois, pratique a escrita nos dois sentidos. Toque em uma palavra se quiser ouvir.', words:ENG_WORDS.slice(0,8)},
+  likes:{title:'Likes / doesn’t like', pages:'56', intro:'Likes significa “gosta”. Doesn’t like significa “não gosta”. She se refere a ela; he, a ele. Observe as expressões e pratique a escrita das frases. O áudio é opcional.'},
   got:{title:'Have you got…?', pages:'60 · atividade 4', intro:'Have you got…? pergunta se você tem alguma coisa. Yes, I have. significa “Sim, tenho”. No, I haven’t. significa “Não, não tenho”. Use a pot para uma panela e potatoes, onions e mushrooms para os itens no plural.', words:ENG_WORDS.slice(8)}
 };
 const ENG_QUESTIONS = {birthday:[],likes:[],got:[]};
@@ -60,3 +60,30 @@ const ENG_DIALOGUES = [
   {question:'Have you got a pot?',response:"No, I haven't.",word:'pot'}
 ];
 ENG_DIALOGUES.forEach(d=>ENG_QUESTIONS.got.push({kind:'dialogue',audio:d.question+' '+d.response,target:d.response,page:60,options:['Yes, I have.',"No, I haven't.",'Yes, I like it.',"No, I don't like it."],instruction:'Ouça a pergunta e a resposta. Toque na resposta que escutou.',context:'Neste diálogo de treino, alguém pergunta e a outra pessoa responde. Escute até o fim.',why:`${d.question} → ${d.response} ${d.response==='Yes, I have.'?'A pessoa tem o item.':'A pessoa não tem o item.'}`}));
+
+// Escrita: tradução nos dois sentidos, frases e lacunas. Áudio opcional.
+const ENG_WRITING = [];
+ENG_WORDS.forEach(w=>{
+  const topic=w.page===60?'got':'birthday';
+  ENG_WRITING.push({topic,page:w.page,prompt:'Traduza para inglês:',source:w.pt,target:w.word,answers:[w.word],audio:w.word,image:w.id});
+  const variants={crisps:['batatas chips','batata chips','batatas fritas','salgadinhos de batata'],pot:['panela','uma panela'],card:['cartão de aniversário','um cartão de aniversário']};
+  ENG_WRITING.push({topic,page:w.page,prompt:'Traduza para português:',source:w.word,target:w.pt,answers:variants[w.id]||[w.pt],audio:w.word,image:w.id});
+});
+ENG_SCENES.forEach(s=>{
+  ENG_WRITING.push({topic:'likes',page:56,prompt:'Traduza a frase para inglês:',source:s.pt,target:s.sentence,answers:[s.sentence],audio:s.sentence});
+  ENG_WRITING.push({topic:'likes',page:56,prompt:'Traduza a frase para português:',source:s.sentence,target:s.pt,answers:[s.pt],audio:s.sentence});
+  ENG_WRITING.push({topic:'likes',page:56,prompt:'Complete em inglês com likes ou doesn’t like:',source:s.blank+' — '+s.pt,target:s.answer,answers:[s.answer],audio:s.sentence});
+});
+const ENG_TRANSLATIONS=[
+ ['Have you got potatoes?','Você tem batatas?'],
+ ['Have you got onions?','Você tem cebolas?'],
+ ['Have you got mushrooms?','Você tem cogumelos?'],
+ ['Have you got a pot?','Você tem uma panela?'],
+ ['Yes, I have.','Sim, tenho.'],
+ ["No, I haven't.",'Não, não tenho.']
+];
+ENG_TRANSLATIONS.forEach(([en,pt])=>{
+ const aliases=pt==='Sim, tenho.'?['Sim, tenho.','Sim, eu tenho.']:pt==='Não, não tenho.'?['Não, não tenho.','Não, eu não tenho.']: [pt,pt.replace('Você tem','Tu tens'),pt.replace('uma panela','panela')];
+ ENG_WRITING.push({topic:'got',page:60,prompt:'Traduza a frase para inglês:',source:pt,target:en,answers:[en],audio:en});
+ ENG_WRITING.push({topic:'got',page:60,prompt:'Traduza a frase para português:',source:en,target:pt,answers:aliases,audio:en});
+});

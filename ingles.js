@@ -69,8 +69,8 @@ function openEnglishTopic(id){
     html+='<p class="small">Os exemplos seguem as cenas da atividade 2. Na atividade 1, as cores dependem do áudio original do livro.</p>';
   }
   if(id==='got'){
-    html+='<div class="paper"><h2>Ouça e repita</h2><p lang="en">Have you got a pot?</p><button class="audio-button" data-say="Have you got a pot?">🔊 Ouvir pergunta</button><p>✓ <span lang="en">Yes, I have.</span> — Sim, tenho.</p><button class="audio-button" data-say="Yes, I have.">🔊 Ouvir resposta positiva</button><p>✕ <span lang="en">No, I haven’t.</span> — Não, não tenho.</p><button class="audio-button" data-say="No, I haven\'t.">🔊 Ouvir resposta negativa</button></div>';
-    html+='<p class="small">Os diálogos de treino alternam respostas positivas e negativas. Ouça a resposta; ela não é uma preferência por comida.</p>';
+    html+='<div class="paper"><h2>Leia e traduza</h2><p lang="en">Have you got a pot?</p><button class="audio-button" data-say="Have you got a pot?">🔊 Ouvir pergunta</button><p>✓ <span lang="en">Yes, I have.</span> — Sim, tenho.</p><button class="audio-button" data-say="Yes, I have.">🔊 Ouvir resposta positiva</button><p>✕ <span lang="en">No, I haven’t.</span> — Não, não tenho.</p><button class="audio-button" data-say="No, I haven\'t.">🔊 Ouvir resposta negativa</button></div>';
+    html+='<p class="small">As respostas indicam se a pessoa tem o item. Pratique a escrita da pergunta e das respostas; o áudio está disponível como apoio.</p>';
   }
   html+='<p id="eng-learn-speaking" class="small" role="status" aria-live="polite"></p>';
   $('eng-learn-content').innerHTML=html;
@@ -144,58 +144,59 @@ function nextEnglish(){
   $('eng-result-note').textContent=`${engRun.assistedCorrect} acertos com apoio escrito. Ouça e repita as frases para continuar praticando.`;
   $('eng-again').onclick=startEnglishQuiz;screen('eng-result');
 }
-function startEnglishWriting(){
-  engWrite={items:shuffle(ENG_WORDS),i:0,first:0,done:false,heard:false,assisted:false,tries:0};
+function startEnglishWriting(topic=null){
+  engWrite={topic,items:shuffle(ENG_WRITING.filter(w=>!topic||w.topic===topic)),i:0,first:0,done:false,assisted:false,tries:0};
   screen('eng-write');loadEnglishWriting();
 }
 function loadEnglishWriting(){
-  stopEnglishAudio();const word=engWrite.items[engWrite.i];
-  Object.assign(engWrite,{done:false,heard:false,assisted:false,tries:0});
-  $('eng-write-count').textContent=`Palavra ${engWrite.i+1} de ${engWrite.items.length} · página ${word.page}`;
-  $('eng-answer').value='';$('eng-answer').disabled=true;$('eng-check').disabled=true;$('eng-check').hidden=false;
+  stopEnglishAudio();const item=engWrite.items[engWrite.i];
+  Object.assign(engWrite,{done:false,assisted:false,tries:0});
+  $('eng-write-count').textContent=`Atividade ${engWrite.i+1} de ${engWrite.items.length} · página ${item.page}`;
+  $('eng-write-prompt').textContent=item.prompt;
+  $('eng-write-source').textContent=item.source;
+  $('eng-answer').value='';$('eng-answer').disabled=false;$('eng-check').disabled=false;$('eng-check').hidden=false;
+  $('eng-answer').lang=item.prompt.includes('português')?'pt-BR':'en-GB';
   $('eng-write-feedback').hidden=true;$('eng-write-next').hidden=true;$('eng-copy').hidden=true;
-  $('eng-write-picture').hidden=true;$('eng-write-playing').textContent='Toque em Ouvir palavra para começar.';
-  $('eng-write-picture').innerHTML=foodHTML(word.id)+`<p>${escapeHTML(word.pt)}</p>`;
+  $('eng-write-picture').hidden=true;$('eng-write-playing').textContent='O áudio é opcional. Você já pode escrever sua resposta.';
+  $('eng-write-picture').innerHTML=(item.image?foodHTML(item.image):'')+`<p>Modelo: <strong>${escapeHTML(item.target)}</strong></p>`;
   engStrokes=[];engPointer=null;
 }
-function unlockEnglishWriting(){if(!engWrite.done){$('eng-answer').disabled=false;$('eng-check').disabled=false;}}
-function playEnglishWriting(){
-  const current=engWrite,i=current.i;
-  speakEnglish(current.items[i].word,$('eng-write-playing'),{onDone:()=>{if(engWrite===current&&current.i===i){current.heard=true;unlockEnglishWriting();}}});
-}
+function playEnglishWriting(){speakEnglish(engWrite.items[engWrite.i].audio,$('eng-write-playing'));}
 function hintEnglishWriting(){
   engWrite.assisted=true;$('eng-write-picture').hidden=false;
-  $('eng-write-playing').textContent='Imagem e tradução abertas. Esta palavra será registrada como treino com apoio.';
-  unlockEnglishWriting();
-  if(!englishSynth){$('eng-write-feedback').textContent='Sem voz neste navegador. Modelo para copiar: '+engWrite.items[engWrite.i].word;$('eng-write-feedback').hidden=false;}
+  $('eng-write-playing').textContent='Modelo aberto para comparar. Atividade com apoio.';
+}
+function normalizeEnglishAnswer(text){
+ return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,'').trim().replace(/\s+/g,' ');
 }
 function checkEnglishWriting(){
-  if(engWrite.done||(!engWrite.heard&&!engWrite.assisted))return;
-  const word=engWrite.items[engWrite.i],input=$('eng-answer').value.toLowerCase().trim().replace(/\s+/g,' ');
-  if(!input){$('eng-write-feedback').textContent='Escreva a palavra no campo antes de conferir.';$('eng-write-feedback').className='feedback miss';$('eng-write-feedback').hidden=false;return;}
+  if(engWrite.done)return;
+  const item=engWrite.items[engWrite.i],input=normalizeEnglishAnswer($('eng-answer').value);
+  $('eng-write-feedback').hidden=false;
+  if(!input){$('eng-write-feedback').textContent='Escreva sua resposta antes de conferir.';$('eng-write-feedback').className='feedback miss';return;}
   engWrite.tries++;
-  const correct=input===word.word;
-  $('eng-write-feedback').className='feedback'+(correct?'':' miss');$('eng-write-feedback').hidden=false;
+  const correct=item.answers.some(a=>normalizeEnglishAnswer(a)===input);
+  $('eng-write-feedback').className='feedback'+(correct?'':' miss');
   if(!correct){
     engWrite.assisted=true;
-    $('eng-write-feedback').textContent=`Compare a grafia do livro: ${word.word}. Tente novamente no campo de texto.`;
+    $('eng-write-feedback').textContent=`Compare com o modelo: ${item.target} Tente novamente. Outras traduções podem ser válidas; a conferência usa os modelos deste treino.`;
     return;
   }
   if(engWrite.tries===1&&!engWrite.assisted)engWrite.first++;
   engWrite.done=true;
-  $('eng-write-feedback').textContent=`✓ ${word.word}. A palavra no campo de texto corresponde à grafia do livro.`;
+  $('eng-write-feedback').textContent=`✓ Muito bem! ${item.target}`;
   $('eng-answer').disabled=true;$('eng-check').hidden=true;
-  $('eng-copy-word').textContent=word.word;$('eng-copy').hidden=false;$('eng-write-next').hidden=false;
-  $('eng-write-next').textContent=engWrite.i===engWrite.items.length-1?'Concluir meu treino →':'Próxima palavra →';
+  $('eng-copy-word').textContent=item.target;$('eng-copy').hidden=false;$('eng-write-next').hidden=false;
+  $('eng-write-next').textContent=engWrite.i===engWrite.items.length-1?'Concluir meu treino →':'Próxima atividade →';
   requestAnimationFrame(resizeEnglishCanvas);
 }
 function nextEnglishWriting(){
   if(!engWrite.done)return;
   if(++engWrite.i<engWrite.items.length){loadEnglishWriting();window.scrollTo(0,0);return;}
-  $('eng-result-title').textContent='Caderno de Inglês concluído!';
-  $('eng-result-score').textContent=engWrite.items.length+' palavras conferidas no campo de texto';
-  $('eng-result-note').textContent=`${engWrite.first} de primeira, sem imagem, tradução ou modelo. A cópia à mão não foi corrigida automaticamente.`;
-  $('eng-again').onclick=startEnglishWriting;screen('eng-result');
+  $('eng-result-title').textContent='Treino de escrita concluído!';
+  $('eng-result-score').textContent=engWrite.items.length+' respostas escritas e conferidas';
+  $('eng-result-note').textContent=`${engWrite.first} de primeira, sem modelo. A cópia à mão não foi corrigida automaticamente.`;
+  $('eng-again').onclick=()=>startEnglishWriting(engWrite.topic);screen('eng-result');
 }
 const engCanvas=$('eng-canvas'),engCtx=engCanvas.getContext('2d');
 let engStrokes=[],engPointer=null,engCW=0,engCH=0;
@@ -224,7 +225,8 @@ document.querySelectorAll('[data-english]').forEach(b=>b.onclick=englishHome);
 document.querySelectorAll('[data-eng-learn]').forEach(b=>b.onclick=()=>openEnglishTopic(b.dataset.engLearn));
 $('eng-listen-start').onclick=startEnglishQuiz;$('eng-play').onclick=playEnglishQuestion;
 $('eng-transcript-button').onclick=showEnglishTranscript;$('eng-next').onclick=nextEnglish;
-$('eng-dictation').onclick=startEnglishWriting;$('eng-write-play').onclick=playEnglishWriting;
+$('eng-dictation').onclick=()=>startEnglishWriting();
+$('eng-writing-start').onclick=()=>startEnglishWriting(engTopic);$('eng-write-play').onclick=playEnglishWriting;
 $('eng-write-hint').onclick=hintEnglishWriting;$('eng-check').onclick=checkEnglishWriting;$('eng-write-next').onclick=nextEnglishWriting;
 $('eng-answer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkEnglishWriting();}});
 if(englishSynth)englishSynth.addEventListener('voiceschanged',populateVoices);
