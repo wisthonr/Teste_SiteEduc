@@ -227,13 +227,56 @@ $('eng-undo').onclick=()=>{engStrokes.pop();drawEnglishCanvas();};$('eng-clear')
 $('subject-pt').onclick=()=>screen('home');$('subject-en').onclick=englishHome;
 document.querySelectorAll('[data-subjects]').forEach(b=>b.onclick=()=>screen('subjects'));
 document.querySelectorAll('[data-english]').forEach(b=>b.onclick=englishHome);
-document.querySelectorAll('[data-eng-learn]').forEach(b=>b.onclick=()=>startEnglishWriting(b.dataset.engLearn,true));
+document.querySelectorAll('[data-eng-learn]').forEach(b=>b.onclick=()=>openEnglishSheet(b.dataset.engLearn));
 $('eng-listen-start').onclick=startEnglishQuiz;$('eng-play').onclick=playEnglishQuestion;
 $('eng-transcript-button').onclick=showEnglishTranscript;$('eng-next').onclick=nextEnglish;
-$('eng-dictation').onclick=()=>startEnglishWriting();
+$('eng-dictation').onclick=()=>openEnglishSheet('review');
 $('eng-writing-start').onclick=()=>startEnglishWriting(engTopic);$('eng-write-play').onclick=playEnglishWriting;
 $('eng-write-hint').onclick=hintEnglishWriting;$('eng-check').onclick=checkEnglishWriting;$('eng-write-next').onclick=nextEnglishWriting;
 $('eng-answer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkEnglishWriting();}});
 if(englishSynth)englishSynth.addEventListener('voiceschanged',populateVoices);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopEnglishAudio();});
 populateVoices();renderEnglishRecords();
+
+let engSheet=null;
+function openEnglishSheet(topic){
+ let items=[];
+ if(topic==='birthday'||topic==='got'){
+  const words=topic==='birthday'?ENG_WORDS.slice(0,8):ENG_WORDS.slice(8);
+  items=words.map(w=>({image:w.id,source:w.pt,prefix:topic==='got'?(w.id==='pot'?'Have you got a ':'Have you got '):'',suffix:topic==='got'?'?':'',target:w.word,answers:[w.word],audio:w.word}));
+  if(topic==='got')items.push(...ENG_WORDS.slice(8).map((w,i)=>({image:w.id,source:(w.id==='pot'?'Have you got a pot?':'Have you got '+w.word+'?')+' '+(i%2===0?'✓ Sim, tenho.':'✕ Não, não tenho.'),prefix:i%2===0?'Yes, I ':'No, I ',suffix:'.',target:i%2===0?'have':"haven't",answers:i%2===0?['have']:["haven't",'have not'],audio:i%2===0?'Yes, I have.':"No, I haven't."})));
+ }else if(topic==='likes')items=ENG_SCENES.map(s=>({scene:s.id,source:s.pt,prefix:s.blank.split('___')[0],suffix:s.blank.split('___')[1],target:s.answer,answers:[s.answer],audio:s.sentence}));
+ else items=ENG_WRITING.map(x=>({...x,prefix:'',suffix:'',source:x.prompt+' '+x.source}));
+ engSheet={topic,items,page:0,values:items.map(()=>''),feedback:items.map(()=>null)};
+ screen('eng-sheet');renderEnglishSheet();
+}
+function saveEnglishSheet(){
+ $('eng-sheet-rows').querySelectorAll('input').forEach(input=>engSheet.values[Number(input.dataset.index)]=input.value);
+}
+function renderEnglishSheet(){
+ stopEnglishAudio();
+ const start=engSheet.page*4,total=Math.ceil(engSheet.items.length/4);
+ $('eng-sheet-title').textContent=engSheet.topic==='review'?'Escrever e traduzir':ENG_TOPICS[engSheet.topic].title;
+ $('eng-sheet-page').textContent=`Folha ${engSheet.page+1} de ${total}`;
+ $('eng-sheet-guide').textContent=engSheet.topic==='likes'?'Escreva likes ou doesn’t like nos espaços.':engSheet.topic==='review'?'Leia e escreva a tradução.':'Olhe as figuras e escreva nos espaços.';
+ $('eng-sheet-status').textContent='';
+ $('eng-sheet-rows').innerHTML=engSheet.items.slice(start,start+4).map((x,k)=>{
+ const i=start+k;
+ return `<article class="sheet-row"><span class="sheet-number">${i+1}</span><div class="sheet-picture">${x.image?foodHTML(x.image):x.scene?sceneHTML(x.scene):'<span aria-hidden="true">✏️</span>'}</div><div class="sheet-question"><p class="sheet-clue">${escapeHTML(x.source)}</p><div class="sheet-line"><span>${escapeHTML(x.prefix||'')}</span><input id="sheet-answer-${i}" data-index="${i}" aria-label="Resposta ${i+1}" value="${escapeHTML(engSheet.values[i])}" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="" type="text"><span>${escapeHTML(x.suffix||'')}</span><button class="sheet-audio" data-audio="${i}" aria-label="Ouvir exercício ${i+1}" title="Ouvir (opcional)">🔊</button></div><p id="sheet-feedback-${i}" class="sheet-feedback" role="status">${escapeHTML(engSheet.feedback[i]||'')}</p></div></article>`;
+ }).join('');
+ $('eng-sheet-rows').querySelectorAll('[data-audio]').forEach(b=>b.onclick=()=>speakEnglish(engSheet.items[Number(b.dataset.audio)].audio,$('eng-sheet-status')));
+ $('eng-sheet-rows').querySelectorAll('input').forEach(input=>input.oninput=()=>{const i=Number(input.dataset.index);engSheet.values[i]=input.value;engSheet.feedback[i]=null;$('sheet-feedback-'+i).textContent='';});
+ $('eng-sheet-prev').hidden=engSheet.page===0;$('eng-sheet-next').hidden=engSheet.page===total-1;
+}
+$('eng-sheet-check').onclick=()=>{
+ saveEnglishSheet();let answered=0,correct=0;
+ $('eng-sheet-rows').querySelectorAll('input').forEach(input=>{
+ const i=Number(input.dataset.index),x=engSheet.items[i],value=normalizeEnglishAnswer(input.value);let message;
+ if(!value)message='Pode fazer esta depois.';
+ else {answered++;if(x.answers.some(a=>normalizeEnglishAnswer(a)===value)){correct++;message='✓ Muito bem!';}else message='Compare com o modelo: '+x.target;}
+ engSheet.feedback[i]=message;$('sheet-feedback-'+i).textContent=message;
+ });
+ $('eng-sheet-status').textContent=`${correct} de ${answered} respostas preenchidas conferem com o modelo. Você pode corrigir ou seguir para outra folha.`;
+};
+$('eng-sheet-prev').onclick=()=>{saveEnglishSheet();engSheet.page--;renderEnglishSheet();window.scrollTo(0,0);};
+$('eng-sheet-next').onclick=()=>{saveEnglishSheet();engSheet.page++;renderEnglishSheet();window.scrollTo(0,0);};
