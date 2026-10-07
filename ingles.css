@@ -13,3 +13,6 @@
 
 #eng-sheet-rows .sheet-clue{margin:0 0 4px}#eng-sheet-rows .sheet-feedback{margin:4px 0 0}
 
+
+.sheet-line input{flex:1 1 220px;width:0;min-width:160px}@media(max-width:600px){.sheet-line input{flex-basis:160px;min-width:120px}}
+
