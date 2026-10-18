@@ -24,6 +24,10 @@ As respostas, seleções e traços ficam no `localStorage` deste navegador (`jul
 
 O total das operações é identificado como um campo para algarismos, com exemplo visível de outra conta. Problemas também oferecem espaço de frase em português, separado do resultado numérico, e um modelo que não usa a resposta esperada. Os exemplos não preenchem campos nem alteram a correção. Os campos de palavras usam `lang="pt-BR"` e `inputmode="text"`; os de algarismos usam `inputmode="numeric"`. A página não força o teclado do iPad nem configura o tempo de reconhecimento do recurso Escrever à Mão. **Escrever livre, sem converter** é o canvas já existente, sem conversão, limite de tempo ou correção automática, para permitir pausas entre letras.
 
+A revisão completa de entrada acrescenta guias para todos os formatos: números, valor posicional, sequências, decomposições, explicações e escrita por extenso. Quadros numéricos e contas por ordens têm instruções de formato para o conjunto de casas; o jogo de saltos também tem exemplo. Exemplos calculados evitam a resposta esperada da atividade. Nos campos de valor posicional, a correção aceita equivalências matemáticas em português: `40`, `4 dezenas`, `quatro dezenas`, `quarenta`; `400`, `4 centenas`, `quatro centenas`, `quatrocentos`. Maiúsculas e ausência de acentos são aceitas. Letras e números confundidos pelo reconhecimento, como `4 DE2EN5`, não são substituídos automaticamente.
+
+Ao abrir uma folha 103 já salva, `prepareSheet` atualiza somente o tipo dos campos de valor posicional e uma pista antiga. Mantém números sorteados, enunciados, respostas e desenhos. Os testes cobrem essa migração, equivalências, entradas inválidas e exemplos que não revelam a resposta. Verificação no navegador cobre as 12 folhas, descrições acessíveis, idioma explícito e largura de 375 px; não valida o reconhecimento físico da Apple Pencil.
+
 ## Desenvolvimento e verificação
 
 Sem framework, instalação ou build:

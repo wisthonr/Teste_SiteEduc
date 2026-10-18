@@ -42,8 +42,8 @@ const MathBook = (() => {
       sheet.trains=[a,x,y,b];sheet.composition=[100,100,50,n-250];
       if(n<250)sheet.composition=[100,100,10,n-210];
       put(task('a',`Complete os assentos do último trem. Junte: ${sheet.composition.join(' + ')}.`,[numeric('seats','Quantidade de assentos',n)]),
-      task('b',`O algarismo 4 vale o mesmo em ${x} e ${y}? Explique.`,[numeric('value1',`Em ${x}, o 4 vale`,40),numeric('value2',`Em ${y}, o 4 vale`,400),text('why','Conte o que você percebeu','Não. Em um número, o 4 ocupa as dezenas e vale 40; no outro, ocupa as centenas e vale 400.')]),
-      task('c',`Decomponha ${a} pelo valor de cada algarismo.`,[expression('decomp','Centenas + dezenas + unidades',a,true)],{hint:`Olhe cada posição. Exemplo: 235 = 200 + 30 + 5.`}),
+      task('b',`O algarismo 4 vale o mesmo em ${x} e ${y}? Explique.`,[{...numeric('value1',`Em ${x}, o 4 vale`,40),kind:'placevalue'},{...numeric('value2',`Em ${y}, o 4 vale`,400),kind:'placevalue'},text('why','Conte o que você percebeu','Não. Em um número, o 4 ocupa as dezenas e vale 40; no outro, ocupa as centenas e vale 400.')]),
+      task('c',`Decomponha ${a} pelo valor de cada algarismo.`,[expression('decomp','Centenas + dezenas + unidades',a,true)],{hint:'Olhe cada posição: centenas, dezenas e unidades.'}),
       task('d',`Decomponha ${b} de três maneiras diferentes.`,[expression('way1','1ª maneira',b),expression('way2','2ª maneira',b),expression('way3','3ª maneira',b)],{distinct:true,hint:'Você pode separar uma centena em duas parcelas de 50, por exemplo. Mude as parcelas, não apenas a ordem.'}));
     }
     if(page==='160'){
@@ -128,6 +128,44 @@ const MathBook = (() => {
     return sheet;
   }
   const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;!?]/g,'').replace(/\s+/g,' ').trim();
+  let namedNumbers;
+  function parseQuantity(value){
+    const raw=String(value).trim();
+    // Never guess OCR substitutions such as 2 -> Z or silently accept decimals.
+    if(!/^[\p{L}\d\s]+[.!]?$/u.test(raw))return null;
+    const s=normalize(raw);
+    namedNumbers??=new Map(Array.from({length:1000},(_,n)=>[normalize(words(n)),n]));
+    const number=x=>{x=x.replace(/\buma\b/g,'um').replace(/\bduas\b/g,'dois').replace(/\b(duzent|trezent|quatrocent|quinhent|seiscent|setecent|oitocent|novecent)as\b/g,'$1os');return /^\d+$/.test(x)?Number(x):namedNumbers.get(x);};
+    const unit=s.match(/^(.+?)\s*(unidades?|dezenas?|centenas?)$/);
+    const count=number(unit?unit[1].trim():s);
+    if(!Number.isSafeInteger(count)||count<0)return null;
+    const n=count*(unit?(unit[2].startsWith('centena')?100:unit[2].startsWith('dezena')?10:1):1);
+    return n<=999?n:null;
+  }
+  function prepareSheet(sheet){
+    let changed=false;
+    if(sheet.id==='103')for(const t of sheet.tasks){
+      if(t.id==='b')for(const f of t.fields)if(['value1','value2'].includes(f.id)&&f.kind==='number'){f.kind='placevalue';changed=true;}
+      if(t.id==='c'&&t.hint?.startsWith('Olhe cada posição.')&&t.hint!=='Olhe cada posição: centenas, dezenas e unidades.'){t.hint='Olhe cada posição: centenas, dezenas e unidades.';changed=true;}
+    }
+    return changed;
+  }
+  function fieldGuide(f,t={fields:[]}){
+    const forbidden=[f.expected,...(t.fields??[]).map(x=>x.expected),t.a,t.b,t.op==='−'?t.a-t.b:t.a+t.b];
+    const sample=[25,36,18,72].find(n=>!forbidden.includes(n)&&(f.kind!=='words'||normalize(words(n))!==normalize(f.expected)));
+    if(f.kind==='placevalue'){const factor=f.expected>=100?100:f.expected>=10?10:1,unit=factor===100?'centenas':factor===10?'dezenas':'unidades';const count=[3,2,5].find(n=>!forbidden.includes(n*factor)),name=count===2?'duas':words(count);return {suffix:'',sample:String(count*factor),text:`Exemplo de outro valor: ${count*factor}, ${count} ${unit} ou ${name} ${unit}. Você pode escrever o valor em algarismos ou com palavras.`};}
+    if(f.kind==='number')return {suffix:' — escreva só o número',sample:String(sample),text:`Exemplo de formato (outra situação): ${sample}. Use só algarismos, sem palavras.`};
+    if(f.kind==='expression'){
+      const n=[235,146,328,512].find(n=>!forbidden.includes(n));
+      return {suffix:' — escreva uma adição',sample:String(n),text:`Exemplo de outro número: ${n} = ${decomposed(n).join(' + ')}. Use as parcelas do número pedido na atividade.`};
+    }
+    if(f.kind==='sequence'){let start=10;while(Array.isArray(f.expected)&&Array.from({length:4},(_,i)=>start+2*i).some(n=>f.expected.includes(n)))start+=20;const seq=Array.from({length:4},(_,i)=>start+2*i);return {suffix:' — números separados por espaços ou traços',sample:seq.join(' '),text:`Exemplo de outra sequência: ${seq.join(' – ')}. Escreva todos os números da sequência pedida.`};}
+    if(f.kind==='words')return {suffix:' — use palavras',sample:String(sample),text:`Exemplo de outro número: ${sample} → ${words(sample)}. Aqui, escreva por extenso o número pedido.`};
+    if(f.id==='sentence')return {suffix:'',sample:String(sample),text:`Exemplo de outra situação: “Ao todo, ficaram ${sample} objetos.” Use o resultado e os objetos da sua atividade.`};
+    if(f.id==='why')return {suffix:'',sample:'',text:'Formato para explicar: “O algarismo está na ... e vale ... .” Complete com o que você percebeu.'};
+    if(['across','down'].includes(f.id)||/^rule\d+$/.test(f.id))return {suffix:'',sample:'',text:'Formato para explicar: “Os números [aumentam ou diminuem] de ... em ... .” Complete com a regra que você observou.'};
+    return {suffix:'',sample:'',text:'Escreva sua ideia em português, com suas palavras. Você também pode usar “Escrever livre, sem converter” e fazer pausas.'};
+  }
   function parseExpression(s){
     s=String(s).replace(/\s/g,'');const sides=s.split('=');if(sides.length>2)return null;
     const parse=x=>/^\d+(\+\d+)+$/.test(x)?x.split('+').map(Number):null;
@@ -141,12 +179,16 @@ const MathBook = (() => {
     const s=String(value??'').trim();if(!s)return {status:'empty',message:'Pode deixar para depois.'};
     if(f.kind==='text'||f.expected===null)return {status:'self',message:'Resposta aberta: compare sua ideia com o modelo de apoio.'};
     let ok=false;
+    if(f.kind==='placevalue'){
+      const n=parseQuantity(s);ok=n===f.expected;
+      if(n===null)return {status:'retry',message:'Confira o texto que o iPad colocou. Você pode usar o valor em algarismos ou escrever a quantidade com dezenas, centenas ou unidades.'};
+    }
     if(f.kind==='number')ok=/^\d+$/.test(s)&&Number(s)===f.expected;
     if(f.kind==='words')ok=normalize(s)===normalize(f.expected)||normalize(s).replace('catorze','quatorze')===normalize(f.expected);
     if(f.kind==='sequence'){const cleaned=s.replace(/[–—−]/g,'-');const vals=cleaned.split(/[\s,;\-]+/).filter(Boolean);ok=vals.length===f.expected.length&&vals.every((v,i)=>/^\d+$/.test(v)&&Number(v)===f.expected[i]);}
     if(f.kind==='expression'){const p=parseExpression(s);ok=p?.sum===f.expected;if(ok&&f.positional)ok=p.parts.filter(Boolean).sort((a,b)=>a-b).join('+')===decomposed(f.expected).sort((a,b)=>a-b).join('+');}
     return {status:ok?'ok':'retry',message:ok?'Isso mesmo!':'Vamos olhar mais uma vez? Use o apoio se quiser.'};
   }
-  return {pages,make,words,digits,decomposed,parseExpression,normalize,checkField,rand};
+  return {pages,make,words,digits,decomposed,parseExpression,parseQuantity,prepareSheet,fieldGuide,normalize,checkField,rand};
 })();
 if(typeof module!=='undefined')module.exports=MathBook;
