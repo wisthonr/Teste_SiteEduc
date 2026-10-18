@@ -37,4 +37,10 @@ O teste verifica 3.600 folhas geradas com semente fixa: limites de 0 a 999, solu
 
 ## Fontes privadas
 
-As fotos de referência e temporários são ignorados pelo Git. Publicar apenas os arquivos didáticos derivados. Não incluir fotos das páginas, manuscritos, nomes da escola/professora/alunos nem mensagens privadas. As ilustrações públicas são SVG/CSS próprios, sem downloads externos ou fontes remotas.
+As fotos de referência e temporários são ignorados pelo Git. Publicar apenas os arquivos didáticos derivados. Não incluir fotos das páginas, manuscritos, nomes da escola/professora/alunos nem mensagens privadas.
+
+## Revisão visual
+
+Menus e cabeçalhos usam cenas coloridas ligadas a cada tema: trens, caminhos com bichinhos, lupa, coleções, livros, bolas e roupas. As perguntas, respostas esperadas, geração de números e armazenamento não foram alterados nesta revisão. `matematica-art.js` contém apenas apresentação; `matematica-ilustracoes.css` adapta as cenas a tablet/celular, sem reduzir os campos de escrita. As ilustrações decorativas ficam fora da árvore de acessibilidade e da impressão.
+
+As figuras SVG são de **OpenMoji 17.0.0**, copiadas do repositório oficial, sob **CC BY-SA 4.0**, e ficam hospedadas junto ao site. Não há carregamento de imagens ou fontes a partir de serviços externos durante o uso. Créditos, fonte, versão e licença estão em [assets/openmoji/CREDITOS.md](assets/openmoji/CREDITOS.md) e no rodapé. As composições dessas figuras também são disponibilizadas sob CC BY-SA 4.0.
