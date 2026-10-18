@@ -22,6 +22,8 @@ Campos HTML de texto com autocorreção e preenchimento automático desativados.
 
 As respostas, seleções e traços ficam no `localStorage` deste navegador (`julia-matematica-v1`). Não há servidor de respostas, telemetria nem sincronização entre aparelhos. Falhas de armazenamento são informadas no rodapé. Os campos de explicação livre são comparados com modelos pela criança e pelo adulto, sem correção automática. As anotações de transporte/empréstimo são livres; a correção verifica os algarismos dos operandos editáveis e do resultado.
 
+O total das operações é identificado como um campo para algarismos, com exemplo visível de outra conta. Problemas também oferecem espaço de frase em português, separado do resultado numérico, e um modelo que não usa a resposta esperada. Os exemplos não preenchem campos nem alteram a correção. Os campos de palavras usam `lang="pt-BR"` e `inputmode="text"`; os de algarismos usam `inputmode="numeric"`. A página não força o teclado do iPad nem configura o tempo de reconhecimento do recurso Escrever à Mão. **Escrever livre, sem converter** é o canvas já existente, sem conversão, limite de tempo ou correção automática, para permitir pausas entre letras.
+
 ## Desenvolvimento e verificação
 
 Sem framework, instalação ou build:
