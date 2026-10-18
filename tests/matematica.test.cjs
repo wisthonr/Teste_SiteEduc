@@ -64,3 +64,11 @@ for(let variant=0;variant<300;variant++)for(const page of M.pages){
   generated++;
 }
 console.log(`OK: ${generated} folhas verificadas; contas, sequências, composição, decomposição e correção.`);
+
+// Scribble may produce an underscore instead of a dash; separators do not change order.
+for(const sep of ['_', ' _ ', ', ', '; ', ' — ', ' ']){
+ assert.equal(check({kind:'sequence',expected:[627,624,621]},[627,624,621].join(sep)),'ok');
+ assert.equal(check({kind:'sequence',expected:[627,624,621]},[621,624,627].join(sep)),'retry');
+}
+assert.equal(check({kind:'sequence',expected:[627,624,621]},'627_624_620'),'retry');
+assert.equal(check({kind:'sequence',expected:[627,624,621]},'627624621'),'retry');

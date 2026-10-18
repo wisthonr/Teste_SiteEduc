@@ -102,7 +102,7 @@
     const t=current.sheet.tasks.find(t=>t.type==='create');if(!t)return null;
     const start=current.answers['create-start']??'',end=current.answers['create-end']??'',step=current.answers['create-step']??'',seq=current.answers['create-sequence']??'',dir=current.answers.direction==='down'?-1:1;
     if(!String(start).trim()||!String(end).trim()||!String(step).trim()||!String(seq).trim()){taskFeedback(t.id,false,'Escolha o início, o fim, o salto e escreva sua sequência.');return false;}
-    const values=String(seq).replace(/[–—−]/g,'-').split(/[\s,;\-]+/).filter(Boolean);
+    const values=String(seq).replace(/[–—−]/g,'-').split(/[\s,;_\-]+/).filter(Boolean);
     const ok=/^\d+$/.test(start)&&/^\d+$/.test(end)&&/^\d+$/.test(step)&&Number(step)>0&&values.length>=4&&Number(values.at(-1))===Number(end)&&values.every((v,i)=>/^\d+$/.test(v)&&Number(v)===Number(start)+dir*Number(step)*i&&Number(v)<=999);
     taskFeedback(t.id,ok,ok?'Sua sequência segue a regra que você criou!':'Confira o começo e o fim, os saltos e a direção. Use pelo menos 4 números entre 0 e 999.');return ok;
   }

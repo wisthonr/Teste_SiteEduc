@@ -159,7 +159,7 @@ const MathBook = (() => {
       const n=[235,146,328,512].find(n=>!forbidden.includes(n));
       return {suffix:' — escreva uma adição',sample:String(n),text:`Exemplo de outro número: ${n} = ${decomposed(n).join(' + ')}. Use as parcelas do número pedido na atividade.`};
     }
-    if(f.kind==='sequence'){let start=10;while(Array.isArray(f.expected)&&Array.from({length:4},(_,i)=>start+2*i).some(n=>f.expected.includes(n)))start+=20;const seq=Array.from({length:4},(_,i)=>start+2*i);return {suffix:' — números separados por espaços ou traços',sample:seq.join(' '),text:`Exemplo de outra sequência: ${seq.join(' – ')}. Escreva todos os números da sequência pedida.`};}
+    if(f.kind==='sequence'){let start=10;while(Array.isArray(f.expected)&&Array.from({length:4},(_,i)=>start+2*i).some(n=>f.expected.includes(n)))start+=20;const seq=Array.from({length:4},(_,i)=>start+2*i);return {suffix:' — números separados por espaços, vírgulas ou traços',sample:seq.join(' '),text:`Exemplo de outra sequência: ${seq.join(' – ')}. Escreva todos os números da sequência pedida.`};}
     if(f.kind==='words')return {suffix:' — use palavras',sample:String(sample),text:`Exemplo de outro número: ${sample} → ${words(sample)}. Aqui, escreva por extenso o número pedido.`};
     if(f.id==='sentence')return {suffix:'',sample:String(sample),text:`Exemplo de outra situação: “Ao todo, ficaram ${sample} objetos.” Use o resultado e os objetos da sua atividade.`};
     if(f.id==='why')return {suffix:'',sample:'',text:'Formato para explicar: “O algarismo está na ... e vale ... .” Complete com o que você percebeu.'};
@@ -185,7 +185,7 @@ const MathBook = (() => {
     }
     if(f.kind==='number')ok=/^\d+$/.test(s)&&Number(s)===f.expected;
     if(f.kind==='words')ok=normalize(s)===normalize(f.expected)||normalize(s).replace('catorze','quatorze')===normalize(f.expected);
-    if(f.kind==='sequence'){const cleaned=s.replace(/[–—−]/g,'-');const vals=cleaned.split(/[\s,;\-]+/).filter(Boolean);ok=vals.length===f.expected.length&&vals.every((v,i)=>/^\d+$/.test(v)&&Number(v)===f.expected[i]);}
+    if(f.kind==='sequence'){const cleaned=s.replace(/[–—−]/g,'-');const vals=cleaned.split(/[\s,;_\-]+/).filter(Boolean);ok=vals.length===f.expected.length&&vals.every((v,i)=>/^\d+$/.test(v)&&Number(v)===f.expected[i]);}
     if(f.kind==='expression'){const p=parseExpression(s);ok=p?.sum===f.expected;if(ok&&f.positional)ok=p.parts.filter(Boolean).sort((a,b)=>a-b).join('+')===decomposed(f.expected).sort((a,b)=>a-b).join('+');}
     return {status:ok?'ok':'retry',message:ok?'Isso mesmo!':'Vamos olhar mais uma vez? Use o apoio se quiser.'};
   }
