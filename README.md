@@ -28,6 +28,8 @@ A revisão completa de entrada acrescenta guias para todos os formatos: números
 
 Ao abrir uma folha 103 já salva, `prepareSheet` atualiza somente o tipo dos campos de valor posicional e uma pista antiga. Mantém números sorteados, enunciados, respostas e desenhos. Os testes cobrem essa migração, equivalências, entradas inválidas e exemplos que não revelam a resposta. Verificação no navegador cobre as 12 folhas, descrições acessíveis, idioma explícito e largura de 375 px; não valida o reconhecimento físico da Apple Pencil.
 
+Os campos grandes e o jogo de saltos oferecem **Digitar ou editar**, que abre um editor preservando o texto. O foco é dado ao editor dentro do toque no botão, sem temporizador. No iPad, toque com o dedo no texto para solicitar o teclado; sua exibição depende do sistema e não foi testada em aparelho físico. Setas, **Inserir espaço** e **Apagar letra** permitem corrigir o texto sem reescrever a resposta toda. Inserir espaço preserva as letras selecionadas e pode separar uma quantidade colada a “unidades”, “dezenas” ou “centenas”. Nada é aplicado à resposta antes de **Aplicar**; **Cancelar** descarta a edição. Aplicar usa o mesmo salvamento e correção já existentes. Testes de navegador verificam cursor, espaço, seleção, remoção de uma letra, Cancelar, Aplicar e recuperação após recarregar.
+
 ## Desenvolvimento e verificação
 
 Sem framework, instalação ou build:

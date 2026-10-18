@@ -2,7 +2,7 @@
   'use strict';
   const M=MathBook,$=s=>document.querySelector(s),root=$('#content'),KEY='julia-matematica-v1';
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let store={sheets:{}},current=null,labMode='build',saveFailed=false,drawObservers=[];
+  let store={sheets:{}},current=null,labMode='build',saveFailed=false,drawObservers=[],editorOrigin=null;
   try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&saved.version===1&&saved.sheets&&typeof saved.sheets==='object')store=saved;}catch{saveFailed=true;}
   function save(){try{localStorage.setItem(KEY,JSON.stringify({...store,version:1}));saveFailed=false;}catch{saveFailed=true;}$('#save-status').textContent=saveFailed?'Não foi possível guardar neste navegador. Mantenha a página aberta.':'Respostas guardadas neste navegador.';}
   function sheetState(id){
@@ -20,7 +20,35 @@
     const key=fieldKey(t,f),guide=M.fieldGuide(f,t);
     const suffix=f.kind==='expression'&&/adição/i.test(f.label)?'':guide.suffix;
     const display={...f,label:f.label.replace(/[:…]+$/,'')+suffix};
-    return `<div class="field">${input(display,key,current.answers[key]??'')}<p id="example-${key}" class="small format-example">${esc(guide.text)}</p></div>`;
+    return `<div class="field">${input(display,key,current.answers[key]??'')}${editTools('f-'+key,f.kind!=='number')}<p id="example-${key}" class="small format-example">${esc(guide.text)}</p></div>`;
+  }
+  function editTools(id,space=true){return `<div class="entry-tools"><button type="button" data-edit-target="${esc(id)}">⌨ Digitar ou editar</button>${space?`<button type="button" data-edit-space="${esc(id)}">Inserir espaço</button>`:''}</div>`;}
+  function openEditor(id,space=false){
+    const origin=document.getElementById(id);if(!origin)return;
+    editorOrigin=origin;const editor=$('#edit-answer');
+    $('#edit-label').textContent=origin.getAttribute('aria-label')||'Sua resposta';
+    editor.value=origin.value;editor.setAttribute('inputmode',origin.getAttribute('inputmode')||'text');
+    $('#edit-space').hidden=origin.getAttribute('inputmode')==='numeric';
+    $('#text-editor').showModal();
+    // Focus synchronously inside the user's button tap, never after a timer.
+    editor.focus();editor.setSelectionRange(origin.selectionStart??editor.value.length,origin.selectionEnd??editor.value.length);
+    if(space)insertEditorSpace();
+  }
+  function insertEditorSpace(){
+    const editor=$('#edit-answer');let start=editor.selectionStart,end=editor.selectionEnd;
+    const joined=editor.value.match(/^([\p{L}\d]+?)(centenas?|dezenas?|unidades?)$/iu);
+    if(joined&&((start===end&&start===editor.value.length)||(start===0&&end===editor.value.length)))start=joined[1].length;
+    // Inserting a space must never replace or erase selected letters.
+    editor.setRangeText(' ',start,start,'end');editor.focus();
+  }
+  function moveEditor(direction){const editor=$('#edit-answer'),pos=direction<0?Math.max(0,editor.selectionStart-1):Math.min(editor.value.length,editor.selectionEnd+1);editor.focus();editor.setSelectionRange(pos,pos);}
+  function applyEditor(){
+    const origin=editorOrigin,editor=$('#edit-answer');if(origin?.isConnected){
+      origin.value=origin.tagName==='INPUT'?editor.value.replace(/\r?\n/g,' '):editor.value;
+      origin.setSelectionRange(Math.min(editor.selectionStart,origin.value.length),Math.min(editor.selectionEnd,origin.value.length));
+      origin.dispatchEvent(new Event('input',{bubbles:true}));
+    }
+    $('#text-editor').close();editorOrigin=null;
   }
   function hint(html){return `<details class="hint"><summary>Uma pista para pensar</summary><p>${html}</p></details>`;}
   function scratch(t){return `<details class="scratch" data-scratch="${t.id}"><summary>✎ Escrever livre, sem converter</summary><p class="small">Escreva ou desenhe no seu tempo. Pode parar entre as letras: os traços continuam aqui, sem virar texto. Esta escrita é para olhar junto com um adulto; não é corrigida automaticamente. Dedo também desenha aqui.</p><canvas data-canvas="${t.id}" aria-label="Rascunho da atividade ${esc(t.id)}"></canvas><div class="button-row"><button data-undo="${t.id}">↶ Desfazer traço</button><button data-clear="${t.id}">Apagar rascunho</button></div></details>`;}
@@ -146,7 +174,7 @@
     const l=labState();current=null;const jumpGuide=M.fieldGuide({kind:'number',expected:l.trail.at(-1)+l.step*l.direction});
     root.innerHTML=`<a href="#inicio" class="back">← Meu caderno</a><header class="sheet-top illustrated-sheet"><div class="sheet-heading-art">${MathArt.scene("lab","sheet")}<div class="sheet-title-copy"><p class="eyebrow">EXPLORAR E BRINCAR</p><h1>Laboratório de números</h1><p class="small">Toque, observe e conte o que você descobriu. Sem tempo para terminar.</p></div></div></header><div class="lab-tabs" aria-label="Escolha uma brincadeira"><button data-lab-mode="build" aria-pressed="${labMode==='build'}">Montar um número</button><button data-lab-mode="jump" aria-pressed="${labMode==='jump'}">Caminho dos saltos</button></div><div id="lab-body"></div>`;
     if(labMode==='build')$('#lab-body').innerHTML=`<div class="lab-layout"><section class="lab-panel"><p class="eyebrow">DESAFIO DAS PECINHAS</p><h2>Vamos montar este número?</h2><p class="big-target">${l.target}</p><p>Use os botões + e − para colocar ou tirar peças. Cada placa vale 100; cada barra vale 10; cada cubinho vale 1.</p><button id="build-target">↻ Outro número</button><details class="hint"><summary>Uma pista</summary><p>Comece olhando as centenas. Depois complete com dezenas e unidades. 10 unidades valem 1 dezena.</p></details><a class="lab-link" href="#folha/103">Praticar a escrita na folha 103 →</a></section><section class="lab-panel"><div id="build-blocks">${blocks(l.counts,true)}</div><p class="number-pill" id="build-total">Você montou: ${l.counts[0]*100+l.counts[1]*10+l.counts[2]}</p><p id="build-message" role="status">${esc(l.message||'Cada toque muda a quantidade. Experimente!')}</p><div class="button-row"><button id="build-exchange-units">10 unidades → 1 dezena</button><button id="build-exchange-tens">10 dezenas → 1 centena</button><button id="build-reset">Tirar todas as peças</button></div></section></div>`;
-    else $('#lab-body').innerHTML=`<div class="lab-layout"><section class="lab-panel"><p class="eyebrow">UM SALTO DE CADA VEZ</p><h2>Descubra o próximo número</h2><p>Comece em <strong>${l.start}</strong> e ${l.direction===1?'avance':'volte'} de <strong>${l.step} em ${l.step}</strong>.</p><div class="jump-track" aria-label="Números do caminho">${l.trail.map(n=>`<span>${n}</span>`).join('')}</div><label for="jump-answer" class="answer-label">Qual é o próximo número? Escreva só o número.</label><input id="jump-answer" type="text" lang="pt-BR" aria-describedby="jump-example jump-message" class="answer" inputmode="numeric" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" value="${esc(l.answer)}"><p id="jump-example" class="small format-example">${esc(jumpGuide.text)}</p><div class="button-row" style="margin-top:18px"><button id="jump-check" class="primary">Experimentar o salto</button><button id="jump-show">Ver um salto de apoio</button></div><p id="jump-message" role="status" class="exchange-message">${esc(l.jumpMessage||'Conte o tamanho do salto e escreva sua ideia.')}</p></section><section class="lab-panel"><h2>Escolha o caminho</h2><label class="answer-label" for="jump-step">Tamanho dos saltos</label><select id="jump-step">${[1,2,3,4,5,10,50].map(n=>`<option value="${n}" ${n===l.step?'selected':''}>De ${n} em ${n}</option>`).join('')}</select><label class="answer-label" for="jump-direction" style="margin-top:22px">Direção</label><select id="jump-direction"><option value="1" ${l.direction===1?'selected':''}>Crescente: aumenta</option><option value="-1" ${l.direction===-1?'selected':''}>Decrescente: diminui</option></select><p style="margin-top:24px"><button id="jump-reset">↻ Começar outro caminho</button></p><p class="small">Mudar o caminho começa uma nova sequência. As folhas do caderno ficam guardadas.</p><a href="#folha/161" class="lab-link">Escrever sequências na folha 161 →</a></section></div>`;
+    else $('#lab-body').innerHTML=`<div class="lab-layout"><section class="lab-panel"><p class="eyebrow">UM SALTO DE CADA VEZ</p><h2>Descubra o próximo número</h2><p>Comece em <strong>${l.start}</strong> e ${l.direction===1?'avance':'volte'} de <strong>${l.step} em ${l.step}</strong>.</p><div class="jump-track" aria-label="Números do caminho">${l.trail.map(n=>`<span>${n}</span>`).join('')}</div><label for="jump-answer" class="answer-label">Qual é o próximo número? Escreva só o número.</label><input id="jump-answer" type="text" lang="pt-BR" aria-describedby="jump-example jump-message" class="answer" inputmode="numeric" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" value="${esc(l.answer)}">${editTools("jump-answer",false)}<p id="jump-example" class="small format-example">${esc(jumpGuide.text)}</p><div class="button-row" style="margin-top:18px"><button id="jump-check" class="primary">Experimentar o salto</button><button id="jump-show">Ver um salto de apoio</button></div><p id="jump-message" role="status" class="exchange-message">${esc(l.jumpMessage||'Conte o tamanho do salto e escreva sua ideia.')}</p></section><section class="lab-panel"><h2>Escolha o caminho</h2><label class="answer-label" for="jump-step">Tamanho dos saltos</label><select id="jump-step">${[1,2,3,4,5,10,50].map(n=>`<option value="${n}" ${n===l.step?'selected':''}>De ${n} em ${n}</option>`).join('')}</select><label class="answer-label" for="jump-direction" style="margin-top:22px">Direção</label><select id="jump-direction"><option value="1" ${l.direction===1?'selected':''}>Crescente: aumenta</option><option value="-1" ${l.direction===-1?'selected':''}>Decrescente: diminui</option></select><p style="margin-top:24px"><button id="jump-reset">↻ Começar outro caminho</button></p><p class="small">Mudar o caminho começa uma nova sequência. As folhas do caderno ficam guardadas.</p><a href="#folha/161" class="lab-link">Escrever sequências na folha 161 →</a></section></div>`;
   }
   function renderBuild(){const l=labState(),total=l.counts[0]*100+l.counts[1]*10+l.counts[2];$('#build-blocks').innerHTML=blocks(l.counts,true);$('#build-total').textContent='Você montou: '+total;$('#build-message').textContent=total===l.target?'Você montou o número! Que outros jeitos de representar essa quantidade você consegue descobrir?':total<l.target?'Ainda faltam '+(l.target-total)+'. Escolha as peças para completar.':'Passou '+(total-l.target)+'. Experimente tirar ou trocar peças.';$('#build-exchange-units').disabled=l.counts[2]<10;$('#build-exchange-tens').disabled=l.counts[1]<10;save();}
   function newJump(){const l=labState();l.step=Number($('#jump-step').value);l.direction=Number($('#jump-direction').value);l.start=l.direction===1?M.rand(100,400):M.rand(600,950);l.trail=[l.start];l.answer='';l.jumpMessage='Um caminho novo. Vamos descobrir o primeiro salto?';save();showLab();}
@@ -155,6 +183,8 @@
   root.addEventListener('change',e=>{if(e.target.matches('[data-direction]')&&current){current.answers.direction=e.target.value;current.checked=false;save();}if(e.target.id==='jump-step'||e.target.id==='jump-direction')newJump();});
   root.addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.editTarget){openEditor(b.dataset.editTarget);return;}
+    if(b.dataset.editSpace){openEditor(b.dataset.editSpace,true);return;}
     if(b.hasAttribute('data-help'))$('#help').showModal();
     if(b.dataset.choice){const [id,i]=b.dataset.choice.split(':');current.selections[id]=Number(i);document.querySelectorAll(`[data-choice^="${id}:"]`).forEach(el=>el.setAttribute('aria-pressed',String(el===b)));taskFeedback(id,false,'');current.checked=false;save();}
     if(b.dataset.paint){const [id,index]=b.dataset.paint.split(':'),i=Number(index),selected=current.selections[id]??=[];const pos=selected.indexOf(i);if(pos>=0)selected.splice(pos,1);else selected.push(i);current.selections[id]=selected;b.setAttribute('aria-pressed',String(selected.includes(i)));document.querySelector(`[data-sum="${id}"]`).textContent=selectionSum(current.sheet.tasks.find(t=>t.id===id));taskFeedback(id,false,'');current.checked=false;save();}
@@ -172,8 +202,11 @@
   });
   root.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='jump-answer'){e.preventDefault();jump(false);}});
   $('#help-button').onclick=()=>$('#help').showModal();
+  $('#edit-space').onclick=insertEditorSpace;$('#edit-left').onclick=()=>moveEditor(-1);$('#edit-right').onclick=()=>moveEditor(1);
+  $('#edit-delete').onclick=()=>{const editor=$('#edit-answer'),end=editor.selectionEnd,start=editor.selectionStart===end?Math.max(0,end-1):editor.selectionStart;editor.setRangeText('',start,end,'end');editor.focus();};
+  $('#edit-apply').onclick=applyEditor;$('#edit-cancel').onclick=()=>$('#text-editor').close();$('#text-editor').addEventListener('close',()=>{editorOrigin=null;});
   $('.skip').onclick=e=>{e.preventDefault();root.focus();root.scrollIntoView();};
   function route(){drawObservers.forEach(o=>o.disconnect());drawObservers=[];const match=location.hash.match(/^#folha\/(\w+)$/);if(match&&M.pages.some(p=>p.id===match[1]))showSheet(match[1]);else if(location.hash==='#laboratorio'){showLab();if(labMode==='build')renderBuild();}else{current=null;home();}document.title=(current?current.sheet.title:'O caderno de Matemática')+' · Julia';window.scrollTo(0,0);root.focus({preventScroll:true});}
-  window.addEventListener('hashchange',route);window.addEventListener('pagehide',save);route();
+  window.addEventListener('hashchange',()=>{if($('#text-editor').open)$('#text-editor').close();route();});window.addEventListener('pagehide',save);route();
   if(saveFailed)$('#save-status').textContent='Não foi possível recuperar o estudo anterior. As novas respostas ficam nesta sessão.';
 })();
