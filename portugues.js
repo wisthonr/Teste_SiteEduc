@@ -24,6 +24,19 @@
   function home() {
     observer?.disconnect(); unit = null;
     app.innerHTML = `<section class="intro"><img src="assets/openmoji/1F98B.svg" alt="Borboleta"><p>LER · DESCOBRIR · ESCREVER</p><h1>Vamos brincar<br>com as palavras?</h1><p>Escolha um caminho para começar.</p></section><section class="garden" aria-label="Caminhos de estudo">${PT.map((d,i)=>`<button class="trail" data-unit="${i}"><img src="assets/openmoji/${d.icon}.svg" alt=""><strong>${escape(d.title)}</strong><small>${state[i]?.answers?.filter(a=>a?.done).length || 0} atividades conferidas</small></button>`).join('')}</section>`;
+    app.insertAdjacentHTML('beforeend', `<div class="adult-tools"><button id="new-round-all">Para o adulto · Outra rodada em tudo</button></div>`);
+    document.querySelector('#new-round-all').onclick = () => {
+      const confirmed = confirm('Começar outra rodada em todos os caminhos? As respostas, os desenhos e as marcações deste caderno serão apagados neste aparelho. Algumas perguntas mudam e outras se repetem para treinar.');
+      if (!confirmed) return;
+      PT.forEach((data, index) => {
+        const previousRound = state[index]?.round;
+        const round = Number.isInteger(previousRound) ? previousRound : 0;
+        state[index] = {round: round + 1, answers: []};
+      });
+      save();
+      home();
+      top();
+    };
     app.querySelectorAll('[data-unit]').forEach(b => b.onclick = () => {unit=Number(b.dataset.unit);question=0;render();top();});
   }
   function render() {
