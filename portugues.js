@@ -18,7 +18,14 @@
     if (!state[unit] || !Array.isArray(state[unit].answers)) state[unit] = {round:0, answers:[]};
     return state[unit];
   }
-  function tasks() { const data = PT[unit]; return session().round % 2 ? [...data.extra, ...data.tasks.slice(data.extra.length)] : data.tasks; }
+  function lesson() {
+    const current = session();
+    return Number.isInteger(current.practiceRound) ? portuguesePractice(unit, current.practiceRound) : PT[unit];
+  }
+  function nextRound(current = {}) {
+    return {round: (current.round || 0) + 1, practiceRound: (current.practiceRound ?? -1) + 1, answers: []};
+  }
+  function tasks() { if (Number.isInteger(session().practiceRound)) return lesson().tasks; const data = PT[unit]; return session().round % 2 ? [...data.extra, ...data.tasks.slice(data.extra.length)] : data.tasks; }
   function answer() { const s = session(); return s.answers[question] ||= {strokes:[],text:'',choice:null,done:false}; }
   function top() { window.scrollTo({top:0,behavior:'instant'}); }
   function home() {
@@ -26,12 +33,10 @@
     app.innerHTML = `<section class="intro"><img src="assets/openmoji/1F98B.svg" alt="Borboleta"><p>LER · DESCOBRIR · ESCREVER</p><h1>Vamos brincar<br>com as palavras?</h1><p>Escolha um caminho para começar.</p></section><section class="garden" aria-label="Caminhos de estudo">${PT.map((d,i)=>`<button class="trail" data-unit="${i}"><img src="assets/openmoji/${d.icon}.svg" alt=""><strong>${escape(d.title)}</strong><small>${state[i]?.answers?.filter(a=>a?.done).length || 0} atividades conferidas</small></button>`).join('')}</section>`;
     app.insertAdjacentHTML('beforeend', `<div class="adult-tools"><button id="new-round-all">Para o adulto · Outra rodada em tudo</button></div>`);
     document.querySelector('#new-round-all').onclick = () => {
-      const confirmed = confirm('Começar outra rodada em todos os caminhos? As respostas, os desenhos e as marcações deste caderno serão apagados neste aparelho. Algumas perguntas mudam e outras se repetem para treinar.');
+      const confirmed = confirm('Começar outra rodada em todos os caminhos? As respostas, os desenhos e as marcações deste caderno serão apagados neste aparelho. Todos os caminhos receberão novas propostas. São seis rodadas de variações; depois o ciclo recomeça.');
       if (!confirmed) return;
       PT.forEach((data, index) => {
-        const previousRound = state[index]?.round;
-        const round = Number.isInteger(previousRound) ? previousRound : 0;
-        state[index] = {round: round + 1, answers: []};
+        state[index] = nextRound(state[index]);
       });
       save();
       home();
@@ -41,8 +46,8 @@
   }
   function render() {
     observer?.disconnect();
-    const data = PT[unit], list = tasks(), a = answer(), t = list[question];
-    app.innerHTML = `<div class="row"><button id="back-home">← Caminhos</button><span class="muted">${question+1} de ${list.length}</span></div><progress value="${session().answers.filter(x=>x?.done).length}" max="${list.length}" aria-label="Atividades conferidas"></progress><h1>${escape(data.title)}</h1><details class="reading" ${question===0?'open':''}><summary>📖 ${escape(data.intro)}</summary><div class="poem">${escape(data.text)}</div>${data.source?`<p class="muted">${escape(data.source)}</p>`:''}<p class="muted">Baseado nas páginas ${data.pages} da apostila.</p></details><section class="paper">${unit===3?'<div class="sizes" aria-label="Sapos pequeno, médio e grande"><img src="assets/openmoji/1F438.svg" alt="Sapo pequeno"><img src="assets/openmoji/1F438.svg" alt="Sapo médio"><img src="assets/openmoji/1F438.svg" alt="Sapo grande"></div>':''}<h2>${escape(t[0])}</h2>${t[1]?`<div class="choices">${t[1].map((v,i)=>`<button class="choice" data-choice="${i}" aria-pressed="${a.choice===i}">${escape(v)}</button>`).join('')}</div>`:`<p class="muted">Escreva com a caneta. Pode ir bem devagar.</p><canvas class="writing" aria-label="Folha para escrever sua resposta com a caneta"></canvas><div class="tools"><button id="undo">↶ Desfazer</button><button id="clear">Apagar folha</button></div><details class="keyboard"><summary>⌨ Digitar</summary><label for="typed">Sua resposta</label><textarea id="typed" lang="pt-BR" spellcheck="false" autocorrect="off">${escape(a.text)}</textarea></details>`}<div class="next"><button class="primary" id="check">${t[1]?'Conferir resposta':'Conferir com uma pista'}</button></div><div id="feedback" role="status"></div></section><div class="row"><button id="prev" ${question===0?'disabled':''}>← Voltar</button><button class="primary" id="next">${question===list.length-1?'Terminar caminho 🌼':'Próxima →'}</button></div>`;
+    const data = lesson(), list = tasks(), a = answer(), t = list[question];
+    app.innerHTML = `<div class="row"><button id="back-home">← Caminhos</button><span class="muted">${question+1} de ${list.length}</span></div><progress value="${session().answers.filter(x=>x?.done).length}" max="${list.length}" aria-label="Atividades conferidas"></progress><h1>${escape(data.title)}</h1><details class="reading" ${question===0?'open':''}><summary>📖 ${escape(data.intro)}</summary><div class="poem">${escape(data.text)}</div>${data.source?`<p class="muted">${escape(data.source)}</p>`:''}<p class="muted">Baseado nas páginas ${data.pages} da apostila.</p></details><section class="paper">${unit===3 && !Number.isInteger(session().practiceRound)?'<div class="sizes" aria-label="Sapos pequeno, médio e grande"><img src="assets/openmoji/1F438.svg" alt="Sapo pequeno"><img src="assets/openmoji/1F438.svg" alt="Sapo médio"><img src="assets/openmoji/1F438.svg" alt="Sapo grande"></div>':''}<h2>${escape(t[0])}</h2>${t[1]?`<div class="choices">${t[1].map((v,i)=>`<button class="choice" data-choice="${i}" aria-pressed="${a.choice===i}">${escape(v)}</button>`).join('')}</div>`:`<p class="muted">Escreva com a caneta. Pode ir bem devagar.</p><canvas class="writing" aria-label="Folha para escrever sua resposta com a caneta"></canvas><div class="tools"><button id="undo">↶ Desfazer</button><button id="clear">Apagar folha</button></div><details class="keyboard"><summary>⌨ Digitar</summary><label for="typed">Sua resposta</label><textarea id="typed" lang="pt-BR" spellcheck="false" autocorrect="off">${escape(a.text)}</textarea></details>`}<div class="next"><button class="primary" id="check">${t[1]?'Conferir resposta':'Conferir com uma pista'}</button></div><div id="feedback" role="status"></div></section><div class="row"><button id="prev" ${question===0?'disabled':''}>← Voltar</button><button class="primary" id="next">${question===list.length-1?'Terminar caminho 🌼':'Próxima →'}</button></div>`;
     document.querySelector('#back-home').onclick = () => {home();top();};
     document.querySelector('#prev').onclick = () => {question--;render();top();};
     document.querySelector('#next').onclick = () => {if(question===list.length-1) finish();else {question++;render();top();}};
@@ -92,7 +97,7 @@
     app.innerHTML=`<section class="celebrate"><img src="assets/openmoji/1F98B.svg" alt="Borboleta"><h1>Mais palavras no seu jardim!</h1><p>Você conferiu ${count} de ${tasks().length} atividades deste caminho.</p><p>Você pode voltar, continuar ou praticar outra rodada.</p><div class="tools"><button id="return">Rever atividades</button><button id="again">Outra rodada</button><button class="primary" id="garden">Escolher caminho</button></div></section>`;
     document.querySelector('#return').onclick=()=>{question=0;render();top();};
     document.querySelector('#garden').onclick=()=>{home();top();};
-    document.querySelector('#again').onclick=()=>{if(confirm('Começar outra rodada? As respostas deste caminho serão apagadas.')){state[unit]={round:s.round+1,answers:[]};question=0;save();render();top();}};top();
+    document.querySelector('#again').onclick=()=>{if(confirm('Começar outra rodada? As respostas deste caminho serão apagadas.')){state[unit]=nextRound(s);question=0;save();render();top();}};top();
   }
   document.querySelector('#home').onclick=e=>{e.preventDefault();home();top();};
   document.querySelector('#help').onclick=()=>document.querySelector('#guide').showModal();
