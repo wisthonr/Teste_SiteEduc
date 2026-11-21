@@ -43,3 +43,4 @@ button,.primary{min-height:56px;border-radius:14px}
 @media(max-width:1024px){.exchange{grid-template-columns:1fr;gap:22px}.hero{grid-template-columns:1fr}.hero-copy{max-width:650px}.postcard{max-width:680px}.hero h1{font-size:48px}.place b{font-size:18px}.route-card h3{font-size:24px}.board{padding:20px}}
 @media(max-width:620px){:root{font-size:18px}.mast{flex-wrap:wrap}.mast>a{font-size:22px}.mast nav button{min-height:48px}.board{padding:12px}.workbench{padding:10px}.scratch{padding:12px}.scratch canvas{height:330px}.place b{font-size:13px}.job-dots a{width:46px;height:46px}.job-head h1{font-size:30px}.chocolate{gap:3px}.chocolate button{min-height:44px}.crates{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .board>.workbench{margin-top:16px}
+.hero .game-description{font-size:17px;margin:12px 0}

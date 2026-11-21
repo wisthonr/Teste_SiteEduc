@@ -37,3 +37,12 @@ A experiência é destinada a uma criança de 8 anos, do 2º ano, começando a u
 O controle do adulto no mapa inicia outra viagem com números e respostas diferentes nas 28 entregas. Há oito variações completas antes de repetir o ciclo. A viagem original e seu progresso continuam até o adulto confirmar a troca. As novas viagens preservam os tipos de tarefa e o intervalo até 999.
 
 Verificação adicional das rodadas e da entrada de respostas com `node tests/expresso-rodadas.test.cjs`. O teste físico da Apple Pencil precisa ser feito no aparelho.
+
+
+## Desafio das Cargas
+
+O botão principal abre `jogo.html`, um jogo de arrastar caixas com a caneta, o dedo ou o mouse. São seis fases de combinação de parcelas com limite de caixas, partilha, sequência, subtração, dobro/triplo e um pedido final que combina multiplicação, dobro e metade. As caixas podem voltar ao depósito, os movimentos podem ser desfeitos e a criança pode pedir pistas e conferir cada vagão. O toque em uma caixa seguido de “Colocar aqui” também funciona, assim como Tab e Enter.
+
+Há 12 partidas com valores diferentes, totalizando 72 desafios. Depois o ciclo se repete. A partida é guardada na chave `expresso-cargas-v1`, com a fase atual, as posições das caixas e as conquistas. A opção de nova partida fica dentro do jogo e pede confirmação. O caderno continua acessível no mapa.
+
+Execute `node tests/trem-jogo.test.cjs` para verificar soluções, limites, retomada e os handlers de interação com um adaptador de DOM. Esse teste não substitui a validação visual e o arraste com a Apple Pencil no iPad.
