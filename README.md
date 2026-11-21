@@ -1,54 +1,30 @@
-# O caderno de Matemática da Julia
+# Expresso do Piquenique
 
-Site estático em português para praticar Matemática do 2º ano. Publicação pelo GitHub Pages, na raiz da branch `main`.
+Jogo de matemática para o 2º ano. A página inicial é publicada pelo GitHub Pages a partir da raiz da branch `main`.
 
-## Atividades
+A cada nova prova, a nova revisão substitui a anterior no mesmo endereço. As fotografias do livro, os manuscritos e os dados pessoais ficam fora da publicação.
 
-- Página 103: tabela de assentos, valor posicional e decomposições distintas.
-- Página 160: quadro de 100 números com lacunas, seleção por nome e regularidades.
-- Páginas 161–162: sequências crescentes/decrescentes, identificação de regras e criação de uma sequência.
-- Página 163: selecionar parcelas cuja soma forma o número pedido; qualquer combinação válida é aceita.
-- Páginas 164–165: problemas com coleções e decomposição.
-- Páginas 166–168: problemas de adição, registro nas ordens, resposta escrita e outra estratégia.
-- Página 169: quatro adições com reagrupamento.
-- Revisão complementar: antecessor/sucessor, ordenação, subtração com trocas e escrita por extenso, conforme os temas de estudo.
-- Laboratório: montar números com material de base dez e percorrer sequências com saltos escolhidos.
+## Viagem
 
-O primeiro treino usa os valores das páginas de referência. O botão **Novos números** substitui somente a folha atual, após avisar sobre a limpeza de respostas e desenhos. O botão **Voltar aos números do livro** restaura aquela folha. Não há nota, cronômetro, bloqueio por erro ou obrigação de concluir uma folha para acessar outra.
+As seis estações reúnem 28 entregas sobre os conteúdos das páginas 160–169, 173–189 e 192–202. A criança pode escolher qualquer estação, usar pistas, desenhar no rascunho e conferir sua resposta. Cada estação completa rende um carimbo. As respostas e os desenhos ficam no armazenamento local do navegador, na chave `expresso-piquenique-v1`.
 
-## Escrita e salvamento
+- **Estação das Encomendas** — material de base dez, trocas e registro da adição e da subtração.
+- **Torre dos Sinais** — sequências crescentes e decrescentes, padrões de figuras e ordenação até 999.
+- **Feira das Coleções** — escrita por extenso, valor posicional, decomposição, leitura de tabelas e comparação de quantidades.
+- **Oficina dos Botões** — grupos iguais, adição de parcelas iguais, multiplicação e criação de um problema.
+- **Cozinha do Vagão** — dobro, triplo, metade e terça parte.
+- **Piquenique no Parque** — repartição, formação de grupos e problemas de falta e sobra.
 
-Campos HTML de texto com autocorreção e preenchimento automático desativados. No iPad compatível, a conversão de manuscrito em texto é feita pelo recurso **Escrever à Mão** do iPadOS. O site confere o texto convertido; não realiza reconhecimento de escrita. O canvas é um rascunho livre, com desfazer e limpar.
+Na criação de um problema, a criança revisa a própria pergunta. O jogo verifica os itens objetivos e oferece espaço para uma estratégia pessoal.
 
-As respostas, seleções e traços ficam no `localStorage` deste navegador (`julia-matematica-v1`). Não há servidor de respostas, telemetria nem sincronização entre aparelhos. Falhas de armazenamento são informadas no rodapé. Os campos de explicação livre são comparados com modelos pela criança e pelo adulto, sem correção automática. As anotações de transporte/empréstimo são livres; a correção verifica os algarismos dos operandos editáveis e do resultado.
+## Executar
 
-O total das operações é identificado como um campo para algarismos, com exemplo visível de outra conta. Problemas também oferecem espaço de frase em português, separado do resultado numérico, e um modelo que não usa a resposta esperada. Os exemplos não preenchem campos nem alteram a correção. Os campos de palavras usam `lang="pt-BR"` e `inputmode="text"`; os de algarismos usam `inputmode="numeric"`. A página não força o teclado do iPad nem configura o tempo de reconhecimento do recurso Escrever à Mão. **Escrever livre, sem converter** é o canvas já existente, sem conversão, limite de tempo ou correção automática, para permitir pausas entre letras.
-
-A revisão completa de entrada acrescenta guias para todos os formatos: números, valor posicional, sequências, decomposições, explicações e escrita por extenso. Quadros numéricos e contas por ordens têm instruções de formato para o conjunto de casas; o jogo de saltos também tem exemplo. Exemplos calculados evitam a resposta esperada da atividade. Nos campos de valor posicional, a correção aceita equivalências matemáticas em português: `40`, `4 dezenas`, `quatro dezenas`, `quarenta`; `400`, `4 centenas`, `quatro centenas`, `quatrocentos`. Maiúsculas e ausência de acentos são aceitas. Letras e números confundidos pelo reconhecimento, como `4 DE2EN5`, não são substituídos automaticamente.
-
-Ao abrir uma folha 103 já salva, `prepareSheet` atualiza somente o tipo dos campos de valor posicional e uma pista antiga. Mantém números sorteados, enunciados, respostas e desenhos. Os testes cobrem essa migração, equivalências, entradas inválidas e exemplos que não revelam a resposta. Verificação no navegador cobre as 12 folhas, descrições acessíveis, idioma explícito e largura de 375 px; não valida o reconhecimento físico da Apple Pencil.
-
-Os campos grandes e o jogo de saltos oferecem **Digitar ou editar**, que abre um editor preservando o texto. O foco é dado ao editor dentro do toque no botão, sem temporizador. No iPad, toque com o dedo no texto para solicitar o teclado; sua exibição depende do sistema e não foi testada em aparelho físico. Setas, **Inserir espaço** e **Apagar letra** permitem corrigir o texto sem reescrever a resposta toda. Inserir espaço preserva as letras selecionadas e pode separar uma quantidade colada a “unidades”, “dezenas” ou “centenas”. Nada é aplicado à resposta antes de **Aplicar**; **Cancelar** descarta a edição. Aplicar usa o mesmo salvamento e correção já existentes. Testes de navegador verificam cursor, espaço, seleção, remoção de uma letra, Cancelar, Aplicar e recuperação após recarregar.
-
-## Desenvolvimento e verificação
-
-Sem framework, instalação ou build:
+Abra `index.html` ou inicie um servidor estático na raiz do projeto.
 
 ```sh
-python -m http.server 8765 --bind 127.0.0.1
-node --check matematica.js
-node --check matematica-data.js
+python -m http.server 8791 --bind 127.0.0.1
+node tests/expresso.test.cjs
 node tests/matematica.test.cjs
 ```
 
-O teste verifica 3.600 folhas geradas com semente fixa: limites de 0 a 999, soluções para as composições, resultados de contas, sequências e regras do corretor. Testes no navegador cobrem navegação livre, persistência, regeneração/cancelamento, seleções, trocas, criação de sequência, jogos e desenho. Dimensões verificadas incluem 375×812, 768×1024 e 1024×1366. Isso não substitui o teste físico da Apple Pencil e da conversão de manuscrito no Safari do iPad.
-
-## Fontes privadas
-
-As fotos de referência e temporários são ignorados pelo Git. Publicar apenas os arquivos didáticos derivados. Não incluir fotos das páginas, manuscritos, nomes da escola/professora/alunos nem mensagens privadas.
-
-## Revisão visual
-
-Menus e cabeçalhos usam cenas coloridas ligadas a cada tema: trens, caminhos com bichinhos, lupa, coleções, livros, bolas e roupas. As perguntas, respostas esperadas, geração de números e armazenamento não foram alterados nesta revisão. `matematica-art.js` contém apenas apresentação; `matematica-ilustracoes.css` adapta as cenas a tablet/celular, sem reduzir os campos de escrita. As ilustrações decorativas ficam fora da árvore de acessibilidade e da impressão.
-
-As figuras SVG são de **OpenMoji 17.0.0**, copiadas do repositório oficial, sob **CC BY-SA 4.0**, e ficam hospedadas junto ao site. Não há carregamento de imagens ou fontes a partir de serviços externos durante o uso. Créditos, fonte, versão e licença estão em [assets/openmoji/CREDITOS.md](assets/openmoji/CREDITOS.md) e no rodapé. As composições dessas figuras também são disponibilizadas sob CC BY-SA 4.0.
+O jogo usa HTML, CSS e JavaScript e carrega seus recursos do próprio site. A ilustração de abertura foi criada para esta atividade.
