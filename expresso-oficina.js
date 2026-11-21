@@ -100,7 +100,7 @@ const Oficina = (function createWorkshop(){
         }break;
       }
       case 'quiz':if(s.choice!==j.key)error=j.hint;break;
-      case 'word':if(MathBook.checkField({kind:'words',expected:MathBook.words(j.n)},number).status!=='ok')error='Leia as três partes em voz alta e ligue as palavras com “e”.';break;
+      case 'word':if(s.handReviewed && s.ink?.length){why='Você comparou sua escrita com a referência. '+MathBook.words(j.n)+'.';break;}if(MathBook.checkField({kind:'words',expected:MathBook.words(j.n)},number).status!=='ok')error='Leia as três partes em voz alta e ligue as palavras com “e”.';break;
       case 'sum':if(s.ways?.length!==2)error='Guarde duas somas com parcelas diferentes.';else why=s.ways.map(p=>`${p.join(' + ')} = ${j.target}`).join('  •  ');break;
       case 'table':{
         if(selection.length!==j.wanted.length||!j.wanted.every(i=>selection.includes(i)))error='Volte à pergunta e marque só as linhas que ela cita.';
@@ -125,18 +125,18 @@ const Oficina = (function createWorkshop(){
       case 'bundles':
         if(count(j,s)*j.each!==j.total)error='Ainda há flores no cesto. Monte os buquês que faltam.';
         else error=numeric(j.total/j.each,'Conte os buquês prontos. A pergunta pede o número de buquês.');
-        why=`36 ÷ 4 = 9. São nove buquês com quatro flores em cada um.`;break;
+        why=`${j.total} ÷ ${j.each} = ${j.total/j.each}. São ${j.total/j.each} buquês.`;break;
       case 'seats':{
         const capacity=j.rows*j.per;
         if(selection.length!==Math.min(capacity,j.people))error=j.object==='piões'?'Entregue todos os piões.':'Embarque todos os passageiros.';
         else if(j.object==='piões'&&s.choice!==0)error='Observe a fila. Ainda há alguém sem brinquedo?';
         else error=numeric(Math.abs(capacity-j.people),j.hint);
-        why=j.object==='piões'?'4 × 3 = 12 piões. Há 13 crianças, então falta um pião.':'6 × 4 = 24 lugares. Como 24 − 22 = 2, ficam duas poltronas vazias.';break;
+        why=j.object==='piões'?`${j.rows} × ${j.per} = ${capacity} piões. Faltam ${j.people-capacity} piões.`:`${j.rows} × ${j.per} = ${capacity} lugares. Ficam ${capacity-j.people} poltronas vazias.`;break;
       }
       case 'story':{
         if(!s.note?.trim()&&!s.ink?.length)error='Escreva ou desenhe sua pergunta para o próximo maquinista.';
         else if(!s.reviewed)error='Compare sua encomenda com o bilhete de revisão e marque a caixinha.';
-        why=`Sua encomenda ficou guardada. ${s.groups||3} grupos de ${s.each||4} dão ${(s.groups||3)*(s.each||4)} ao todo.`;break;
+        why=`Sua encomenda ficou guardada. ${s.groups||j.defaultGroups||3} grupos de ${s.each||j.defaultEach||4} dão ${(s.groups||j.defaultGroups||3)*(s.each||j.defaultEach||4)} ao todo.`;break;
       }
     }
     return {error,why};

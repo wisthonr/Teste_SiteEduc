@@ -1,10 +1,14 @@
 function iniciarExpresso(){
-  const stops=Expresso.stops, W=Oficina, game=document.getElementById('game');
+  let stops;
+  const W=Oficina, game=document.getElementById('game');
   const by=id=>document.getElementById(id);
   const escape=s=>String(s??'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
   const key='expresso-piquenique-v1';
   let book={}, stop, job, sheet, message='', observer, focusReturn;
   try{book=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
+  if (typeof book !== 'object' || Array.isArray(book)) book = {};
+  stops = ExpressoRounds.create(Number.isInteger(book.round) ? book.round : 0);
+  let numberTarget;
   function save(){
     try{localStorage.setItem(key,JSON.stringify(book));by('storage-note').textContent='Viagem guardada neste navegador.';}
     catch{by('storage-note').textContent='O navegador não conseguiu guardar esta viagem.';}
@@ -32,7 +36,7 @@ function iniciarExpresso(){
       <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><a class="primary" href="${destination()}">${stamps()===stops.length?'Ver meu bilhete':book.last?'Continuar viagem':'Embarcar no trem'}</a></div>
       <div class="postcard"><img src="assets/expresso-paisagem.webp" alt="Uma locomotiva com encomendas atravessa uma ponte a caminho do piquenique."></div>
     </section><section class="route-area"><div class="section-head"><div><span class="overline">Escolha onde jogar</span><h2>Mapa da viagem</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
-      <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">Estação ${String(i+1).padStart(2,'0')}</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} entregas concluídas</span></div></a>`).join('')}</div></section>`;
+      <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">Estação ${String(i+1).padStart(2,'0')}</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} entregas concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova viagem com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
   function ticket(){
     const done=stamps(),total=stops.reduce((acc,s)=>acc+completed(s),0),max=stops.reduce((acc,s)=>acc+s.jobs.length,0);
@@ -45,7 +49,7 @@ function iniciarExpresso(){
     return `<button type="button" data-act="${action}"${i===null?'':` data-n="${i}"`}${opts.pressed===undefined?'':` aria-pressed="${opts.pressed}"`}${opts.disabled?' disabled':''}${opts.cls?` class="${opts.cls}"`:''}${opts.aria?` aria-label="${escape(opts.aria)}"`:''}>${label}</button>`;
   }
   function numInput(label){
-    return `<label class="answer-line">${label}<input id="num" data-field="answer" inputmode="numeric" type="text" autocomplete="off" maxlength="5" value="${escape(sheet.answer)}" /></label>`;
+    return `<label class="answer-line">${label}<span class="small">Toque no campo para usar os números.</span><input id="num" data-field="answer" readonly inputmode="none" data-number type="text" autocomplete="off" maxlength="5" value="${escape(sheet.answer)}" /></label>`;
   }
   function calcView(){
     const m=W.material(job,sheet), trade=W.exchangeAt(job,sheet), plus=job.op==='+', names=['Centenas','Dezenas','Unidades'];
@@ -71,7 +75,7 @@ function iniciarExpresso(){
       <div class="subaction">${trade===undefined?'<strong>As peças estão prontas.</strong>':btn('trade',tradeText,null,{cls:'accent'})}</div>
       ${plus&&trade!==undefined?`<p class="piece-note">Toque em dez peças ou use o botão para juntá-las de uma vez. ${marked.length?`Você marcou ${marked.length} de 10.`:''}</p>`:''}
       </div>
-      <div class="calc-wrap"><h3>Registre a conta</h3><div class="calc"><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" inputmode="numeric" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div></div></div>`;
+      <div class="calc-wrap"><h3>Registre a conta</h3><p class="small">Toque em cada casa do resultado para escolher o número.</p><div class="calc"><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div></div></div>`;
   }
   function trackView(){
     const picked=W.take(sheet), named=v=>({'☀️':'sol','🍃':'folha','🌙':'lua'}[v]||v);
@@ -91,7 +95,7 @@ function iniciarExpresso(){
       case 'exchange':return calcView();
       case 'track':return trackView();
       case 'quiz':return `<div class="answers">${job.choices.map((v,i)=>btn('choose',v,i,{pressed:sheet.choice===i})).join('')}</div>`;
-      case 'word':return `<div class="number-label">${job.n}</div><label class="word-label">Número por extenso<input data-field="answer" type="text" autocomplete="off" spellcheck="false" value="${escape(sheet.answer)}"></label>`;
+      case 'word':return `<div class="number-label">${job.n}</div><p>Escreva o nome deste número na folha abaixo.</p><details><summary>Digitar ou editar</summary><label class="word-label">Número por extenso<input data-field="answer" type="text" lang="pt-BR" autocomplete="off" autocorrect="off" spellcheck="false" value="${escape(sheet.answer)}"></label></details>`;
       case 'sum':{
         const ways=sheet.ways||[], val=sel.map(i=>job.pieces[i]);
         return `<div class="chips">${job.pieces.map((v,i)=>btn('pick',String(v),i,{pressed:sel.includes(i),disabled:ways.length===2,cls:'chip'})).join('')}</div>
@@ -110,32 +114,39 @@ function iniciarExpresso(){
         ${toys?`<div class="tools">${['Faltam piões','Sobram piões'].map((v,i)=>btn('choose',v,i,{pressed:sheet.choice===i})).join('')}</div>`:''}${numInput(toys?'Quantos piões faltam ou sobram?':'Quantas poltronas ficaram vazias?')}`;
       }
       case 'story':{
-        const selector=(field,title,defaultValue)=>`<label>${title}<select data-field="${field}">${[2,3,4,5,6].map(v=>`<option ${v===(sheet[field]||defaultValue)?'selected':''}>${v}</option>`).join('')}</select></label>`;
-        return `<div class="selects">${selector('groups','Quantos vagões?',3)}${selector('each','Quantos objetos por vagão?',4)}</div>
-          <label class="word-label">Minha pergunta<textarea data-field="note" rows="3" placeholder="Escreva aqui ou desenhe no rascunho.">${escape(sheet.note)}</textarea></label><label class="review"><input type="checkbox" data-field="reviewed" ${sheet.reviewed?'checked':''}> Revisei minha história. Ela conta o que vai nos vagões e pergunta quantos objetos há ao todo.</label>`;
+        const selector=(field,title,defaultValue)=>`<label>${title}<select data-field="${field}">${[2,3,4,5,6,7,8,9,10].map(v=>`<option ${v===(sheet[field]||defaultValue)?'selected':''}>${v}</option>`).join('')}</select></label>`;
+        return `<div class="selects">${selector('groups','Quantos vagões?',job.defaultGroups||3)}${selector('each','Quantos objetos por vagão?',job.defaultEach||4)}</div>
+          <details><summary>Digitar ou editar a pergunta</summary><label class="word-label">Minha pergunta<textarea data-field="note" rows="3" placeholder="Você também pode escrever na folha abaixo.">${escape(sheet.note)}</textarea></label></details><label class="review"><input type="checkbox" data-field="reviewed" ${sheet.reviewed?'checked':''}> Revisei minha história. Ela conta o que vai nos vagões e pergunta quantos objetos há ao todo.</label>`;
       }
     }
   }
   function toolbar(){
-    return `<details class="scratch" ${sheet.scratchOpen?'open':''}><summary>✎ &nbsp; Meu rascunho</summary><p class="small">Desenhe sua estratégia. Use a caneta, o dedo ou o mouse.</p><canvas id="ink" aria-label="Espaço para desenhar sua estratégia"></canvas><div class="tools">${btn('undo-ink','Desfazer traço')}</div>
-      ${job.kind==='story'?'':`<label class="word-label">Como eu pensei<textarea data-field="note" rows="2">${escape(sheet.note)}</textarea></label>`}</details>`;
+    return `<section class="scratch" aria-label="Folha de escrita"><h2>✎ Minha folha</h2>
+      <p class="small">Escreva com a caneta, no seu tempo. Use o dedo fora da folha para rolar.</p>
+      <canvas id="ink" aria-label="Folha para escrever com a caneta"></canvas>
+      <div class="tools">${btn('undo-ink','↶ Desfazer traço')}${btn('clear-ink','Apagar folha')}</div>
+      ${job.kind==='story'?'':`<details><summary>Digitar como pensei</summary><label class="word-label">Minha ideia<textarea lang="pt-BR" autocorrect="off" data-field="note" rows="3">${escape(sheet.note)}</textarea></label></details>`}
+      </section>`;
+  }
+  function numberPad(){
+    return `<section id="number-pad" class="number-pad" hidden aria-label="Botões para registrar o resultado">
+      <p id="number-label"></p><div class="digits">${[1,2,3,4,5,6,7,8,9,0].map(n=>btn('digit',n,n)).join('')}${btn('erase-digit','⌫',null,{aria:'Apagar último algarismo'})}${btn('close-pad','Pronto')}</div>
+      ${btn('keyboard','Usar teclado')}
+    </section>`;
   }
   function mission(){
     const i=stop.jobs.indexOf(job),done=!!sheet.done;
     game.innerHTML=`<div class="play ${stop.color}"><div class="play-nav"><a href="#mapa">Mapa da viagem</a><span>${stop.title}</span></div>
       <div class="job-head">${icon(stop)}<div><span class="overline">Entrega ${i+1} de ${stop.jobs.length}</span><h1>${job.title}</h1></div></div>
       <div class="job-dots" aria-label="Entregas da estação">${stop.jobs.map((j,k)=>`<a href="${url(stop,j)}" aria-label="Entrega ${k+1}: ${j.title}" ${j===job?'aria-current="step"':''} class="${book[stop.id]?.[j.id]?.done?'done':''}">${book[stop.id]?.[j.id]?.done?'✓':k+1}</a>`).join('')}</div>
-      <section class="board"><p class="prompt">${job.prompt}</p><div class="workbench">${taskView()}</div>
-      <div class="actions">${btn('check',job.kind==='story'?'Guardar minha encomenda':'Conferir entrega',null,{cls:'primary'})}${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}</div>
-      <div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Encomenda guardada':'Entrega conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima entrega':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar nesta estação'}</a></div>`:''}</section>${toolbar()}</div>`;
+      <section class="board"><p class="prompt">${job.prompt}</p>${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}<div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="workbench">${taskView()}</div>${numberPad()}${toolbar()}
+      <div class="actions">${btn('check',job.kind==='story'?'Guardar minha encomenda':'Conferir entrega',null,{cls:'primary'})}</div>
+      <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Encomenda guardada':sheet.handReviewed?'Escrita revisada':'Entrega conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima entrega':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar nesta estação'}</a></div>`:''}</section></div>`;
     by('feedback').textContent=message;
-    if(sheet.scratchOpen)setupInk();
-    game.querySelector('.scratch').ontoggle=e=>{
-      if(!e.target.isConnected)return;
-      sheet.scratchOpen=e.target.open;save();
-      if(sheet.scratchOpen)setupInk();else observer?.disconnect();
-    };
+    numberTarget = null;
+    setupInk();
   }
+
   function renderMission(){
     const active=document.activeElement;
     const restore=active?.dataset.act;
@@ -165,10 +176,23 @@ function iniciarExpresso(){
     }
     const point=e=>{const r=c.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height];};
     c.onpointerdown=e=>{
-      if(active!==null||e.button>0||!e.isPrimary)return;
+      if(e.pointerType==='touch'||active!==null||e.button>0||!e.isPrimary)return;
+      if (job.kind==='word' || job.kind==='story') {sheet.handReviewed=false;sheet.done=false;game.querySelector('.success')?.remove();}
       e.preventDefault();active=e.pointerId;c.setPointerCapture(active);line=[point(e)];strokes.push(line);paint();
     };
-    c.onpointermove=e=>{if(active!==e.pointerId)return;line.push(point(e));paint();};
+    c.onpointermove=e=>{
+      if(active!==e.pointerId)return;
+      const rect=c.getBoundingClientRect();
+      const coalesced=e.getCoalescedEvents?.();
+      const samples=coalesced?.length?coalesced:[e];
+      const last=line[line.length-1];
+      ctx.beginPath();ctx.moveTo(last[0]*rect.width,last[1]*rect.height);
+      for(const sample of samples){
+        const position=point(sample);line.push(position);
+        ctx.lineTo(position[0]*rect.width,position[1]*rect.height);
+      }
+      ctx.stroke();
+    };
     function end(e){if(active!==e.pointerId)return;active=null;save();}
     c.onpointerup=end;c.onpointercancel=end;c.onlostpointercapture=end;
     observer=new ResizeObserver(paint);observer.observe(c);paint();
@@ -187,10 +211,17 @@ function iniciarExpresso(){
   by('brand').onclick=e=>{e.preventDefault();location.hash='mapa';};
   by('help').onclick=()=>{focusReturn=document.activeElement;by('help-panel').showModal();};
   by('help-close').onclick=()=>by('help-panel').close();by('help-panel').onclose=()=>focusReturn?.focus();
+  game.addEventListener('focusin',e=>{
+    if (!e.target.matches('[data-number]') || !e.target.readOnly) return;
+    numberTarget=e.target;
+    by('number-label').textContent=e.target.getAttribute('aria-label')||'Toque nos números da sua resposta.';
+    by('number-pad').hidden=false;
+  });
   game.addEventListener('input',e=>{
     if(!sheet)return;
     const t=e.target, field=t.dataset.field;
     if(field){
+      if(field!=='note'||job.kind==='story')sheet.handReviewed=false;
       sheet[field]=field==='reviewed'?t.checked:['each','groups'].includes(field)?Number(t.value):t.value;
     }else if(t.dataset.result!==undefined){
       sheet.result||=['','',''];sheet.result[Number(t.dataset.result)]=t.value.trim();
@@ -199,8 +230,32 @@ function iniciarExpresso(){
     message='';sheet.done=false;game.querySelector('.success')?.remove();by('feedback').textContent='';save();
   });
   game.addEventListener('click',e=>{
-    const b=e.target.closest('[data-act]');if(!b||!sheet)return;
+    const b=e.target.closest('[data-act]');
+    if (!b) return;
     const action=b.dataset.act,n=Number(b.dataset.n);
+    if (action==='new-trip') {
+      if (!confirm('Começar uma nova viagem? Os números das 28 entregas vão mudar. As respostas, os desenhos e os carimbos desta viagem serão apagados neste navegador.')) return;
+      const nextBook = {round:(Number.isInteger(book.round)?book.round:0)+1};
+      try {localStorage.setItem(key,JSON.stringify(nextBook));}
+      catch {by('storage-note').textContent='Não foi possível guardar a nova viagem. Tente novamente.';return;}
+      book=nextBook;stops=ExpressoRounds.create(book.round);navigate();return;
+    }
+    if (!sheet) return;
+    if (['digit','erase-digit','close-pad','keyboard'].includes(action)) {
+      if (!numberTarget?.isConnected) return;
+      if (action==='close-pad') {by('number-pad').hidden=true;return;}
+      if (action==='keyboard') {numberTarget.readOnly=false;numberTarget.inputMode='numeric';by('number-pad').hidden=true;numberTarget.focus();return;}
+      const limit=numberTarget.maxLength>0?numberTarget.maxLength:5;
+      numberTarget.value=action==='erase-digit'?numberTarget.value.slice(0,-1):limit===1?String(n):(numberTarget.value+String(n)).slice(0,limit);
+      numberTarget.dispatchEvent(new Event('input',{bubbles:true}));return;
+    }
+    if (action==='review-word') {sheet.handReviewed=true;sheet.done=true;save();renderMission();return;}
+    if (action==='clear-ink') {
+      if (!sheet.ink?.length || !confirm('Apagar os traços desta folha?')) return;
+      sheet.ink=[];sheet.handReviewed=false;
+      if(job.kind==='word'||job.kind==='story')sheet.done=false;
+      save();renderMission();return;
+    }
     if(action==='locate'){
       const p=by(`place-${n}`);p.classList.remove('highlight');void p.offsetWidth;p.classList.add('highlight');return;
     }
@@ -212,8 +267,12 @@ function iniciarExpresso(){
     }else if(action==='trade'&&sheet.marked?.length&&sheet.marked.length!==10){
       message=`Você marcou ${sheet.marked.length}. Marque mais ${10-sheet.marked.length} para fazer a troca.`;
     }else if(action==='hint'){sheet.hint=!sheet.hint;}
-    else if(action==='undo-ink'){sheet.ink?.pop();if(job.kind==='story'&&!sheet.note?.trim()&&!sheet.ink?.length)sheet.done=false;}
+    else if(action==='undo-ink'){sheet.ink?.pop();sheet.handReviewed=false;if(job.kind==='story'||job.kind==='word')sheet.done=false;}
     else if(action==='check'){
+      if (job.kind==='word' && !sheet.answer?.trim() && sheet.ink?.length) {
+        by('feedback').innerHTML=`<p>Compare sua escrita com <strong>${escape(MathBook.words(job.n))}</strong>.</p><p>Confira cada palavra e os espaços. Peça ajuda a um adulto se precisar.</p>${btn('review-word','Já revisei minha escrita')}`;
+        return;
+      }
       const result=W.judge(job,sheet);sheet.done=!result.error;message=result.error||'';
     }else if(action==='keep-sum'){
       message=W.storeSum(job,sheet);sheet.done=false;

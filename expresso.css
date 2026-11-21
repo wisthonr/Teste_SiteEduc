@@ -18,3 +18,28 @@ table{width:100%;border-collapse:collapse;text-align:left;background:#fffdf6}cap
 @media(max-width:620px){:root{font-size:16px}.mast{padding-top:8px;padding-bottom:8px}.mast>a{font-size:1.1rem;gap:6px}.brand-icon{width:30px;height:30px;font-size:1.1rem}.mast nav{gap:0}.mast nav button{padding:6px 7px}.mast #help{width:30px}.hero{grid-template-columns:1fr;padding:22px 0;gap:17px}.hero-copy{display:grid;grid-template-columns:1fr auto;align-items:end;gap:0 10px}.hero-copy .overline,.hero-copy p{grid-column:1/-1}.hero h1{grid-column:1/-1;font-size:clamp(3rem,10vw,4.1rem);margin:10px 0}.hero h1 br{display:none}.hero h1 em:before{content:' '}.hero p{margin:0 0 13px}.hero .primary{justify-self:start}.postcard{max-width:100%;margin:0 3px}.postcard img{aspect-ratio:2.15}.route-area{padding-top:17px}.section-head{align-items:end}.section-head h2{font-size:1.85rem}.routes{grid-template-columns:1fr}.route-card{align-items:center}.exchange{grid-template-columns:1fr}.calc{max-width:230px}.play-nav{align-items:start}.play-nav span{text-align:right}.stamp-grid{grid-template-columns:1fr 1fr}.crates{grid-template-columns:repeat(3,minmax(0,1fr))}.crate{padding:5px}.job-head>.tile-icon{width:48px;height:48px}.pass{margin-top:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .piece-note{font-size:.88rem;margin-top:8px;color:#465e55}.tokens .piece{width:28px;height:30px;min-height:30px;border-radius:5px;padding:2px;display:inline-grid;place-items:center;border:1px solid #dad4c1;background:#fffaf0}.tokens .piece[aria-pressed=true]{background:#b9d8c5;border-color:#356858}.tokens .piece:has(.b1){height:46px}.b1{width:7px;height:40px;background:repeating-linear-gradient(to bottom,#76aa92 0 3px,#548e78 3px 4px);border-width:0 1px}.b0{width:30px;height:30px;border:0;background-color:#d9986d;background-image:repeating-linear-gradient(0deg,transparent 0 2px,#ae7051 2px 3px),repeating-linear-gradient(90deg,transparent 0 2px,#ae7051 2px 3px)}
+/* Controles e folha dimensionados para o iPad em pé. */
+:root{font-size:20px}
+h2,h3,.job-head h1{font-family:'Trebuchet MS','Segoe UI',sans-serif;letter-spacing:normal}
+button,.primary{min-height:56px;border-radius:14px}
+.job-dots{gap:10px;flex-wrap:wrap}.job-dots a{width:50px;height:50px}
+.answer-line input{width:160px;height:64px;font-size:30px;text-align:center}
+.answer-line .small{display:block;font-weight:normal}
+.result input{height:62px;font-size:30px;cursor:pointer}
+.calc{max-width:330px}.calc-row{font-size:28px;min-height:42px}
+.scratch{padding:18px;margin:22px 0;background:#fffdf5}
+.scratch h2{font-size:24px;margin-bottom:8px}
+.scratch canvas{height:390px;background:repeating-linear-gradient(#fffdf6 0 63px,#bfd2d8 64px,#fffdf6 66px);border:2px solid #a8bebe;margin:14px 0}
+.scratch details{margin-top:18px}.scratch summary{font-size:17px}
+.tokens .piece{width:44px;height:44px;min-height:44px}.tokens .piece:has(.b1){height:48px}
+.number-pad{margin:16px 0;background:#e1eee3;padding:16px;border-radius:16px}
+.number-pad[hidden]{display:none}.number-pad p{margin-bottom:10px}
+.digits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:380px;margin-bottom:12px}
+.digits button{font-size:27px;min-height:60px}
+.digits button[data-act=close-pad]{font-size:19px}
+.adult-tools{margin-top:28px;text-align:center}.adult-tools button{background:transparent;font-size:15px;font-weight:normal;min-height:48px}.adult-tools p{font-size:14px;margin-top:8px}
+.chocolate{max-width:560px}.chocolate button{min-height:50px}
+.word-label input,.word-label textarea{font-size:22px;line-height:1.6}
+@media(max-width:1024px){.exchange{grid-template-columns:1fr;gap:22px}.hero{grid-template-columns:1fr}.hero-copy{max-width:650px}.postcard{max-width:680px}.hero h1{font-size:48px}.place b{font-size:18px}.route-card h3{font-size:24px}.board{padding:20px}}
+@media(max-width:620px){:root{font-size:18px}.mast{flex-wrap:wrap}.mast>a{font-size:22px}.mast nav button{min-height:48px}.board{padding:12px}.workbench{padding:10px}.scratch{padding:12px}.scratch canvas{height:330px}.place b{font-size:13px}.job-dots a{width:46px;height:46px}.job-head h1{font-size:30px}.chocolate{gap:3px}.chocolate button{min-height:44px}.crates{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.board>.workbench{margin-top:16px}
