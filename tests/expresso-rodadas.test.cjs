@@ -44,7 +44,6 @@ function solve(job) {
     case 'seats':
       state.selection=Array.from({length:Math.min(job.rows*job.per,job.people)},(_,i)=>i);
       state.choice=0;state.answer=String(Math.abs(job.rows*job.per-job.people));break;
-    case 'story':state.note=job.prompt;state.reviewed=true;break;
   }
   assert(!workshop.judge(job,state).error,`${job.id}: ${workshop.judge(job,state).error}`);
   return state;
@@ -54,13 +53,13 @@ function answerSignature(job, state) {
   if(job.kind==='quiz') return job.choices[job.key];
   if(job.kind==='sum') return String(job.target);
   if(job.kind==='fraction') return String(job.total/job.parts);
-  if(job.kind==='story') return job.prompt;
   return state.answer || state.result.join('');
 }
 let previous;
 for(let round=0;round<=17;round++) {
   const jobs=rounds.create(round).flatMap(s=>s.jobs);
-  assert.equal(jobs.length,28);
+  assert.equal(jobs.length,27);
+  assert(jobs.every(job=>job.id!=='autora'&&job.kind!=='story'));
   const answers=jobs.map(job=>answerSignature(job,solve(job)));
   if(previous) answers.forEach((answer,i)=>assert.notEqual(answer,previous[i],`Resposta repetida em ${round}/${jobs[i].id}`));
   previous=answers;
@@ -122,6 +121,27 @@ ui.click('review-word');assert(ui.data.colecoes.escrever.done);
 ui.click('undo-ink');assert(!ui.data.colecoes.escrever.done);
 for(const station of rounds.create(1))for(const job of station.jobs)ui.navigate(`#${station.id}/${job.id}`);
 
+// A atividade retirada não bloqueia o carimbo nem apaga respostas de sessões anteriores.
+const completedButtons={round:4,last:['botoes','autora'],botoes:{
+  tres:{done:true,answer:'21',ink:[[[.2,.4]]]},
+  cinco:{done:true},bombons:{done:true},autora:{done:false,note:'Rascunho antigo'}
+}};
+const oldLink=mount(completedButtons,'#botoes/autora');
+assert(oldLink.element('game').innerHTML.includes('Minhas conquistas'));
+assert(oldLink.element('game').innerHTML.includes('3 de 27 atividades'));
+assert.match(oldLink.element('game').innerHTML, /href="#botoes\/tres" class="stamp [^"]*earned"/);
+assert.deepEqual(oldLink.data,completedButtons);
+oldLink.navigate('#mapa');
+assert(oldLink.element('game').innerHTML.includes('3 de 3 atividades concluídas'));
+assert(!oldLink.element('game').innerHTML.includes('#botoes/autora'));
+const pendingButtons=structuredClone(completedButtons);
+pendingButtons.botoes.cinco={done:false,answer:'2',ink:[[[.3,.5]]]};
+const pendingLink=mount(pendingButtons,'#botoes/autora');
+assert(pendingLink.element('game').innerHTML.includes('Atividade 2 de 3'));
+assert.deepEqual(pendingLink.data.botoes,pendingButtons.botoes);
+assert.deepEqual(pendingLink.data.last,['botoes','cinco']);
+assert(!pendingLink.element('game').innerHTML.includes('Minha pergunta'));
+
 // Caso relatado no iPad: 822 - 370. Anotar 7 centenas e 12 dezenas, sem preencher unidades.
 const reported=rounds.create(4).flatMap(s=>s.jobs).find(j=>j.id==='casinha');
 assert.equal(reported.a,822);assert.equal(reported.b,370);
@@ -140,6 +160,7 @@ assert(noteUI.element('game').innerHTML.includes('id="original-digit-0" class="r
 assert(noteUI.element('game').innerHTML.includes('id="original-digit-1" class="replaced-digit"'));
 assert(noteUI.element('game').innerHTML.includes('id="original-digit-2" class=""'));
 assert.equal(noteUI.data.correio.casinha.ink.length,1);
-console.log('OK: 28 missões × 18 viagens, respostas diferentes entre viagens, correção, migração, caneta, rejeição de toque, teclado numérico, revisão manual e montagem das 28 telas.');
+console.log('OK: 27 atividades × 18 rodadas, respostas diferentes entre rodadas, correção, migração, caneta, rejeição de toque, teclado numérico, revisão manual e montagem das 27 telas.');
+console.log('OK: elaboração de perguntas removida, links antigos redirecionados, progresso e carimbo preservados.');
 console.log('OK: caso 822 - 370, anotação de dois dígitos, edição, retomada e indicação das colunas trocadas.');
 

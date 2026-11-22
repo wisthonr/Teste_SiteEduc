@@ -34,9 +34,9 @@ function iniciarExpresso(){
   function map(){
     game.innerHTML=`<section class="hero">
       <div class="hero-copy"><span class="overline">MEU CADERNO · 2º ANO</span><h1>Matemática<br><em>em cores!</em></h1><p>Vamos descobrir, experimentar<br>e aprender um pouquinho mais?</p></div><div class="cover-art"><img src="assets/caderno-matematica.svg" alt="Caderno com botões coloridos e peças de contagem, como nas atividades da apostila."></div></section><nav class="home-menu" aria-label="Menu principal">
-        <a class="home-option home-game" href="jogo.html?v=20261122-trocas"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
+        <a class="home-option home-game" href="jogo.html?v=20261122-sem-criacao"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
         <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/270F.svg" alt=""></span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
-        <a class="home-option home-lessons" href="aula.html?v=20261122-trocas"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
+        <a class="home-option home-lessons" href="aula.html?v=20261122-sem-criacao"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
       </nav><section class="route-area"><div class="section-head"><div><span class="overline">ESCOLHA UM ASSUNTO</span><h2>Meu caderno</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
       <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">${s.jobs.length} atividades</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} atividades concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova rodada com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
@@ -112,11 +112,6 @@ function iniciarExpresso(){
         return `<div class="counter">${job.people} ${toys?'crianças precisam de um pião':'passageiros vão embarcar'}</div><p class="small">${toys?'Toque em cada pião para entregá-lo.':'Toque nas poltronas para sentar os passageiros.'}</p><div class="seat-grid" style="--cols:${job.per}">${arr(job.rows*job.per,i=>btn('seat',sel.includes(i)?'✓':toys?'🪀':'▱',i,{pressed:sel.includes(i),aria:`${toys?'Pião':'Poltrona'} ${i+1}`,disabled:!sel.includes(i)&&sel.length>=job.people}))}</div>
         ${toys?`<div class="tools">${['Faltam piões','Sobram piões'].map((v,i)=>btn('choose',v,i,{pressed:sheet.choice===i})).join('')}</div>`:''}${numInput(toys?'Quantos piões faltam ou sobram?':'Quantas poltronas ficaram vazias?')}`;
       }
-      case 'story':{
-        const selector=(field,title,defaultValue)=>`<label>${title}<select data-field="${field}">${[2,3,4,5,6,7,8,9,10].map(v=>`<option ${v===(sheet[field]||defaultValue)?'selected':''}>${v}</option>`).join('')}</select></label>`;
-        return `<div class="selects">${selector('groups','Quantos grupos?',job.defaultGroups||3)}${selector('each','Quantos objetos por grupo?',job.defaultEach||4)}</div>
-          <details><summary>Digitar ou editar a pergunta</summary><label class="word-label">Minha pergunta<textarea data-field="note" rows="3" placeholder="Você também pode escrever na folha abaixo.">${escape(sheet.note)}</textarea></label></details><label class="review"><input type="checkbox" data-field="reviewed" ${sheet.reviewed?'checked':''}> Revisei minha história. Ela conta o que há nos grupos e pergunta quantos objetos há ao todo.</label>`;
-      }
     }
   }
   function toolbar(){
@@ -124,7 +119,7 @@ function iniciarExpresso(){
       <p class="small">Escreva com a caneta, no seu tempo. Use o dedo fora da folha para rolar.</p>
       <canvas id="ink" aria-label="Folha para escrever com a caneta"></canvas>
       <div class="tools">${btn('undo-ink','↶ Desfazer traço')}${btn('clear-ink','Apagar folha')}</div>
-      ${job.kind==='story'?'':`<details><summary>Digitar como pensei</summary><label class="word-label">Minha ideia<textarea lang="pt-BR" autocorrect="off" data-field="note" rows="3">${escape(sheet.note)}</textarea></label></details>`}
+      <details><summary>Digitar como pensei</summary><label class="word-label">Minha ideia<textarea lang="pt-BR" autocorrect="off" data-field="note" rows="3">${escape(sheet.note)}</textarea></label></details>
       </section>`;
   }
   function numberPad(){
@@ -138,7 +133,7 @@ function iniciarExpresso(){
     if(job.kind==='sum')return 'soma';
     if(job.kind==='track'&&job.line.length&&typeof job.line[0]==='number')return 'sequencia';
     if(job.kind==='batch'&&['dobro','triplo'].includes(job.id))return 'dobro';
-    if(['load','batch','story'].includes(job.kind))return 'multiplicacao';
+    if(['load','batch'].includes(job.kind))return 'multiplicacao';
     if(['share','fraction','bundles'].includes(job.kind))return 'divisao';
     return '';
   }
@@ -148,8 +143,8 @@ function iniciarExpresso(){
       <div class="job-head">${icon(stop)}<div><span class="overline">Atividade ${i+1} de ${stop.jobs.length}</span><h1>${job.title}</h1></div></div>
       <div class="job-dots" aria-label="Atividades do assunto">${stop.jobs.map((j,k)=>`<a href="${url(stop,j)}" aria-label="Atividade ${k+1}: ${j.title}" ${j===job?'aria-current="step"':''} class="${book[stop.id]?.[j.id]?.done?'done':''}">${book[stop.id]?.[j.id]?.done?'✓':k+1}</a>`).join('')}</div>
       <section class="board"><p class="prompt">${job.prompt}</p><details class="book-reference"><summary>📖 Apostila · ${escape(job.reference.label)}</summary><p>${escape(job.reference.note)}${book.round>0?' Nesta rodada, números e opções podem mudar para repetir o raciocínio.':''}</p></details>${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}${lessonTopic()?btn('lesson','▶ Ver uma aula de exemplo',null,{cls:'lesson-help'}):''}<div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="workbench">${taskView()}</div>${numberPad()}${toolbar()}
-      <div class="actions">${btn('check',job.kind==='story'?'Guardar minha pergunta':'Conferir resposta',null,{cls:'primary'})}</div>
-      <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Pergunta guardada':sheet.handReviewed?'Escrita revisada':'Atividade conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima atividade':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar neste assunto'}</a></div>`:''}</section></div>`;
+      <div class="actions">${btn('check','Conferir resposta',null,{cls:'primary'})}</div>
+      <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${sheet.handReviewed?'Escrita revisada':'Atividade conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima atividade':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar neste assunto'}</a></div>`:''}</section></div>`;
     by('feedback').textContent=message;
     numberTarget = null;
     setupInk();
@@ -185,7 +180,7 @@ function iniciarExpresso(){
     const point=e=>{const r=c.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height];};
     c.onpointerdown=e=>{
       if(e.pointerType==='touch'||active!==null||e.button>0||!e.isPrimary)return;
-      if (job.kind==='word' || job.kind==='story') {sheet.handReviewed=false;sheet.done=false;game.querySelector('.success')?.remove();}
+      if (job.kind==='word') {sheet.handReviewed=false;sheet.done=false;game.querySelector('.success')?.remove();}
       e.preventDefault();active=e.pointerId;c.setPointerCapture(active);line=[point(e)];strokes.push(line);paint();
     };
     c.onpointermove=e=>{
@@ -209,6 +204,8 @@ function iniciarExpresso(){
     observer?.disconnect();stop=undefined;job=undefined;sheet=undefined;message='';
     const [section,id]=location.hash.slice(1).split('/');
     stop=stops.find(s=>s.id===section);
+    // Links salvos da atividade retirada seguem para as atividades restantes ou para a conquista.
+    if(stop?.id==='botoes'&&id==='autora'){location.hash=completed(stop)===stop.jobs.length?'#bilhete':url(stop);navigate();return;}
     if(stop){
       job=stop.jobs.find(j=>j.id===id)||first(stop);sheet=entry(stop,job);book.last=[stop.id,job.id];save();mission();
     }else if(section==='bilhete')ticket();else map();
@@ -229,7 +226,7 @@ function iniciarExpresso(){
     if(!sheet)return;
     const t=e.target, field=t.dataset.field;
     if(field){
-      if(field!=='note'||job.kind==='story')sheet.handReviewed=false;
+      if(field!=='note')sheet.handReviewed=false;
       sheet[field]=field==='reviewed'?t.checked:['each','groups'].includes(field)?Number(t.value):t.value;
     }else if(t.dataset.carry!==undefined){
       const i=Number(t.dataset.carry);
@@ -239,7 +236,7 @@ function iniciarExpresso(){
     }else if(t.dataset.result!==undefined){
       sheet.result||=['','',''];sheet.result[Number(t.dataset.result)]=t.value.trim();
     }else return;
-    if(field==='note'&&job.kind!=='story'){save();return;}
+    if(field==='note'){save();return;}
     message='';sheet.done=false;game.querySelector('.success')?.remove();by('feedback').textContent='';save();
   });
   game.addEventListener('click',e=>{
@@ -247,7 +244,7 @@ function iniciarExpresso(){
     if (!b) return;
     const action=b.dataset.act,n=Number(b.dataset.n);
     if (action==='new-trip') {
-      if (!confirm('Começar uma nova rodada? Os números das 28 atividades vão mudar. As respostas, os desenhos e os carimbos desta rodada serão apagados neste navegador.')) return;
+      if (!confirm('Começar uma nova rodada? Os números das 27 atividades vão mudar. As respostas, os desenhos e os carimbos desta rodada serão apagados neste navegador.')) return;
       const nextBook = {round:(Number.isInteger(book.round)?book.round:0)+1};
       try {localStorage.setItem(key,JSON.stringify(nextBook));}
       catch {by('storage-note').textContent='Não foi possível guardar a nova rodada. Tente novamente.';return;}
@@ -269,7 +266,7 @@ function iniciarExpresso(){
     if (action==='clear-ink') {
       if (!sheet.ink?.length || !confirm('Apagar os traços desta folha?')) return;
       sheet.ink=[];sheet.handReviewed=false;
-      if(job.kind==='word'||job.kind==='story')sheet.done=false;
+      if(job.kind==='word')sheet.done=false;
       save();renderMission();return;
     }
     if(action==='locate'){
@@ -283,7 +280,7 @@ function iniciarExpresso(){
     }else if(action==='trade'&&sheet.marked?.length&&sheet.marked.length!==10){
       message=`Você marcou ${sheet.marked.length}. Marque mais ${10-sheet.marked.length} para fazer a troca.`;
     }else if(action==='hint'){sheet.hint=!sheet.hint;}
-    else if(action==='undo-ink'){sheet.ink?.pop();sheet.handReviewed=false;if(job.kind==='story'||job.kind==='word')sheet.done=false;}
+    else if(action==='undo-ink'){sheet.ink?.pop();sheet.handReviewed=false;if(job.kind==='word')sheet.done=false;}
     else if(action==='check'){
       if (job.kind==='word' && !sheet.answer?.trim() && sheet.ink?.length) {
         by('feedback').innerHTML=`<p>Compare sua escrita com <strong>${escape(MathBook.words(job.n))}</strong>.</p><p>Confira cada palavra e os espaços. Peça ajuda a um adulto se precisar.</p>${btn('review-word','Já revisei minha escrita')}`;

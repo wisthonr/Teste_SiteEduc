@@ -25,7 +25,6 @@ const Expresso = (() => {
       {id:'tres', kind:'load', title:'O pedido da costureira', prompt:'Prepare 3 grupos com 4 botões em cada um. Depois registre quantos botões há ao todo.', groups:3, each:4, item:'botões', token:'🔵', hint:'Cada grupo completo coloca um 4 na sua soma. Conte quantos grupos você preparou.'},
       {id:'cinco', kind:'load', title:'Cinco grupos de botões', prompt:'Monte 5 grupos de 3 botões. Quantos botões foram encomendados?', groups:5, each:3, item:'botões', token:'🟡', hint:'Diga um número por grupo completo: 3, 6… Pare quando contar os cinco grupos.'},
       {id:'bombons', kind:'batch', title:'Encomenda da bomboniere', prompt:'Uma caixa tem 25 bombons. Já temos uma caixa e o cliente pediu mais três iguais. Quantos bombons ele receberá?', groups:4, each:25, initial:1, thing:'caixa', plural:'caixas', token:'🍫', item:'bombons', hint:'Conte também a primeira caixa. Duas caixas de 25 formam 50.'},
-      {id:'autora', kind:'story', title:'Você faz a encomenda', prompt:'Invente uma encomenda para outra pessoa resolver. Escolha o que vai nos grupos e crie uma pergunta sobre o total.', hint:'Por exemplo, quem pediu as caixas? O que há dentro delas? O que essa pessoa quer descobrir?'}
     ]},
     {id:'cozinha', title:'Receitas e partes', short:'Cozinha', icon:'🧁', color:'mel', subject:'Dobro, triplo e partes', pages:'186–189, 196–201', jobs:[
       {id:'dobro', kind:'batch', title:'Bolinhos em dobro', prompt:'Uma receita rende 7 bolinhos. Prepare o dobro e descubra quantos bolinhos sairão do forno.', groups:2, each:7, initial:1, thing:'receita', plural:'receitas', token:'🧁', item:'bolinhos', hint:'O dobro são duas receitas do mesmo tamanho.'},
@@ -107,10 +106,6 @@ const Expresso = (() => {
   "bombons": {
     "label": "p. 187 · exercício 2",
     "note": "Uma caixa de bombons e mais três caixas iguais: contar todas as quatro caixas."
-  },
-  "autora": {
-    "label": "p. 183 · exercícios 1 a 3",
-    "note": "Adaptação da proposta de escolher objetos e grupos iguais e escrever as sentenças. No site, a criança também escreve uma pergunta sobre sua encomenda."
   },
   "dobro": {
     "label": "p. 189 · exercício 4",

@@ -6,16 +6,16 @@ A cada nova prova, a nova revisão substitui a anterior no mesmo endereço. As f
 
 ## Caderno
 
-Os seis assuntos reúnem 28 atividades sobre os conteúdos das páginas 160–169, 173–189 e 192–202. A criança pode escolher qualquer assunto, usar pistas, escrever na folha e conferir sua resposta. Cada assunto completo rende um carimbo. As respostas e os desenhos ficam no armazenamento local do navegador, na chave `expresso-piquenique-v1`.
+Os seis assuntos reúnem 27 atividades sobre os conteúdos das páginas 160–169, 173–189 e 192–202. A criança pode escolher qualquer assunto, usar pistas, escrever na folha e conferir sua resposta. Cada assunto completo rende um carimbo. As respostas e os desenhos ficam no armazenamento local do navegador, na chave `expresso-piquenique-v1`.
 
 - **Somar e subtrair** — material de base dez, trocas e registro da adição e da subtração.
 - **Sequências e ordem** — sequências crescentes e decrescentes, padrões de figuras e ordenação até 999.
 - **Números e coleções** — escrita por extenso, valor posicional, decomposição, leitura de tabelas e comparação de quantidades.
-- **Oficina dos Botões** — grupos iguais, adição de parcelas iguais, multiplicação e criação de um problema.
+- **Oficina dos Botões** — grupos iguais, adição de parcelas iguais, multiplicação.
 - **Receitas e partes** — dobro, triplo, metade e terça parte.
 - **Repartir e descobrir** — repartição, formação de grupos e problemas de falta e sobra.
 
-Na criação de um problema, a criança revisa a própria pergunta. O jogo verifica os itens objetivos e oferece espaço para uma estratégia pessoal.
+Não propor elaboração de perguntas, histórias ou enunciados para a Júlia. Ela resolve as atividades da apostila e suas variações, com espaço para escrever cálculos e respostas.
 
 ## Executar
 
@@ -34,7 +34,7 @@ O jogo usa HTML, CSS e JavaScript e carrega seus recursos do próprio site. A il
 
 A experiência é destinada a uma criança de 8 anos, do 2º ano, começando a usar o tablet, que escreve devagar e com letras grandes. Priorizar iPad em pé com Apple Pencil, instruções curtas, escolhas visuais e escrita livre sempre acessível. A folha fica aberta, preserva pausas e ignora toques da mão. O reconhecimento do iPad não é usado para corrigir os traços. Os resultados numéricos podem ser registrados por botões grandes, com teclado opcional. A escrita por extenso à mão usa comparação com modelo e revisão explícita, identificada no resultado.
 
-O controle do adulto no início abre outra rodada com números e respostas diferentes nas 28 atividades. Há oito variações completas antes de repetir o ciclo. A rodada original e seu progresso continuam até o adulto confirmar a troca. As novas rodadas preservam os tipos de tarefa e o intervalo até 999.
+O controle do adulto no início abre outra rodada com números e respostas diferentes nas 27 atividades. Há oito variações completas antes de repetir o ciclo. A rodada original e seu progresso continuam até o adulto confirmar a troca. As novas rodadas preservam os tipos de tarefa e o intervalo até 999.
 
 Verificação adicional das rodadas e da entrada de respostas com `node tests/expresso-rodadas.test.cjs`. O teste físico da Apple Pencil precisa ser feito no aparelho.
 
@@ -59,7 +59,7 @@ A criança registra a conta e suas anotações de troca. As peças são um apoio
 
 ## Referências da apostila
 
-As 28 atividades, seis fases do jogo e seis aulas mostram a página da apostila. Ao abrir a referência, o adulto vê o exercício e a adaptação feita. A referência acompanha todas as rodadas, mesmo quando os números mudam. A numeração foi conferida nas fotografias da avaliação de Matemática enviadas no chat “Criar atividade matemática inovadora”. As fotos e as respostas manuscritas continuam privadas.
+As 27 atividades, seis fases do jogo e seis aulas mostram a página da apostila. Ao abrir a referência, o adulto vê o exercício e a adaptação feita. A referência acompanha todas as rodadas, mesmo quando os números mudam. A numeração foi conferida nas fotografias da avaliação de Matemática enviadas no chat “Criar atividade matemática inovadora”. As fotos e as respostas manuscritas continuam privadas.
 
 As bandeiras são uma atividade complementar do critério de sequências de figuras, sem exercício equivalente identificado nas fotos. A ordenação dos quatro fichas é complementar ao critério de ordenação, com o quadro da página 160 como apoio. O suco em triplo adapta o exercício 2 da página 188, que pede duas receitas. Os desafios de cargas e as aulas têm exemplos próprios, identificados como adaptações.
 

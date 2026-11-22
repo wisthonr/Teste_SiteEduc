@@ -1,4 +1,4 @@
-/* Variações das mesmas 28 missões. A viagem original permanece na rodada zero. */
+/* Variações das mesmas 27 atividades. A viagem original permanece na rodada zero. */
 const ExpressoRounds = (() => {
   const clone = value => JSON.parse(JSON.stringify(value));
   function create(round) {
@@ -53,8 +53,6 @@ const ExpressoRounds = (() => {
     update('flores',{total:4*(9+r),prompt:`Há ${4*(9+r)} flores. Monte buquês de 4 flores. Quantos buquês ficam prontos?`});
     update('avioes',{rows:6,per:4,people:22-r,prompt:`O avião tem 6 fileiras de 4 poltronas. Embarque ${22-r} passageiros. Quantas poltronas ficam vazias?`});
     update('pioes',{people:13+r,prompt:`Há ${13+r} crianças e 4 caixas com 3 piões cada. Entregue um pião por criança. Quantos faltam?`});
-    const themes=['livros','maçãs','lápis','bolas','flores','biscoitos','figurinhas','presentes'];
-    update('autora',{defaultGroups:3,defaultEach:r+2,prompt:`Invente uma encomenda com 3 grupos de ${r+2} ${themes[r-1]}. Escreva uma pergunta sobre o total.`,hint:`Conte quem pediu ${themes[r-1]}, diga quantos há em cada grupo e pergunte o total.`});
     return stops;
   }
   return {create};

@@ -132,11 +132,6 @@ const Oficina = (function createWorkshop(){
         else error=numeric(Math.abs(capacity-j.people),j.hint);
         why=j.object==='piões'?`${j.rows} × ${j.per} = ${capacity} piões. Faltam ${j.people-capacity} piões.`:`${j.rows} × ${j.per} = ${capacity} lugares. Ficam ${capacity-j.people} poltronas vazias.`;break;
       }
-      case 'story':{
-        if(!s.note?.trim()&&!s.ink?.length)error='Escreva ou desenhe sua pergunta para o próximo maquinista.';
-        else if(!s.reviewed)error='Compare sua encomenda com o bilhete de revisão e marque a caixinha.';
-        why=`Sua encomenda ficou guardada. ${s.groups||j.defaultGroups||3} grupos de ${s.each||j.defaultEach||4} dão ${(s.groups||j.defaultGroups||3)*(s.each||j.defaultEach||4)} ao todo.`;break;
-      }
     }
     return {error,why};
   }

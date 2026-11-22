@@ -40,7 +40,5 @@ state.selection = [1,2,3,6];
 assert.equal(game.storeSum(job,state),'');
 assert.ok(!game.judge(job,state).error);
 
-const tale = stops.flatMap(s => s.jobs).find(j => j.kind === 'story');
-assert.ok(game.judge(tale,{reviewed:true}).error);
-assert.ok(!game.judge(tale,{reviewed:true,ink:[[[0.1,0.5]]]}).error);
-console.log('Trocas, grupos, decomposições e criação de problemas verificados nas seis estações.');
+assert.ok(stops.flatMap(s => s.jobs).every(j => j.kind !== 'story' && j.id !== 'autora'));
+console.log('Trocas, grupos e decomposições verificados nos seis assuntos.');
