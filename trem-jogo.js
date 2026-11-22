@@ -31,7 +31,7 @@
     const loads = model.totals(level,state);
     const completed = Object.values(book.states).filter(s=>s.done).length;
     root.innerHTML = `<nav class="levels" aria-label="Fases do jogo">${Array.from({length:6},(_,i)=>`<button data-action="level" data-index="${i}" aria-label="Fase ${i+1}" ${i===book.level?'aria-current="step"':''}>${book.states[i]?.done?'✓':i+1}</button>`).join('')}<span>${completed}/6 entregas</span></nav>
-      <section class="brief"><span class="eyebrow">Fase ${book.level+1} · ${['Combinar','Repartir','Ordenar','Subtrair','Multiplicar','Desafio final'][book.level]}</span><h1>${escape(level.title)}</h1><p>${escape(level.prompt)}</p></section>
+      <section class="brief"><span class="eyebrow">Fase ${book.level+1} · ${['Combinar','Repartir','Ordenar','Subtrair','Multiplicar','Desafio final'][book.level]}</span><h1>${escape(level.title)}</h1><p>${escape(level.prompt)}</p><details class="book-reference"><summary>📖 Apostila · ${escape(level.reference.label)}</summary><p>${escape(level.reference.note)}</p></details></section>
       <div class="guidance"><span>${selected===null?'Arraste uma caixa até o vagão.':`Caixa ${level.pieces[selected].value} selecionada. Toque em “Colocar aqui”.`}</span><button data-action="hint" aria-expanded="${showHint}">💡 Pista</button><button data-action="lesson">▶ Aula de exemplo</button></div>
       ${showHint?`<p class="hint">${escape(level.hint)}</p>`:''}
       <section class="train ${level.sequence?'sequence':''} ${state.done?'departed':''}" aria-label="Vagões de entrega">

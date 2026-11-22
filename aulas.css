@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:reduce){.lesson-dialog *{animation:none!important;transition:none!important}.lesson-dialog .lesson-removed{opacity:.22}}
 
 .lesson-package strong{position:static;background:#fff9df;border:1px solid #c99e56;border-radius:10px;padding:0 16px;margin-top:-10px;z-index:1}.carry-note{min-width:0;width:100%;height:48px;text-align:center;font-size:23px;padding:3px;background:#fff3cf}.calc-row.marks{gap:3px;padding:6px 0}.guidance{flex-wrap:wrap}.guidance>span{flex:1 1 260px}
+
+.book-reference{margin:12px 0 18px;border-left:3px solid #819b79;padding:0 12px;background:#f1f3e8;border-radius:0 10px 10px 0;color:#3a554d}.book-reference summary{font-size:16px;line-height:1.45;min-height:44px;padding:10px 0;cursor:pointer;touch-action:manipulation}.book-reference p,.brief .book-reference p,.lesson-dialog .book-reference p{font-size:16px;line-height:1.5;margin:0;padding:0 0 12px}.book-reference summary:focus-visible{outline:3px solid #a74122;outline-offset:3px}

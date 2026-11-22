@@ -55,3 +55,10 @@ Execute `node tests/trem-jogo.test.cjs` para verificar soluções, limites, reto
 A criança registra a conta e suas anotações de troca. As peças são um apoio opcional; na soma, é preciso selecionar dez antes de trocar. A correção aceita um resultado correto mesmo sem manipular peças. Foram retirados o botão que soma a carga, as diferenças numéricas das pistas de erro e contadores que entregavam resultados nas atividades. A resolução completa da própria conta só aparece depois de acertar. As anotações de troca são rascunho, sem correção automática.
 
 `node tests/aulas.test.cjs` verifica cálculo sem ajuda automática, orientações sem resultado, conservação de quantidade nas trocas, exemplos alternativos, reprodução, pausas para pensar, navegação e cancelamento de voz. A interface também foi conferida em navegador com largura de iPad em orientação vertical; a caneta e a voz do iPad precisam ser experimentadas no aparelho.
+
+
+## Referências da apostila
+
+As 28 atividades, seis fases do jogo e seis aulas mostram a página da apostila. Ao abrir a referência, o adulto vê o exercício e a adaptação feita. A referência acompanha todas as rodadas, mesmo quando os números mudam. A numeração foi conferida nas fotografias da avaliação de Matemática enviadas no chat “Criar atividade matemática inovadora”. As fotos e as respostas manuscritas continuam privadas.
+
+As bandeiras são uma atividade complementar do critério de sequências de figuras, sem exercício equivalente identificado nas fotos. A ordenação dos quatro bilhetes é complementar ao critério de ordenação, com o quadro da página 160 como apoio. O suco em triplo adapta o exercício 2 da página 188, que pede duas receitas. Os desafios de cargas e as aulas têm exemplos próprios, identificados como adaptações.

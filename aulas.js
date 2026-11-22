@@ -30,7 +30,7 @@ const Aulas = (() => {
     const current=lesson.steps[position];
     const focused=document.activeElement?.dataset?.lesson;
     dialog.innerHTML=`<div class="lesson-top"><span>UMA CONTA DE EXEMPLO</span><button data-lesson="close" aria-label="Fechar aula e voltar à atividade">✕ Voltar</button></div>
-      <h2 id="lesson-title">${esc(lesson.title)}</h2><p class="lesson-example">Exemplo ${esc(lesson.example)}</p>
+      <h2 id="lesson-title">${esc(lesson.title)}</h2><p class="lesson-example">Exemplo ${esc(lesson.example)}</p><details class="book-reference"><summary>📖 Apostila · ${esc(lesson.reference.label)}</summary><p>${esc(lesson.reference.note)}</p></details>
       <div class="lesson-progress" aria-label="Passo ${position+1} de ${lesson.steps.length}">${lesson.steps.map((_,i)=>`<i class="${i<=position?'lesson-filled':''}"></i>`).join('')}<span>${position+1}/${lesson.steps.length}</span></div>
       <div class="lesson-screen"><h3>${esc(current.title)}</h3><div class="lesson-scene">${scene(current.scene)}</div><p class="lesson-equation">${esc(current.equation)}</p></div>
       <p class="lesson-caption" aria-live="polite">${esc(current.narration)}</p><p class="lesson-status" role="status"></p>

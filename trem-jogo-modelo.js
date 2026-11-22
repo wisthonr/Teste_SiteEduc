@@ -1,5 +1,31 @@
 /* Desafios resolvíveis com caixas inteiras, no conteúdo de Matemática do 2º ano. */
 const CargoGame = (() => {
+  const references = [
+  {
+    "label": "p. 163 · exercício 1",
+    "note": "Desafio adaptado de composição de números por adições. Os dois pedidos, as quantidades e o limite de caixas foram criados para o jogo."
+  },
+  {
+    "label": "p. 192 · exercício 1a",
+    "note": "Desafio adaptado de repartição em grupos iguais. No jogo, os objetos estão em caixas fechadas, com limite de caixas por vagão."
+  },
+  {
+    "label": "p. 161 · exercício 1c",
+    "note": "Desafio adaptado de sequência decrescente, com valores que mudam nas partidas."
+  },
+  {
+    "label": "p. 177 · exercício 2",
+    "note": "Desafio adaptado de subtração para encontrar uma parte do total. O contexto das entregas e os valores foram criados para o jogo."
+  },
+  {
+    "label": "pp. 188–189 · receitas",
+    "note": "Desafio adaptado dos problemas de dobro. O triplo foi incluído conforme os critérios da prova."
+  },
+  {
+    "label": "pp. 183, 189 e 197 · grupos, dobro e metade",
+    "note": "Desafio combinado que reúne conteúdos dessas páginas. A encomenda do jogo foi criada para praticar as três ideias juntas."
+  }
+];
   function makeLevel(index, round = 0) {
     const r = round % 12;
     let title, prompt, hint, zones, values, solution, sequence = false;
@@ -64,7 +90,7 @@ const CargoGame = (() => {
     // A posição inicial muda sem alterar a identidade ou o conteúdo das caixas.
     const pieces = values.map((value,id)=>({id,value}));
     const order = pieces.map((_,i)=>i).sort((a,b)=>((a*5+round*3)%values.length)-((b*5+round*3)%values.length));
-    return {index,title,prompt,hint,zones,pieces,solution,order,sequence};
+    return {index,title,prompt,hint,zones,pieces,solution,order,sequence,reference:references[index]};
   }
   function empty(level) {return {places:level.pieces.map(()=>-1),history:[],done:false};}
   function restore(level, saved) {

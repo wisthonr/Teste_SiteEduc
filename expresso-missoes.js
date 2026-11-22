@@ -42,6 +42,122 @@ const Expresso = (() => {
       {id:'pioes', kind:'seats', title:'Um pião para cada criança', prompt:'Há 13 crianças e 4 caixas com 3 piões em cada uma. Entregue um pião por criança e descubra se faltam ou sobram piões.', rows:4, per:3, people:13, object:'piões', hint:'Depois de entregar todos os piões, alguma criança ainda espera?'}
     ]}
   ];
+  // Referências conferidas nas fotos da apostila; critérios complementares são identificados.
+  const references = {
+  "pacotes": {
+    "label": "p. 164 · exercícios 1 e 2",
+    "note": "Adição com quadro de trocas. O cenário e os números foram adaptados para a atividade digital."
+  },
+  "camisetas": {
+    "label": "p. 168 · exercício 4",
+    "note": "Adaptação da arrecadação de camisetas para adultos e crianças."
+  },
+  "casinha": {
+    "label": "p. 177 · exercício 2",
+    "note": "Adaptação do problema do petshop: descobrir o preço da casinha a partir do total da compra."
+  },
+  "tampinhas": {
+    "label": "p. 175 · exercício 6",
+    "note": "Comparar tampinhas grandes e pequenas para descobrir quantas há a mais."
+  },
+  "descer": {
+    "label": "p. 161 · exercício 1c",
+    "note": "Adaptação da sequência em ordem decrescente, completando os números que faltam."
+  },
+  "subir": {
+    "label": "p. 176 · exercício 8a",
+    "note": "Adaptação da sequência crescente que começa em 635, 640 e 645."
+  },
+  "bandeira": {
+    "label": "Critério da prova · sequências de figuras",
+    "note": "Atividade complementar de padrões repetitivos, prevista nos critérios da escola. Sem exercício equivalente identificado nas fotos da apostila enviadas."
+  },
+  "fila": {
+    "label": "p. 160 · apoio para ordenação",
+    "note": "Atividade complementar baseada no critério da prova de ordenar números até 999. A página 160 oferece o quadro numérico como apoio; os quatro bilhetes foram criados para o site."
+  },
+  "regra": {
+    "label": "p. 160 · exercício 2",
+    "note": "Identificar a regularidade da sequência destacada no quadro numérico. Aqui a regra é escolhida entre alternativas."
+  },
+  "escrever": {
+    "label": "p. 174 · exercício 4a",
+    "note": "Escrever o número por extenso."
+  },
+  "posicao": {
+    "label": "p. 178 · exercício 5b",
+    "note": "Indicar quantas unidades vale o algarismo destacado no número 782."
+  },
+  "etiqueta": {
+    "label": "p. 167 · exercício 3",
+    "note": "Decompor o resultado de duas maneiras diferentes. Aqui a criança escolhe fichas para formar as parcelas."
+  },
+  "cores": {
+    "label": "p. 173 · exercícios 1 e 2",
+    "note": "Ler a tabela e juntar as quantidades de tampinhas azuis e verdes."
+  },
+  "metal": {
+    "label": "p. 176 · exercício 7",
+    "note": "Comparar tampinhas de metal e de plástico. A tabela original com as quantidades está na página 175, exercício 5."
+  },
+  "cinco": {
+    "label": "p. 182 · exercício 1c",
+    "note": "Montar cinco grupos de três botões e registrar a quantidade total. Os grupos foram representados por vagões."
+  },
+  "bombons": {
+    "label": "p. 187 · exercício 2",
+    "note": "Uma caixa de bombons e mais três caixas iguais: contar todas as quatro caixas."
+  },
+  "autora": {
+    "label": "p. 183 · exercícios 1 a 3",
+    "note": "Adaptação da proposta de escolher objetos e grupos iguais e escrever as sentenças. No site, a criança também escreve uma pergunta sobre sua encomenda."
+  },
+  "dobro": {
+    "label": "p. 189 · exercício 4",
+    "note": "Calcular o dobro de uma receita de sete cupcakes, representados aqui como bolinhos."
+  },
+  "triplo": {
+    "label": "p. 188 · exercício 2 · adaptação para triplo",
+    "note": "O exercício do livro pede duas receitas de 140 mL. Aqui são três receitas, para treinar o triplo previsto nos critérios da prova."
+  },
+  "metade": {
+    "label": "p. 197 · exercício 1",
+    "note": "Marcar a metade de 18 bombons. No site, os bombons foram substituídos por quadradinhos de chocolate."
+  },
+  "terco": {
+    "label": "p. 199 · exercício 1",
+    "note": "Marcar a terça parte da barra de chocolate."
+  },
+  "bilhete": {
+    "label": "pp. 197–198 · exercício 2a",
+    "note": "Comparar entrada inteira e meia-entrada. A tabela está na página 197; a pergunta de justificativa continua na página 198. Aqui a justificativa é escolhida entre contas."
+  },
+  "laranjas": {
+    "label": "p. 192 · exercício 1a",
+    "note": "Repartir as laranjas igualmente entre três crianças."
+  },
+  "flores": {
+    "label": "p. 193 · exercício 1b",
+    "note": "Formar buquês de quatro flores e descobrir quantos buquês ficam prontos."
+  },
+  "malas": {
+    "label": "p. 194 · exercício 2",
+    "note": "Distribuir malas igualmente entre bagageiros."
+  },
+  "avioes": {
+    "label": "p. 194 · exercício 1",
+    "note": "Calcular os lugares de seis fileiras de quatro poltronas e descobrir quantos ficam vazios."
+  },
+  "pioes": {
+    "label": "p. 202 · exercício 3, itens a e b",
+    "note": "Comparar o total de piões das caixas com a quantidade de crianças e descobrir se faltam ou sobram piões."
+  },
+  "tres": {
+    "label": "p. 181 · exercício 1b",
+    "note": "Montar três grupos de quatro botões e registrar a quantidade total. Os grupos foram representados por vagões."
+  }
+};
+  for (const stop of stops) for (const job of stop.jobs) job.reference=references[job.id];
   return {stops};
 })();
 if (typeof module !== 'undefined') module.exports = Expresso;

@@ -70,6 +70,32 @@ const LessonData = (() => {
       step('Confira o próximo','O próximo vagão é trinta. Em uma sequência que diminui, fazemos o salto voltando.',{type:'sequence',values:[18,22,26,30],jump:4},'26 + 4 = 30')
     ]};
   }
-  return {create};
+  const references = {
+  "soma": {
+    "label": "pp. 164 e 169",
+    "note": "Quadro de trocas e registro da adição. Exemplo didático com números próprios."
+  },
+  "subtracao": {
+    "label": "pp. 175 e 177",
+    "note": "Subtração com trocas e descoberta de uma parte do total. Exemplo didático com números próprios."
+  },
+  "multiplicacao": {
+    "label": "pp. 181–183",
+    "note": "Grupos de mesma quantidade e adição de parcelas iguais. Exemplo didático com números próprios."
+  },
+  "divisao": {
+    "label": "pp. 192 e 194",
+    "note": "Distribuição em partes iguais. Exemplo didático com números próprios."
+  },
+  "dobro": {
+    "label": "pp. 188–189 e 197",
+    "note": "Dobro e metade; o triplo também faz parte dos critérios da prova. Exemplo didático com números próprios."
+  },
+  "sequencia": {
+    "label": "pp. 161–162",
+    "note": "Completar sequências e explicar sua regularidade. Exemplo didático com números próprios."
+  }
+};
+  return {create:(topic,context)=>({...create(topic,context),reference:references[topic]||references.sequencia})};
 })();
 if(typeof module!=='undefined')module.exports=LessonData;
