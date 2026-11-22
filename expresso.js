@@ -8,7 +8,7 @@ function iniciarExpresso(){
   try{book=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
   if (typeof book !== 'object' || Array.isArray(book)) book = {};
   stops = ExpressoRounds.create(Number.isInteger(book.round) ? book.round : 0);
-  let numberTarget;
+  let numberTarget, replaceNumber=false;
   function save(){
     try{localStorage.setItem(key,JSON.stringify(book));by('storage-note').textContent='Atividades guardadas neste navegador.';}
     catch{by('storage-note').textContent='O navegador não conseguiu guardar estas atividades.';}
@@ -34,9 +34,9 @@ function iniciarExpresso(){
   function map(){
     game.innerHTML=`<section class="hero">
       <div class="hero-copy"><span class="overline">MEU CADERNO · 2º ANO</span><h1>Matemática<br><em>em cores!</em></h1><p>Vamos descobrir, experimentar<br>e aprender um pouquinho mais?</p></div><div class="cover-art"><img src="assets/caderno-matematica.svg" alt="Caderno com botões coloridos e peças de contagem, como nas atividades da apostila."></div></section><nav class="home-menu" aria-label="Menu principal">
-        <a class="home-option home-game" href="jogo.html?v=20261122-voz"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
+        <a class="home-option home-game" href="jogo.html?v=20261122-trocas"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
         <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/270F.svg" alt=""></span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
-        <a class="home-option home-lessons" href="aula.html?v=20261122-voz"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
+        <a class="home-option home-lessons" href="aula.html?v=20261122-trocas"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
       </nav><section class="route-area"><div class="section-head"><div><span class="overline">ESCOLHA UM ASSUNTO</span><h2>Meu caderno</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
       <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">${s.jobs.length} atividades</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} atividades concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova rodada com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
@@ -55,7 +55,8 @@ function iniciarExpresso(){
   }
   function calcView(){
     const m=W.material(job,sheet), trade=W.exchangeAt(job,sheet), plus=job.op==='+', names=['Centenas','Dezenas','Unidades'];
-    const digits=n=>W.digits(n).map((d,i)=>`<span>${i===0&&d===0?'':d}</span>`).join('');
+    const changed=i=>!plus&&String(sheet.notes?.[i]??'').trim()!==''&&Number(sheet.notes[i])!==W.digits(job.a)[i];
+    const digits=(n,original=false)=>W.digits(n).map((d,i)=>`<span ${original?`id="original-digit-${i}" class="${changed(i)?'replaced-digit':''}"`:''}>${i===0&&d===0?'':d}</span>`).join('');
     const marked=sheet.marked||[];
     const material=m.map((count,i)=>{
       const canPick=plus&&i===trade;
@@ -66,9 +67,11 @@ function iniciarExpresso(){
       return `<div class="place" id="place-${i}"><b>${names[i]}</b><div class="tokens">${pieces}</div></div>`;
     }).join('');
     const tradeText=trade===2?(plus?'Juntar 10 unidades':'Abrir 1 dezena'):plus?'Juntar 10 dezenas':'Abrir 1 centena';
-    const carries=names.map((name,i)=>`<input class="carry-note" data-carry="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="2" aria-label="Anotação de troca nas ${name}" value="${escape(sheet.notes?.[i])}">`).join('');
-    return `<div class="exchange"><div class="calc-wrap"><h3>Resolva a conta</h3><p class="small">Comece pelas unidades. Use as casinhas de cima para anotar as trocas. Você também pode fazer a conta na sua folha.</p><div class="calc"><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div></div>
-      <details class="material-help" ${sheet.supportOpen?'open':''}><summary>Preciso de peças para pensar</summary><p class="small">${plus?'As peças das duas parcelas estão juntas. Conte e faça as trocas.':'Estas peças representam a primeira quantidade. Abra uma dezena quando precisar.'}</p><div class="places">${material}</div>
+    const carries=names.map((name,i)=>`<input class="carry-note" data-carry="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="2" aria-label="${plus?`Anotação de troca nas ${name}`:`${name} após a troca`}" aria-describedby="exchange-instructions" value="${escape(sheet.notes?.[i])}">`).join('');
+    return `<div class="exchange"><div class="calc-wrap"><h3>Resolva a conta</h3><p class="small" id="exchange-instructions">${plus?'Comece pelas unidades. Nos quadrados de cima, anote o que passou para a próxima coluna.':'Comece pelas unidades. Se fizer uma troca, anote em cima a quantidade que ficou em cada coluna alterada. Deixe vazio onde nada mudou.'}</p>
+      ${plus?'':`<details class="exchange-guide"><summary>Como preencher os quadrados de cima</summary><p>Na subtração, anote quanto <strong>ficou</strong> depois da troca, nas duas colunas que mudaram.</p><div class="exchange-examples"><section><h4>Trocar uma centena</h4><p>Exemplo: <strong>642 − 280</strong></p><p>6 centenas viram <b>5</b>.<br>4 dezenas viram <b>14</b>.</p><div class="example-notes" aria-label="Exemplo: C 5, D 14, U vazio"><span>C<b>5</b></span><span>D<b>14</b></span><span>U<b>—</b></span></div></section><section><h4>Trocar uma dezena</h4><p>Exemplo: <strong>346 − 128</strong></p><p>4 dezenas viram <b>3</b>.<br>6 unidades viram <b>16</b>.</p><div class="example-notes" aria-label="Exemplo: C vazio, D 3, U 16"><span>C<b>—</b></span><span>D<b>3</b></span><span>U<b>16</b></span></div></section></div><p class="small">O traço significa deixar vazio. São exemplos com outros números; faça as trocas da sua conta.</p></details>`}
+      <div class="calc"><p class="notes-title">${plus?'Trocas da adição':'Depois da troca'}</p><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a,true)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div><p class="small calc-note">As anotações de cima são opcionais. Você também pode fazer as trocas na sua folha.</p></div>
+      <details class="material-help" ${sheet.supportOpen?'open':''}><summary>Preciso de peças para pensar</summary><p class="small">${plus?'As peças das duas parcelas estão juntas. Conte e faça as trocas.':'Estas peças mostram a quantidade de cima. Você pode trocar 1 centena por 10 dezenas ou 1 dezena por 10 unidades. O total não muda.'}</p><div class="places">${material}</div>
       <div class="subaction">${trade===undefined?'<strong>Conte as peças e faça seu registro.</strong>':btn('trade',tradeText,null,{cls:'accent',disabled:plus&&marked.length!==10})}</div>
       ${plus&&trade!==undefined?`<p class="piece-note">Marque dez peças para juntá-las. ${marked.length?`Você marcou ${marked.length} de 10.`:''}</p>`:''}</details></div>`;
   }
@@ -218,7 +221,7 @@ function iniciarExpresso(){
   by('help-close').onclick=()=>by('help-panel').close();by('help-panel').onclose=()=>focusReturn?.focus();
   game.addEventListener('focusin',e=>{
     if (!e.target.matches('[data-number]') || !e.target.readOnly) return;
-    numberTarget=e.target;
+    numberTarget=e.target;replaceNumber=true;
     by('number-label').textContent=e.target.getAttribute('aria-label')||'Toque nos números da sua resposta.';
     by('number-pad').hidden=false;
   });
@@ -229,7 +232,10 @@ function iniciarExpresso(){
       if(field!=='note'||job.kind==='story')sheet.handReviewed=false;
       sheet[field]=field==='reviewed'?t.checked:['each','groups'].includes(field)?Number(t.value):t.value;
     }else if(t.dataset.carry!==undefined){
-      sheet.notes||=['','',''];sheet.notes[Number(t.dataset.carry)]=t.value.trim();save();return;
+      const i=Number(t.dataset.carry);
+      sheet.notes||=['','',''];sheet.notes[i]=t.value.trim();
+      if(job.op!=='+' && by(`original-digit-${i}`))by(`original-digit-${i}`).classList.toggle('replaced-digit',sheet.notes[i]!==''&&Number(sheet.notes[i])!==W.digits(job.a)[i]);
+      save();return;
     }else if(t.dataset.result!==undefined){
       sheet.result||=['','',''];sheet.result[Number(t.dataset.result)]=t.value.trim();
     }else return;
@@ -255,7 +261,8 @@ function iniciarExpresso(){
       if (action==='close-pad') {by('number-pad').hidden=true;return;}
       if (action==='keyboard') {numberTarget.readOnly=false;numberTarget.inputMode='numeric';by('number-pad').hidden=true;numberTarget.focus();return;}
       const limit=numberTarget.maxLength>0?numberTarget.maxLength:5;
-      numberTarget.value=action==='erase-digit'?numberTarget.value.slice(0,-1):limit===1?String(n):(numberTarget.value+String(n)).slice(0,limit);
+      numberTarget.value=action==='erase-digit'?numberTarget.value.slice(0,-1):limit===1||replaceNumber?String(n):(numberTarget.value+String(n)).slice(0,limit);
+      replaceNumber=false;
       numberTarget.dispatchEvent(new Event('input',{bubbles:true}));return;
     }
     if (action==='review-word') {sheet.handReviewed=true;sheet.done=true;save();renderMission();return;}

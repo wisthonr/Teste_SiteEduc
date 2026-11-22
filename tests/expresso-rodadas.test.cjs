@@ -76,6 +76,7 @@ function mount(saved={}, hash='#mapa') {
   function element(id) {
     if(elements.has(id))return elements.get(id);
     const node={id,innerHTML:'',textContent:'',dataset:{},hidden:true,isConnected:true,
+      classList:{toggle(){}},
       setAttribute(){},focus(){},remove(){},getAttribute(){return null;},
       querySelector(){return null;},querySelectorAll(){return [];},
       addEventListener(name,fn){listeners[name]=fn;},
@@ -120,5 +121,25 @@ ui.click('check');assert(ui.element('feedback').innerHTML.includes('Compare sua 
 ui.click('review-word');assert(ui.data.colecoes.escrever.done);
 ui.click('undo-ink');assert(!ui.data.colecoes.escrever.done);
 for(const station of rounds.create(1))for(const job of station.jobs)ui.navigate(`#${station.id}/${job.id}`);
+
+// Caso relatado no iPad: 822 - 370. Anotar 7 centenas e 12 dezenas, sem preencher unidades.
+const reported=rounds.create(4).flatMap(s=>s.jobs).find(j=>j.id==='casinha');
+assert.equal(reported.a,822);assert.equal(reported.b,370);
+const trading={};workshop.adjust(reported,trading,'trade');assert.deepEqual(workshop.material(reported,trading),[7,12,2]);
+assert(workshop.judge(reported,{result:['4','4','2']}).error.includes('dezenas'));
+assert(!workshop.judge(reported,{result:['4','5','2']}).error);
+const noteUI=mount({round:4,correio:{casinha:{notes:['1','',''],ink:[[[.2,.3]]]}}},'#correio/casinha');
+function noteInput(index,value){const n={dataset:{carry:String(index)},readOnly:true,isConnected:true,value,maxLength:2,matches:()=>true,getAttribute:()=> 'Quantidade após a troca'};n.dispatchEvent=()=>noteUI.listeners.input({target:n});return n;}
+const hundreds=noteInput(0,'1');noteUI.listeners.focusin({target:hundreds});noteUI.click('digit',7);
+assert.equal(noteUI.data.correio.casinha.notes[0],'7'); // novo toque substitui a anotação antiga
+const tens=noteInput(1,'');noteUI.listeners.focusin({target:tens});noteUI.click('digit',1);noteUI.click('digit',2);
+assert.deepEqual(noteUI.data.correio.casinha.notes,['7','12','']);
+noteUI.navigate('#mapa');noteUI.navigate('#correio/casinha');
+assert(noteUI.element('game').innerHTML.includes('Depois da troca'));
+assert(noteUI.element('game').innerHTML.includes('id="original-digit-0" class="replaced-digit"'));
+assert(noteUI.element('game').innerHTML.includes('id="original-digit-1" class="replaced-digit"'));
+assert(noteUI.element('game').innerHTML.includes('id="original-digit-2" class=""'));
+assert.equal(noteUI.data.correio.casinha.ink.length,1);
 console.log('OK: 28 missões × 18 viagens, respostas diferentes entre viagens, correção, migração, caneta, rejeição de toque, teclado numérico, revisão manual e montagem das 28 telas.');
+console.log('OK: caso 822 - 370, anotação de dois dígitos, edição, retomada e indicação das colunas trocadas.');
 

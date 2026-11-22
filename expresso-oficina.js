@@ -86,7 +86,7 @@ const Oficina = (function createWorkshop(){
         for(let i=2;i>=0;i--){
           if((i===0&&expected[i]===0&&!result[i])||result[i]===String(expected[i]))continue;
           const place=['centenas','dezenas','unidades'][i];
-          return {error:`Confira a coluna das ${place}. ${j.op==='+'?'Some os algarismos dessa coluna e confira as trocas.':'Tire dessa coluna a quantidade escrita na segunda linha da conta.'}`};
+          return {error:`Confira a coluna das ${place}. ${j.op==='+'?'Some os algarismos dessa coluna e confira as trocas.':'Use a quantidade que ficou após a troca, se houve troca, e retire o algarismo de baixo.'}`};
         }
         why=`${j.a} ${j.op} ${j.b} = ${total}. ${j.op==='+'?'A entrega tem':'A diferença é de'} ${total} ${j.unit}.`;break;
       }

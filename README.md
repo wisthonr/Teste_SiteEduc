@@ -74,3 +74,7 @@ As explicações usam arquivos MP3 de voz sintética em português brasileiro (F
 Um único elemento de áudio é reutilizado entre as etapas para favorecer a reprodução por toque no iPad. Fechar a aula, pausar ou mudar de página cancela a fala atual. Se o navegador bloquear a reprodução, a aula pede um novo toque sem avançar. Em caso de falha de arquivo, há alternativa de voz do aparelho, priorizando vozes brasileiras de qualidade superior quando disponíveis.
 
 Verificação: `node tests/aulas.test.cjs` cobre narração, ritmo, pausas, cancelamento, alternativa de voz e bloqueio de reprodução. Os MP3 não contêm gravações da criança; são apenas a leitura dos exemplos didáticos.
+
+## Anotações de troca na subtração
+
+A linha superior indica Depois da troca: quantidades restantes nas colunas alteradas. Colunas não alteradas podem ficar vazias. Ao escrever uma quantidade diferente, o algarismo original fica riscado; apagar a anotação restaura sua aparência. Dois exemplos independentes mostram troca de centena e de dezena, sem preencher a resposta da atividade. As anotações continuam opcionais, sem avaliação automática. Ao tocar novamente em um campo numérico, o próximo dígito substitui o conteúdo anterior; os seguintes completam números como 12. O caso 822 − 370 está coberto pelos testes.
