@@ -44,3 +44,14 @@ button,.primary{min-height:56px;border-radius:14px}
 @media(max-width:620px){:root{font-size:18px}.mast{flex-wrap:wrap}.mast>a{font-size:22px}.mast nav button{min-height:48px}.board{padding:12px}.workbench{padding:10px}.scratch{padding:12px}.scratch canvas{height:330px}.place b{font-size:13px}.job-dots a{width:46px;height:46px}.job-head h1{font-size:30px}.chocolate{gap:3px}.chocolate button{min-height:44px}.crates{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .board>.workbench{margin-top:16px}
 .hero .game-description{font-size:17px;margin:12px 0}
+
+/* As três experiências têm entrada visível no início, antes da ilustração. */
+.home-menu{display:grid;gap:12px;margin-top:24px;grid-column:1/-1;width:100%}
+.home-option{display:flex;align-items:center;gap:16px;min-height:92px;padding:16px 20px;border:2px solid #82a28f;border-radius:18px;text-decoration:none;background:#edf3df;box-shadow:0 3px 0 #cad7bd}
+.home-option:hover{border-color:#155957;transform:translateY(-1px)}
+.home-option strong{display:block;font-size:24px;line-height:1.25}.home-option small{display:block;font-size:16px;line-height:1.4;margin-top:5px}
+.home-icon{display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:15px;background:#ffffffa6;font-size:32px}
+.home-game{background:#155957;color:white;border-color:#155957;box-shadow:0 3px 0 #0b3838}.home-game .home-icon{background:#ffffff22}
+.home-lessons{background:#ffedc6;border-color:#c6a163;box-shadow:0 3px 0 #decb9e}
+@media(max-width:1024px){.hero-copy{max-width:none}.home-menu{max-width:700px}.hero{padding-top:26px}.hero-copy>p{max-width:32em}.home-option{min-height:92px}}
+@media(max-width:620px){.hero-copy{display:block}.home-option{padding:14px;gap:12px}.home-option strong{font-size:23px}.home-icon{width:46px;height:46px;font-size:29px}}

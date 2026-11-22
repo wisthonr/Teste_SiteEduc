@@ -33,9 +33,13 @@ function iniciarExpresso(){
   const meter=(n,total)=>`<span class="pips" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<n?'filled':''}"></i>`).join('')}</span>`;
   function map(){
     game.innerHTML=`<section class="hero">
-      <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><a class="primary" href="jogo.html">🚂 Jogar Desafio das Cargas</a><p class="game-description">Arraste caixas, resolva pedidos e vença seis desafios.</p><a href="${destination()}">${book.last?'Continuar atividades do caderno':'Praticar no caderno'}</a><a class="lesson-shortcut" href="aula.html">▶ Aulas curtas para aprender</a></div>
+      <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><nav class="home-menu" aria-label="Menu principal">
+        <a class="home-option home-game" href="jogo.html?v=20261122-menu"><span class="home-icon" aria-hidden="true">🚂</span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
+        <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true">✏️</span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
+        <a class="home-option home-lessons" href="aula.html?v=20261122-menu"><span class="home-icon" aria-hidden="true">🎬</span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
+      </nav></div>
       <div class="postcard"><img src="assets/expresso-paisagem.webp" alt="Uma locomotiva com encomendas atravessa uma ponte a caminho do piquenique."></div>
-    </section><section class="route-area"><div class="section-head"><div><span class="overline">Escolha onde jogar</span><h2>Mapa da viagem</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
+    </section><section class="route-area"><div class="section-head"><div><span class="overline">Atividades por assunto</span><h2>Mapa da viagem</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
       <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">Estação ${String(i+1).padStart(2,'0')}</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} entregas concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova viagem com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
   function ticket(){
