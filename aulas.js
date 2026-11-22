@@ -1,6 +1,9 @@
 /* Aulas curtas com exemplos próprios; não leem nem preenchem respostas da criança. */
 const Aulas = (() => {
-  let dialog, lesson, position=0, playing=false, sound=false, waiting=false, timer, fallback, generation=0, returnFocus;
+  let dialog, lesson, position=0, playing=false, sound=false, waiting=false, timer, fallback, generation=0, returnFocus, audio, speed=1;
+  try {const saved=Number(window.localStorage.getItem('aulas-ritmo-v1'));if([.9,1,1.15].includes(saved))speed=saved;} catch {}
+  const speedLabel=()=>`Ritmo: ${speed===1?'normal':speed>1?'mais rápido':'mais calmo'}`;
+  const canNarrate=()=>typeof window.Audio==='function'||!!window.speechSynthesis;
   const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const repeat=(n,fn)=>Array.from({length:n},(_,i)=>fn(i)).join('');
   const dots=(n)=>repeat(n,i=>`<i class="lesson-dot" style="--i:${i}" aria-hidden="true"></i>`);
@@ -17,6 +20,7 @@ const Aulas = (() => {
   }
   function stop() {
     generation++;clearTimeout(timer);clearTimeout(fallback);
+    if(audio){audio.onended=null;audio.onerror=null;audio.onplaying=null;audio.pause();}
     if(sound&&window.speechSynthesis)window.speechSynthesis.cancel();
   }
   function controls() {
@@ -35,7 +39,7 @@ const Aulas = (() => {
       <div class="lesson-screen"><h3>${esc(current.title)}</h3><div class="lesson-scene">${scene(current.scene)}</div><p class="lesson-equation">${esc(current.equation)}</p></div>
       <p class="lesson-caption" aria-live="polite">${esc(current.narration)}</p><p class="lesson-status" role="status"></p>
       <div class="lesson-controls"><button data-lesson="previous" ${position===0?'disabled':''}>← Anterior</button><button data-lesson="play" class="lesson-primary"></button><button data-lesson="next" ${position===lesson.steps.length-1?'disabled':''}>Próximo →</button></div>
-      <div class="lesson-options"><button data-lesson="restart">↶ Recomeçar aula</button><button data-lesson="sound" aria-pressed="${sound}" ${!('speechSynthesis' in window)?'disabled':''}>${sound?'🔊 Voz ligada':'🔈 Ouvir explicação'}</button></div><p class="lesson-voice-note">A voz usa as opções disponíveis neste aparelho. A explicação também está escrita.</p>`;
+      <div class="lesson-options"><button data-lesson="restart">↶ Recomeçar aula</button><button data-lesson="sound" aria-pressed="${sound}" ${!canNarrate()?'disabled':''}>${sound?'🔊 Voz ligada':'🔈 Ouvir explicação'}</button><button data-lesson="pace" aria-label="Mudar ritmo da narração" ${!canNarrate()?'disabled':''}>${speedLabel()}</button></div><p class="lesson-voice-note">Narração com voz sintética. Use “Ritmo” para ouvir mais rápido ou mais devagar.</p>`;
     controls();
     if(focused) {
       const next=dialog.querySelector(`[data-lesson="${focused}"]`);
@@ -53,19 +57,47 @@ const Aulas = (() => {
         if(id!==generation||!playing)return;
         if(current.pause||position===lesson.steps.length-1){playing=false;waiting=current.pause;controls();}
         else {position++;render();schedule();}
-      },sound?900:0);
+      },sound?350:0);
     }
-    if(sound&&window.speechSynthesis&&window.SpeechSynthesisUtterance) {
+    function speakWithDevice() {
+      if(id!==generation||!dialog.open||!playing)return;
+      clearTimeout(fallback);
+      if(audio){audio.onended=null;audio.onerror=null;audio.onplaying=null;audio.pause();}
+      if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){
+        playing=false;controls();dialog.querySelector('.lesson-status').textContent='Não foi possível carregar a voz. Toque em Reproduzir para tentar de novo.';return;
+      }
       const utterance=new SpeechSynthesisUtterance(current.narration);
-      utterance.lang='pt-BR';utterance.rate=.86;
+      utterance.lang='pt-BR';utterance.rate=speed;
       const voices=window.speechSynthesis.getVoices();
-      const voice=voices.find(v=>/^pt[-_]BR$/i.test(v.lang))||voices.find(v=>/^pt/i.test(v.lang));
+      const score=v=>(/^pt[-_]BR$/i.test(v.lang)?100:0)+(/premium|enhanced|aprimorada|natural|neural/i.test(v.name||'')?20:0);
+      const voice=voices.filter(v=>/^pt/i.test(v.lang)).sort((a,b)=>score(b)-score(a))[0];
       if(voice)utterance.voice=voice;
       utterance.onend=finish;
-      utterance.onerror=()=>{if(id===generation){sound=false;dialog.querySelector('[data-lesson="sound"]').textContent='Voz indisponível · ler legenda';timer=setTimeout(finish,8000);}};
-      fallback=setTimeout(finish,35000);
+      utterance.onerror=()=>{if(id===generation){stop();sound=false;playing=false;render();dialog.querySelector('.lesson-status').textContent='A voz não está disponível agora. Você pode ler a explicação.';}};
+      dialog.querySelector('.lesson-voice-note').textContent='Áudio indisponível: usando a voz deste aparelho. Você também pode ler a explicação.';
+      fallback=setTimeout(()=>{if(id===generation){stop();playing=false;controls();dialog.querySelector('.lesson-status').textContent='A narração parou. Toque em Reproduzir para tentar de novo.';}},45000);
       window.speechSynthesis.speak(utterance);
-    } else timer=setTimeout(finish,Math.max(6500,current.narration.split(/\s+/).length*400));
+    }
+    const recording=typeof LessonAudio!=='undefined'?LessonAudio[current.narration]:null;
+    if(sound&&recording&&typeof window.Audio==='function') {
+      // Um único player conserva a permissão de reprodução obtida pelo toque no iPad.
+      if(!audio){audio=new window.Audio();audio.hidden=true;document.body.appendChild(audio);}
+      audio.preload='auto';audio.setAttribute('playsinline','');audio.preservesPitch=true;
+      audio.src=recording.src;audio.playbackRate=speed;
+      let failed=false;
+      function failedRecording(error) {
+        if(failed||id!==generation||!dialog.open||!playing)return;
+        failed=true;clearTimeout(fallback);
+        if(error?.name==='NotAllowedError') {
+          stop();playing=false;controls();dialog.querySelector('.lesson-status').textContent='Toque em Reproduzir para ouvir a explicação.';
+        } else speakWithDevice();
+      }
+      audio.onended=finish;audio.onerror=failedRecording;
+      audio.onplaying=()=>{if(id===generation)clearTimeout(fallback);};
+      fallback=setTimeout(()=>failedRecording(),20000);
+      try {audio.play()?.catch(failedRecording);} catch(error){failedRecording(error);}
+    } else if(sound) speakWithDevice();
+    else timer=setTimeout(finish,Math.max(6500,current.narration.split(/\s+/).length*400));
   }
   function navigate(next) {stop();playing=false;waiting=false;position=Math.max(0,Math.min(lesson.steps.length-1,next));render();}
   function ensureDialog() {
@@ -83,7 +115,13 @@ const Aulas = (() => {
           else {if(waiting){position=Math.min(position+1,lesson.steps.length-1);waiting=false;render();}playing=true;controls();schedule();}
           break;
         case 'sound':
-          stop();sound=!sound;playing=true;render();schedule();break;
+          stop();sound=!sound;playing=true;waiting=false;render();schedule();break;
+        case 'pace':
+          speed=speed===1?1.15:speed===1.15?.9:1;
+          try {window.localStorage.setItem('aulas-ritmo-v1',String(speed));} catch {}
+          action.textContent=speedLabel();
+          if(playing&&sound){if(audio&&!audio.paused)audio.playbackRate=speed;else schedule();}
+          break;
       }
     });
     dialog.addEventListener('close',()=>{stop();playing=false;returnFocus?.focus({preventScroll:true});});

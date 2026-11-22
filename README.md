@@ -66,3 +66,11 @@ As bandeiras são uma atividade complementar do critério de sequências de figu
 ## Capa e identidade visual
 
 Capa inspirada nos quadros azuis, rosas e roxos, botões e peças de contagem da apostila. Ilustração simples em SVG local, sem fotografias ou respostas da criança. O fundo é branco azulado, e o tema de trem foi retirado da interface. Atividades, jogo e aulas compartilham a paleta. Os identificadores internos e as chaves de armazenamento foram mantidos para preservar o progresso existente.
+
+## Narração das aulas
+
+As explicações usam arquivos MP3 de voz sintética em português brasileiro (Francisca Neural), com ritmo normal, servidos pelo próprio site. `aulas-audio.js` associa cada texto ao arquivo correspondente, incluindo os exemplos alternativos. O botão Ritmo alterna normal, mais rápido e mais calmo, com preferência salva neste navegador. As pausas de reflexão continuam até a criança avançar.
+
+Um único elemento de áudio é reutilizado entre as etapas para favorecer a reprodução por toque no iPad. Fechar a aula, pausar ou mudar de página cancela a fala atual. Se o navegador bloquear a reprodução, a aula pede um novo toque sem avançar. Em caso de falha de arquivo, há alternativa de voz do aparelho, priorizando vozes brasileiras de qualidade superior quando disponíveis.
+
+Verificação: `node tests/aulas.test.cjs` cobre narração, ritmo, pausas, cancelamento, alternativa de voz e bloqueio de reprodução. Os MP3 não contêm gravações da criança; são apenas a leitura dos exemplos didáticos.

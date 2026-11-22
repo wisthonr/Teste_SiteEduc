@@ -1,0 +1,4 @@
+Narrações sintéticas das aulas de Matemática em cores.
+Voz: Microsoft pt-BR-FranciscaNeural. Geradas com edge-tts em 22/11/2026, ritmo padrão.
+Os textos são os exemplos próprios de aulas-dados.js; não contêm respostas ou dados da criança.
+Os arquivos são servidos pelo próprio site. Nenhuma conta ou chave é usada no iPad.
