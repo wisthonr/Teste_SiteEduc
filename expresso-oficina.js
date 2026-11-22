@@ -92,10 +92,10 @@ const Oficina = (function createWorkshop(){
       }
       case 'track':{
         const values=selection.map(i=>j.picks[i]);
-        if(values.length!==j.solution.length)error='Preencha todos os vagões vazios.';
+        if(values.length!==j.solution.length)error='Preencha todos os espaços vazios.';
         else{
           const i=values.findIndex((v,index)=>v!==j.solution[index]);
-          if(i!==-1)error=`Olhe o ${i+1}º vagão que você engatou. ${j.hint}`;
+          if(i!==-1)error=`Olhe o ${i+1}º elemento que você escolheu. ${j.hint}`;
         }break;
       }
       case 'quiz':if(s.choice!==j.key)error=j.hint;break;
@@ -110,7 +110,7 @@ const Oficina = (function createWorkshop(){
       case 'load':
       case 'share':{
         const list=loads(j,s);
-        if(list.some(x=>x!==j.each))error=j.kind==='load'?`Confira se cada vagão tem exatamente ${j.each} peças. Use “Desfazer” para retirar a última entrega.`:'Os grupos precisam ficar iguais e a cesta deve ficar vazia. Experimente desfazer a última entrega.';
+        if(list.some(x=>x!==j.each))error=j.kind==='load'?`Confira se cada grupo tem exatamente ${j.each} peças. Use “Desfazer” para retirar a última entrega.`:'Os grupos precisam ficar iguais e a cesta deve ficar vazia. Experimente desfazer a última entrega.';
         else error=numeric(j.kind==='load'?j.groups*j.each:j.each,'Conte outra vez e registre sua descoberta.');
         why=j.kind==='load'?`${Array(j.groups).fill(j.each).join(' + ')} = ${j.groups*j.each}. São ${j.groups} × ${j.each} ${j.item}.`:`${j.groups*j.each} ÷ ${j.groups} = ${j.each}. Cada grupo recebeu ${j.each} ${j.item}.`;break;
       }

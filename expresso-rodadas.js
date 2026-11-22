@@ -39,7 +39,7 @@ const ExpressoRounds = (() => {
     update('metal',{rows:[['Metal',328+r*4],['Plástico',493+r*9]],hint:'Compare as duas quantidades. Descubra quanto falta para a menor chegar à maior.'});
     for (const [id,groups,each] of [['tres',3,4+r],['cinco',5,3+r],['laranjas',3,5+r],['malas',4,2+r]]) {
       const j=jobs[id], total=groups*each;
-      update(id,{groups,each,prompt:j.kind==='load'?`Prepare ${groups} vagões com ${each} ${j.item} em cada um. Quantas peças vão ao todo?`:`Reparta ${total} ${j.item} igualmente entre ${groups} grupos. Quantas ficam em cada grupo?`,hint:j.kind==='load'?`Coloque ${each} peças em cada vagão. Depois some os grupos.`:'Distribua uma peça para cada grupo até acabar. Os grupos devem ficar iguais.'});
+      update(id,{groups,each,prompt:j.kind==='load'?`Prepare ${groups} grupos com ${each} ${j.item} em cada um. Quantas peças vão ao todo?`:`Reparta ${total} ${j.item} igualmente entre ${groups} grupos. Quantas ficam em cada grupo?`,hint:j.kind==='load'?`Coloque ${each} peças em cada grupo. Depois some os grupos.`:'Distribua uma peça para cada grupo até acabar. Os grupos devem ficar iguais.'});
     }
     for (const [id,each] of [['bombons',25+r*5],['dobro',7+r],['triplo',140+r*10]]) {
       const j=jobs[id];
@@ -54,7 +54,7 @@ const ExpressoRounds = (() => {
     update('avioes',{rows:6,per:4,people:22-r,prompt:`O avião tem 6 fileiras de 4 poltronas. Embarque ${22-r} passageiros. Quantas poltronas ficam vazias?`});
     update('pioes',{people:13+r,prompt:`Há ${13+r} crianças e 4 caixas com 3 piões cada. Entregue um pião por criança. Quantos faltam?`});
     const themes=['livros','maçãs','lápis','bolas','flores','biscoitos','figurinhas','presentes'];
-    update('autora',{defaultGroups:3,defaultEach:r+2,prompt:`Invente uma encomenda com 3 vagões de ${r+2} ${themes[r-1]}. Escreva uma pergunta sobre o total.`,hint:`Conte quem pediu ${themes[r-1]}, diga quantos há em cada vagão e pergunte o total.`});
+    update('autora',{defaultGroups:3,defaultEach:r+2,prompt:`Invente uma encomenda com 3 grupos de ${r+2} ${themes[r-1]}. Escreva uma pergunta sobre o total.`,hint:`Conte quem pediu ${themes[r-1]}, diga quantos há em cada grupo e pergunte o total.`});
     return stops;
   }
   return {create};

@@ -63,11 +63,11 @@ const LessonData = (() => {
       ]};
     }
     return {title:'Descobrir a regra da sequência',example:'18, 22, 26…',steps:[
-      step('Olhe os vizinhos','Observe os números de vagões vizinhos. O que mudou de dezoito para vinte e dois?',{type:'sequence',values:[18,22,26]},'18, 22, 26, …',true),
+      step('Olhe os vizinhos','Observe os números vizinhos. O que mudou de dezoito para vinte e dois?',{type:'sequence',values:[18,22,26]},'18, 22, 26, …',true),
       step('Descubra o salto','De dezoito até vinte e dois, avançamos quatro casas.',{type:'sequence',values:[18,22,26],jump:4},'22 − 18 = 4'),
       step('Teste mais um par','De vinte e dois até vinte e seis também avançamos quatro. A regra se repete.',{type:'sequence',values:[18,22,26],jump:4},'26 − 22 = 4'),
-      step('Continue a regra','Some quatro ao último número. Qual deve ser o próximo vagão?',{type:'sequence',values:[18,22,26,'?'],jump:4},'26 + 4 = ?',true),
-      step('Confira o próximo','O próximo vagão é trinta. Em uma sequência que diminui, fazemos o salto voltando.',{type:'sequence',values:[18,22,26,30],jump:4},'26 + 4 = 30')
+      step('Continue a regra','Some quatro ao último número. Qual deve ser o próximo número?',{type:'sequence',values:[18,22,26,'?'],jump:4},'26 + 4 = ?',true),
+      step('Confira o próximo','O próximo número é trinta. Em uma sequência que diminui, fazemos o salto voltando.',{type:'sequence',values:[18,22,26,30],jump:4},'26 + 4 = 30')
     ]};
   }
   const references = {

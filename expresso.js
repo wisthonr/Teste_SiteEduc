@@ -10,8 +10,8 @@ function iniciarExpresso(){
   stops = ExpressoRounds.create(Number.isInteger(book.round) ? book.round : 0);
   let numberTarget;
   function save(){
-    try{localStorage.setItem(key,JSON.stringify(book));by('storage-note').textContent='Viagem guardada neste navegador.';}
-    catch{by('storage-note').textContent='O navegador não conseguiu guardar esta viagem.';}
+    try{localStorage.setItem(key,JSON.stringify(book));by('storage-note').textContent='Atividades guardadas neste navegador.';}
+    catch{by('storage-note').textContent='O navegador não conseguiu guardar estas atividades.';}
   }
   function entry(s,j){return (book[s.id]||={})[j.id]||=( {} );}
   function completed(s){return s.jobs.filter(j=>book[s.id]?.[j.id]?.done).length;}
@@ -33,21 +33,19 @@ function iniciarExpresso(){
   const meter=(n,total)=>`<span class="pips" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<n?'filled':''}"></i>`).join('')}</span>`;
   function map(){
     game.innerHTML=`<section class="hero">
-      <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><nav class="home-menu" aria-label="Menu principal">
-        <a class="home-option home-game" href="jogo.html?v=20261122-referencias"><span class="home-icon" aria-hidden="true">🚂</span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
-        <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true">✏️</span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
-        <a class="home-option home-lessons" href="aula.html?v=20261122-referencias"><span class="home-icon" aria-hidden="true">🎬</span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
-      </nav></div>
-      <div class="postcard"><img src="assets/expresso-paisagem.webp" alt="Uma locomotiva com encomendas atravessa uma ponte a caminho do piquenique."></div>
-    </section><section class="route-area"><div class="section-head"><div><span class="overline">Atividades por assunto</span><h2>Mapa da viagem</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
-      <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">Estação ${String(i+1).padStart(2,'0')}</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} entregas concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova viagem com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
+      <div class="hero-copy"><span class="overline">MEU CADERNO · 2º ANO</span><h1>Matemática<br><em>em cores!</em></h1><p>Vamos descobrir, experimentar<br>e aprender um pouquinho mais?</p></div><div class="cover-art"><img src="assets/caderno-matematica.svg" alt="Caderno com botões coloridos e peças de contagem, como nas atividades da apostila."></div></section><nav class="home-menu" aria-label="Menu principal">
+        <a class="home-option home-game" href="jogo.html?v=20261122-caderno"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
+        <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/270F.svg" alt=""></span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
+        <a class="home-option home-lessons" href="aula.html?v=20261122-caderno"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
+      </nav><section class="route-area"><div class="section-head"><div><span class="overline">ESCOLHA UM ASSUNTO</span><h2>Meu caderno</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
+      <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">${s.jobs.length} atividades</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} atividades concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova rodada com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
   function ticket(){
     const done=stamps(),total=stops.reduce((acc,s)=>acc+completed(s),0),max=stops.reduce((acc,s)=>acc+s.jobs.length,0);
-    game.innerHTML=`<section class="pass"><span class="overline">Clube do Trilho</span><h1>Meu bilhete</h1><p>${done===6?'O piquenique chegou ao parque com os seis carimbos!':'Complete as entregas de uma estação para ganhar o carimbo dela.'}</p>
-      <div class="pass-count"><strong>${done} / 6</strong> carimbos · ${total} de ${max} entregas</div>
-      <div class="stamp-grid">${stops.map(s=>`<a href="${url(s)}" class="stamp ${s.color} ${completed(s)===s.jobs.length?'earned':''}">${icon(s)}<strong>${s.short}</strong><small>${completed(s)===s.jobs.length?'Carimbado':`${completed(s)} de ${s.jobs.length} entregas`}</small></a>`).join('')}</div>
-      <a class="primary" href="#mapa">Voltar ao mapa</a></section>`;
+    game.innerHTML=`<section class="pass"><span class="overline">Clube da Matemática</span><h1>Minhas conquistas</h1><p>${done===6?'Você completou os seis assuntos do seu caderno!':'Complete as atividades de um assunto para ganhar um carimbo.'}</p>
+      <div class="pass-count"><strong>${done} / 6</strong> carimbos · ${total} de ${max} atividades</div>
+      <div class="stamp-grid">${stops.map(s=>`<a href="${url(s)}" class="stamp ${s.color} ${completed(s)===s.jobs.length?'earned':''}">${icon(s)}<strong>${s.short}</strong><small>${completed(s)===s.jobs.length?'Carimbado':`${completed(s)} de ${s.jobs.length} atividades`}</small></a>`).join('')}</div>
+      <a class="primary" href="#mapa">Voltar ao início</a></section>`;
   }
   function btn(action,label,i=null,opts={}){
     return `<button type="button" data-act="${action}"${i===null?'':` data-n="${i}"`}${opts.pressed===undefined?'':` aria-pressed="${opts.pressed}"`}${opts.disabled?' disabled':''}${opts.cls?` class="${opts.cls}"`:''}${opts.aria?` aria-label="${escape(opts.aria)}"`:''}>${label}</button>`;
@@ -78,12 +76,12 @@ function iniciarExpresso(){
   function trackView(){
     const picked=W.take(sheet), named=v=>({'☀️':'sol','🍃':'folha','🌙':'lua'}[v]||v);
     const cars=[...job.line,...Array.from({length:job.solution.length},(_,i)=>i<picked.length?job.picks[picked[i]]:null)];
-    return `<div class="rail">${cars.map((v,i)=>`<div class="wagon ${i>=job.line.length?'joined':''} ${v===null?'empty':''}" aria-label="${v===null?'vagão vazio':escape(named(v))}">${v??'?'}</div>`).join('')}</div><p class="small">Toque nas peças na ordem em que elas vão entrar.</p><div class="tools">${job.picks.map((v,i)=>btn('pick',String(v),i,{aria:`Engatar ${named(v)}`,disabled:(!job.repeat&&picked.includes(i))||picked.length===job.solution.length,cls:'chip'})).join('')}${btn('undo-pick','Desengatar o último',null,{disabled:!picked.length})}</div>`;
+    return `<div class="rail">${cars.map((v,i)=>`<div class="wagon ${i>=job.line.length?'joined':''} ${v===null?'empty':''}" aria-label="${v===null?'espaço vazio':escape(named(v))}">${v??'?'}</div>`).join('')}</div><p class="small">Toque nas peças na ordem em que elas vão entrar.</p><div class="tools">${job.picks.map((v,i)=>btn('pick',String(v),i,{aria:`Escolher ${named(v)}`,disabled:(!job.repeat&&picked.includes(i))||picked.length===job.solution.length,cls:'chip'})).join('')}${btn('undo-pick','Retirar o último',null,{disabled:!picked.length})}</div>`;
   }
   function groupsView(){
     const list=W.loads(job,sheet), total=job.groups*job.each, left=total-W.sum(list), share=job.kind==='share';
-    return `<div class="counter">${job.token} ${share?`${left} ${job.item} na cesta`:`Prepare ${job.groups} grupos com ${job.each} ${job.item}.`}</div><p class="small">Toque em ${share?'um grupo':'um vagão'} para entregar uma peça.</p>
-      <div class="crates">${list.map((n,i)=>btn('add-one',`<b>${share?(job.container||'Criança'):'Vagão'} ${i+1}</b><span class="group-pieces" aria-hidden="true">${job.token.repeat(n)||'·'}</span>`,i,{cls:'crate',disabled:!left,aria:`Entregar a ${share?(job.container||'criança'):'vagão'} ${i+1}, com ${n} peças`})).join('')}</div>
+    return `<div class="counter">${job.token} ${share?`${left} ${job.item} na cesta`:`Prepare ${job.groups} grupos com ${job.each} ${job.item}.`}</div><p class="small">Toque em ${share?'um grupo':'um grupo'} para entregar uma peça.</p>
+      <div class="crates">${list.map((n,i)=>btn('add-one',`<b>${share?(job.container||'Criança'):'Grupo'} ${i+1}</b><span class="group-pieces" aria-hidden="true">${job.token.repeat(n)||'·'}</span>`,i,{cls:'crate',disabled:!left,aria:`Entregar a ${share?(job.container||'criança'):'grupo'} ${i+1}, com ${n} peças`})).join('')}</div>
       <div class="tools">${share?btn('round','Dar uma para cada grupo',null,{disabled:left<job.groups}):''}${btn('undo-load','Desfazer última entrega',null,{disabled:!sheet.history?.length})}</div>
       ${share?'':`<div class="formula">${list.join(' + ')}</div>`}${numInput(share?'Quantas peças em cada grupo?':'Quantos botões ao todo?')}`;
   }
@@ -113,8 +111,8 @@ function iniciarExpresso(){
       }
       case 'story':{
         const selector=(field,title,defaultValue)=>`<label>${title}<select data-field="${field}">${[2,3,4,5,6,7,8,9,10].map(v=>`<option ${v===(sheet[field]||defaultValue)?'selected':''}>${v}</option>`).join('')}</select></label>`;
-        return `<div class="selects">${selector('groups','Quantos vagões?',job.defaultGroups||3)}${selector('each','Quantos objetos por vagão?',job.defaultEach||4)}</div>
-          <details><summary>Digitar ou editar a pergunta</summary><label class="word-label">Minha pergunta<textarea data-field="note" rows="3" placeholder="Você também pode escrever na folha abaixo.">${escape(sheet.note)}</textarea></label></details><label class="review"><input type="checkbox" data-field="reviewed" ${sheet.reviewed?'checked':''}> Revisei minha história. Ela conta o que vai nos vagões e pergunta quantos objetos há ao todo.</label>`;
+        return `<div class="selects">${selector('groups','Quantos grupos?',job.defaultGroups||3)}${selector('each','Quantos objetos por grupo?',job.defaultEach||4)}</div>
+          <details><summary>Digitar ou editar a pergunta</summary><label class="word-label">Minha pergunta<textarea data-field="note" rows="3" placeholder="Você também pode escrever na folha abaixo.">${escape(sheet.note)}</textarea></label></details><label class="review"><input type="checkbox" data-field="reviewed" ${sheet.reviewed?'checked':''}> Revisei minha história. Ela conta o que há nos grupos e pergunta quantos objetos há ao todo.</label>`;
       }
     }
   }
@@ -143,12 +141,12 @@ function iniciarExpresso(){
   }
   function mission(){
     const i=stop.jobs.indexOf(job),done=!!sheet.done;
-    game.innerHTML=`<div class="play ${stop.color}"><div class="play-nav"><a href="#mapa">Mapa da viagem</a><span>${stop.title}</span></div>
-      <div class="job-head">${icon(stop)}<div><span class="overline">Entrega ${i+1} de ${stop.jobs.length}</span><h1>${job.title}</h1></div></div>
-      <div class="job-dots" aria-label="Entregas da estação">${stop.jobs.map((j,k)=>`<a href="${url(stop,j)}" aria-label="Entrega ${k+1}: ${j.title}" ${j===job?'aria-current="step"':''} class="${book[stop.id]?.[j.id]?.done?'done':''}">${book[stop.id]?.[j.id]?.done?'✓':k+1}</a>`).join('')}</div>
+    game.innerHTML=`<div class="play ${stop.color}"><div class="play-nav"><a href="#mapa">Meu caderno</a><span>${stop.title}</span></div>
+      <div class="job-head">${icon(stop)}<div><span class="overline">Atividade ${i+1} de ${stop.jobs.length}</span><h1>${job.title}</h1></div></div>
+      <div class="job-dots" aria-label="Atividades do assunto">${stop.jobs.map((j,k)=>`<a href="${url(stop,j)}" aria-label="Atividade ${k+1}: ${j.title}" ${j===job?'aria-current="step"':''} class="${book[stop.id]?.[j.id]?.done?'done':''}">${book[stop.id]?.[j.id]?.done?'✓':k+1}</a>`).join('')}</div>
       <section class="board"><p class="prompt">${job.prompt}</p><details class="book-reference"><summary>📖 Apostila · ${escape(job.reference.label)}</summary><p>${escape(job.reference.note)}${book.round>0?' Nesta rodada, números e opções podem mudar para repetir o raciocínio.':''}</p></details>${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}${lessonTopic()?btn('lesson','▶ Ver uma aula de exemplo',null,{cls:'lesson-help'}):''}<div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="workbench">${taskView()}</div>${numberPad()}${toolbar()}
-      <div class="actions">${btn('check',job.kind==='story'?'Guardar minha encomenda':'Conferir entrega',null,{cls:'primary'})}</div>
-      <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Encomenda guardada':sheet.handReviewed?'Escrita revisada':'Entrega conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima entrega':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar nesta estação'}</a></div>`:''}</section></div>`;
+      <div class="actions">${btn('check',job.kind==='story'?'Guardar minha pergunta':'Conferir resposta',null,{cls:'primary'})}</div>
+      <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Pergunta guardada':sheet.handReviewed?'Escrita revisada':'Atividade conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima atividade':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar neste assunto'}</a></div>`:''}</section></div>`;
     by('feedback').textContent=message;
     numberTarget = null;
     setupInk();
@@ -243,10 +241,10 @@ function iniciarExpresso(){
     if (!b) return;
     const action=b.dataset.act,n=Number(b.dataset.n);
     if (action==='new-trip') {
-      if (!confirm('Começar uma nova viagem? Os números das 28 entregas vão mudar. As respostas, os desenhos e os carimbos desta viagem serão apagados neste navegador.')) return;
+      if (!confirm('Começar uma nova rodada? Os números das 28 atividades vão mudar. As respostas, os desenhos e os carimbos desta rodada serão apagados neste navegador.')) return;
       const nextBook = {round:(Number.isInteger(book.round)?book.round:0)+1};
       try {localStorage.setItem(key,JSON.stringify(nextBook));}
-      catch {by('storage-note').textContent='Não foi possível guardar a nova viagem. Tente novamente.';return;}
+      catch {by('storage-note').textContent='Não foi possível guardar a nova rodada. Tente novamente.';return;}
       book=nextBook;stops=ExpressoRounds.create(book.round);navigate();return;
     }
     if (!sheet) return;

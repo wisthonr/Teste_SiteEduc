@@ -7,7 +7,7 @@ const CargoGame = (() => {
   },
   {
     "label": "p. 192 · exercício 1a",
-    "note": "Desafio adaptado de repartição em grupos iguais. No jogo, os objetos estão em caixas fechadas, com limite de caixas por vagão."
+    "note": "Desafio adaptado de repartição em grupos iguais. No jogo, os objetos estão em caixas fechadas, com limite de caixas por quadro."
   },
   {
     "label": "p. 161 · exercício 1c",
@@ -33,7 +33,7 @@ const CargoGame = (() => {
     switch (index) {
       case 0:
         title = 'Duas encomendas, seis caixas';
-        prompt = 'Complete os dois pedidos. Cada vagão leva exatamente 3 caixas. Duas caixas vão ficar no depósito.';
+        prompt = 'Complete os dois pedidos. Cada quadro leva exatamente 3 caixas. Duas caixas vão ficar no depósito.';
         values = [100+10*r,20+r,7,80+10*r,60+r,18,50+r,9];
         zones = [zone('Bosque',127+11*r,3),zone('Lago',158+11*r,3)];
         solution = [0,0,0,1,1,1,-1,-1];
@@ -41,20 +41,20 @@ const CargoGame = (() => {
         break;
       case 1:
         title = 'Uma partilha com caixas fechadas';
-        prompt = `Reparta ${36+6*r} biscoitos igualmente entre 3 vagões. Use todas as caixas. Cada vagão deve levar 3 caixas.`;
+        prompt = `Reparta ${36+6*r} biscoitos igualmente entre 3 quadros. Use todas as caixas. Cada quadro deve levar 3 caixas.`;
         values = [6+r,4+r,2,6+r,4+r,2,6+r,4+r,2];
         zones = ['Bosque','Lago','Praça'].map(name=>zone(name,12+2*r,3,false));
         solution = [0,0,0,1,1,1,2,2,2];
-        hint = 'Descubra quanto cada vagão deve receber. As caixas têm quantidades diferentes; tente combinar uma maior, uma média e uma pequena.';
+        hint = 'Descubra quanto cada quadro deve receber. As caixas têm quantidades diferentes; tente combinar uma maior, uma média e uma pequena.';
         break;
       case 2: {
         title = 'O código do trilho';
         const start = 627+10*r, step = 3+r;
-        prompt = `O trem passou por ${start} e ${start-step}. Arraste os próximos quatro números, na ordem. O salto é sempre igual.`;
+        prompt = `A sequência começa com ${start} e ${start-step}. Arraste os próximos quatro números, na ordem. O salto é sempre igual.`;
         values = [2,3,4,5,6,7].map(n=>start-n*step);
         zones = [2,3,4,5].map((n,i)=>zone(`${i+1}º lugar`,start-n*step,1,false));
         solution = [0,1,2,3,-1,-1]; sequence = true;
-        hint = `Compare ${start} com ${start-step}. O trem volta ${step} casas por vez. Continue a partir do segundo número.`;
+        hint = `Compare ${start} com ${start-step}. A sequência diminui ${step} a cada passo. Continue a partir do segundo número.`;
         break;
       }
       case 3:
