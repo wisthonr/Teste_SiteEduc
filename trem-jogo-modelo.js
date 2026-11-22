@@ -99,10 +99,9 @@ const CargoGame = (() => {
       if(load.count!==zone.count) return {ok:false,text:`${zone.label}: coloque ${zone.count} ${level.sequence?'número':'caixas'}. Você colocou ${load.count}.`};
       if(load.total!==zone.target) {
         if(level.sequence)return {ok:false,text:`Confira o ${i+1}º lugar. Continue com o mesmo salto a partir do número anterior.`};
-        const difference=zone.target-load.total;
-        return {ok:false,text:`${zone.label}: sua carga tem ${load.total}. ${difference>0?'Faltam':'Passaram'} ${Math.abs(difference)}. Troque uma caixa e tente de novo.`};
+        return {ok:false,text:`${zone.label}: a quantidade ainda não confere. Calcule o pedido, some os números das suas caixas e compare. Depois tente outra combinação.`};
       }
-      return {ok:true,text:`${zone.label}: ${load.total}, pedido completo!`};
+      return {ok:true,text:`${zone.label}: combinação conferida!`};
     });
     return {ok:reports.every(r=>r.ok),reports};
   }

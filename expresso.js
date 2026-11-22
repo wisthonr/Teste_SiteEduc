@@ -33,7 +33,7 @@ function iniciarExpresso(){
   const meter=(n,total)=>`<span class="pips" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<n?'filled':''}"></i>`).join('')}</span>`;
   function map(){
     game.innerHTML=`<section class="hero">
-      <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><a class="primary" href="jogo.html">🚂 Jogar Desafio das Cargas</a><p class="game-description">Arraste caixas, resolva pedidos e vença seis desafios.</p><a href="${destination()}">${book.last?'Continuar atividades do caderno':'Praticar no caderno'}</a></div>
+      <div class="hero-copy"><span class="overline"><i></i> Matemática · 2º ano</span><h1>Expresso do<br><em>Piquenique</em></h1><p>O trem vai partir! Ajude a preparar as encomendas e leve o piquenique até o parque.</p><a class="primary" href="jogo.html">🚂 Jogar Desafio das Cargas</a><p class="game-description">Arraste caixas, resolva pedidos e vença seis desafios.</p><a href="${destination()}">${book.last?'Continuar atividades do caderno':'Praticar no caderno'}</a><a class="lesson-shortcut" href="aula.html">▶ Aulas curtas para aprender</a></div>
       <div class="postcard"><img src="assets/expresso-paisagem.webp" alt="Uma locomotiva com encomendas atravessa uma ponte a caminho do piquenique."></div>
     </section><section class="route-area"><div class="section-head"><div><span class="overline">Escolha onde jogar</span><h2>Mapa da viagem</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
       <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">Estação ${String(i+1).padStart(2,'0')}</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} entregas concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova viagem com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
@@ -54,7 +54,6 @@ function iniciarExpresso(){
   function calcView(){
     const m=W.material(job,sheet), trade=W.exchangeAt(job,sheet), plus=job.op==='+', names=['Centenas','Dezenas','Unidades'];
     const digits=n=>W.digits(n).map((d,i)=>`<span>${i===0&&d===0?'':d}</span>`).join('');
-    const marks=sheet.trades||[];
     const marked=sheet.marked||[];
     const material=m.map((count,i)=>{
       const canPick=plus&&i===trade;
@@ -62,21 +61,16 @@ function iniciarExpresso(){
         const piece=`<i class="block b${i}" aria-hidden="true"></i>`;
         return canPick?btn('mark',piece,k,{pressed:marked.includes(k),cls:'piece',aria:`Marcar peça ${k+1} de ${names[i]}`}):piece;
       }).join('');
-      return `<div class="place" id="place-${i}"><b>${names[i]}</b><div class="tokens">${pieces}</div><strong>${count}</strong></div>`;
+      return `<div class="place" id="place-${i}"><b>${names[i]}</b><div class="tokens">${pieces}</div></div>`;
     }).join('');
     const tradeText=trade===2?(plus?'Juntar 10 unidades':'Abrir 1 dezena'):plus?'Juntar 10 dezenas':'Abrir 1 centena';
-    const carries=names.map((_,i)=>{
-      const added=marks.includes(i+1);
-      if(plus&&added)return btn('locate','1',i,{cls:'carry',aria:`Mostrar a peça que passou para ${names[i]}`});
-      if(!plus&&marks.length&&m[i]!==W.digits(job.a)[i])return btn('locate',String(m[i]),i,{cls:'carry',aria:`Mostrar ${m[i]} ${names[i]}`});
-      return '<span></span>';
-    }).join('');
-    return `<div class="exchange"><div><h3>Quadro de trocas</h3><div class="places">${material}</div>
-      <div class="subaction">${trade===undefined?'<strong>As peças estão prontas.</strong>':btn('trade',tradeText,null,{cls:'accent'})}</div>
-      ${plus&&trade!==undefined?`<p class="piece-note">Toque em dez peças ou use o botão para juntá-las de uma vez. ${marked.length?`Você marcou ${marked.length} de 10.`:''}</p>`:''}
-      </div>
-      <div class="calc-wrap"><h3>Registre a conta</h3><p class="small">Toque em cada casa do resultado para escolher o número.</p><div class="calc"><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div></div></div>`;
+    const carries=names.map((name,i)=>`<input class="carry-note" data-carry="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="2" aria-label="Anotação de troca nas ${name}" value="${escape(sheet.notes?.[i])}">`).join('');
+    return `<div class="exchange"><div class="calc-wrap"><h3>Resolva a conta</h3><p class="small">Comece pelas unidades. Use as casinhas de cima para anotar as trocas. Você também pode fazer a conta na sua folha.</p><div class="calc"><div class="calc-row heads"><span></span><span>C</span><span>D</span><span>U</span></div><div class="calc-row marks"><span></span>${carries}</div><div class="calc-row"><span></span>${digits(job.a)}</div><div class="calc-row"><b>${job.op}</b>${digits(job.b)}</div><div class="calc-row result"><span>=</span>${names.map((name,i)=>`<input data-result="${i}" readonly data-number inputmode="none" autocomplete="off" maxlength="1" aria-label="${name} do resultado" value="${escape(sheet.result?.[i])}">`).join('')}</div></div></div>
+      <details class="material-help" ${sheet.supportOpen?'open':''}><summary>Preciso de peças para pensar</summary><p class="small">${plus?'As peças das duas parcelas estão juntas. Conte e faça as trocas.':'Estas peças representam a primeira quantidade. Abra uma dezena quando precisar.'}</p><div class="places">${material}</div>
+      <div class="subaction">${trade===undefined?'<strong>Conte as peças e faça seu registro.</strong>':btn('trade',tradeText,null,{cls:'accent',disabled:plus&&marked.length!==10})}</div>
+      ${plus&&trade!==undefined?`<p class="piece-note">Marque dez peças para juntá-las. ${marked.length?`Você marcou ${marked.length} de 10.`:''}</p>`:''}</details></div>`;
   }
+
   function trackView(){
     const picked=W.take(sheet), named=v=>({'☀️':'sol','🍃':'folha','🌙':'lua'}[v]||v);
     const cars=[...job.line,...Array.from({length:job.solution.length},(_,i)=>i<picked.length?job.picks[picked[i]]:null)];
@@ -84,8 +78,8 @@ function iniciarExpresso(){
   }
   function groupsView(){
     const list=W.loads(job,sheet), total=job.groups*job.each, left=total-W.sum(list), share=job.kind==='share';
-    return `<div class="counter">${job.token} ${left} ${job.item} ${share?'na cesta':'para embarcar'}</div><p class="small">Toque em ${share?'um grupo':'um vagão'} para entregar uma peça.</p>
-      <div class="crates">${list.map((n,i)=>btn('add-one',`<b>${share?(job.container||'Criança'):'Vagão'} ${i+1}</b><span class="group-pieces" aria-hidden="true">${job.token.repeat(n)||'·'}</span><strong>${n}</strong>`,i,{cls:'crate',disabled:!left,aria:`Entregar a ${share?(job.container||'criança'):'vagão'} ${i+1}, com ${n} peças`})).join('')}</div>
+    return `<div class="counter">${job.token} ${share?`${left} ${job.item} na cesta`:`Prepare ${job.groups} grupos com ${job.each} ${job.item}.`}</div><p class="small">Toque em ${share?'um grupo':'um vagão'} para entregar uma peça.</p>
+      <div class="crates">${list.map((n,i)=>btn('add-one',`<b>${share?(job.container||'Criança'):'Vagão'} ${i+1}</b><span class="group-pieces" aria-hidden="true">${job.token.repeat(n)||'·'}</span>`,i,{cls:'crate',disabled:!left,aria:`Entregar a ${share?(job.container||'criança'):'vagão'} ${i+1}, com ${n} peças`})).join('')}</div>
       <div class="tools">${share?btn('round','Dar uma para cada grupo',null,{disabled:left<job.groups}):''}${btn('undo-load','Desfazer última entrega',null,{disabled:!sheet.history?.length})}</div>
       ${share?'':`<div class="formula">${list.join(' + ')}</div>`}${numInput(share?'Quantas peças em cada grupo?':'Quantos botões ao todo?')}`;
   }
@@ -99,18 +93,18 @@ function iniciarExpresso(){
       case 'sum':{
         const ways=sheet.ways||[], val=sel.map(i=>job.pieces[i]);
         return `<div class="chips">${job.pieces.map((v,i)=>btn('pick',String(v),i,{pressed:sel.includes(i),disabled:ways.length===2,cls:'chip'})).join('')}</div>
-          <div class="formula">${val.length?`${val.join(' + ')} = ${W.sum(val)}`:'Escolha as parcelas'}</div>
+          <div class="formula">${val.length?`${val.join(' + ')} = ?`:'Escolha as parcelas'}</div>
           ${btn('keep-sum','Guardar esta soma',null,{disabled:!sel.length||ways.length===2})}
           <div class="saved-sums">${ways.map((parts,i)=>`<p>✓ ${i+1}ª soma &nbsp; ${parts.join(' + ')} = ${job.target}</p>`).join('')}</div>`;
       }
       case 'table':return `<table><caption>Tampinhas da coleção</caption><thead><tr><th>Escolha</th><th>Tipo</th><th>Quantidade</th></tr></thead><tbody>${job.rows.map(([name,value],i)=>`<tr><td>${btn('pick',sel.includes(i)?'✓':'○',i,{pressed:sel.includes(i),aria:`Selecionar ${name}`})}</td><th scope="row">${name}</th><td>${value}</td></tr>`).join('')}</tbody></table>${numInput('Quantas tampinhas?')}`;
       case 'load':case 'share':return groupsView();
       case 'batch':return `<div class="servings">${arr(n,()=>`<div class="portion"><span>${job.token}</span><b>${job.each} ${job.item}</b></div>`)||'Monte a primeira porção.'}</div><div class="tools">${btn('more',`Acrescentar uma ${job.thing}`,null,{disabled:n>=job.groups+1})}${btn('less',`Retirar uma ${job.thing}`,null,{disabled:!n})}</div>${numInput(`Qual é o total em ${job.item}?`)}`;
-      case 'fraction':return `<p class="small">Toque em um quadradinho para marcar ou desmarcar.</p><div class="chocolate" style="--cols:${job.cols}">${arr(job.total,i=>btn('pick',sel.includes(i)?'✓':'',i,{pressed:sel.includes(i),aria:`Quadradinho ${i+1}`}))}</div><p class="counter">${sel.length} de ${job.total} quadradinhos marcados</p>`;
+      case 'fraction':return `<p class="small">Toque em um quadradinho para marcar ou desmarcar.</p><div class="chocolate" style="--cols:${job.cols}">${arr(job.total,i=>btn('pick',sel.includes(i)?'✓':'',i,{pressed:sel.includes(i),aria:`Quadradinho ${i+1}`}))}</div><p class="counter">Conte os quadradinhos marcados e confira as partes iguais.</p>`;
       case 'bundles':return `<div class="counter">🌷 ${job.total-n*job.each} flores no cesto</div><div class="servings">${arr(n,()=>'<span class="bouquet" aria-label="Buquê de 4 flores">💐</span>')}</div><div class="tools">${btn('more','Montar um buquê de 4',null,{disabled:n===job.total/job.each})}${btn('less','Desfazer um buquê',null,{disabled:!n})}</div>${numInput('Quantos buquês ficaram prontos?')}`;
       case 'seats':{
         const toys=job.object==='piões';
-        return `<div class="counter">${job.people-sel.length} ${toys?'criança(s) esperando um pião':'passageiro(s) esperando'}</div><p class="small">${toys?'Toque em cada pião para entregá-lo.':'Toque nas poltronas para sentar os passageiros.'}</p><div class="seat-grid" style="--cols:${job.per}">${arr(job.rows*job.per,i=>btn('seat',sel.includes(i)?'✓':toys?'🪀':'▱',i,{pressed:sel.includes(i),aria:`${toys?'Pião':'Poltrona'} ${i+1}`,disabled:!sel.includes(i)&&sel.length>=job.people}))}</div>
+        return `<div class="counter">${job.people} ${toys?'crianças precisam de um pião':'passageiros vão embarcar'}</div><p class="small">${toys?'Toque em cada pião para entregá-lo.':'Toque nas poltronas para sentar os passageiros.'}</p><div class="seat-grid" style="--cols:${job.per}">${arr(job.rows*job.per,i=>btn('seat',sel.includes(i)?'✓':toys?'🪀':'▱',i,{pressed:sel.includes(i),aria:`${toys?'Pião':'Poltrona'} ${i+1}`,disabled:!sel.includes(i)&&sel.length>=job.people}))}</div>
         ${toys?`<div class="tools">${['Faltam piões','Sobram piões'].map((v,i)=>btn('choose',v,i,{pressed:sheet.choice===i})).join('')}</div>`:''}${numInput(toys?'Quantos piões faltam ou sobram?':'Quantas poltronas ficaram vazias?')}`;
       }
       case 'story':{
@@ -134,12 +128,21 @@ function iniciarExpresso(){
       ${btn('keyboard','Usar teclado')}
     </section>`;
   }
+  function lessonTopic(){
+    if(['exchange','table'].includes(job.kind))return job.op==='+'?'soma':'subtracao';
+    if(job.kind==='sum')return 'soma';
+    if(job.kind==='track'&&job.line.length&&typeof job.line[0]==='number')return 'sequencia';
+    if(job.kind==='batch'&&['dobro','triplo'].includes(job.id))return 'dobro';
+    if(['load','batch','story'].includes(job.kind))return 'multiplicacao';
+    if(['share','fraction','bundles'].includes(job.kind))return 'divisao';
+    return '';
+  }
   function mission(){
     const i=stop.jobs.indexOf(job),done=!!sheet.done;
     game.innerHTML=`<div class="play ${stop.color}"><div class="play-nav"><a href="#mapa">Mapa da viagem</a><span>${stop.title}</span></div>
       <div class="job-head">${icon(stop)}<div><span class="overline">Entrega ${i+1} de ${stop.jobs.length}</span><h1>${job.title}</h1></div></div>
       <div class="job-dots" aria-label="Entregas da estação">${stop.jobs.map((j,k)=>`<a href="${url(stop,j)}" aria-label="Entrega ${k+1}: ${j.title}" ${j===job?'aria-current="step"':''} class="${book[stop.id]?.[j.id]?.done?'done':''}">${book[stop.id]?.[j.id]?.done?'✓':k+1}</a>`).join('')}</div>
-      <section class="board"><p class="prompt">${job.prompt}</p>${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}<div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="workbench">${taskView()}</div>${numberPad()}${toolbar()}
+      <section class="board"><p class="prompt">${job.prompt}</p>${btn('hint','✦ Pista',null,{pressed:!!sheet.hint})}${lessonTopic()?btn('lesson','▶ Ver uma aula de exemplo',null,{cls:'lesson-help'}):''}<div class="hint"${sheet.hint?'':' hidden'}>${job.hint}</div><div class="workbench">${taskView()}</div>${numberPad()}${toolbar()}
       <div class="actions">${btn('check',job.kind==='story'?'Guardar minha encomenda':'Conferir entrega',null,{cls:'primary'})}</div>
       <div class="feedback" id="feedback" role="status"></div>${done?`<div class="success"><b>✓ ${job.kind==='story'?'Encomenda guardada':sheet.handReviewed?'Escrita revisada':'Entrega conferida'}</b><p>${escape(W.judge(job,sheet).why)}</p><a class="primary" href="${i+1<stop.jobs.length?url(stop,stop.jobs[i+1]):completed(stop)===stop.jobs.length?'#bilhete':url(stop,first(stop))}">${i+1<stop.jobs.length?'Próxima entrega':completed(stop)===stop.jobs.length?'Ver meu carimbo':'Continuar nesta estação'}</a></div>`:''}</section></div>`;
     by('feedback').textContent=message;
@@ -223,6 +226,8 @@ function iniciarExpresso(){
     if(field){
       if(field!=='note'||job.kind==='story')sheet.handReviewed=false;
       sheet[field]=field==='reviewed'?t.checked:['each','groups'].includes(field)?Number(t.value):t.value;
+    }else if(t.dataset.carry!==undefined){
+      sheet.notes||=['','',''];sheet.notes[Number(t.dataset.carry)]=t.value.trim();save();return;
     }else if(t.dataset.result!==undefined){
       sheet.result||=['','',''];sheet.result[Number(t.dataset.result)]=t.value.trim();
     }else return;
@@ -241,6 +246,8 @@ function iniciarExpresso(){
       book=nextBook;stops=ExpressoRounds.create(book.round);navigate();return;
     }
     if (!sheet) return;
+    if (action==='lesson') {Aulas.open(lessonTopic(),job);return;}
+    if (['mark','trade'].includes(action))sheet.supportOpen=true;
     if (['digit','erase-digit','close-pad','keyboard'].includes(action)) {
       if (!numberTarget?.isConnected) return;
       if (action==='close-pad') {by('number-pad').hidden=true;return;}

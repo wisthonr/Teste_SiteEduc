@@ -80,14 +80,13 @@ const Oficina = (function createWorkshop(){
     let error,why=j.why;
     switch(j.kind){
       case 'exchange':{
-        if(exchangeAt(j,s)!==undefined)return {error:'Faça a troca indicada no quadro de peças antes de registrar o resultado.'};
         const total=j.op==='+'?j.a+j.b:j.a-j.b;
         const result=(s.result||[]).map(x=>String(x??'').trim());
         const expected=digits(total);
         for(let i=2;i>=0;i--){
           if((i===0&&expected[i]===0&&!result[i])||result[i]===String(expected[i]))continue;
           const place=['centenas','dezenas','unidades'][i];
-          return {error:`Confira a coluna das ${place}. ${j.op==='+'?'Conte as peças que ficaram nessa coluna.':'Tire dessa coluna a quantidade escrita na segunda linha da conta.'}`};
+          return {error:`Confira a coluna das ${place}. ${j.op==='+'?'Some os algarismos dessa coluna e confira as trocas.':'Tire dessa coluna a quantidade escrita na segunda linha da conta.'}`};
         }
         why=`${j.a} ${j.op} ${j.b} = ${total}. ${j.op==='+'?'A entrega tem':'A diferença é de'} ${total} ${j.unit}.`;break;
       }

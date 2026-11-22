@@ -10,7 +10,7 @@
   book.level = Number.isInteger(book.level) && book.level >= 0 && book.level < 6 ? book.level : 0;
   if (!book.states || typeof book.states !== 'object') book.states = {};
   let level, state, selected = null, drag = null, recent = null;
-  let showHint = false, showSums = false, report = null, message = '', suppressClickUntil = 0;
+  let showHint = false, report = null, message = '', suppressClickUntil = 0;
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function save() {
     book.states[book.level] = state;
@@ -20,7 +20,7 @@
   function load() {
     level = model.makeLevel(book.level, book.round);
     state = model.restore(level, book.states[book.level]);
-    selected = null; recent = null; showHint = false; showSums = false; report = null; message = '';
+    selected = null; recent = null; showHint = false; report = null; message = '';
     save(); render();
   }
   function piece(id) {
@@ -32,7 +32,7 @@
     const completed = Object.values(book.states).filter(s=>s.done).length;
     root.innerHTML = `<nav class="levels" aria-label="Fases do jogo">${Array.from({length:6},(_,i)=>`<button data-action="level" data-index="${i}" aria-label="Fase ${i+1}" ${i===book.level?'aria-current="step"':''}>${book.states[i]?.done?'✓':i+1}</button>`).join('')}<span>${completed}/6 entregas</span></nav>
       <section class="brief"><span class="eyebrow">Fase ${book.level+1} · ${['Combinar','Repartir','Ordenar','Subtrair','Multiplicar','Desafio final'][book.level]}</span><h1>${escape(level.title)}</h1><p>${escape(level.prompt)}</p></section>
-      <div class="guidance"><span>${selected===null?'Arraste uma caixa até o vagão.':`Caixa ${level.pieces[selected].value} selecionada. Toque em “Colocar aqui”.`}</span><button data-action="hint" aria-expanded="${showHint}">💡 Pista</button></div>
+      <div class="guidance"><span>${selected===null?'Arraste uma caixa até o vagão.':`Caixa ${level.pieces[selected].value} selecionada. Toque em “Colocar aqui”.`}</span><button data-action="hint" aria-expanded="${showHint}">💡 Pista</button><button data-action="lesson">▶ Aula de exemplo</button></div>
       ${showHint?`<p class="hint">${escape(level.hint)}</p>`:''}
       <section class="train ${level.sequence?'sequence':''} ${state.done?'departed':''}" aria-label="Vagões de entrega">
         <img class="engine" src="assets/openmoji/1F682.svg" alt="Locomotiva" draggable="false">
@@ -40,12 +40,12 @@
           <h2>${escape(zone.label)}</h2><p class="goal">${zone.showTarget?`Pedido <strong>${zone.target}</strong>`:`${zone.count} ${level.sequence?'número':'caixas'}`}</p>
           <div class="cargo-slots">${level.pieces.filter(p=>state.places[p.id]===i).map(p=>piece(p.id)).join('')}</div>
           <button class="drop-button" data-action="drop" data-zone="${i}" ${state.done?'disabled':''}>${loads[i].count>=zone.count?'Vagão cheio':'Colocar aqui'}</button>
-          <small>${loads[i].count}/${zone.count} ${level.sequence?'número':'caixas'}${showSums&&!level.sequence?` · total ${loads[i].total}`:''}</small>
+          <small>${loads[i].count}/${zone.count} ${level.sequence?'número':'caixas'}</small>
           ${report?`<p class="zone-feedback ${report.reports[i].ok?'ok':''}">${escape(report.reports[i].text)}</p>`:''}
         </section>`).join('')}</div>
       </section>
       <section class="depot" data-zone="-1" aria-label="Depósito"><div class="depot-head"><h2>${level.sequence?'Bilhetes disponíveis':'Depósito de caixas'}</h2><button data-action="drop" data-zone="-1" ${state.done?'disabled':''}>Devolver aqui</button></div><div class="supply">${level.order.filter(id=>state.places[id]===-1).map(piece).join('')||'<span class="empty">Todas as caixas embarcaram.</span>'}</div></section>
-      <div class="controls"><button data-action="undo" ${!state.history.length||state.done?'disabled':''}>↶ Desfazer</button>${level.sequence?'':`<button data-action="sums" aria-pressed="${showSums}">Somar minhas caixas</button>`}<button class="primary" data-action="check" ${state.done?'disabled':''}>Conferir carga</button></div>
+      <div class="controls"><button data-action="undo" ${!state.history.length||state.done?'disabled':''}>↶ Desfazer</button><button class="primary" data-action="check" ${state.done?'disabled':''}>Conferir carga</button></div>
       <p class="message" role="status">${escape(message)}</p>
       ${state.done?`<section class="victory" role="status"><img src="assets/openmoji/2728.svg" alt=""><h2>Entrega pronta!</h2><p>${completed===6?'Você resolveu os seis desafios do piquenique!':'As quantidades e o número de caixas estão certos.'}</p><button class="primary" data-action="next">${completed===6?'Ver minha conquista':'Próxima missão →'}</button></section>`:''}
       <div class="adult"><button data-action="restart">Recomeçar esta fase</button><button data-action="new-round">Adulto · Nova partida</button><span>12 partidas com valores diferentes, depois o ciclo recomeça.</span></div>`;
@@ -77,7 +77,7 @@
         else movePiece(selected,Number(button.dataset.zone));
         break;
       case 'hint':showHint=!showHint;render();break;
-      case 'sums':showSums=!showSums;render();break;
+      case 'lesson':Aulas.open(['soma','divisao','sequencia','subtracao','dobro','multiplicacao'][book.level]);break;
       case 'undo':
         model.undo(state);selected=null;report=null;message='Último movimento desfeito.';save();render();break;
       case 'check':

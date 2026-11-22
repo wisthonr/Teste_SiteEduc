@@ -46,3 +46,12 @@ O botão principal abre `jogo.html`, um jogo de arrastar caixas com a caneta, o 
 Há 12 partidas com valores diferentes, totalizando 72 desafios. Depois o ciclo se repete. A partida é guardada na chave `expresso-cargas-v1`, com a fase atual, as posições das caixas e as conquistas. A opção de nova partida fica dentro do jogo e pede confirmação. O caderno continua acessível no mapa.
 
 Execute `node tests/trem-jogo.test.cjs` para verificar soluções, limites, retomada e os handlers de interação com um adaptador de DOM. Esse teste não substitui a validação visual e o arraste com a Apple Pencil no iPad.
+
+
+## Aulas e autonomia no cálculo
+
+`aula.html` reúne seis aulas animadas com exemplos independentes, legendas, narração opcional em português e pausas que aguardam a criança pensar. Os controles permitem avançar, voltar, repetir e sair sem alterar a atividade. As aulas também podem ser abertas pelo caderno e pelo jogo. A voz usa SpeechSynthesis e as vozes disponíveis no aparelho; nenhuma instalação é necessária. Ao sair da aula ou ocultar a página, reprodução e voz são interrompidas.
+
+A criança registra a conta e suas anotações de troca. As peças são um apoio opcional; na soma, é preciso selecionar dez antes de trocar. A correção aceita um resultado correto mesmo sem manipular peças. Foram retirados o botão que soma a carga, as diferenças numéricas das pistas de erro e contadores que entregavam resultados nas atividades. A resolução completa da própria conta só aparece depois de acertar. As anotações de troca são rascunho, sem correção automática.
+
+`node tests/aulas.test.cjs` verifica cálculo sem ajuda automática, orientações sem resultado, conservação de quantidade nas trocas, exemplos alternativos, reprodução, pausas para pensar, navegação e cancelamento de voz. A interface também foi conferida em navegador com largura de iPad em orientação vertical; a caneta e a voz do iPad precisam ser experimentadas no aparelho.
