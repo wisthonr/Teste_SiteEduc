@@ -40,7 +40,12 @@ function solve(job) {
       state.answer=String(job.kind==='load'?job.groups*job.each:job.each);break;
     case 'batch':state.count=job.groups;state.answer=String(job.groups*job.each);break;
     case 'fraction':state.selection=Array.from({length:job.total/job.parts},(_,i)=>i);break;
-    case 'bundles':state.count=job.total/job.each;state.answer=String(state.count);break;
+    case 'bundles':
+      for(let offset=0;offset<job.total;offset+=job.each){
+        for(let i=offset;i<offset+job.each;i++)workshop.adjust(job,state,'flower-pick',i);
+        workshop.adjust(job,state,'keep-bouquet');
+      }
+      state.answer=String(job.total/job.each);break;
     case 'seats':
       state.selection=Array.from({length:Math.min(job.rows*job.per,job.people)},(_,i)=>i);
       state.choice=0;state.answer=String(Math.abs(job.rows*job.per-job.people));break;
@@ -142,6 +147,67 @@ assert.deepEqual(pendingLink.data.botoes,pendingButtons.botoes);
 assert.deepEqual(pendingLink.data.last,['botoes','cinco']);
 assert(!pendingLink.element('game').innerHTML.includes('Minha pergunta'));
 
+// Flores: a criança monta os grupos; o site não limita nem conta a seleção por ela.
+const flowerJob=rounds.create(0).flatMap(s=>s.jobs).find(j=>j.id==='flores');
+const flowerUI=mount({},'#parque/flores');
+const flowerCount=()=>[...flowerUI.element('game').innerHTML.matchAll(/data-act="flower-pick"/g)].length;
+assert.equal(flowerCount(),36);
+flowerUI.click('flower-pick',0);flowerUI.click('flower-pick',0);
+assert.deepEqual(flowerUI.data.parque.flores.selection,[]);
+for(let i=0;i<5;i++)flowerUI.click('flower-pick',i);
+assert.equal(flowerUI.data.parque.flores.selection.length,5); // sem limitar a quatro
+assert.equal(flowerUI.element('feedback').textContent,'');
+assert(!flowerUI.data.parque.flores.answer);
+assert(!flowerUI.element('game').innerHTML.includes('Você marcou'));
+flowerUI.click('keep-bouquet');
+assert.equal(flowerCount(),31);
+assert.deepEqual(flowerUI.data.parque.flores.bouquets,[[0,1,2,3,4]]);
+assert.equal(flowerUI.element('feedback').textContent,'');
+flowerUI.click('check');
+assert(flowerUI.element('feedback').textContent.includes('Todos precisam ter 4 flores'));
+assert(!flowerUI.data.parque.flores.done);
+flowerUI.click('undo-bouquet',0);
+assert.equal(flowerCount(),36);
+flowerUI.click('flower-pick',8);flowerUI.click('clear-flowers');
+assert.deepEqual(flowerUI.data.parque.flores.selection,[]);
+for(let offset=0;offset<36;offset+=4){
+  for(let i=offset;i<offset+4;i++)flowerUI.click('flower-pick',i);
+  flowerUI.click('keep-bouquet');
+}
+assert.equal(flowerCount(),0);
+assert(!flowerUI.data.parque.flores.answer); // sem preencher a resposta ao montar
+assert(!flowerUI.element('game').innerHTML.includes('São 9 buquês'));
+const assembled=structuredClone(flowerUI.data.parque.flores.bouquets);
+flowerUI.click('flower-pick',0); // flor já utilizada não pode entrar em outro grupo
+flowerUI.click('keep-bouquet');
+assert.deepEqual(flowerUI.data.parque.flores.bouquets,assembled);
+flowerUI.listeners.input({target:{dataset:{field:'answer'},value:'8'}});flowerUI.click('check');
+assert(!flowerUI.data.parque.flores.done);
+assert(!flowerUI.element('feedback').textContent.includes('9'));
+flowerUI.listeners.input({target:{dataset:{field:'answer'},value:'9'}});flowerUI.click('check');
+assert(flowerUI.data.parque.flores.done);
+assert(flowerUI.element('game').innerHTML.includes('São 9 buquês'));
+flowerUI.navigate('#mapa');flowerUI.navigate('#parque/flores');
+assert.deepEqual(flowerUI.data.parque.flores.bouquets,assembled);
+flowerUI.click('undo-bouquet',2);
+assert(!flowerUI.data.parque.flores.done);
+assert.equal(flowerCount(),4);
+for(const i of [8,9,10,11])flowerUI.click('flower-pick',i);
+flowerUI.navigate('#mapa');flowerUI.navigate('#parque/flores');
+assert.deepEqual(flowerUI.data.parque.flores.selection,[8,9,10,11]);
+flowerUI.click('keep-bouquet');flowerUI.click('check');
+assert(flowerUI.data.parque.flores.done);
+// Compatibilidade com a atividade anterior e proteção contra flores duplicadas.
+const oldFlowers={count:9,answer:'9',done:true,ink:[[[.2,.4]]]};
+const migratedFlowers=mount({parque:{flores:oldFlowers}},'#parque/flores');
+assert(migratedFlowers.element('game').innerHTML.includes('Atividade conferida'));
+assert.deepEqual(migratedFlowers.data.parque.flores,oldFlowers);
+migratedFlowers.click('undo-bouquet',0);
+assert.equal(migratedFlowers.data.parque.flores.bouquets.length,8);
+assert.deepEqual(migratedFlowers.data.parque.flores.ink,oldFlowers.ink);
+const duplicates=Array.from({length:9},()=>[0,1,2,3]);
+assert(workshop.judge(flowerJob,{bouquets:duplicates,answer:'9'}).error);
+
 // Caso relatado no iPad: 822 - 370. Anotar 7 centenas e 12 dezenas, sem preencher unidades.
 const reported=rounds.create(4).flatMap(s=>s.jobs).find(j=>j.id==='casinha');
 assert.equal(reported.a,822);assert.equal(reported.b,370);
@@ -162,5 +228,6 @@ assert(noteUI.element('game').innerHTML.includes('id="original-digit-2" class=""
 assert.equal(noteUI.data.correio.casinha.ink.length,1);
 console.log('OK: 27 atividades × 18 rodadas, respostas diferentes entre rodadas, correção, migração, caneta, rejeição de toque, teclado numérico, revisão manual e montagem das 27 telas.');
 console.log('OK: elaboração de perguntas removida, links antigos redirecionados, progresso e carimbo preservados.');
+console.log('OK: flores selecionáveis, grupos livres, correção ao finalizar, desfazer, persistência e migração dos buquês antigos.');
 console.log('OK: caso 822 - 370, anotação de dois dígitos, edição, retomada e indicação das colunas trocadas.');
 

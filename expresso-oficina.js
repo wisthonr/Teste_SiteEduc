@@ -4,6 +4,12 @@ const Oficina = (function createWorkshop(){
   const take=(s)=>s.selection||[];
   const loads=(j,s)=>s.loads||Array(j.groups).fill(0);
   const digits=n=>[Math.floor(n/100),Math.floor(n/10)%10,n%10];
+  function bouquets(j,s){
+    if(Array.isArray(s.bouquets))return s.bouquets;
+    // Conservar os buquês já montados na versão anterior, sem apagar a resposta ou a folha.
+    const saved=Math.max(0,Math.min(Math.trunc(Number(s.count)||0),Math.floor(j.total/j.each)));
+    return Array.from({length:saved},(_,group)=>Array.from({length:j.each},(_,i)=>group*j.each+i));
+  }
   function material(j,s){
     if(s.boxes)return s.boxes;
     const a=digits(j.a),b=digits(j.b);
@@ -37,6 +43,23 @@ const Oficina = (function createWorkshop(){
         }
         break;
       case 'undo-pick':s.selection=selected.slice(0,-1);break;
+      case 'flower-pick':{
+        if(j.kind!=='bundles'||!Number.isInteger(n)||n<0||n>=j.total||bouquets(j,s).flat().includes(n))return;
+        s.selection=selected.includes(n)?selected.filter(i=>i!==n):[...selected,n];break;
+      }
+      case 'clear-flowers':if(j.kind==='bundles')s.selection=[];break;
+      case 'keep-bouquet':{
+        if(j.kind!=='bundles')return;
+        const groups=bouquets(j,s), used=new Set(groups.flat());
+        const flowers=[...new Set(selected)].filter(i=>Number.isInteger(i)&&i>=0&&i<j.total&&!used.has(i));
+        if(!flowers.length)return;
+        // A criança decide o tamanho do grupo. A conferência acontece apenas ao finalizar.
+        s.bouquets=[...groups,flowers];s.selection=[];break;
+      }
+      case 'undo-bouquet':{
+        if(j.kind!=='bundles')return;
+        s.bouquets=bouquets(j,s).filter((_,i)=>i!==n);break;
+      }
       case 'choose':s.choice=n;break;
       case 'add-one':{
         const list=loads(j,s).slice();
@@ -121,10 +144,13 @@ const Oficina = (function createWorkshop(){
       case 'fraction':
         if(selection.length!==j.total/j.parts)error=`Você marcou ${selection.length}. Imagine ${j.parts} partes iguais desta barra e conte uma delas.`;
         why=`${j.total} ÷ ${j.parts} = ${j.total/j.parts}. Uma parte tem ${j.total/j.parts} quadradinhos.`;break;
-      case 'bundles':
-        if(count(j,s)*j.each!==j.total)error='Ainda há flores no cesto. Monte os buquês que faltam.';
+      case 'bundles':{
+        const groups=bouquets(j,s), flowers=groups.flat();
+        if(groups.some(group=>group.length!==j.each))error=`Conte as flores de cada buquê. Todos precisam ter ${j.each} flores. Você pode desfazer um buquê para tentar de novo.`;
+        else if(flowers.length!==j.total||new Set(flowers).size!==j.total||flowers.some(i=>!Number.isInteger(i)||i<0||i>=j.total))error='Ainda há flores para separar. Use todas e forme buquês iguais.';
         else error=numeric(j.total/j.each,'Conte os buquês prontos. A pergunta pede o número de buquês.');
         why=`${j.total} ÷ ${j.each} = ${j.total/j.each}. São ${j.total/j.each} buquês.`;break;
+      }
       case 'seats':{
         const capacity=j.rows*j.per;
         if(selection.length!==Math.min(capacity,j.people))error=j.object==='piões'?'Entregue todos os piões.':'Embarque todos os passageiros.';
@@ -135,6 +161,6 @@ const Oficina = (function createWorkshop(){
     }
     return {error,why};
   }
-  return {count,take,loads,digits,material,exchangeAt,adjust,storeSum,judge,sum};
+  return {count,take,loads,digits,bouquets,material,exchangeAt,adjust,storeSum,judge,sum};
 })();
 if (typeof module !== 'undefined') module.exports = Oficina;

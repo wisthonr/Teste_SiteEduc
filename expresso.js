@@ -34,9 +34,9 @@ function iniciarExpresso(){
   function map(){
     game.innerHTML=`<section class="hero">
       <div class="hero-copy"><span class="overline">MEU CADERNO · 2º ANO</span><h1>Matemática<br><em>em cores!</em></h1><p>Vamos descobrir, experimentar<br>e aprender um pouquinho mais?</p></div><div class="cover-art"><img src="assets/caderno-matematica.svg" alt="Caderno com botões coloridos e peças de contagem, como nas atividades da apostila."></div></section><nav class="home-menu" aria-label="Menu principal">
-        <a class="home-option home-game" href="jogo.html?v=20261122-sem-criacao"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
+        <a class="home-option home-game" href="jogo.html?v=20261122-flores"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F9E9.svg" alt=""></span><span><strong>Jogar</strong><small>Arraste as caixas e resolva os desafios.</small></span></a>
         <a class="home-option home-work" href="${destination()}"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/270F.svg" alt=""></span><span><strong>Fazer atividades</strong><small>${book.last?'Continue de onde parou no caderno.':'Resolva as contas e escreva na sua folha.'}</small></span></a>
-        <a class="home-option home-lessons" href="aula.html?v=20261122-sem-criacao"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
+        <a class="home-option home-lessons" href="aula.html?v=20261122-flores"><span class="home-icon" aria-hidden="true"><img src="assets/openmoji/1F4D6.svg" alt=""></span><span><strong>Assistir às aulas</strong><small>Aprenda passo a passo com as animações.</small></span></a>
       </nav><section class="route-area"><div class="section-head"><div><span class="overline">ESCOLHA UM ASSUNTO</span><h2>Meu caderno</h2></div><a class="small-ticket" href="#bilhete">✦ ${stamps()} de 6 carimbos</a></div>
       <div class="routes">${stops.map((s,i)=>`<a href="${url(s)}" class="route-card ${s.color}">${icon(s)}<div><span class="index">${s.jobs.length} atividades</span><h3>${s.title}</h3><p>${s.subject}</p>${meter(completed(s),s.jobs.length)}<span class="sr">${completed(s)} de ${s.jobs.length} atividades concluídas</span></div></a>`).join('')}</div><div class="adult-tools"><button data-act="new-trip">Para o adulto · Nova rodada com outros números</button><p>8 variações completas. Depois, o ciclo recomeça.</p></div></section>`;
   }
@@ -88,6 +88,18 @@ function iniciarExpresso(){
       <div class="tools">${share?btn('round','Dar uma para cada grupo',null,{disabled:left<job.groups}):''}${btn('undo-load','Desfazer última entrega',null,{disabled:!sheet.history?.length})}</div>
       ${share?'':`<div class="formula">${list.join(' + ')}</div>`}${numInput(share?'Quantas peças em cada grupo?':'Quantos botões ao todo?')}`;
   }
+  function flowersView(){
+    const groups=W.bouquets(job,sheet), used=new Set(groups.flat()), picked=W.take(sheet);
+    const flower='<span class="flower-picture" aria-hidden="true">🌷</span>';
+    return `<section class="flower-picker" aria-label="Escolher flores">
+      <h3>Escolha as flores</h3><p class="small">Toque nas flores para marcar ou desmarcar. Escolha ${job.each} para cada buquê e toque em <strong>Separar buquê</strong>.</p>
+      <div class="flower-board">${Array.from({length:job.total},(_,i)=>used.has(i)?'<span class="flower-space" aria-hidden="true"></span>':btn('flower-pick',flower+(picked.includes(i)?'<span class="flower-check" aria-hidden="true">✓</span>':''),i,{cls:'flower-button',pressed:picked.includes(i),aria:`Flor ${i+1}`})).join('')}</div>
+      <div class="flower-tools">${btn('keep-bouquet','Separar buquê',null,{cls:'primary',disabled:!picked.length})}${btn('clear-flowers','Desmarcar',null,{disabled:!picked.length})}</div>
+    </section><section class="bouquet-collection" aria-label="Meus buquês"><h3>Meus buquês</h3>
+      <div class="bouquet-list">${groups.map((group,i)=>`<div class="flower-bouquet"><div class="bouquet-flowers" role="img" aria-label="Flores deste buquê">${group.map(()=>flower).join('')}</div>${btn('undo-bouquet','Desfazer',i,{aria:'Desfazer este buquê e devolver suas flores ao quadro'})}</div>`).join('')||'<p class="small">Os buquês que você separar vão aparecer aqui.</p>'}</div>
+      <p class="small">Use todas as flores. Depois conte seus buquês e registre a resposta.</p>
+    </section>${numInput('Quantos buquês ficaram prontos?')}`;
+  }
   function taskView(){
     const sel=W.take(sheet),n=W.count(job,sheet), arr=(len,fn)=>Array.from({length:len},(_,i)=>fn(i)).join('');
     switch(job.kind){
@@ -106,7 +118,7 @@ function iniciarExpresso(){
       case 'load':case 'share':return groupsView();
       case 'batch':return `<div class="servings">${arr(n,()=>`<div class="portion"><span>${job.token}</span><b>${job.each} ${job.item}</b></div>`)||'Monte a primeira porção.'}</div><div class="tools">${btn('more',`Acrescentar uma ${job.thing}`,null,{disabled:n>=job.groups+1})}${btn('less',`Retirar uma ${job.thing}`,null,{disabled:!n})}</div>${numInput(`Qual é o total em ${job.item}?`)}`;
       case 'fraction':return `<p class="small">Toque em um quadradinho para marcar ou desmarcar.</p><div class="chocolate" style="--cols:${job.cols}">${arr(job.total,i=>btn('pick',sel.includes(i)?'✓':'',i,{pressed:sel.includes(i),aria:`Quadradinho ${i+1}`}))}</div><p class="counter">Conte os quadradinhos marcados e confira as partes iguais.</p>`;
-      case 'bundles':return `<div class="counter">🌷 ${job.total-n*job.each} flores no cesto</div><div class="servings">${arr(n,()=>'<span class="bouquet" aria-label="Buquê de 4 flores">💐</span>')}</div><div class="tools">${btn('more','Montar um buquê de 4',null,{disabled:n===job.total/job.each})}${btn('less','Desfazer um buquê',null,{disabled:!n})}</div>${numInput('Quantos buquês ficaram prontos?')}`;
+      case 'bundles':return flowersView();
       case 'seats':{
         const toys=job.object==='piões';
         return `<div class="counter">${job.people} ${toys?'crianças precisam de um pião':'passageiros vão embarcar'}</div><p class="small">${toys?'Toque em cada pião para entregá-lo.':'Toque nas poltronas para sentar os passageiros.'}</p><div class="seat-grid" style="--cols:${job.per}">${arr(job.rows*job.per,i=>btn('seat',sel.includes(i)?'✓':toys?'🪀':'▱',i,{pressed:sel.includes(i),aria:`${toys?'Pião':'Poltrona'} ${i+1}`,disabled:!sel.includes(i)&&sel.length>=job.people}))}</div>

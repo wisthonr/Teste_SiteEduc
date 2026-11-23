@@ -17,6 +17,8 @@ Os seis assuntos reúnem 27 atividades sobre os conteúdos das páginas 160–16
 
 Não propor elaboração de perguntas, histórias ou enunciados para a Júlia. Ela resolve as atividades da apostila e suas variações, com espaço para escrever cálculos e respostas.
 
+Na atividade das flores (p. 193, exercício 1b), a criança seleciona flores individuais em um quadro e separa os próprios buquês. Não há contador de flores marcadas, de flores restantes ou de buquês; não há limite automático de quatro flores na seleção. O tamanho dos grupos e a resposta só são avaliados em **Conferir resposta**. Cada buquê pode ser desfeito. Os buquês, as respostas e os traços salvos na versão anterior são preservados.
+
 ## Executar
 
 Abra `index.html` ou inicie um servidor estático na raiz do projeto.
