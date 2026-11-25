@@ -1,4 +1,16 @@
-# Matemática em cores
+# Beach Club · Revisão de inglês
+
+Site estático de revisão do 2º ano, publicado pelo GitHub Pages a partir da raiz de `main`. A página inicial atual é o caderno da Unit 6, *I’m on holiday!*.
+
+A revisão segue as pp. 66–67, os exercícios 3 e 4 da p. 69, os exercícios 1 e 3 da p. 72 e o exercício 3 da p. 74. Cada ficha traz sua referência. A prática oral da p. 72 usa cartões falados. As ilustrações e os MP3 em inglês britânico foram preparados para o caderno. Fotos e anotações do material escolar ficam privadas.
+
+São 22 fichas por rodada, incluindo o jogo das malas. O controle do adulto alterna quatro rodadas com confirmação. A escrita aceita caneta e mouse, permite desfazer e pede que a criança compare a própria palavra com o modelo. O navegador guarda traços, escolhas, posição e rodada na chave `beach-club-english-v1`.
+
+Execute com um servidor estático na raiz. Para verificar as variações, os gabaritos e a presença das imagens e gravações, rode `node tests/holiday.test.cjs`. Os endereços anteriores de jogo e aula encaminham para as atividades de inglês.
+
+## Histórico da revisão de matemática
+
+### Matemática em cores
 
 Jogo de matemática para o 2º ano. A página inicial é publicada pelo GitHub Pages a partir da raiz da branch `main`.
 
